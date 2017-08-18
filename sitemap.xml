@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://example.com/research/netlab/</loc>
+    <lastmod>2017-03-18T11:14:35+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/research/publications/</loc>
+    <lastmod>2017-03-18T11:14:35+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/research/grants/</loc>
+    <lastmod>2017-03-18T11:14:35+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/research/software/</loc>
+    <lastmod>2017-03-18T11:14:35+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/consulting/</loc>
+    <lastmod>2017-03-18T10:59:56+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/contact/</loc>
+    <lastmod>2017-03-18T10:59:56+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/teaching/475/</loc>
+    <lastmod>2017-02-05T07:51:49+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/home/</loc>
+    <lastmod>2017-02-05T07:51:49+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/teaching/420/</loc>
+    <lastmod>2017-02-05T07:51:49+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/teaching/120/</loc>
+    <lastmod>2017-02-05T07:51:49+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/teaching/340/</loc>
+    <lastmod>2017-02-05T07:51:49+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/</loc>
+    <lastmod>2017-03-18T11:14:35+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://example.com/research/</loc>
+    <lastmod>2017-03-18T11:14:35+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://example.com/teaching/</loc>
+    <lastmod>2017-02-05T07:51:49+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

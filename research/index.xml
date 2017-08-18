@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Researches on Dr. John McLevey</title>
+    <link>https://example.com/research/index.xml</link>
+    <description>Recent content in Researches on Dr. John McLevey</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 18 Mar 2017 11:14:35 +0100</lastBuildDate>
+    <atom:link href="https://example.com/research/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Nested menus</title>
+      <link>https://example.com/research/netlab/</link>
+      <pubDate>Sat, 18 Mar 2017 11:14:35 +0100</pubDate>
+      
+      <guid>https://example.com/research/netlab/</guid>
+      <description>&lt;p&gt;Crab supports nested menus up to three levels deep.&lt;/p&gt;
+
+&lt;p&gt;This is especially helpful for websites that focus on content with
+a fixed, pre-defined strucure.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Publications</title>
+      <link>https://example.com/research/publications/</link>
+      <pubDate>Sat, 18 Mar 2017 11:14:35 +0100</pubDate>
+      
+      <guid>https://example.com/research/publications/</guid>
+      <description>
+
+&lt;p&gt;&lt;em&gt;Italics&lt;/em&gt; = student at time of publication&lt;/p&gt;
+
+&lt;h1 id=&#34;peer-reviewed-journal-articles&#34;&gt;Peer Reviewed Journal Articles&lt;/h1&gt;
+
+&lt;p&gt;John McLevey and &lt;em&gt;Reid McIlroy-Young&lt;/em&gt;. 2017. &amp;ldquo;&lt;strong&gt;Introducing &lt;em&gt;metaknowledge&lt;/em&gt;: Software for Computational Research in Information Science, Network Analysis, and Science of Science&lt;/strong&gt;.&amp;rdquo; &lt;em&gt;The Journal of Informetrics&lt;/em&gt;. 11: 176-197.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.sciencedirect.com/science/article/pii/S1751157716302000&#34;&gt;Gated Link&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.johnmclevey.com/pdfs/research/mclevey_mcilroy_young_2017.pdf&#34;&gt;Download PDF&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/mclevey/metaknowledge_article_supplement&#34;&gt;Supplementary Python Notebooks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Allyson Stokes and John McLevey (equal authors). 2016. &amp;ldquo;&lt;strong&gt;From Porter to Bourdieu: The Evolving Specialty Structure of English Canadian Sociology, 1966-2014&lt;/strong&gt;.&amp;rdquo; &lt;em&gt;Canadian Review of Sociology / Revue canadienne de sociologie&lt;/em&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://onlinelibrary.wiley.com/doi/10.1111/cars.12104/full&#34;&gt;Gated Link&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.johnmclevey.com/pdfs/research/stokes_mclevey_2016.pdf&#34;&gt;Download PDF&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://example.com/research/porter_bourdieu_supplement.pdf&#34;&gt;Online Supplement&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;John McLevey. 2015. &amp;ldquo;&lt;strong&gt;Understanding Policy Research in Liminal Spaces: Think Tank Responses to Diverging Principles of Legitimacy&lt;/strong&gt;.&amp;rdquo; &lt;em&gt;Social Studies of Science&lt;/em&gt;. 45(2): 270-293.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://journals.sagepub.com/doi/abs/10.1177/0306312715575054&#34;&gt;Gated Link&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.johnmclevey.com/pdfs/research/mclevey2015.pdf&#34;&gt;Download PDF&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;John McLevey. 2014. &amp;ldquo;&lt;strong&gt;Think Tanks, Funding, and the Politics of Policy Knowledge in Canada&lt;/strong&gt;.&amp;rdquo; &lt;em&gt;Canadian Review of Sociology / Revue canadienne de sociologie&lt;/em&gt;. 51(1):54-75.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://onlinelibrary.wiley.com/doi/10.1111/cars.12033/full&#34;&gt;Gated Link&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.johnmclevey.com/pdfs/research/mclevey2014.pdf&#34;&gt;Download PDF&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;chapters-in-edited-volumes&#34;&gt;Chapters in Edited Volumes&lt;/h2&gt;
+
+&lt;p&gt;John McLevey and &lt;em&gt;Ryan Deschamps&lt;/em&gt;. Forthcoming. &amp;ldquo;&lt;strong&gt;The Sociology of Public Policy Formation and Implementation&lt;/strong&gt;.&amp;rdquo; William Outhwaite and Stephen Turner (eds) &lt;em&gt;The SAGE Handbook of Political Sociology&lt;/em&gt;. SAGE.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.johnmclevey.com/pdfs/research/mclevey_deschamps_shps.pdf&#34;&gt;Download PDF&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;John McLevey, Allyson Stokes, and &lt;em&gt;Amelia Howard&lt;/em&gt;.  Forthcoming. &amp;ldquo;&lt;strong&gt;Pierre Bourdieu&amp;rsquo;s Uneven Influence on Anglophone Canadian Sociology&lt;/strong&gt;.&amp;rdquo; Thomas Medvetz and Jeff Sallaz (eds) &lt;em&gt;The Oxford Handbook of Pierre Bourdieu&lt;/em&gt;. Oxford: Oxford University Press.&lt;/p&gt;
+
+&lt;h2 id=&#34;under-review&#34;&gt;Under Review&lt;/h2&gt;
+
+&lt;p&gt;Owen Gallupe, John McLevey, and Sarah Brown. &amp;ldquo;&lt;strong&gt;Selection or Influence? A Meta-Analysis of the Association between Peer and Personal Offending&lt;/strong&gt;.&amp;rdquo; Revise and Resubmit at the &lt;em&gt;Journal of Quantitative Criminology&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;manuscripts-close-to-submission&#34;&gt;Manuscripts Close to Submission&lt;/h2&gt;
+
+&lt;p&gt;John McLevey, &lt;em&gt;Alexander Graham&lt;/em&gt;, &lt;em&gt;Reid McIlroy-Young&lt;/em&gt;, &lt;em&gt;Pierson Browne&lt;/em&gt;, and Kathryn S. Plaisance. &amp;ldquo;&lt;strong&gt;Knowledge diffusion and status boundaries: A statistical network analysis of the relationships between philosophy of science and the sciences&lt;/strong&gt;.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;John McLevey, &lt;em&gt;Alexander Graham&lt;/em&gt;, and &lt;em&gt;Pierson Browne&lt;/em&gt;. &amp;ldquo;&lt;strong&gt;Network Structure and the &amp;lsquo;Chain of Trust&amp;rsquo; in Free/Libre Open Source Software Development: The Case of Linux&lt;/strong&gt;.&amp;rdquo;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Research Grants</title>
+      <link>https://example.com/research/grants/</link>
+      <pubDate>Sat, 18 Mar 2017 11:14:35 +0100</pubDate>
+      
+      <guid>https://example.com/research/grants/</guid>
+      <description>&lt;p&gt;Total Research Grants since 2013: &lt;strong&gt;$846,401&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;2016-2022. David Tindall (PI), John McLevey (Co-I), Mark Stoddart (Co-I). Collaborators: Andrew Jorgenson, Philippe Le Billon, Mario Diani, Jennifer Earl, Don Grant, Philip Leifeld, Dana R Fisher, Moses Boudourides. &lt;a href=&#34;http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/insight_grants-subventions_savoir-eng.aspx&#34;&gt; Social Science and Humanities Research Council of Canada (&lt;strong&gt;SSHRC&lt;/strong&gt;)&lt;/a&gt;, Insight Grant Application. &amp;ldquo;&lt;strong&gt;Making sense of climate action: Understanding social mobilization to curb anthropogenic climate change through advances in social network analysis&lt;/strong&gt;. $282,672.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;2016-2020 John McLevey (PI), Ontario &lt;a href=&#34;https://www.ontario.ca/document/ontario-research-fund-early-researcher-awards-program-guidelines&#34;&gt;Early Researcher Award&lt;/a&gt;, Ministry of Research and Innovation, &amp;ldquo;&lt;strong&gt;Information and Idea Diffusion in an Open Source Collaboration Network&lt;/strong&gt;,&amp;rdquo; $150,000.&lt;/p&gt;
+
+&lt;p&gt;2016-2018 John McLevey (PI), Owen Gallupe (Collaborator) and Martin Cooke (Collaborator), &lt;a href=&#34;http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/insight_development_grants-su
+bventions_de_developpement_savoir-eng.aspx&#34;&gt;Social Science and Humanities Research Council of Canada (&lt;strong&gt;SSHRC&lt;/strong&gt;)&lt;/a&gt;, Insight Development Grant, “&lt;strong&gt;Remaking the Boundaries of Open and Proprietary Science: A Longitudinal Study of Biomedical Research and Development Networks in Canada&lt;/strong&gt;” $67,790.&lt;/p&gt;
+
+&lt;p&gt;2016-2018 Katie Plaisance (PI) and John McLevey (Co-I), &lt;a href=&#34;http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/insight_development_grants-su
+bventions_de_developpement_savoir-eng.aspx&#34;&gt;Social Science and Humanities Research Council of Canada (&lt;strong&gt;SSHRC&lt;/strong&gt;)&lt;/a&gt;, Insight Development Grant, &amp;ldquo;&lt;strong&gt;Increasing the Impact of Philosophy of Science in Scientific Domains&lt;/strong&gt;,&amp;rdquo; $59,302&lt;/p&gt;
+
+&lt;p&gt;2015-2016 John McLevey (PI) and Vanessa Schweizer (Co-I), Basillie School of International Affairs, Major Workshops Grant, &amp;ldquo;&lt;strong&gt;Challenges and Opportunities for Governance of Socio-Ecological Systems in Comparative Perspective&lt;/strong&gt;,&amp;rdquo; $8,400.&lt;/p&gt;
+
+&lt;p&gt;2015-2020 Mark Stoddart (PI) and John McLevey (Co-I), &lt;a href=&#34;http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/insight_development_grants-su
+bventions_de_developpement_savoir-eng.aspx&#34;&gt;Social Science and Humanities Research Council of Canada (&lt;strong&gt;SSHRC&lt;/strong&gt;)&lt;/a&gt;, Insight Grant, &amp;ldquo;&lt;strong&gt;The Oil-Tourism Interface and Social-Ecological Change in the North Atlantic&lt;/strong&gt;,&amp;rdquo; $188,423.&lt;/p&gt;
+
+&lt;p&gt;2014-2016 John McLevey (PI), &lt;a href=&#34;http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/insight_development_grants-su
+bventions_de_developpement_savoir-eng.aspx&#34;&gt;Social Science and Humanities Research Council of Canada (&lt;strong&gt;SSHRC&lt;/strong&gt;)&lt;/a&gt;, Insight Development Grant, &lt;strong&gt;&amp;ldquo;Collaborative Design in Online Networks&lt;/strong&gt;,&amp;rdquo; $74,814.&lt;/p&gt;
+
+&lt;p&gt;2013 University of Waterloo, Faculty Research Startup Grant, $15,000.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Research Software</title>
+      <link>https://example.com/research/software/</link>
+      <pubDate>Sat, 18 Mar 2017 11:14:35 +0100</pubDate>
+      
+      <guid>https://example.com/research/software/</guid>
+      <description>
+
+&lt;p&gt;In addition to writing articles, I am co-developing research software with student members of my research team. Our work is funded in part by grants from the Social Science and Humanities Research Council of Canada (SSHRC) and an Early Researcher Award from the Ministry of Research and Innovation in Ontario.&lt;/p&gt;
+
+&lt;h1 id=&#34;metaknowledge&#34;&gt;metaknowledge&lt;/h1&gt;
+
+&lt;p&gt;Coming soon&amp;hellip;&lt;/p&gt;
+
+&lt;h1 id=&#34;recordlinkage&#34;&gt;recordlinkage&lt;/h1&gt;
+
+&lt;p&gt;Descriptions of contributions coming soon&amp;hellip;&lt;/p&gt;
+
+&lt;h1 id=&#34;tidyextractors&#34;&gt;tidyextractors&lt;/h1&gt;
+
+&lt;p&gt;Coming soon&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
