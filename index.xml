@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dr. John McLevey</title>
-    <link>https://example.com/index.xml</link>
+    <link>/index.xml</link>
     <description>Recent content on Dr. John McLevey</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 18 Mar 2017 11:14:35 +0100</lastBuildDate>
-    <atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Nested menus</title>
-      <link>https://example.com/research/netlab/</link>
+      <link>/research/netlab/</link>
       <pubDate>Sat, 18 Mar 2017 11:14:35 +0100</pubDate>
       
-      <guid>https://example.com/research/netlab/</guid>
+      <guid>/research/netlab/</guid>
       <description>&lt;p&gt;Crab supports nested menus up to three levels deep.&lt;/p&gt;
 
 &lt;p&gt;This is especially helpful for websites that focus on content with
@@ -24,10 +24,10 @@ a fixed, pre-defined strucure.&lt;/p&gt;
     
     <item>
       <title>Publications</title>
-      <link>https://example.com/research/publications/</link>
+      <link>/research/publications/</link>
       <pubDate>Sat, 18 Mar 2017 11:14:35 +0100</pubDate>
       
-      <guid>https://example.com/research/publications/</guid>
+      <guid>/research/publications/</guid>
       <description>
 
 &lt;p&gt;&lt;em&gt;Italics&lt;/em&gt; = student at time of publication&lt;/p&gt;
@@ -47,7 +47,7 @@ a fixed, pre-defined strucure.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://onlinelibrary.wiley.com/doi/10.1111/cars.12104/full&#34;&gt;Gated Link&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.johnmclevey.com/pdfs/research/stokes_mclevey_2016.pdf&#34;&gt;Download PDF&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://example.com/research/porter_bourdieu_supplement.pdf&#34;&gt;Online Supplement&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/research/porter_bourdieu_supplement.pdf&#34;&gt;Online Supplement&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;John McLevey. 2015. &amp;ldquo;&lt;strong&gt;Understanding Policy Research in Liminal Spaces: Think Tank Responses to Diverging Principles of Legitimacy&lt;/strong&gt;.&amp;rdquo; &lt;em&gt;Social Studies of Science&lt;/em&gt;. 45(2): 270-293.&lt;/p&gt;
@@ -88,10 +88,10 @@ a fixed, pre-defined strucure.&lt;/p&gt;
     
     <item>
       <title>Research Grants</title>
-      <link>https://example.com/research/grants/</link>
+      <link>/research/grants/</link>
       <pubDate>Sat, 18 Mar 2017 11:14:35 +0100</pubDate>
       
-      <guid>https://example.com/research/grants/</guid>
+      <guid>/research/grants/</guid>
       <description>&lt;p&gt;Total Research Grants since 2013: &lt;strong&gt;$846,401&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;2016-2022. David Tindall (PI), John McLevey (Co-I), Mark Stoddart (Co-I). Collaborators: Andrew Jorgenson, Philippe Le Billon, Mario Diani, Jennifer Earl, Don Grant, Philip Leifeld, Dana R Fisher, Moses Boudourides. &lt;a href=&#34;http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/insight_grants-subventions_savoir-eng.aspx&#34;&gt; Social Science and Humanities Research Council of Canada (&lt;strong&gt;SSHRC&lt;/strong&gt;)&lt;/a&gt;, Insight Grant Application. &amp;ldquo;&lt;strong&gt;Making sense of climate action: Understanding social mobilization to curb anthropogenic climate change through advances in social network analysis&lt;/strong&gt;. $282,672.&amp;rdquo;&lt;/p&gt;
@@ -118,10 +118,10 @@ bventions_de_developpement_savoir-eng.aspx&#34;&gt;Social Science and Humanities
     
     <item>
       <title>Research Software</title>
-      <link>https://example.com/research/software/</link>
+      <link>/research/software/</link>
       <pubDate>Sat, 18 Mar 2017 11:14:35 +0100</pubDate>
       
-      <guid>https://example.com/research/software/</guid>
+      <guid>/research/software/</guid>
       <description>
 
 &lt;p&gt;In addition to writing articles, I am co-developing research software with student members of my research team. Our work is funded in part by grants from the Social Science and Humanities Research Council of Canada (SSHRC) and an Early Researcher Award from the Ministry of Research and Innovation in Ontario.&lt;/p&gt;
@@ -142,20 +142,20 @@ bventions_de_developpement_savoir-eng.aspx&#34;&gt;Social Science and Humanities
     
     <item>
       <title>Consulting</title>
-      <link>https://example.com/consulting/</link>
+      <link>/consulting/</link>
       <pubDate>Sat, 18 Mar 2017 10:59:56 +0100</pubDate>
       
-      <guid>https://example.com/consulting/</guid>
+      <guid>/consulting/</guid>
       <description>&lt;p&gt;2016-2017. Janice Aurini (Co-PI), John McLevey (Co-PI), Rob Gorbet (Co-I). &amp;ldquo;&lt;b&gt;Assessing the Impact of Classroom-Integrated Robotics on the Cultivation of 21st-Century Competencies&lt;/b&gt;.&amp;rdquo; Contract with Council of Ontario Directors of Education (CODE). Associates: Allyson Stokes and Scott Davies. Research Assistants: Cathlene Hillier and Brittany Etmanski.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Contact</title>
-      <link>https://example.com/contact/</link>
+      <link>/contact/</link>
       <pubDate>Sat, 18 Mar 2017 10:59:56 +0100</pubDate>
       
-      <guid>https://example.com/contact/</guid>
+      <guid>/contact/</guid>
       <description>&lt;p&gt;Dr. John McLevey&lt;br /&gt;
 Assistant Professor&lt;br /&gt;
 Department of Knowledge Integration &lt;br /&gt;
@@ -171,20 +171,20 @@ Waterloo, ON, Canada &lt;/p&gt;
     
     <item>
       <title>&#39;Big Data&#39; and Social Science Research in the Digital Age</title>
-      <link>https://example.com/teaching/475/</link>
+      <link>/teaching/475/</link>
       <pubDate>Sun, 05 Feb 2017 07:51:49 +0100</pubDate>
       
-      <guid>https://example.com/teaching/475/</guid>
+      <guid>/teaching/475/</guid>
       <description>&lt;p&gt;Coming Soon.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Home</title>
-      <link>https://example.com/home/</link>
+      <link>/home/</link>
       <pubDate>Sun, 05 Feb 2017 07:51:49 +0100</pubDate>
       
-      <guid>https://example.com/home/</guid>
+      <guid>/home/</guid>
       <description>&lt;div id=&#34;summary&#34;&gt;
   &lt;p&gt;&lt;img src=&#34;images/portrait_small.jpg&#34; alt=&#34;John McLevey&#34; width=&#34;450&#34;&gt;&lt;/p&gt;
 
@@ -211,34 +211,62 @@ Research Methods&lt;/p&gt;
     
     <item>
       <title>Senior Honors Project</title>
-      <link>https://example.com/teaching/420/</link>
+      <link>/teaching/420/</link>
       <pubDate>Sun, 05 Feb 2017 07:51:49 +0100</pubDate>
       
-      <guid>https://example.com/teaching/420/</guid>
+      <guid>/teaching/420/</guid>
       <description>&lt;p&gt;Coming Soon&amp;hellip;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>The Art &amp; Science of Learning</title>
-      <link>https://example.com/teaching/120/</link>
+      <link>/teaching/120/</link>
       <pubDate>Sun, 05 Feb 2017 07:51:49 +0100</pubDate>
       
-      <guid>https://example.com/teaching/120/</guid>
-      <description>&lt;p&gt;(INTEG 120)&lt;/p&gt;
+      <guid>/teaching/120/</guid>
+      <description>
+
+&lt;p&gt;(INTEG 120)&lt;/p&gt;
+
+&lt;div id=&#34;summary&#34;&gt;
+  &lt;p&gt;&lt;strong&gt;Quick Links&lt;/strong&gt;&lt;br /&gt;
+&lt;a href=&#34;#desc&#34;&gt;Course Description&lt;/a&gt;&lt;br /&gt;
+Learning Objectives&lt;br /&gt;
+Deliverables&lt;br /&gt;
+Schedule&lt;/p&gt;
+
+&lt;/div&gt;
+
+
+&lt;h1 id=&#34;course-description&#34;&gt;Course Description&lt;/h1&gt;
+
+&lt;div id=&#34;desc&#34;&gt;&lt;/div&gt;
 
 &lt;p&gt;There are three sets of related learning objectives in this course. First, you will be introduced to state-of-the-art scientific research on learning and cognitive adaptability, and you will begin using this research to become more intentional learners and knowledge integrators. Second, you will learn about how the mind processes information, and will begin developing new habits to facilitate clear and critical thinking in complex, messy, and stressful circumstances. Finally, you will learn how to see the social networks you are embedded in, and how they shape what you think, know, and do. You will use this knowledge to identify opportunities and develop strategies for learning, and for the integration and synthesis of different types of knowledge.&lt;/p&gt;
 
 &lt;p&gt;More coming soon&amp;hellip;&lt;/p&gt;
+
+&lt;h1 id=&#34;learning-objectives&#34;&gt;Learning Objectives&lt;/h1&gt;
+
+&lt;div id=&#34;lo&#34;&gt;&lt;/div&gt;
+
+&lt;h1 id=&#34;deliverables&#34;&gt;Deliverables&lt;/h1&gt;
+
+&lt;div id=&#34;del&#34;&gt;&lt;/div&gt;
+
+&lt;h1 id=&#34;schedule&#34;&gt;Schedule&lt;/h1&gt;
+
+&lt;div id=&#34;sched&#34;&gt;&lt;/div&gt;
 </description>
     </item>
     
     <item>
       <title>Thinking Through Research Methods</title>
-      <link>https://example.com/teaching/340/</link>
+      <link>/teaching/340/</link>
       <pubDate>Sun, 05 Feb 2017 07:51:49 +0100</pubDate>
       
-      <guid>https://example.com/teaching/340/</guid>
+      <guid>/teaching/340/</guid>
       <description>&lt;p&gt;(INTEG 340)&lt;/p&gt;
 
 &lt;p&gt;This course provides an introduction to empirical research design and methods with a focus on applications in the social sciences and related fields. You will learn about core issues in research design (e.g. sampling) that transcend specific approaches, and about a variety of techniques for collecting and analyzing quantitative and qualitative data. The course will cover both abstract and practical issues related to methodology and decision making in empirical research. You will have the opportunity to develop and workshop proposals that you may wish to pursue in your senior honors thesis. By the end of the course you will be a more informed consumer and have a basic set of skills for designing and implementing your own empirical research projects. Most importantly, you will have a foundation for future learning about research design and methods.&lt;/p&gt;

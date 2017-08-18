@@ -2,74 +2,74 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://example.com/research/netlab/</loc>
+    <loc>/research/netlab/</loc>
     <lastmod>2017-03-18T11:14:35+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/research/publications/</loc>
+    <loc>/research/publications/</loc>
     <lastmod>2017-03-18T11:14:35+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/research/grants/</loc>
+    <loc>/research/grants/</loc>
     <lastmod>2017-03-18T11:14:35+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/research/software/</loc>
+    <loc>/research/software/</loc>
     <lastmod>2017-03-18T11:14:35+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/consulting/</loc>
+    <loc>/consulting/</loc>
     <lastmod>2017-03-18T10:59:56+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/contact/</loc>
+    <loc>/contact/</loc>
     <lastmod>2017-03-18T10:59:56+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/teaching/475/</loc>
+    <loc>/teaching/475/</loc>
     <lastmod>2017-02-05T07:51:49+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/home/</loc>
+    <loc>/home/</loc>
     <lastmod>2017-02-05T07:51:49+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/teaching/420/</loc>
+    <loc>/teaching/420/</loc>
     <lastmod>2017-02-05T07:51:49+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/teaching/120/</loc>
+    <loc>/teaching/120/</loc>
     <lastmod>2017-02-05T07:51:49+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/teaching/340/</loc>
+    <loc>/teaching/340/</loc>
     <lastmod>2017-02-05T07:51:49+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/</loc>
+    <loc>/</loc>
     <lastmod>2017-03-18T11:14:35+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/research/</loc>
+    <loc>/research/</loc>
     <lastmod>2017-03-18T11:14:35+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/teaching/</loc>
+    <loc>/teaching/</loc>
     <lastmod>2017-02-05T07:51:49+01:00</lastmod>
     <priority>0</priority>
   </url>

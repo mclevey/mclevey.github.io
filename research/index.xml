@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Researches on Dr. John McLevey</title>
-    <link>https://example.com/research/index.xml</link>
+    <link>/research/index.xml</link>
     <description>Recent content in Researches on Dr. John McLevey</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 18 Mar 2017 11:14:35 +0100</lastBuildDate>
-    <atom:link href="https://example.com/research/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/research/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Nested menus</title>
-      <link>https://example.com/research/netlab/</link>
+      <link>/research/netlab/</link>
       <pubDate>Sat, 18 Mar 2017 11:14:35 +0100</pubDate>
       
-      <guid>https://example.com/research/netlab/</guid>
+      <guid>/research/netlab/</guid>
       <description>&lt;p&gt;Crab supports nested menus up to three levels deep.&lt;/p&gt;
 
 &lt;p&gt;This is especially helpful for websites that focus on content with
@@ -24,10 +24,10 @@ a fixed, pre-defined strucure.&lt;/p&gt;
     
     <item>
       <title>Publications</title>
-      <link>https://example.com/research/publications/</link>
+      <link>/research/publications/</link>
       <pubDate>Sat, 18 Mar 2017 11:14:35 +0100</pubDate>
       
-      <guid>https://example.com/research/publications/</guid>
+      <guid>/research/publications/</guid>
       <description>
 
 &lt;p&gt;&lt;em&gt;Italics&lt;/em&gt; = student at time of publication&lt;/p&gt;
@@ -47,7 +47,7 @@ a fixed, pre-defined strucure.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://onlinelibrary.wiley.com/doi/10.1111/cars.12104/full&#34;&gt;Gated Link&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.johnmclevey.com/pdfs/research/stokes_mclevey_2016.pdf&#34;&gt;Download PDF&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://example.com/research/porter_bourdieu_supplement.pdf&#34;&gt;Online Supplement&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/research/porter_bourdieu_supplement.pdf&#34;&gt;Online Supplement&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;John McLevey. 2015. &amp;ldquo;&lt;strong&gt;Understanding Policy Research in Liminal Spaces: Think Tank Responses to Diverging Principles of Legitimacy&lt;/strong&gt;.&amp;rdquo; &lt;em&gt;Social Studies of Science&lt;/em&gt;. 45(2): 270-293.&lt;/p&gt;
@@ -88,10 +88,10 @@ a fixed, pre-defined strucure.&lt;/p&gt;
     
     <item>
       <title>Research Grants</title>
-      <link>https://example.com/research/grants/</link>
+      <link>/research/grants/</link>
       <pubDate>Sat, 18 Mar 2017 11:14:35 +0100</pubDate>
       
-      <guid>https://example.com/research/grants/</guid>
+      <guid>/research/grants/</guid>
       <description>&lt;p&gt;Total Research Grants since 2013: &lt;strong&gt;$846,401&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;2016-2022. David Tindall (PI), John McLevey (Co-I), Mark Stoddart (Co-I). Collaborators: Andrew Jorgenson, Philippe Le Billon, Mario Diani, Jennifer Earl, Don Grant, Philip Leifeld, Dana R Fisher, Moses Boudourides. &lt;a href=&#34;http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/insight_grants-subventions_savoir-eng.aspx&#34;&gt; Social Science and Humanities Research Council of Canada (&lt;strong&gt;SSHRC&lt;/strong&gt;)&lt;/a&gt;, Insight Grant Application. &amp;ldquo;&lt;strong&gt;Making sense of climate action: Understanding social mobilization to curb anthropogenic climate change through advances in social network analysis&lt;/strong&gt;. $282,672.&amp;rdquo;&lt;/p&gt;
@@ -118,10 +118,10 @@ bventions_de_developpement_savoir-eng.aspx&#34;&gt;Social Science and Humanities
     
     <item>
       <title>Research Software</title>
-      <link>https://example.com/research/software/</link>
+      <link>/research/software/</link>
       <pubDate>Sat, 18 Mar 2017 11:14:35 +0100</pubDate>
       
-      <guid>https://example.com/research/software/</guid>
+      <guid>/research/software/</guid>
       <description>
 
 &lt;p&gt;In addition to writing articles, I am co-developing research software with student members of my research team. Our work is funded in part by grants from the Social Science and Humanities Research Council of Canada (SSHRC) and an Early Researcher Award from the Ministry of Research and Innovation in Ontario.&lt;/p&gt;
