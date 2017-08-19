@@ -170,12 +170,92 @@ Waterloo, ON, Canada &lt;/p&gt;
     </item>
     
     <item>
-      <title>&#39;Big Data&#39; and Social Science Research in the Digital Age</title>
-      <link>/teaching/475/</link>
+      <title></title>
+      <link>/teaching/</link>
       <pubDate>Sun, 05 Feb 2017 07:51:49 +0100</pubDate>
       
-      <guid>/teaching/475/</guid>
-      <description>&lt;p&gt;Coming Soon.&lt;/p&gt;
+      <guid>/teaching/</guid>
+      <description>
+
+&lt;div id=&#34;summary&#34;&gt;
+  &lt;p&gt;&lt;img src=&#34;images/f2013120.png&#34; alt=&#34;120&#34; width=&#34;350&#34;&gt;&lt;/p&gt;
+
+&lt;/div&gt;
+
+
+&lt;h1 id=&#34;the-art-and-science-of-learning&#34;&gt;The Art and Science of Learning&lt;/h1&gt;
+
+&lt;p&gt;&lt;div id=&#34;120&#34;&gt;&lt;/div&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;integ-120&#34;&gt;INTEG 120&lt;/h3&gt;
+
+&lt;p&gt;There are three sets of related learning objectives in this course. First, you will be introduced to state-of-the-art scientific research on learning and cognitive adaptability, and you will begin using this research to become more intentional learners and knowledge integrators. Second, you will learn about how the mind processes information, and will begin developing new habits to facilitate clear and critical thinking in complex, messy, and stressful circumstances. Finally, you will learn how to see the social networks you are embedded in, and how they shape what you think, know, and do. You will use this knowledge to identify opportunities and develop strategies for learning, and for the integration and synthesis of different types of knowledge.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;/120&#34;&gt;Syllabus &amp;amp; Slides&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;big-data-and-social-science-research-in-the-digital-age&#34;&gt;&amp;lsquo;Big Data&amp;rsquo; and Social Science Research in the Digital Age&lt;/h1&gt;
+
+&lt;p&gt;&lt;div id=&#34;475&#34;&gt;&lt;/div&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;integ-475&#34;&gt;INTEG 475&lt;/h3&gt;
+
+&lt;p&gt;We are living in an age where digital information is being produced at an unprecedented rate. This explosion of digital data has the potential to revolutionize the way we learn about the world, and how we conduct research related to urgent social and political problems. This course focuses primarily on the knowledge and skills necessary for doing high-quality research with digital data. The course is divided into four core sections: (1) a research-oriented introduction to the programming language Python, (2) collecting, cleaning, and combining digital datasets, (3) analyzing digital datasets using tools from machine learning, text analysis, and social network analysis, and (4) privacy and confidentiality. There will be an emphasis on good research design throughout the course. Previous courses in research methods and / or statistics are an asset, but are not required. I assume no previous knowledge or experience of computer programming.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;/475&#34;&gt;Syllabus &amp;amp; Slides&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;thinking-through-research-methods&#34;&gt;Thinking Through Research Methods&lt;/h1&gt;
+
+&lt;p&gt;&lt;div id=&#34;340&#34;&gt;&lt;/div&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;integ-340&#34;&gt;INTEG 340&lt;/h3&gt;
+
+&lt;p&gt;This course provides an introduction to empirical research design and methods with a focus on applications in the social sciences and related fields. You will learn about core issues in research design (e.g. sampling) that transcend specific approaches, and about a variety of techniques for collecting and analyzing quantitative and qualitative data. The course will cover both abstract and practical issues related to methodology and decision making in empirical research. You will have the opportunity to develop and workshop proposals that you may wish to pursue in your senior honors thesis. By the end of the course you will be a more informed consumer and have a basic set of skills for designing and implementing your own empirical research projects. Most importantly, you will have a foundation for future learning about research design and methods.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;/340&#34;&gt;Syllabus &amp;amp; Slides&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;senior-honors-project&#34;&gt;Senior Honors Project&lt;/h1&gt;
+
+&lt;p&gt;&lt;div id=&#34;420ab&#34;&gt;&lt;/div&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;integ-420ab&#34;&gt;INTEG 420AB&lt;/h3&gt;
+
+&lt;p&gt;The Senior Research Project is the two-term culmination of the Knowledge Integration degree. It provides you with the opportunity to engage in an original research or design project supervised by an expert (or experts) in your chosen field. Traditionally, INTEG 420 A (taken in the fall) is focused on designing your project, conducting literature reviews, applying for ethics clearance, and making serious progress on any empirical research (if your project requires empirical work). INTEG 420 B (taken in the winter) is focused on actually writing the actual thesis and disseminating the work through a conference paper and poster.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;/420&#34;&gt;Syllabus &amp;amp; Slides&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>&#39;Big Data&#39; and Social Science Research in the Digital Age</title>
+      <link>/475/</link>
+      <pubDate>Sun, 05 Feb 2017 07:51:49 +0100</pubDate>
+      
+      <guid>/475/</guid>
+      <description>&lt;div id=&#34;summary&#34;&gt;
+  &lt;p&gt;&lt;strong&gt;Quick Links&lt;/strong&gt;&lt;br /&gt;
+&lt;a href=&#34;#desc&#34;&gt;Course Description&lt;/a&gt;&lt;br /&gt;
+Learning Objectives&lt;br /&gt;
+Deliverables&lt;br /&gt;
+Schedule&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Slides&lt;/strong&gt;&lt;br /&gt;
+First&lt;br /&gt;
+Second&lt;br /&gt;
+Third&lt;br /&gt;
+&amp;hellip;&lt;/p&gt;
+
+&lt;/div&gt;
+
+
+&lt;p&gt;We are living in an age where digital information is being produced at an unprecedented rate. This explosion of digital data has the potential to revolutionize the way we learn about the world, and how we conduct research related to urgent social and political problems. This course focuses primarily on the knowledge and skills necessary for doing high-quality research with digital data. The course is divided into four core sections: (1) a research-oriented introduction to the programming language Python, (2) collecting, cleaning, and combining digital datasets, (3) analyzing digital datasets using tools from machine learning, text analysis, and social network analysis, and (4) privacy and confidentiality. There will be an emphasis on good research design throughout the course. Previous courses in research methods and / or statistics are an asset, but are not required. I assume no previous knowledge or experience of computer programming.&lt;/p&gt;
 </description>
     </item>
     
@@ -211,20 +291,36 @@ Research Methods&lt;/p&gt;
     
     <item>
       <title>Senior Honors Project</title>
-      <link>/teaching/420/</link>
+      <link>/420/</link>
       <pubDate>Sun, 05 Feb 2017 07:51:49 +0100</pubDate>
       
-      <guid>/teaching/420/</guid>
-      <description>&lt;p&gt;Coming Soon&amp;hellip;&lt;/p&gt;
+      <guid>/420/</guid>
+      <description>&lt;div id=&#34;summary&#34;&gt;
+  &lt;p&gt;&lt;strong&gt;Quick Links&lt;/strong&gt;&lt;br /&gt;
+&lt;a href=&#34;#desc&#34;&gt;Course Description&lt;/a&gt;&lt;br /&gt;
+Learning Objectives&lt;br /&gt;
+Deliverables&lt;br /&gt;
+Schedule&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Slides&lt;/strong&gt;&lt;br /&gt;
+First&lt;br /&gt;
+Second&lt;br /&gt;
+Third&lt;br /&gt;
+&amp;hellip;&lt;/p&gt;
+
+&lt;/div&gt;
+
+
+&lt;p&gt;The Senior Research Project is the two-term culmination of the Knowledge Integration degree. It provides you with the opportunity to engage in an original research or design project supervised by an expert (or experts) in your chosen field. Traditionally, INTEG 420 A (taken in the fall) is focused on designing your project, conducting literature reviews, applying for ethics clearance, and making serious progress on any empirical research (if your project requires empirical work). INTEG 420 B (taken in the winter) is focused on actually writing the actual thesis and disseminating the work through a conference paper and poster.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>The Art &amp; Science of Learning</title>
-      <link>/teaching/120/</link>
+      <link>/120/</link>
       <pubDate>Sun, 05 Feb 2017 07:51:49 +0100</pubDate>
       
-      <guid>/teaching/120/</guid>
+      <guid>/120/</guid>
       <description>
 
 &lt;p&gt;(INTEG 120)&lt;/p&gt;
@@ -235,6 +331,12 @@ Research Methods&lt;/p&gt;
 Learning Objectives&lt;br /&gt;
 Deliverables&lt;br /&gt;
 Schedule&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Slides&lt;/strong&gt;&lt;br /&gt;
+First&lt;br /&gt;
+Second&lt;br /&gt;
+Third&lt;br /&gt;
+&amp;hellip;&lt;/p&gt;
 
 &lt;/div&gt;
 
@@ -263,11 +365,27 @@ Schedule&lt;/p&gt;
     
     <item>
       <title>Thinking Through Research Methods</title>
-      <link>/teaching/340/</link>
+      <link>/340/</link>
       <pubDate>Sun, 05 Feb 2017 07:51:49 +0100</pubDate>
       
-      <guid>/teaching/340/</guid>
-      <description>&lt;p&gt;(INTEG 340)&lt;/p&gt;
+      <guid>/340/</guid>
+      <description>&lt;div id=&#34;summary&#34;&gt;
+  &lt;p&gt;&lt;strong&gt;Quick Links&lt;/strong&gt;&lt;br /&gt;
+&lt;a href=&#34;#desc&#34;&gt;Course Description&lt;/a&gt;&lt;br /&gt;
+Learning Objectives&lt;br /&gt;
+Deliverables&lt;br /&gt;
+Schedule&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Slides&lt;/strong&gt;&lt;br /&gt;
+First&lt;br /&gt;
+Second&lt;br /&gt;
+Third&lt;br /&gt;
+&amp;hellip;&lt;/p&gt;
+
+&lt;/div&gt;
+
+
+&lt;p&gt;(INTEG 340)&lt;/p&gt;
 
 &lt;p&gt;This course provides an introduction to empirical research design and methods with a focus on applications in the social sciences and related fields. You will learn about core issues in research design (e.g. sampling) that transcend specific approaches, and about a variety of techniques for collecting and analyzing quantitative and qualitative data. The course will cover both abstract and practical issues related to methodology and decision making in empirical research. You will have the opportunity to develop and workshop proposals that you may wish to pursue in your senior honors thesis. By the end of the course you will be a more informed consumer and have a basic set of skills for designing and implementing your own empirical research projects. Most importantly, you will have a foundation for future learning about research design and methods.&lt;/p&gt;
 
