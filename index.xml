@@ -10,29 +10,29 @@
     <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Nested menus</title>
-      <link>/research/netlab/</link>
+      <title>Publications, Grants, &amp; Software</title>
+      <link>/research/</link>
       <pubDate>Sat, 18 Mar 2017 11:14:35 +0100</pubDate>
       
-      <guid>/research/netlab/</guid>
-      <description>&lt;p&gt;Crab supports nested menus up to three levels deep.&lt;/p&gt;
-
-&lt;p&gt;This is especially helpful for websites that focus on content with
-a fixed, pre-defined strucure.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Publications</title>
-      <link>/research/publications/</link>
-      <pubDate>Sat, 18 Mar 2017 11:14:35 +0100</pubDate>
-      
-      <guid>/research/publications/</guid>
+      <guid>/research/</guid>
       <description>
+
+&lt;div id=&#34;summary&#34;&gt;
+  &lt;p&gt;&lt;strong&gt;Quick Links&lt;/strong&gt;&lt;br /&gt;
+&lt;a href=&#34;#pubs&#34;&gt;Publications&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;#grants&#34;&gt;Research Grants&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;#soft&#34;&gt;Research Software&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;#report&#34;&gt;Research Reports&lt;/a&gt;&lt;/p&gt;
+
+&lt;/div&gt;
+
 
 &lt;p&gt;&lt;em&gt;Italics&lt;/em&gt; = student at time of publication&lt;/p&gt;
 
-&lt;h1 id=&#34;peer-reviewed-journal-articles&#34;&gt;Peer Reviewed Journal Articles&lt;/h1&gt;
+&lt;h2 id=&#34;peer-reviewed-journal-articles&#34;&gt;Peer Reviewed Journal Articles&lt;/h2&gt;
+
+&lt;div id=&#34;pubs&#34;&gt;&lt;/div&gt;
+ 
 
 &lt;p&gt;John McLevey and &lt;em&gt;Reid McIlroy-Young&lt;/em&gt;. 2017. &amp;ldquo;&lt;strong&gt;Introducing &lt;em&gt;metaknowledge&lt;/em&gt;: Software for Computational Research in Information Science, Network Analysis, and Science of Science&lt;/strong&gt;.&amp;rdquo; &lt;em&gt;The Journal of Informetrics&lt;/em&gt;. 11: 176-197.&lt;/p&gt;
 
@@ -83,60 +83,56 @@ a fixed, pre-defined strucure.&lt;/p&gt;
 &lt;p&gt;John McLevey, &lt;em&gt;Alexander Graham&lt;/em&gt;, &lt;em&gt;Reid McIlroy-Young&lt;/em&gt;, &lt;em&gt;Pierson Browne&lt;/em&gt;, and Kathryn S. Plaisance. &amp;ldquo;&lt;strong&gt;Knowledge diffusion and status boundaries: A statistical network analysis of the relationships between philosophy of science and the sciences&lt;/strong&gt;.&amp;rdquo;&lt;/p&gt;
 
 &lt;p&gt;John McLevey, &lt;em&gt;Alexander Graham&lt;/em&gt;, and &lt;em&gt;Pierson Browne&lt;/em&gt;. &amp;ldquo;&lt;strong&gt;Network Structure and the &amp;lsquo;Chain of Trust&amp;rsquo; in Free/Libre Open Source Software Development: The Case of Linux&lt;/strong&gt;.&amp;rdquo;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Research Grants</title>
-      <link>/research/grants/</link>
-      <pubDate>Sat, 18 Mar 2017 11:14:35 +0100</pubDate>
-      
-      <guid>/research/grants/</guid>
-      <description>&lt;p&gt;Total Research Grants since 2013: &lt;strong&gt;$846,401&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;2016-2022. David Tindall (PI), John McLevey (Co-I), Mark Stoddart (Co-I). Collaborators: Andrew Jorgenson, Philippe Le Billon, Mario Diani, Jennifer Earl, Don Grant, Philip Leifeld, Dana R Fisher, Moses Boudourides. &lt;a href=&#34;http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/insight_grants-subventions_savoir-eng.aspx&#34;&gt; Social Science and Humanities Research Council of Canada (&lt;strong&gt;SSHRC&lt;/strong&gt;)&lt;/a&gt;, Insight Grant Application. &amp;ldquo;&lt;strong&gt;Making sense of climate action: Understanding social mobilization to curb anthropogenic climate change through advances in social network analysis&lt;/strong&gt;. $282,672.&amp;rdquo;&lt;/p&gt;
+&lt;h1 id=&#34;research-grants&#34;&gt;Research Grants&lt;/h1&gt;
 
-&lt;p&gt;2016-2020 John McLevey (PI), Ontario &lt;a href=&#34;https://www.ontario.ca/document/ontario-research-fund-early-researcher-awards-program-guidelines&#34;&gt;Early Researcher Award&lt;/a&gt;, Ministry of Research and Innovation, &amp;ldquo;&lt;strong&gt;Information and Idea Diffusion in an Open Source Collaboration Network&lt;/strong&gt;,&amp;rdquo; $150,000.&lt;/p&gt;
+&lt;div id=&#34;grants&#34;&gt;&lt;/div&gt;
 
-&lt;p&gt;2016-2018 John McLevey (PI), Owen Gallupe (Collaborator) and Martin Cooke (Collaborator), &lt;a href=&#34;http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/insight_development_grants-su
-bventions_de_developpement_savoir-eng.aspx&#34;&gt;Social Science and Humanities Research Council of Canada (&lt;strong&gt;SSHRC&lt;/strong&gt;)&lt;/a&gt;, Insight Development Grant, “&lt;strong&gt;Remaking the Boundaries of Open and Proprietary Science: A Longitudinal Study of Biomedical Research and Development Networks in Canada&lt;/strong&gt;” $67,790.&lt;/p&gt;
+&lt;p&gt;Total Research Grants since 2013: &lt;strong&gt;$846,401&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;2016-2018 Katie Plaisance (PI) and John McLevey (Co-I), &lt;a href=&#34;http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/insight_development_grants-su
-bventions_de_developpement_savoir-eng.aspx&#34;&gt;Social Science and Humanities Research Council of Canada (&lt;strong&gt;SSHRC&lt;/strong&gt;)&lt;/a&gt;, Insight Development Grant, &amp;ldquo;&lt;strong&gt;Increasing the Impact of Philosophy of Science in Scientific Domains&lt;/strong&gt;,&amp;rdquo; $59,302&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;2016-2022. David Tindall (PI), John McLevey (Co-I), Mark Stoddart (Co-I). Collaborators: Andrew Jorgenson, Philippe Le Billon, Mario Diani, Jennifer Earl, Don Grant, Philip Leifeld, Dana R Fisher, Moses Boudourides. &lt;a href=&#34;http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/insight_grants-subventions_savoir-eng.aspx&#34;&gt; Social Science and Humanities Research Council of Canada (&lt;strong&gt;SSHRC&lt;/strong&gt;)&lt;/a&gt;, Insight Grant Application. &amp;ldquo;&lt;strong&gt;Making sense of climate action: Understanding social mobilization to curb anthropogenic climate change through advances in social network analysis&lt;/strong&gt;. $282,672.&amp;rdquo;&lt;/p&gt;&lt;/li&gt;
 
-&lt;p&gt;2015-2016 John McLevey (PI) and Vanessa Schweizer (Co-I), Basillie School of International Affairs, Major Workshops Grant, &amp;ldquo;&lt;strong&gt;Challenges and Opportunities for Governance of Socio-Ecological Systems in Comparative Perspective&lt;/strong&gt;,&amp;rdquo; $8,400.&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;2016-2020 John McLevey (PI), Ontario &lt;a href=&#34;https://www.ontario.ca/document/ontario-research-fund-early-researcher-awards-program-guidelines&#34;&gt;Early Researcher Award&lt;/a&gt;, Ministry of Research and Innovation, &amp;ldquo;&lt;strong&gt;Information and Idea Diffusion in an Open Source Collaboration Network&lt;/strong&gt;,&amp;rdquo; $150,000.&lt;/p&gt;&lt;/li&gt;
 
-&lt;p&gt;2015-2020 Mark Stoddart (PI) and John McLevey (Co-I), &lt;a href=&#34;http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/insight_development_grants-su
-bventions_de_developpement_savoir-eng.aspx&#34;&gt;Social Science and Humanities Research Council of Canada (&lt;strong&gt;SSHRC&lt;/strong&gt;)&lt;/a&gt;, Insight Grant, &amp;ldquo;&lt;strong&gt;The Oil-Tourism Interface and Social-Ecological Change in the North Atlantic&lt;/strong&gt;,&amp;rdquo; $188,423.&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;2016-2018 John McLevey (PI), Owen Gallupe (Collaborator) and Martin Cooke (Collaborator), &lt;a href=&#34;http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/insight_development_grants-su
+bventions_de_developpement_savoir-eng.aspx&#34;&gt;Social Science and Humanities Research Council of Canada (&lt;strong&gt;SSHRC&lt;/strong&gt;)&lt;/a&gt;, Insight Development Grant, “&lt;strong&gt;Remaking the Boundaries of Open and Proprietary Science: A Longitudinal Study of Biomedical Research and Development Networks in Canada&lt;/strong&gt;” $67,790.&lt;/p&gt;&lt;/li&gt;
 
-&lt;p&gt;2014-2016 John McLevey (PI), &lt;a href=&#34;http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/insight_development_grants-su
-bventions_de_developpement_savoir-eng.aspx&#34;&gt;Social Science and Humanities Research Council of Canada (&lt;strong&gt;SSHRC&lt;/strong&gt;)&lt;/a&gt;, Insight Development Grant, &lt;strong&gt;&amp;ldquo;Collaborative Design in Online Networks&lt;/strong&gt;,&amp;rdquo; $74,814.&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;2016-2018 Katie Plaisance (PI) and John McLevey (Co-I), &lt;a href=&#34;http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/insight_development_grants-su
+bventions_de_developpement_savoir-eng.aspx&#34;&gt;Social Science and Humanities Research Council of Canada (&lt;strong&gt;SSHRC&lt;/strong&gt;)&lt;/a&gt;, Insight Development Grant, &amp;ldquo;&lt;strong&gt;Increasing the Impact of Philosophy of Science in Scientific Domains&lt;/strong&gt;,&amp;rdquo; $59,302&lt;/p&gt;&lt;/li&gt;
 
-&lt;p&gt;2013 University of Waterloo, Faculty Research Startup Grant, $15,000.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Research Software</title>
-      <link>/research/software/</link>
-      <pubDate>Sat, 18 Mar 2017 11:14:35 +0100</pubDate>
-      
-      <guid>/research/software/</guid>
-      <description>
+&lt;li&gt;&lt;p&gt;2015-2016 John McLevey (PI) and Vanessa Schweizer (Co-I), Basillie School of International Affairs, Major Workshops Grant, &amp;ldquo;&lt;strong&gt;Challenges and Opportunities for Governance of Socio-Ecological Systems in Comparative Perspective&lt;/strong&gt;,&amp;rdquo; $8,400.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;2015-2020 Mark Stoddart (PI) and John McLevey (Co-I), &lt;a href=&#34;http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/insight_development_grants-su
+bventions_de_developpement_savoir-eng.aspx&#34;&gt;Social Science and Humanities Research Council of Canada (&lt;strong&gt;SSHRC&lt;/strong&gt;)&lt;/a&gt;, Insight Grant, &amp;ldquo;&lt;strong&gt;The Oil-Tourism Interface and Social-Ecological Change in the North Atlantic&lt;/strong&gt;,&amp;rdquo; $188,423.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;2014-2016 John McLevey (PI), &lt;a href=&#34;http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/insight_development_grants-su
+bventions_de_developpement_savoir-eng.aspx&#34;&gt;Social Science and Humanities Research Council of Canada (&lt;strong&gt;SSHRC&lt;/strong&gt;)&lt;/a&gt;, Insight Development Grant, &lt;strong&gt;&amp;ldquo;Collaborative Design in Online Networks&lt;/strong&gt;,&amp;rdquo; $74,814.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;2013 University of Waterloo, Faculty Research Startup Grant, $15,000.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;research-software&#34;&gt;Research Software&lt;/h1&gt;
+
+&lt;div id=&#34;soft&#34;&gt;&lt;/div&gt;
 
 &lt;p&gt;In addition to writing articles, I am co-developing research software with student members of my research team. Our work is funded in part by grants from the Social Science and Humanities Research Council of Canada (SSHRC) and an Early Researcher Award from the Ministry of Research and Innovation in Ontario.&lt;/p&gt;
 
-&lt;h1 id=&#34;metaknowledge&#34;&gt;metaknowledge&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;metaknowledge&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
 
-&lt;p&gt;Coming soon&amp;hellip;&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;tidyextractors&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
 
-&lt;h1 id=&#34;recordlinkage&#34;&gt;recordlinkage&lt;/h1&gt;
+&lt;li&gt;&lt;p&gt;Contributions to &lt;em&gt;recordlinkage&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
 
-&lt;p&gt;Descriptions of contributions coming soon&amp;hellip;&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;gitnet&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h1 id=&#34;tidyextractors&#34;&gt;tidyextractors&lt;/h1&gt;
+&lt;h2 id=&#34;reports&#34;&gt;Reports&lt;/h2&gt;
 
-&lt;p&gt;Coming soon&amp;hellip;&lt;/p&gt;
+&lt;div id=&#34;report&#34;&gt;&lt;/div&gt;
+
+&lt;p&gt;Janice Aurini, John McLevey, Rob Gorbet, and Allyson Stokes. Forthcoming. &amp;ldquo;&lt;strong&gt;Assessing the Impact of Classroom-Integrated Robotics on the Cultivation of 21st Century Competencies&lt;/strong&gt;.&amp;rdquo; Report for the Council of Ontario Directors of Education (CODE) and the Ministry of Eduction.&lt;/p&gt;
 </description>
     </item>
     
