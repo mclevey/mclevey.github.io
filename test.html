@@ -130,10 +130,6 @@
 
 </style>
 
-
-<h1>TEST</h1>
-
-
 <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
@@ -170,9 +166,6 @@ d3.json("nets/graphFile.json", function(error, graph) {
           .on("start", dragstarted)
           .on("drag", dragged)
           .on("end", dragended));
-
-  node.append("text")
-      .text(function(d) { return d.id; });
 
   simulation
       .nodes(graph.nodes)
