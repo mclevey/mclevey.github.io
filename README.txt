@@ -1,54 +1,33 @@
-
-TITLE: 
-Concept - 100% Fully Responsive Free HTML5 Bootstrap Template
-
-AUTHOR:
-DESIGNED & DEVELOPED by GetTemplates.co
-
-Website: http://gettemplates.co/
-Twitter: http://twitter.com/gettemplatesco
-Facebook: http://facebook.com/gettemplatesco
+Massively by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 
 
-CREDITS:
+This is Massively, a text-heavy, article-oriented design built around a huge background
+image (with a new parallax implementation I'm testing) and scroll effects (powered by
+Scrollex). A *slight* departure from all the one-pagers I've been doing lately, but one
+that fulfills a few user requests and makes use of some new techniques I've been wanting
+to try out. Enjoy it :)
 
-Bootstrap
-http://getbootstrap.com/
+Demo images* courtesy of Unsplash, a radtastic collection of CC0 (public domain) images
+you can use for pretty much whatever.
 
-jQuery
-http://jquery.com/
+(* = not included)
 
-jQuery Easing
-http://gsgd.co.uk/sandbox/jquery/easing/
+AJ
+aj@lkn.io | @ajlkn
 
-Modernizr
-http://modernizr.com/
 
-Google Fonts
-https://www.google.com/fonts/
+Credits:
 
-Icomoon
-https://icomoon.io/app/
+	Demo Images:
+		Unsplash (unsplash.com)
 
-Respond JS
-https://github.com/scottjehl/Respond/blob/master/LICENSE-MIT
+	Icons:
+		Font Awesome (fortawesome.github.com/Font-Awesome)
 
-animate.css
-http://daneden.me/animate
-
-jQuery Waypoint
-https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
-
-Stellar Parallax
-http://markdalgleish.com/projects/stellar.js/
-
-jQuery countTo
-http://www.owlcarousel.owlgraphic.com/
-
-Magnific Popup
-http://dimsemenov.com/plugins/magnific-popup/
-
-Demo Images:
-http://pixeden.com
-http://unsplash.com
-
+	Other:
+		jQuery (jquery.com)
+		Misc. Sass functions (@HugoGiraudel)
+		Skel (skel.io)
+		Scrollex (github.com/ajlkn/jquery.scrollex)
