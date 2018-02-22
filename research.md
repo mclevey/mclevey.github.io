@@ -16,50 +16,50 @@ Italics = student at time of publication
 * Allyson Stokes and John McLevey (equal authors). 2016. "**From Porter to Bourdieu: The Evolving Specialty Structure of English Canadian Sociology, 1966- 2014.**" *Canadian Review of Sociology / Revue canadienne de sociologie*. 53(2):176–202.
   * [Gated Link](http://onlinelibrary.wiley.com/doi/10.1111/cars.12104/full), [Download PDF](http://www.johnmclevey.com/pdfs/research/stokes_mclevey_2016.pdf), [Access Article Supplement](/research/porter_bourdieu_supplement.pdf)
 
-* John McLevey. 2015. "Understanding Policy Research in Liminal Spaces: Think Tank Responses to Diverging Principles of Legitimacy." *Social Studies of Science*. 45(2):270-293.  
+* John McLevey. 2015. "**Understanding Policy Research in Liminal Spaces: Think Tank Responses to Diverging Principles of Legitimacy.**" *Social Studies of Science*. 45(2):270-293.  
   * [Gated Link](http://journals.sagepub.com/doi/abs/10.1177/0306312715575054), [Download PDF](http://www.johnmclevey.com/pdfs/research/mclevey2015.pdf)
 
-* John McLevey. 2014. "Think Tanks, Funding, and the Politics of Policy Knowledge in Canada." *Canadian Review of Sociology / Revue canadienne de sociologie*. 51(1):54-75.  
+* John McLevey. 2014. "**Think Tanks, Funding, and the Politics of Policy Knowledge in Canada.**" *Canadian Review of Sociology / Revue canadienne de sociologie*. 51(1):54-75.  
   * [Gated Link](http://onlinelibrary.wiley.com/doi/10.1111/cars.12033/full), [Download PDF](http://www.johnmclevey.com/pdfs/research/mclevey2014.pdf)
 
 ## Chapters in Peer Reviewed Edited Volumes
 
-* John McLevey and *Ryan Deschamps*. 2018. "The Sociology of Public Policy Formation and Implementation." William Outhwaite and Stephen Turner (eds) *The SAGE Handbook of Political Sociology*. SAGE.
+* John McLevey and *Ryan Deschamps*. 2018. "**The Sociology of Public Policy Formation and Implementation.**" William Outhwaite and Stephen Turner (eds) *The SAGE Handbook of Political Sociology*. SAGE.
   * [Download PDF](http://www.johnmclevey.com/pdfs/research/mclevey_deschamps_shps.pdf)
 
-* John McLevey, Allyson Stokes, and *Amelia Howard*.  2018. "Pierre Bourdieu's Uneven Influence on Anglophone Canadian Sociology." Thomas Medvetz and Jeff Sallaz (eds) *The Oxford Handbook of Pierre Bourdieu*. Oxford: Oxford University Press.
+* John McLevey, Allyson Stokes, and *Amelia Howard*.  2018. "**Pierre Bourdieu's Uneven Influence on Anglophone Canadian Sociology.**" Thomas Medvetz and Jeff Sallaz (eds) *The Oxford Handbook of Pierre Bourdieu*. Oxford: Oxford University Press.
 
 ## Articles Under Review
 
 ### Revise & Resubmit (Revisions Submitted)
 
-* Owen Gallupe, John McLevey, and Sarah Brown. "Selection or Influence? A Meta-Analysis of the Association between Peer and Personal Offending." Minor revisions requested for publication in *Journal of Quantitative Criminology*.  
+* Owen Gallupe, John McLevey, and Sarah Brown. "**Selection or Influence? A Meta-Analysis of the Association between Peer and Personal Offending.**" Minor revisions requested for publication in *Journal of Quantitative Criminology*.  
 
 ### Submitted
 
-* John McLevey, *Alexander Graham*, *Reid McIlroy-Young*, *Pierson Browne*, and Kathryn S. Plaisance. "Indifferent interdisciplinary: intellectual status and disciplinary boundaries between philosophy of science and the sciences." Under review at *Scientometrics*.
+* John McLevey, *Alexander Graham*, *Reid McIlroy-Young*, *Pierson Browne*, and Kathryn S. Plaisance. "**Indifferent interdisciplinary: intellectual status and disciplinary boundaries between philosophy of science and the sciences.**" Under review at *Scientometrics*.
 
 ## Books in Progress
 
-* Mark Stoddart, Alice Mattoni, and John McLevey. *Navigating Social-Environmental Wellbeing: Nature-Based Tourism and Offshore Oil in the North Atlantic*. Book proposal submitted to Palgrave MacMillan in January 2018.
+* Mark Stoddart, Alice Mattoni, and John McLevey. *Navigating Social-Environmental Wellbeing: Nature-Based Tourism and Offshore Oil in the North Atlantic**. Book proposal submitted to Palgrave MacMillan in January 2018.
 
-* John McLevey. *A Practical Introduction to Computational Social Science*.
+* John McLevey. **A Practical Introduction to Computational Social Science**.
 
 ## Articles in Progress
 
-* John McLevey, *Pierson Browne*, and *Alexander Graham*. "Remaking the Boundaries of Open and Proprietary Science: A Linked Data Analysis of Multi-Institutional Collaboration in International Biomedical Science."
+* John McLevey, *Pierson Browne*, and *Alexander Graham*. "**Remaking the Boundaries of Open and Proprietary Science: A Linked Data Analysis of Multi-Institutional Collaboration in International Biomedical Science.**"
 
-* *Alexander Graham* and John McLevey. "Estimating the Effects of Intellectual Diversity on Impact and Productivity" <!-- Under review at *Science, Technology, and Human Values*.  -->
+* *Alexander Graham* and John McLevey. "**Estimating the Effects of Intellectual Diversity on Impact and Productivity.**" <!-- Under review at *Science, Technology, and Human Values*.  -->
 
-* John McLevey, *Alexander Graham*, and *Pierson Browne*. "Network Structure and the 'Chain of Trust' in Free/Libre Open Source Software Development: The Case of Linux." <!-- Under review at *Science, Technology, and Human Values*.  -->
+* John McLevey, *Alexander Graham*, and *Pierson Browne*. "**Network Structure and the 'Chain of Trust' in Free/Libre Open Source Software Development: The Case of Linux.**" <!-- Under review at *Science, Technology, and Human Values*.  -->
 
-* John McLevey, Mark Stoddart, and *Yixi Yang*. "The Oil-Tourism Interface in International Media: A Systematic Comparison of Norway, Scotland, and Newfoundland and Labrador."
+* John McLevey, Mark Stoddart, and *Yixi Yang*. "**The Oil-Tourism Interface in International Media: A Systematic Comparison of Norway, Scotland, and Newfoundland and Labrador.**"
 
-* John McLevey, *Pierson Browne*, *Alexander Graham*, and *Tyler Crick*. "Measuring institutional change in the science-policy interface: A comparison of Canada, the US, the UK, and Australia."
+* John McLevey, *Pierson Browne*, *Alexander Graham*, and *Tyler Crick*. "**Measuring institutional change in the science-policy interface: A comparison of Canada, the US, the UK, and Australia.**"
 
 # Policy Reports
 
-* Janice Aurini, John McLevey, Allyson Stokes, and Rob Gorbet. 2017. "Classroom Robotics and Acquisition of 21st Century Competencies: An Action Research Study of Nine Ontario School Boards." Report for the Council of Ontario Directors of Education (CODE) and the Ministry of Education, Ontario.
+* Janice Aurini, John McLevey, Allyson Stokes, and Rob Gorbet. 2017. "**Classroom Robotics and Acquisition of 21st Century Competencies: An Action Research Study of Nine Ontario School Boards.**" Report for the Council of Ontario Directors of Education (CODE) and the Ministry of Education, Ontario.
 
 # Research Grants
 
