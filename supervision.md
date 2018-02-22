@@ -6,7 +6,7 @@ menu: true
 
 I am interested in working with students on projects in the areas of social networks, computational social science, sociology of science, science policy, political sociology, environmental sociology, or sociology of education. Depending on the student, the committee, and the project, I am also open to providing advice on research methods for students working in other substantive areas.
 
-For the most part, I supervise graduate students from the Department of Sociology & Legal Studies and undergraduate students from the Department of Knowledge Integration, but I have also worked with students from departments in the Faculty of Science and the Faculty of Applied Health Sciences.
+For the most part, I supervise graduate students from the Department of Sociology & Legal Studies and undergraduate students from the Department of Knowledge Integration, but I have also worked with students from other departments in the faculties of Environment, Science, and Applied Health Sciences.
 
 # PhD Dissertations
 
