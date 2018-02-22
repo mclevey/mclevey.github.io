@@ -11,7 +11,7 @@ menu: true
 Italics = student at time of publication
 
 * John McLevey and *Reid McIlroy-Young*. 2017. "**Introducing *metaknowledge*: Software for Computational Research in Information Science, Network Analysis, and Science of Science.**" *The Journal of Informetrics*. 11: 176-197.
-  * [Gated Link](http://www.sciencedirect.com/science/article/pii/S1751157716302000), [Download PDF](http://www.johnmclevey.com/pdfs/research/mclevey_mcilroy_young_2017.pdf), [Access Supplementary Python Notebooks](https://github.com/mclevey/metaknowledge_article_supplement)
+  * [Gated Link](http://www.sciencedirect.com/science/article/pii/S1751157716302000), [Download PDF](http://www.johnmclevey.com/pdfs/research/JOI2017.pdf), [Access Supplementary Python Notebooks](https://github.com/mclevey/metaknowledge_article_supplement)
 
 * Allyson Stokes and John McLevey (equal authors). 2016. "**From Porter to Bourdieu: The Evolving Specialty Structure of English Canadian Sociology, 1966- 2014.**" *Canadian Review of Sociology / Revue canadienne de sociologie*. 53(2):176–202.
   * [Gated Link](http://onlinelibrary.wiley.com/doi/10.1111/cars.12104/full), [Download PDF](http://www.johnmclevey.com/pdfs/research/stokes_mclevey_2016.pdf), [Access Article Supplement](/research/porter_bourdieu_supplement.pdf)
