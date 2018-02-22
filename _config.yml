@@ -45,7 +45,7 @@ author:
   name:                <John> <McLevey>
   email:               <john.mclevey@uwaterloo.ca>
   # Used by `jekyll-seo-tag`:
-  # twitter:             <username>
+  twitter:             <johnmclevey>
 
 # This text will appear in a `<small>` tag in the footer of every page.
 copyright:             © 2017. All rights reserved.
@@ -198,8 +198,8 @@ remote_theme: qwtel/hydejack@gem-7.5.0
 #   yandex:              <verification-id>
 
 # Used for Twitter cards
-# twitter:
-#   username:            <twitter handle>
+twitter:
+  username:            <johnmclevey>
 
 # Used for Facebook open graph
 # facebook:
