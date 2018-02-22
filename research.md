@@ -41,7 +41,7 @@ Italics = student at time of publication
 
 ## Books in Progress
 
-* Mark Stoddart, Alice Mattoni, and John McLevey. *Navigating Social-Environmental Wellbeing: Nature-Based Tourism and Offshore Oil in the North Atlantic**. Book proposal submitted to Palgrave MacMillan in January 2018.
+* Mark Stoddart, Alice Mattoni, and John McLevey. **Navigating Social-Environmental Wellbeing: Nature-Based Tourism and Offshore Oil in the North Atlantic**. Book proposal submitted to Palgrave MacMillan in January 2018.
 
 * John McLevey. **A Practical Introduction to Computational Social Science**.
 
