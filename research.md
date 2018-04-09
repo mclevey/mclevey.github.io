@@ -8,7 +8,7 @@ menu: true
 
 ## Books / Research Monographs
 
-\ind Mark Stoddart, Alice Mattoni, and John McLevey. *Industrial Development and Eco-Tourisms: Is Co-existance Possible Between Oil Exploration and Nature Conservation?* Under contract with Palgrave MacMillan.
+* Mark Stoddart, Alice Mattoni, and John McLevey. *Industrial Development and Eco-Tourisms: Is Co-existance Possible Between Oil Exploration and Nature Conservation?* Under contract with Palgrave MacMillan.
 
 ## Peer Reviewed Journal Articles
 
@@ -66,7 +66,7 @@ Italics = student at time of publication
 
 * Total Research Grants since 2013: **$860,740**
 
-* 2018-2019. Mark Stoddart (PI), **John McLevey**, (Co-Applicant), John Sandlos (Co-Applicant), Vanessa Schweizer (Co-Applicant), Catherine Mei Ling Wong (Co-Applicant). Climate Change and Energy Futures Workshop: Challenges and Opportunities for Global and Interdisciplinary Research. [SSHRC Connection Grant](http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/connection_grants-subventions_connexion-eng.aspx), $24,373 (plus matching funds from Memorial University and University of Waterloo). 
+* 2018-2019. Mark Stoddart (PI), **John McLevey**, (Co-Applicant), John Sandlos (Co-Applicant), Vanessa Schweizer (Co-Applicant), Catherine Mei Ling Wong (Co-Applicant). Climate Change and Energy Futures Workshop: Challenges and Opportunities for Global and Interdisciplinary Research. [SSHRC Connection Grant](http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/connection_grants-subventions_connexion-eng.aspx), $24,373 (plus matching funds from Memorial University and University of Waterloo).
 
 * 2016-2020 **John McLevey (PI)**, Ontario [Early Researcher Award](https://www.ontario.ca/document/ontario-research-fund-early-researcher-awards-program-guidelines), Ministry of Research and Innovation, "Information and Idea Diffusion in an Open Source Collaboration Network," $150,000.   
 
