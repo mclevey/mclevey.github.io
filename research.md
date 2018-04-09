@@ -6,9 +6,15 @@ menu: true
 
 # Publications
 
+## Books / Research Monographs
+
+\ind Mark Stoddart, Alice Mattoni, and John McLevey. *Industrial Development and Eco-Tourisms: Is Co-existance Possible Between Oil Exploration and Nature Conservation?* Under contract with Palgrave MacMillan.
+
 ## Peer Reviewed Journal Articles
 
 Italics = student at time of publication
+
+* John McLevey, *Alexander Graham*, *Reid McIlroy-Young*, *Pierson Browne*, and Kathryn S. Plaisance. 2018. "Indifferent interdisciplinary: intellectual status and disciplinary boundaries between philosophy of science and the sciences." *Scientometrics*. Issue number not yet assigned.   
 
 * John McLevey and *Reid McIlroy-Young*. 2017. "**Introducing *metaknowledge*: Software for Computational Research in Information Science, Network Analysis, and Science of Science.**" *The Journal of Informetrics*. 11: 176-197.
   * [Gated Link](http://www.sciencedirect.com/science/article/pii/S1751157716302000), [Download PDF](http://www.johnmclevey.com/pdfs/research/JOI2017.pdf), [Access Supplementary Python Notebooks](https://github.com/mclevey/metaknowledge_article_supplement)
@@ -35,13 +41,8 @@ Italics = student at time of publication
 
 * Owen Gallupe, John McLevey, and Sarah Brown. "**Selection or Influence? A Meta-Analysis of the Association between Peer and Personal Offending.**" Minor revisions requested for publication in *Journal of Quantitative Criminology*.  
 
-### Submitted
-
-* John McLevey, *Alexander Graham*, *Reid McIlroy-Young*, *Pierson Browne*, and Kathryn S. Plaisance. "**Indifferent interdisciplinary: intellectual status and disciplinary boundaries between philosophy of science and the sciences.**" Under review at *Scientometrics*.
 
 ## Books in Progress
-
-* Mark Stoddart, Alice Mattoni, and John McLevey. **Navigating Social-Environmental Wellbeing: Nature-Based Tourism and Offshore Oil in the North Atlantic**. Book proposal submitted to Palgrave MacMillan in January 2018.
 
 * John McLevey. **A Practical Introduction to Computational Social Science**.
 
@@ -49,13 +50,13 @@ Italics = student at time of publication
 
 * John McLevey, *Pierson Browne*, and *Alexander Graham*. "**Remaking the Boundaries of Open and Proprietary Science: A Linked Data Analysis of Multi-Institutional Collaboration in International Biomedical Science.**"
 
-* *Alexander Graham* and John McLevey. "**Estimating the Effects of Intellectual Diversity on Impact and Productivity.**" <!-- Under review at *Science, Technology, and Human Values*.  -->
+* *Alexander Graham* and John McLevey. "**Collective Intelligence and Diversity Bonuses in Scientific Fields.**" <!-- Under review at *Science, Technology, and Human Values*.  -->
 
 * John McLevey, *Alexander Graham*, and *Pierson Browne*. "**Network Structure and the 'Chain of Trust' in Free/Libre Open Source Software Development: The Case of Linux.**" <!-- Under review at *Science, Technology, and Human Values*.  -->
 
 * John McLevey, Mark Stoddart, and *Yixi Yang*. "**The Oil-Tourism Interface in International Media: A Systematic Comparison of Norway, Scotland, and Newfoundland and Labrador.**"
 
-* John McLevey, *Pierson Browne*, *Alexander Graham*, and *Tyler Crick*. "**Measuring institutional change in the science-policy interface: A comparison of Canada, the US, the UK, and Australia.**"
+* John McLevey and *Alexander Graham*. "**Smart Collaboration & Boundary Spanning for High Impact Science.**"
 
 # Policy Reports
 
@@ -63,7 +64,9 @@ Italics = student at time of publication
 
 # Research Grants
 
-* Total Research Grants since 2013: **$846,401**
+* Total Research Grants since 2013: **$860,740**
+
+* 2018-2019. Mark Stoddart (PI), **John McLevey**, (Co-Applicant), John Sandlos (Co-Applicant), Vanessa Schweizer (Co-Applicant), Catherine Mei Ling Wong (Co-Applicant). Climate Change and Energy Futures Workshop: Challenges and Opportunities for Global and Interdisciplinary Research. [SSHRC Connection Grant](http://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/connection_grants-subventions_connexion-eng.aspx), $24,373 (plus matching funds from Memorial University and University of Waterloo). 
 
 * 2016-2020 **John McLevey (PI)**, Ontario [Early Researcher Award](https://www.ontario.ca/document/ontario-research-fund-early-researcher-awards-program-guidelines), Ministry of Research and Innovation, "Information and Idea Diffusion in an Open Source Collaboration Network," $150,000.   
 
