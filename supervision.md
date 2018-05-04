@@ -21,17 +21,17 @@ For the most part, I supervise graduate students from the Department of Sociolog
 
 # MA Theses
 
+* Nicholas Brandon, MD (committee member, supervisor Shannon Majowicz, successfully defended 2018)      
 * Alexander Graham (supervisor, successfully defended 2017)   
 * Junyi Wang (committee member, supervisor Derek Robinson, successfully defended in 2017)   
 * Chen Chen (reader, supervisor Peter Johnson, successfully defended 2016)                                 
 * Stuart Anderson (reader, supervisor Götz Hoeppe, successfully defended 2017)    
-* Nicholas Brandon, MD (committee member, supervisor Shannon Majowicz)      
 * Sarah Tang (committee member, supervisor Simron Singh)             
 
 # Undergraduate Senior Honors Theses
 
-* Rachel Wood (in progress 2017-2018)       
-* Jessilyn Wolfe (in progress 2017-2018)     
+* Rachel Wood (completed 2018)       
+* Jessilyn Wolfe (completed 2018)     
 * Jillian Anderson (completed 2017)     
 * Julia Yaroshinsky (completed 2016)     
 * Tiffany Lin (completed 2015)     
