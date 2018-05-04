@@ -14,6 +14,8 @@ menu: true
 
 Italics = student at time of publication
 
+* Owen Gallupe, John McLevey, and Sarah Brown. 2018. "**Selection or Influence? A Meta-Analysis of the Association between Peer and Personal Offending.**" *Journal of Quantitative Criminology*. Issue number not yet assigned.
+
 * John McLevey, *Alexander Graham*, *Reid McIlroy-Young*, *Pierson Browne*, and Kathryn S. Plaisance. 2018. "**Interdisciplinarity and Insularity in the Diffusion of Knowledge: An Analysis of Disciplinary Boundaries Between Philosophy of Science and the Sciences**." *Scientometrics*. Issue number not yet assigned.   
 
 * John McLevey and *Reid McIlroy-Young*. 2017. "**Introducing *metaknowledge*: Software for Computational Research in Information Science, Network Analysis, and Science of Science.**" *The Journal of Informetrics*. 11: 176-197.
@@ -35,11 +37,9 @@ Italics = student at time of publication
 
 * John McLevey, Allyson Stokes, and *Amelia Howard*.  2018. "**Pierre Bourdieu's Uneven Influence on Anglophone Canadian Sociology.**" Thomas Medvetz and Jeff Sallaz (eds) *The Oxford Handbook of Pierre Bourdieu*. Oxford: Oxford University Press.
 
-## Articles Under Review
+<!-- ## Articles Under Review
 
-### Revise & Resubmit (Revisions Submitted)
-
-* Owen Gallupe, John McLevey, and Sarah Brown. "**Selection or Influence? A Meta-Analysis of the Association between Peer and Personal Offending.**" Minor revisions requested for publication in *Journal of Quantitative Criminology*.  
+### Revise & Resubmit (Revisions Submitted) -->
 
 
 ## Books in Progress
