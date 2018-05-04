@@ -14,7 +14,7 @@ menu: true
 
 Italics = student at time of publication
 
-* John McLevey, *Alexander Graham*, *Reid McIlroy-Young*, *Pierson Browne*, and Kathryn S. Plaisance. 2018. "**Indifferent interdisciplinary: intellectual status and disciplinary boundaries between philosophy of science and the sciences**." *Scientometrics*. Issue number not yet assigned.   
+* John McLevey, *Alexander Graham*, *Reid McIlroy-Young*, *Pierson Browne*, and Kathryn S. Plaisance. 2018. "**Interdisciplinarity and Insularity in the Diffusion of Knowledge: An Analysis of Disciplinary Boundaries Between Philosophy of Science and the Sciences**." *Scientometrics*. Issue number not yet assigned.   
 
 * John McLevey and *Reid McIlroy-Young*. 2017. "**Introducing *metaknowledge*: Software for Computational Research in Information Science, Network Analysis, and Science of Science.**" *The Journal of Informetrics*. 11: 176-197.
   * [Gated Link](http://www.sciencedirect.com/science/article/pii/S1751157716302000), [Download PDF](http://www.johnmclevey.com/pdfs/research/JOI2017.pdf), [Access Supplementary Python Notebooks](https://github.com/mclevey/metaknowledge_article_supplement)
