@@ -19,14 +19,14 @@ For the most part, I supervise graduate students from the Department of Sociolog
 * Rod Missaghian (committee member, supervisor Janice Aurini)        
 * Yixi Yang (committee member, supervisor Mark Stoddart at Memorial University)             
 
-# MA Theses
+# Master's Theses
 
+* Sarah Tang (committee member, supervisor Simron Singh)                
 * Nicholas Brandon, MD (committee member, supervisor Shannon Majowicz, successfully defended 2018)      
 * Alexander Graham (supervisor, successfully defended 2017)   
 * Junyi Wang (committee member, supervisor Derek Robinson, successfully defended in 2017)   
 * Chen Chen (reader, supervisor Peter Johnson, successfully defended 2016)                                 
 * Stuart Anderson (reader, supervisor Götz Hoeppe, successfully defended 2017)    
-* Sarah Tang (committee member, supervisor Simron Singh)             
 
 # Undergraduate Senior Honors Theses
 
