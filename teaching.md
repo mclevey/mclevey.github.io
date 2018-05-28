@@ -4,6 +4,11 @@ title: Teaching
 menu: true
 ---
 
+<img src="assets/img/class_net_for_site.png" alt="Communication network for Fall 2017 INTEG 120 students, data from 24 class meetings.">
+<br>
+<p><small>Communication network for Fall 2017 INTEG 120 students, data collected from 24 class meetings.</small></p>
+<br><br>
+
 In addition to the courses below, I occasionally teach courses in the sociology of science, science and technology policy, social networks, and creativity and innovation.
 
 # INTEG 440: Computational Social Science
