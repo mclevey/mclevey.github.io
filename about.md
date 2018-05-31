@@ -1,6 +1,6 @@
 ---
-layout: about
-title: About
+layout: page
+title: test
 description: >
   kjde
 hide_description: true
