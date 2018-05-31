@@ -4,17 +4,9 @@ title: CV
 menu: true
 ---
 
-You can download a PDF version of my CV here.
+You can **download** a PDF version of my CV [here](https://github.com/mclevey/cv/raw/master/cv_mclevey.pdf).
 
 ---
-
-Knowledge Integration, Sociology & Legal Studies    
-University of Waterloo, Waterloo, ON, Canada  
-\href{http://www.johnmclevey.com}{johnmclevey.com} | [networkslab.org](http://networkslab.org)   
-john.mclevey@uwaterloo.ca    
-647-921-2044    
-\bigskip
-Citizenship: Canadian  
 
 # Appointments
 
@@ -25,30 +17,17 @@ Citizenship: Canadian
 
 # Affiliations
 
-
-2014-Present. Affiliate Researcher, [Waterloo Institute for Complexity and Innovation](http://wici.ca/new/)
-
-
-2014-Present. Board Member, [University of Waterloo Survey Research Centre](http://math.uwaterloo.ca/survey-research-centre/node/1)     
-
-
-2014-Present. Fellow, [Balsillie School of International Affairs](http://www.balsillieschool.ca/)
-
-
-2014-Present. Cross-appointed to the [School of Environment, Resources, and Sustainability](https://uwaterloo.ca/environment-resources-and-sustainability/)   
-
-
-2016-Present. Cross-appointed to the [Department of Geography and Environmental Management](https://uwaterloo.ca/geography-environmental-management/)   
-
-
+* 2014-Present. Affiliate Researcher, [Waterloo Institute for Complexity and Innovation](http://wici.ca/new/)
+* 2014-Present. Board Member, [University of Waterloo Survey Research Centre](http://math.uwaterloo.ca/survey-research-centre/node/1)     
+* 2014-Present. Fellow, [Balsillie School of International Affairs](http://www.balsillieschool.ca/)
+* 2014-Present. Cross-appointed to the [School of Environment, Resources, and Sustainability](https://uwaterloo.ca/environment-resources-and-sustainability/)   
+* 2016-Present. Cross-appointed to the [Department of Geography and Environmental Management](https://uwaterloo.ca/geography-environmental-management/)   
 
 # Education
 
-2013. PhD, Sociology, McMaster University. Hamilton, ON, Canada.    
-
-2009. MA, Sociology, McMaster University. Hamilton, ON, Canada.    
-
-2008. BA Honors, Sociology, Political Science, Memorial University. St. John's, NL, Canada.    
+* 2013. PhD, Sociology, McMaster University. Hamilton, ON, Canada.    
+* 2009. MA, Sociology, McMaster University. Hamilton, ON, Canada.    
+* 2008. BA Honors, Sociology, Political Science, Memorial University. St. John's, NL, Canada.    
 
 # Research Areas
 
