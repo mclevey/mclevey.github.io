@@ -25,23 +25,15 @@ You can **download** a PDF version of my CV [here](https://github.com/mclevey/cv
 
 # Education
 
-* 2013. PhD, Sociology, McMaster University. Hamilton, ON, Canada.    
-* 2009. MA, Sociology, McMaster University. Hamilton, ON, Canada.    
-* 2008. BA Honors, Sociology, Political Science, Memorial University. St. John's, NL, Canada.    
+* (2013) PhD, Sociology, McMaster University. Hamilton, ON, Canada.    
+* (2009) MA, Sociology, McMaster University. Hamilton, ON, Canada.    
+* (2008) BA Honors, Sociology, Political Science, Memorial University. St. John's, NL, Canada.    
 
 # Research Areas
 
 Social Networks and Computational Social Science, Sociology of Science, Environmental Sociology, Political Sociology and Social Movements, Research Methods, Sociology of Education
 
-
-<!-- Science Policy, Computational Social Science, Environmental Sociology, Social Networks, Political Sociology, Research Methods, Education -->
-
-<!-- Social Networks; Computational Social Science; Political Sociology; Science and Public Policy; Environmental Sociology; Research Methods; Education -->
-
-
 # Peer Reviewed Publications
-
-<!-- Student co-author names are \underline{underlined}.    -->
 
 ## Books / Research Monographs
 
@@ -50,9 +42,7 @@ Mark Stoddart, Alice Mattoni, and John McLevey. *Industrial Development and Eco-
 
 ## Peer Reviewed Journal Articles and Chapters in Peer Reviewed Edited Volumes
 
-\footnotesize{
-  Italics = student at time of publication}\bigskip
-\normalsize
+***Italics* = student at time of publication**
 
 
 John McLevey, *Alexander Graham*, *Reid McIlroy-Young*, *Pierson Browne*, and Kathryn S. Plaisance. 2018. "Interdisciplinarity and Insularity in the Diffusion of Knowledge: An Analysis of Disciplinary Boundaries Between Philosophy of Science and the Sciences." *Scientometrics*. Issue number not yet assigned.
