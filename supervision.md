@@ -21,7 +21,8 @@ For the most part, I supervise graduate students from the Department of Sociolog
 
 # Master's Theses
 
-* Sarah Tang (committee member, supervisor Simron Singh)                
+* Emerson LaCroix (committee member, supervisor Janice Aurini)                    
+* Sarah Tang (committee member, supervisor Simron Singh)        
 * Nicholas Brandon, MD (committee member, supervisor Shannon Majowicz, successfully defended 2018)      
 * Alexander Graham (supervisor, successfully defended 2017)   
 * Junyi Wang (committee member, supervisor Derek Robinson, successfully defended in 2017)   

@@ -15,13 +15,13 @@ In addition to the courses below, I occasionally teach courses in the sociology 
 
 We are living in an age where digital information is being produced at an unprecedented rate. This explosion of digital data has the potential to revolutionize the way we learn about the world, and how we conduct research related to urgent social and political problems. This course focuses primarily on the knowledge and skills necessary for doing high-quality research with digital data. The course is divided into four core sections: (1) a research-oriented introduction to the programming language Python, (2) collecting, cleaning, and combining digital datasets, (3) analyzing digital datasets using tools from machine learning, text analysis, and social network analysis, and (4) privacy and confidentiality. There will be an emphasis on good research design throughout the course. Previous courses in research methods and / or statistics are an asset, but are not required. I assume no previous knowledge or experience of computer programming.
 
-[Course Syllabus](/440/)
+<!-- [Course Syllabus](/440/) -->
 
 # INTEG 340: Research Design & Methods
 
 This course provides an introduction to empirical research design and methods with a focus on applications in the social sciences and related fields. You will learn about core issues in research design (e.g. sampling) that transcend specific approaches, and about a variety of techniques for collecting and analyzing quantitative and qualitative data. The course will cover both abstract and practical issues related to methodology and decision making in empirical research. You will have the opportunity to develop and workshop proposals that you may wish to pursue in your senior honors thesis. By the end of the course you will be a more informed consumer and have a basic set of skills for designing and implementing your own empirical research projects. Most importantly, you will have a foundation for future learning about research design and methods.
 
-[Course Syllabus](/340/)
+<!-- [Course Syllabus](/340/) -->
 
 # INTEG 120: The Art & Science of Learning
 
