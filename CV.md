@@ -1,10 +1,10 @@
 ---
 layout: page
-title: CV
+title: Download a PDF version of my CV [here](https://github.com/mclevey/cv/raw/master/cv_mclevey.pdf)
 menu: true
 ---
 
-You can **download** a PDF version of my CV [here](https://github.com/mclevey/cv/raw/master/cv_mclevey.pdf).
+<!-- You can **download** a PDF version of my CV [here](https://github.com/mclevey/cv/raw/master/cv_mclevey.pdf). -->
 
 ---
 
