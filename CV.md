@@ -16,7 +16,7 @@ You can **download** a PDF version of my CV [here](https://github.com/mclevey/cv
 # Affiliations
 
 * 2014-Present. Affiliate Researcher, [Waterloo Institute for Complexity and Innovation](http://wici.ca/new/)
-* 2014-Present. Board Member, [University of Waterloo Survey Research Centre](http://math.uwaterloo.ca/survey-research-centre/node/1)     
+* 2014-2017. Board Member, [University of Waterloo Survey Research Centre](http://math.uwaterloo.ca/survey-research-centre/node/1)     
 * 2014-Present. Fellow, [Balsillie School of International Affairs](http://www.balsillieschool.ca/)
 * 2014-Present. Cross-appointed to the [School of Environment, Resources, and Sustainability](https://uwaterloo.ca/environment-resources-and-sustainability/)   
 * 2016-Present. Cross-appointed to the [Department of Geography and Environmental Management](https://uwaterloo.ca/geography-environmental-management/)   
@@ -38,11 +38,13 @@ Social Networks and Computational Social Science, Sociology of Science, Environm
 
 Mark Stoddart, Alice Mattoni, and John McLevey. *Industrial Development and Eco-Tourisms: Is Co-existence Possible Between Oil Exploration and Nature Conservation?* Under contract with Palgrave MacMillan.
 
+John McLevey. *Doing Computational Social Science: A Practical Guide.* Under contract with SAGE, UK office.
+
 ## Peer Reviewed Journal Articles and Chapters in Peer Reviewed Edited Volumes
 
 *Italics* = student at time of publication
 
-* Owen Gallupe, John McLevey, and Sarah Brown. Forthcoming. "Selection or Influence? A Meta-Analysis of the Association between Peer and Personal Offending." *Journal of Quantitative Criminology*.  
+* Owen Gallupe, John McLevey, and Sarah Brown. Forthcoming. "Selection or Influence? A Meta-Analysis of the Association between Peer and Personal Offending." *Journal of Quantitative Criminology*. [Gated Link](https://link.springer.com/article/10.1007/s10940-018-9384-y). Open access version coming soon.
 * John McLevey, *Alexander Graham*, *Reid McIlroy-Young*, *Pierson Browne*, and Kathryn S. Plaisance. 2018. "Interdisciplinarity and Insularity in the Diffusion of Knowledge: An Analysis of Disciplinary Boundaries Between Philosophy of Science and the Sciences." *Scientometrics*. Issue number not yet assigned.
 * John McLevey and *Ryan Deschamps*. 2018. "The Sociology of Public Policy Formation and Implementation." William Outhwaite and Stephen Turner (eds) *The SAGE Handbook of Political Sociology*. SAGE.
 * John McLevey, Allyson Stokes, and *Amelia Howard*.  2018. "Pierre Bourdieu's Uneven Influence on Anglophone Canadian Sociology." Thomas Medvetz and Jeff Sallaz (eds) *The Oxford Handbook of Pierre Bourdieu*. Oxford: Oxford University Press.
