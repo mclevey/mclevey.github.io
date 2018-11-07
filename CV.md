@@ -15,6 +15,7 @@ You can **download** a PDF version of my CV [here](https://github.com/mclevey/cv
 
 # Affiliations
 
+* Spring 2019. Visiting Scholar. Department of Political and Social Sciences. [Scuola Normale Superiore](https://en.sns.it). Florence, Italy
 * 2014-Present. Affiliate Researcher, [Waterloo Institute for Complexity and Innovation](http://wici.ca/new/)
 * 2014-2017. Board Member, [University of Waterloo Survey Research Centre](http://math.uwaterloo.ca/survey-research-centre/node/1)     
 * 2014-Present. Fellow, [Balsillie School of International Affairs](http://www.balsillieschool.ca/)
@@ -173,18 +174,17 @@ bventions_de_developpement_savoir-eng.aspx), "Collaborative Design in Online Net
 
 ## Courses Designed, Developed, and Offered since 2013
 
-* Research Methods (undergraduate lecture)  
-* "Big Data" and Social Science Research (undergraduate seminar)   
-* KI Thesis / Senior Research Project    
-* The Art & Science of Learning (undergraduate lecture)<!-- \footnote{Formerly: Disciplines and Integrative Practices} -->    
-* Data Visualization (undergraduate seminar)    
-* Sociology of Science and Technology (undergraduate seminar)      
-* Open Science and Technology (undergraduate seminar)  
-* Creativity and Innovation (undergraduate lecture)  
-
+* INTEG 340 Research Methods
+* INTEG 640 / 440 Computational Social Science (formerly "Big Data" and Social Science Research)  
+* INTEG 420 KI Thesis / Senior Research Project    
+* INTEG 120 The Art & Science of Learning <!-- \footnote{Formerly: Disciplines and Integrative Practices} -->    
+* INTEG 275 Data Visualization     
+* INTEG 375 Sociology of Science and Technology      
+* INTEG 375 Open Science and Technology
+* INTEG 251 Creativity and Innovation   
 
 ## Independent Studies Courses
-<!--  with Sasha Graham, Tiff Lin, Kelly White, Ben Carr, Tyler Crick -->
+<!--  with Sasha Graham, Tiff Lin, Kelly White, Ben Carr, Tyler Crick, Kuil S -->
 
 * Social Network Analysis (3x); Reproducibility and Replication in the Sciences; Sociology of Science; Computational Sociology; The Sociology of Expertise and Science Policy; Sociology of Organizations  
 
