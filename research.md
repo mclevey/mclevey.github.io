@@ -6,7 +6,7 @@ menu: true
 
 I primarily work in the areas of social network analysis and computational social science, with substantive interests in the (1) science-policy interface and (2) environmental governance and social movements. As a computational social scientist, my most general research goal is to advance our knowledge of how social networks and institutions affect the spread of information, knowledge, beliefs, biases, and behaviors. I am currently involved in a number of research projects in service of that larger goal, some of which are described below.
 
-# Science-Policy Interface
+## Science-Policy Interface
 
 (Policy for Science + Science for Policy)
 
@@ -16,7 +16,7 @@ Relatedly, I am currently focused on a series of papers on (*i*) team organizati
 
 In addition to writing journal articles in this area, I work with students in NetLab on the development of open source research software (e.g. `metaknowledge` for science of science, `pdpp` for "principled data processing" and reproducible science). I also co-organize and co-instruct [Science Outside the Lab North](http://www.sotlnorth.ca) with [Eric Kennedy](https://profiles.laps.yorku.ca/profiles/ebk/) from York University and the Forum on Science, Policy, and Society.
 
-# Environmental Governance and Social Movements
+## Environmental Governance and Social Movements
 
 My second main area of research is environmental governance and social movements. I am currently a co-investigator on two projects funded by SSHRC Insight Grants. The first, with [Mark Stoddart](https://www.mun.ca/soc/people/faculty-profiles/mark-c-j-stoddart.php) (Memorial University) as PI, is broadly concerned with the problem of how coastal societies navigate the relationships between extractive development (i.e. natural resource extraction) and attractive development (i.e. economies based on tourism, leisure, recreation). A great deal of environmental science research focuses only on one of these two very different ways of living with and making a living from coastal environments. By contrast, we examine both socio-ecological development models together in a systematic comparison of five North Atlantic regions: Denmark, Iceland, Norway, Newfoundland and Labrador, and Scotland. I am currently co-authoring a book based on this project with Mark Stoddart (Memorial University) and [Alice Mattoni](http://www.alicemattoni.com) (Scuola Normale Superiore in the Istituto di Scienze Umane, Florence).
 
