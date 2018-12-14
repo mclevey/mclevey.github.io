@@ -11,11 +11,11 @@ author1:
   about:             |
   # This photo will be used in the about section.
   picture:
-    path:            /assets/img/IMG_0028.JPG
+    path:            /assets/img/headshot.jpg
     # srcset is optional, but can be used to provide higher res versions for retina displays
     srcset:
-      1x:            /assets/img/IMG_0028.JPG
-      2x:            /assets/img/IMG_0028.JPG
+      1x:            /assets/img/headshot.jpg
+      2x:            /assets/img/headshot.jpg
 
   # Social media icons in sidebar.
   # Comment/uncommet to show/hide. Rearrange to change the order in which they appear.
