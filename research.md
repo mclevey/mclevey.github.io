@@ -4,7 +4,7 @@ title: Research
 menu: true
 ---
 
-I primarily work in the areas of social network analysis and computational social science, with substantive interests in the (1) science-policy interface and (2) environmental governance and social movements. As a computational social scientist, my most general research goal is to advance our knowledge of how social networks and institutions affect the spread of information, knowledge, beliefs, biases, and behaviors. I am currently involved in a number of research projects in service of that larger goal, some of which are described below.
+I primarily work in the areas of social network analysis and computational social science, with substantive interests in the (1) science-policy interface and (2) environmental governance and social movements. As a computational social scientist, my most general research goal is to advance our knowledge of how social networks and institutions affect cognition and behaviour, including formation and diffusion of knowledge, beliefs, biases, and behaviors. I am currently involved in a number of research projects in service of that larger goal, some of which are described below.
 
 ## Science-Policy Interface
 
