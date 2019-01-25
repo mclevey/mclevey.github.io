@@ -11,7 +11,7 @@ menu: true
 
 In addition to the courses below, I occasionally teach courses in the sociology of science, science and technology policy, social networks, and creativity and innovation.
 
-# INTEG 440: Computational Social Science
+# INTEG 440 / 640: Computational Social Science
 
 We are living in an age where digital information is being produced at an unprecedented rate. This explosion of digital data has the potential to revolutionize the way we learn about the world, and how we conduct research related to urgent social and political problems. This course focuses primarily on the knowledge and skills necessary for doing high-quality research with digital data. The course is divided into four core sections: (1) a research-oriented introduction to the programming language Python, (2) collecting, cleaning, and combining digital datasets, (3) analyzing digital datasets using tools from machine learning, text analysis, and social network analysis, and (4) privacy and confidentiality. There will be an emphasis on good research design throughout the course. Previous courses in research methods and / or statistics are an asset, but are not required. I assume no previous knowledge or experience of computer programming.
 
@@ -30,9 +30,3 @@ There are three sets of related learning objectives in this course. First, you w
 # INTEG 420 A/B: Senior Honours Project
 
 The Senior Research Project is the two-term culmination of the Knowledge Integration degree. It provides you with the opportunity to engage in an original research or design project supervised by an expert (or experts) in your chosen field. Traditionally, INTEG 420 A (taken in the fall) is focused on designing your project, conducting literature reviews, applying for ethics clearance, and making serious progress on any empirical research (if your project requires empirical work). INTEG 420 B (taken in the winter) is focused on actually writing the actual thesis and disseminating the work through a conference paper and poster.
-
-<!-- # INTEG 441: Communicating with Data
-
-Visualizing data is central to scientific research, and is increasingly prominent in science communication and journalism. This course provides an introduction to the history, principles, and techniques of data visualization and information design, with an emphasis on data used by social scientists, data scientists, and policy analysts. Students will learn how to create effective visualizations for a variety of different audiences and purposes, including making sense of new datasets and communicating evidence to others.   
-
-I assume that students in this class will have a minimal background in research methods (i.e. one undergraduate research methods class), but little to no programming experience. While some programming experience is advantageous, you will acquire the necessary skills in this course. -->

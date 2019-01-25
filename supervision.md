@@ -4,38 +4,42 @@ title: Supervision
 menu: true
 ---
 
-I am interested in working with students on projects in the areas of social networks, computational social science, sociology of science, science policy, political sociology, environmental sociology, or sociology of education. Depending on the student, the committee, and the project, I am also open to providing advice on research methods for students working in other substantive areas.
+I am interested in working with students on projects in the areas of social network analysis / network science, computational social science or data science, sociology of science, environmental sociology, and political sociology.
 
 For the most part, I supervise graduate students from the Department of Sociology & Legal Studies and undergraduate students from the Department of Knowledge Integration, but I have also worked with students from other departments in the faculties of Environment, Science, and Applied Health Sciences.
 
 # PhD Dissertations
 
-* Michael Clarke (committee member -- successfully defended in 2016)     
-* Alexander Graham (co-supervisor with Peter Carrington)       
-* Amelia Howard (supervisor)      
-* Tyler Crick (supervisor)     
-* Julie Cook (co-supervisor with Jennifer Lynes)    
-* Pierson Browne (committee member, supervisor Jen Whitson)      
-* Rod Missaghian (committee member, supervisor Janice Aurini)        
-* Yixi Yang (committee member, supervisor Mark Stoddart at Memorial University)             
+* Alexander Graham (supervisor)
+* Tyler Crick (supervisor)
+* Amelia Howard (supervisor)
+* Pierson Browne (committee member and interim supervisor, supervisor Jen Whitson)
+* François Lachapelle (committee member, supervisor David Tindall at UBC)
+* Adam Howe (committee member, supervisor David Tindall at UBC)
+* Julie Cook (committee member, supervisor Jen Lynes)
+* Rod Missaghian (committee member, supervisor Janice Aurini)
+* Yixi Yang (committee member, supervisor Mark Stoddart at Memorial University)
+* Michael Clarke (committee member -- successfully defended in 2016)
+* Noorin Manji (committee member -- successfully defended in 2018)
 
 # Master's Theses
 
-* Emerson LaCroix (committee member, supervisor Janice Aurini)                    
-* Sarah Tang (committee member, supervisor Simron Singh)        
-* Nicholas Brandon, MD (committee member, supervisor Shannon Majowicz, successfully defended 2018)      
-* Alexander Graham (supervisor, successfully defended 2017)   
-* Junyi Wang (committee member, supervisor Derek Robinson, successfully defended in 2017)   
-* Chen Chen (reader, supervisor Peter Johnson, successfully defended 2016)                                 
-* Stuart Anderson (reader, supervisor Götz Hoeppe, successfully defended 2017)    
+* Alexander Graham (supervisor, successfully defended 2017)
+* Emerson LaCroix (committee member, supervisor Janice Aurini)
+* Sarah Tang (committee member, supervisor Simron Singh)
+* Nicholas Brandon, MD (committee member, supervisor Shannon Majowicz, successfully defended 2018)
+* Junyi Wang (committee member, supervisor Derek Robinson, successfully defended in 2017)
+* Chen Chen (reader, supervisor Peter Johnson, successfully defended 2016)
+* Stuart Anderson (reader, supervisor Götz Hoeppe, successfully defended 2017)
 
 # Undergraduate Senior Honors Theses
 
-* Rachel Wood (completed 2018)       
-* Jessilyn Wolfe (completed 2018)     
-* Jillian Anderson (completed 2017)     
-* Julia Yaroshinsky (completed 2016)     
-* Tiffany Lin (completed 2015)     
-* Benjamin Carr (completed 2014)     
-* Chelsea Mills (completed 2014)     
-* Christina Minji Chung (completed 2014)   
+* Jason Kurian (in progress)
+* Rachel Wood (completed 2018)
+* Jessilyn Wolfe (completed 2018)
+* Jillian Anderson (completed 2017)
+* Julia Yaroshinsky (completed 2016)
+* Tiffany Lin (completed 2015)
+* Benjamin Carr (completed 2014)
+* Chelsea Mills (completed 2014)
+* Christina Minji Chung (completed 2014)
