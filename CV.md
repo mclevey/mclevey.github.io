@@ -30,7 +30,7 @@ You can **download** a PDF version of my CV [here](https://github.com/mclevey/cv
 
 # Research Areas
 
-Social Networks and Computational Social Science, Sociology of Science, Environmental Sociology, Political Sociology and Social Movements, Research Methods
+Social Networks and Computational Social Science, Sociology of Science, Environmental Sociology, Political Sociology and Social Movements, Cognitive Sociology, Research Methods
 
 # Peer Reviewed Publications
 
