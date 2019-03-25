@@ -40,6 +40,8 @@ Mark Stoddart, Alice Mattoni, and John McLevey. *Industrial Development and Eco-
 
 John McLevey. *Doing Computational Social Science: A Practical Guide.* Under contract with SAGE, UK office.
 
+Harry Collins with Robert Evans, Jonathon Goodall, Michael Gorman, Martin Innes, Will Mason-Wilkes, John McLevey and Alun Preece. (**Authors after Collins listed alphabetically**). *Face-to-Face: Why you need to talk to people to understand the world*. First 45K words of book manuscript under review. 
+
 ## Peer Reviewed Journal Articles and Chapters in Peer Reviewed Edited Volumes
 
 *Italics* = student at time of publication
@@ -58,7 +60,6 @@ John McLevey. *Doing Computational Social Science: A Practical Guide.* Under con
 * John McLevey, *Alexander Graham*, *Pierson Browne*, and *Tyler Crick*. "Diversity and Similarity in Social Networks: New Measures for Empirical Research."
 * *Alexander Graham*, John McLevey, *Pierson Browne*, and *Tyler Crick*. “Collective Intelligence and Diversity Bonuses in Science.”
 * John McLevey, *Pierson Browne*, and *Alexander Graham*. "Remaking the Boundaries of Open and Proprietary Science: A Linked Data Analysis of Multi-Institutional Collaboration in International Biomedical Science."
-* John McLevey, *Alexander Graham*, and *Pierson Browne*. "Network Structure and the 'Chain of Trust' in Free/Libre Open Source Software Development: The Case of Linux."
 * John McLevey, Mark Stoddart, and *Yixi Yang*. "The Oil-Tourism Interface in International Media: A Systematic Comparison of Norway, Scotland, Iceland, Denmark, Greenland, and Newfoundland and Labrador."
 * Kathryn Plaisance, John McLevey, and *Janet Michaud*. "Show Me the Numbers: A Quantitative Portrait of the Attitudes, Experiences, and Values of Philosophers of Science with Respect to Doing Broadly Engaged Work."
 * Kathryn Plaisance, John McLevey, and *Janet Michaud*. "The Impact of Philosophy of Science in Scientific Domains: A Qualitative Study of Philosophers’ Experiences and Perceptions Regarding the Broader Impact of their Work."
