@@ -27,11 +27,11 @@ title:                 John McLevey
 # A short description (~150 chars) of the page used for the meta description tag.
 # Can use markdown, but no more than one paragraph (enforced by `>`)
 description:           >
-  Assistant Professor at the University of Waterloo.
+  Associate Professor at the University of Waterloo.
 
 # A shorter description for the sidebar.
 tagline:               >
-  Assistant Professor, Knowledge Integration, Sociology & Legal Studies, University of Waterloo.
+  Associate Professor, Knowledge Integration, Sociology & Legal Studies, University of Waterloo.
 
 # A list of keywords for your blog.
 keywords:              [Computational Social Science, Social Networks, Sociology of Science, Education, Environment.]
