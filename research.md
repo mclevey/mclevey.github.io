@@ -28,6 +28,6 @@ I am currently co-editing (1) a special issue of *Social Networks* on social net
 
 ## Scientific Software
 
-In addition to writing journal articles in this area, I work with students in NetLab on the development of open source research software (e.g. `metaknowledge` for science of science, `pdpp` for "principled data processing" and reproducible science, `divsim` for measuring diversity and similarity in social and information networks, and `Nate` for network analysis for text data.). I also co-organize and co-instruct [Science Outside the Lab North](http://www.sotlnorth.ca) with [Eric Kennedy](https://profiles.laps.yorku.ca/profiles/ebk/) from York University and the Forum on Science, Policy, and Society.
+In addition to writing journal articles in this area, I work with students in NetLab on the development of open source research software (e.g. `metaknowledge` for science of science and partially automating literature reviews, `pdpp` for "principled data processing" and reproducible science, and `Nate` for network analysis for text data.). 
 
 Please be in touch if you would like to learn more about any of these projects!
