@@ -36,7 +36,7 @@ For the most part, I supervise graduate students from the Department of Sociolog
 
 # Undergraduate Senior Honors Theses
 
-* Jason Kurian (in progress)
+* Jason Kurian (completed 2019) 
 * Rachel Wood (completed 2018)
 * Jessilyn Wolfe (completed 2018)
 * Jillian Anderson (completed 2017)
