@@ -14,6 +14,7 @@ For the most part, I supervise graduate students from the Department of Sociolog
 * Tyler Crick (supervisor)
 * Amelia Howard (supervisor)
 * Pierson Browne (committee member and interim supervisor, supervisor Jen Whitson)
+* Adam Howe (committee member, supervisor David Tindall at UBC)
 * François Lachapelle (committee member, supervisor David Tindall at UBC)
 * Peter Duggins  (committee member, supervisor Chris Eliasmith, Systems Design Engineering)
 * Moutasem Zakkar (committee member, supervisors Craig Janes and Plinio Morita, School of Public Health and Health Systems)
