@@ -14,4 +14,3 @@ done
 
 echo -e "\033[0;32mPushing changes.\033[0m"
 cd /Users/johnmclevey/Documents/work/career/websites/mclevey.github.io/ && git add . && git commit -m 'routine update' && git push
-
