@@ -1,0 +1,247 @@
+[
+  {
+    "objectID": "pages/blog.html",
+    "href": "pages/blog.html",
+    "title": "Probably a blog about modelling, probabilistic programming, scientific computing, and research workflows.",
+    "section": "",
+    "text": "Hello World!\n\n\n\n\n\nThese are the first words from every blog, right?\n\n\n\n\n\nFeb 19, 2024\n\n\nJohn McLevey\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "pages/about.html",
+    "href": "pages/about.html",
+    "title": "Dr. John McLevey (he/him)",
+    "section": "",
+    "text": "My current research addresses three broad and longstanding themes that cut across the social, cognitive, and computational/statistical sciences. First, I am developing generative models of schematic cognition, social influence, and cultural learning to deepen our knowledge of how latent opinions, identities, beliefs, and behaviors form and co-evolve, and to better measure polarization and large-scale cultural change. In developing these models, I am primarily focused on culture related to (a) climate change and environmental policy; (a) harm reduction initiatives and public health responses to the toxic drug supply and overdose crisis; (c) generative artificial intelligence; (d) privacy, security, and surveillance; and (e) lifestyle preferences and politics.\nSecond, I am using these models as digital ’laboratories’ (of a sort) to better understand the workings and impacts of coordinated information operations such as disinformation campaigns and censorship on populations. Third, I am using data from social media platforms to better understand the role of emotional dynamics and identity-related processes in online political discussions. I approach each of these projects as a computational social scientist with expertise in network science and social network analysis, probabilistic and generative modelling, and computational text analysis.\nMy work is funded by research grants from the Social Science and Humanities Research Council of Canada (SSHRC) and an Early Researcher Award from the Ontario Ministry of Research and Innovation. To learn more, browse my CV (with links to preprints and open access publications) or check out my books.\nOutside of work and spending time with friends and family, I generally spend my time playing basketball, hiking, strength training, traveling, and reading. When I am not traveling for work, I split my time between Waterloo (ON), Toronto (ON), and St. John’s (NL). However, nearly all of this is temporarily on hold as my partner and I adjust to life with newborn identical twins!"
+  },
+  {
+    "objectID": "pages/about.html#education",
+    "href": "pages/about.html#education",
+    "title": "Dr. John McLevey (he/him)",
+    "section": "Education",
+    "text": "Education\n\nPhD, Sociology, McMaster University (2009-2013)\nMA, Sociology, McMaster University (2008-2009)\nBA(H) Sociology, Political Science, Memorial University (2004-2008)"
+  },
+  {
+    "objectID": "pages/about.html#expertise",
+    "href": "pages/about.html#expertise",
+    "title": "Dr. John McLevey (he/him)",
+    "section": "Expertise",
+    "text": "Expertise\nComputational Social Science, Generative Models, Natural Language Processing (NLP), Network Science, Cognitive Science, Cultural Cognition and Opinion Dynamics, Environmental Sociology, Sociology of Science and Technology"
+  },
+  {
+    "objectID": "pages/consulting.html",
+    "href": "pages/consulting.html",
+    "title": "Consulting",
+    "section": "",
+    "text": "Consulting"
+  },
+  {
+    "objectID": "pages/books.html",
+    "href": "pages/books.html",
+    "title": "Books",
+    "section": "",
+    "text": "The SAGE Handbook of Social Network Analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis new edition of The Sage Handbook of Social Network Analysis builds on the success of its predecessor, offering a comprehensive overview of social network analysis produced by leading international scholars in the field. Brand new chapters provide both significant updates to topics covered in the first edition, as well as discussing cutting edge topics that have developed since, including new chapters on (1) general issues such as social categories and computational social science; (2) applications in contexts such as environmental policy, gender, ethnicity, cognition and social media and digital networks; and (3) concepts and methods such as centrality, blockmodeling, multilevel network analysis, spatial analysis, data collection, and beyond.  Learn more about the book here!\n\n\n\n\n\nDoing Computational Social Science: A Practical Introduction\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nComputational approaches offer exciting opportunities for us to do social science differently. This beginner’s guide discusses a range of computational methods and how to use them to study the problems and questions you want to research. It assumes no knowledge of programming, offering step-by-step guidance for coding in Python and drawing on examples of real data analysis to demonstrate how you can apply each approach in any discipline. […] For anyone who wants to use computational methods to conduct a social science research project, this book equips you with the skills, good habits and best working practices to do rigorous, high quality work.  Learn more about the book here!\n\n\n\n\n\nFace-to-Face: Science, Trust, Democracy, and the Internet\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe internet is changing the way that knowledge is made and shared. Knowledge-making in face-to-face settings is being replaced by information gathering from remote sources, whose origins may be concealed but which can create an illusion of intimacy. Though remote communication is beneficial in many ways – modern societies would fail without it – too much reliance on remote communication threatens the core institutions of democratic societies. […] By drawing out the special features of face-to-face interaction and its constitutive role in creating societies, with science as the icon, the book sets out an agenda for civic education that can protect democratic institutions from the erosion of pluralism and the facile abandonment of trustworthy expertise.  Learn more about the book here!\n\n\n\n\n\nIndustrial Development and Eco Tourisms: Can Oil Extraction and Nature Convervation Coexist?\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis book examines the “oil-tourism interface”, the broad range of direct and indirect contact points between offshore oil extraction and nature-based tourism. Offshore oil extraction and nature-based tourism are pursued as development paths across the North Atlantic region. Offshore oil promises economic benefits from employment and royalty payments to host societies, but is based on fossil fuel-intensive resource extraction. Nature-based tourism, instead, is based on experiencing natural environments and encountering wildlife, including whales, seals, or seabirds. […] Through a comparative analysis of Denmark, Iceland, Newfoundland and Labrador, Norway, and Scotland, this book offers important lessons for how coastal societies can better navigate relationships between resource extraction and nature-based tourism in the interests of social-ecological wellbeing.  Learn more about the book here!"
+  },
+  {
+    "objectID": "index.html#about",
+    "href": "index.html#about",
+    "title": "Dr. John McLevey (he/him)",
+    "section": "About",
+    "text": "About\nMy current research addresses three broad and longstanding themes that cut across the social, cognitive, and computational/statistical sciences. First, I am developing generative models of schematic cognition, social influence, and cultural learning to deepen our knowledge of how latent opinions, identities, beliefs, and behaviors form and co-evolve, and to better measure polarization and large-scale cultural change. In developing these models, I am primarily focused on culture related to (a) climate change and environmental policy; (a) harm reduction initiatives and public health responses to the toxic drug supply and overdose crisis; (c) generative artificial intelligence; (d) privacy, security, and surveillance; and (e) lifestyle preferences and politics.\nSecond, I am using these models as digital ’laboratories’ (of a sort) to better understand the workings and impacts of coordinated information operations such as disinformation campaigns and censorship on populations. Third, I am using data from social media platforms to better understand the role of emotional dynamics and identity-related processes in online political discussions. I approach each of these projects as a computational social scientist with expertise in network science and social network analysis, probabilistic and generative modelling, and computational text analysis.\nMy work is funded by research grants from the Social Science and Humanities Research Council of Canada (SSHRC) and an Early Researcher Award from the Ontario Ministry of Research and Innovation. To learn more, browse my CV (with links to preprints and open access publications) or check out my books.\nOutside of work and spending time with friends and family, I generally spend my time playing basketball, hiking, strength training, traveling, and reading. When I am not traveling for work, I split my time between Waterloo (ON), Toronto (ON), and St. John’s (NL). However, nearly all of this is temporarily on hold as my partner and I adjust to life with newborn identical twins!"
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Dr. John McLevey (he/him)",
+    "section": "Education",
+    "text": "Education\n\nPhD, Sociology, McMaster University (2009-2013)\nMA, Sociology, McMaster University (2008-2009)\nBA(H) Sociology, Political Science, Memorial University (2004-2008)"
+  },
+  {
+    "objectID": "index.html#expertise",
+    "href": "index.html#expertise",
+    "title": "Dr. John McLevey (he/him)",
+    "section": "Expertise",
+    "text": "Expertise\nComputational Social Science; Network Science; Generative Modelling; Natural Language Processing; Cognitive Science; Cultural Cognition, Emotion, and Opinion Dynamics; Sociology of Science and Technology; Environmental Sociology"
+  },
+  {
+    "objectID": "publications/books/Face-to-Face.html#part-i-foundations-communication-socialization-and-trust",
+    "href": "publications/books/Face-to-Face.html#part-i-foundations-communication-socialization-and-trust",
+    "title": "Face-to-Face: Science, Trust, Democracy, and the Internet",
+    "section": "Part I: Foundations: Communication, Socialization and Trust",
+    "text": "Part I: Foundations: Communication, Socialization and Trust\nChapter 1 | What Trust and Communication Are For\nChapter 2 | Forming Societies and Learning to Trust and to Rely\nChapter 3 | Completing the Story of Face-to-Face Communication"
+  },
+  {
+    "objectID": "publications/books/Face-to-Face.html#part-ii-arguments-and-evidence-can-remote-communication-replace-face-to-face",
+    "href": "publications/books/Face-to-Face.html#part-ii-arguments-and-evidence-can-remote-communication-replace-face-to-face",
+    "title": "Face-to-Face: Science, Trust, Democracy, and the Internet",
+    "section": "Part II: Arguments and Evidence: Can Remote Communication Replace Face to Face?",
+    "text": "Part II: Arguments and Evidence: Can Remote Communication Replace Face to Face?\nChapter 4 | Remote Technology and Trust\nChapter 5 | Can Remote Replace Face-to-Face Communication?\nChapter 6 | Small Groups to Big Groups: When Big Groups Are Trustworthy\nChapter 7 | The ‘Stickiness’ of Face-to-Face Communication: Some Case Studies\nChapter 8 | When Remote Communication Is Not Trustworthy\nChapter 9 | Disinformation and Misinformation"
+  },
+  {
+    "objectID": "publications/books/Face-to-Face.html#part-iii-consequences-science-truth-democracy-and-the-nature-of-society",
+    "href": "publications/books/Face-to-Face.html#part-iii-consequences-science-truth-democracy-and-the-nature-of-society",
+    "title": "Face-to-Face: Science, Trust, Democracy, and the Internet",
+    "section": "Part III: Consequences: Science, Truth, Democracy and the Nature of Society",
+    "text": "Part III: Consequences: Science, Truth, Democracy and the Nature of Society\nChapter 10 | Some Immediate Consequences of the Coronavirus (COVID-19) Pandemic for Science\nChapter 11 | The Nature of Democracy and Scientific Expertise\nChapter 12 | What Is to Be Done?\nPostscript | The November 2020 Election in the USA"
+  },
+  {
+    "objectID": "publications/books/Face-to-Face.html#appendixes",
+    "href": "publications/books/Face-to-Face.html#appendixes",
+    "title": "Face-to-Face: Science, Trust, Democracy, and the Internet",
+    "section": "Appendixes",
+    "text": "Appendixes\nAppendix A | Propaganda and Other Traditions\nAppendix B | (i) Coronavirus (COVID-19) Disinformation, (ii) Update on Disinformation in General, and (iii) a Warning about How Not to Fix the Problem\nAppendix C | The Delineated Cases of Citizen Participation in Science and Technology\nAppendix D | An Alternative View: Successful Business Interaction Without Face-to-Face Communication\nAppendix E | Second Language Learning"
+  },
+  {
+    "objectID": "publications/books/Industrial-Development-Eco-Tourisms.html",
+    "href": "publications/books/Industrial-Development-Eco-Tourisms.html",
+    "title": "Industrial Development and Eco Tourisms: Can Oil Extraction and Nature Convervation Coexist?",
+    "section": "",
+    "text": "Description\nThis book examines the “oil-tourism interface”, the broad range of direct and indirect contact points between offshore oil extraction and nature-based tourism. Offshore oil extraction and nature-based tourism are pursued as development paths across the North Atlantic region. Offshore oil promises economic benefits from employment and royalty payments to host societies, but is based on fossil fuel-intensive resource extraction. Nature-based tourism, instead, is based on experiencing natural environments and encountering wildlife, including whales, seals, or seabirds. They share social-ecological space, such as oceans, coastlines, cities and towns where tourism and offshore oil operations and offices are located. However, they rarely share cultural or political space, in terms of media coverage, public debate, or policy discussion that integrates both modes of development. Through a comparative analysis of Denmark, Iceland, Newfoundland and Labrador, Norway, and Scotland, this book offers important lessons for how coastal societies can better navigate relationships between resource extraction and nature-based tourism in the interests of social-ecological wellbeing.\n\n\n\n \n\n\n\n\nContents\nChapter 1 | Introduction: Contact Points Between Offshore Oil and Nature-Based Tourism\nChapter 2 | The North Atlantic as Object of Inquiry\nChapter 3 | Cultural Dimensions of the Oil-Tourism Interface\nChapter 4 | Environmental Governance and the Oil-Tourism Interface\nChapter 5 | Environmental Movement Conflict and Collaboration in the Oil-Tourism Interface\nChapter 6 | Lessons Learned and Social Futures: Building Social-Ecological Wellbeing in Coastal Communities\nChapter 7 | Epilogue on Methodology\n\n\nReviews\n\n“This book breaks new ground with its introduction of the notion of the oil-tourism interface. Through this analytical and empirical lens, the book explores the tensions between oil extraction and eco-tourism – in terms of extractive and attractive development. The devastating impact of oil extraction on the environment also has detrimental consequences for highly-valued tourism landscapes. One of the main strengths of this book lies in the rich cases, which the authors use to illustrate the complexities of these consequences and the ways in which societies, including policy-makers, business, citizens and social movements, evaluate and try to shape tourism and oil development models. These insights are important in the current context of climate crisis, which both impacts and is impacted by oil extraction and eco-tourism.” Julie Uldam, Associate Professor, Department of Management, Society and Communication Copenhagen Business School, Denmark\n\n\n“The ambivalent relations between fossil fuel extraction and tourism are a particularly apposite research topic in the North Atlantic, where global climate change can be seen at work in often poignant ways. The authors develop a relational political ecology approach which, combined with an ‘omnivorous methodology’, lends itself well to a nuanced analysis of the oil-tourism interface. This book is a valuable addition to environmental social science scholarship and essential reading for those interested in the complexities of a rapidly changing region.” Karl Benediktsson, Professor of Human Geography, University of Iceland, Iceland\n\n\n“Around the world, the same landscapes that harbor mineral riches are often tourist attractions, setting up tough policy dilemmas. The authors wisely build a framework for understanding and assessing these policies through the concept of”social-ecological wellbeing,” applied to fascinating cases on the coasts on both sides of the North Atlantic. Anyone interested in the future of the planet will learn a lot from this book of political ecology.” James M. Jasper, Author of The Art of Moral Protest\n\n\n“Eco-tourism and extractive industries may seem unlikely bedfellows but the reality is that, in many parts of the world, governments pursue both. By examining the politics and cultures of oil and tourism in the North Atlantic, Stoddart, Mattoni and McLevy shed new light on how contradictions and conflicts between the two development paths are managed and, critically, where opportunities to promote more positive social and ecological futures lie. I thoroughly recommend it.” Stewart Lockie, Distinguished Professor of Sociology, James Cook University, Australia\n\n\n“In this sweeping five-nation comparison, the authors untangle the complicated interplay of offshore oil extraction and nature-based tourism for the coastal cultures and political interests of the North Atlantic region. Through the adoption of an “omnivorous” methodological approach, the authors identify how these two industries have co-existed in isolation, cooperation, and conflict. From their findings, they offer a compelling argument for the consistent inclusion of environmental groups in deliberations on these economic activities at sea, ideally for the enhanced wellbeing of North Atlantic communities and the marine environment. Their assessment is particularly salient given climate change and the future significance of the Arctic in both oil exploration and tourism.” Patricia Widener, Florida Atlantic University, USA, author of Toxic and Intoxicating Oil\n\n\n\n\n\nCitationBibTeX citation:@book{cj stoddart2020,\n  author = {CJ Stoddart, Mark and Mattoni, Alice and McLevey, John},\n  publisher = {Palgrave Macmillan},\n  title = {Industrial {Development} and {Eco} {Tourisms:} {Can} {Oil}\n    {Extraction} and {Nature} {Convervation} {Coexist?}},\n  date = {2020-11-01},\n  address = {London, UK},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nCJ Stoddart, Mark, Alice Mattoni, and John McLevey. 2020. Industrial\nDevelopment and Eco Tourisms: Can Oil Extraction and Nature Convervation\nCoexist? London, UK: Palgrave Macmillan."
+  },
+  {
+    "objectID": "posts/Just Another Technical Blog.html",
+    "href": "posts/Just Another Technical Blog.html",
+    "title": "Hello World!",
+    "section": "",
+    "text": "I’ve been meaning to start doing some technical blogging for ~13 years, but I’ve always been too busy. Now that I have newborn twins, I figure it’s a good time to start. 🤣"
+  },
+  {
+    "objectID": "publications/chapters/SHSNA-Introduction.html",
+    "href": "publications/chapters/SHSNA-Introduction.html",
+    "title": "Intoduction",
+    "section": "",
+    "text": "PREPRINT VERSION\nThis new edition of the Sage Handbook of Social Network Analysis aims to build on the success of its predecessor, bringing together in one place a comprehensive overview of social network analysis produced by leading international scholars in the field. We present authoritative accounts of its history, theories, and methods, and a wide-ranging review of the various disciplines and topics to which it has made important contributions. Most of the topics covered in the first edition are included here, but in thoroughly revised or new chapters, many by new authors. We have also included chapters on a number of new topics that have experienced significant development since the first edition appeared, in order to ensure that the volume is completely up to date and so continues to meet the needs and expectations of our readers. In what follows, we provide a high-level overview of the development and growth of social network analysis and discuss several ideas that are foundational to the field."
+  },
+  {
+    "objectID": "publications/chapters/SHSNA-Introduction.html#footnotes",
+    "href": "publications/chapters/SHSNA-Introduction.html#footnotes",
+    "title": "Intoduction",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nOverviews of the history of social network analysis can be found in Freeman (2004); Prell (2012), and Scott (2017: Chapter 2).↩︎\nThe others consist of function words, as well as collections of words that are so common due to (a) their prevalence in nearly all SNA topics, or (b) article writing conventions.↩︎\nOf course, like all methods, this approach is imperfect. Our two-step approach is designed to avoid false positives due to the widespread use of “network” as a metaphor, to differentiate between social network analysis and actor network theory, and so on. While this method may miss some social network analyses, we think the probability of a publication using social network analysis citing at least one article in Social Networks is very high. Among these articles, we consider any that contain ‘network’ to be an SNA publication. The final step in our approach mirrors that of others (CITES).↩︎\nMatrices are also used for other types of network data, such as bipartite, multi-level, and multi-plex networks.↩︎"
+  },
+  {
+    "objectID": "publications/books/Doing-Computational-Social-Science.html#part-i-foundations",
+    "href": "publications/books/Doing-Computational-Social-Science.html#part-i-foundations",
+    "title": "Doing Computational Social Science: A Practical Introduction",
+    "section": "Part I: Foundations",
+    "text": "Part I: Foundations\nChapter 1 | Setting up your open source scientific computing environment\nChapter 2 | Python programming: The basics\nChapter 3 | Python programming: Data structures, functions and files\nChapter 4 | Collecting data from Application Programming Interfaces (APIs)\nChapter 5 | Collecting data from the web (Scraping)\nChapter 6 | Processing structured data\nChapter 7 | Visualisation and exploratory data analysis\nChapter 8 | Latent factors and components"
+  },
+  {
+    "objectID": "publications/books/Doing-Computational-Social-Science.html#part-ii-fundamentals-of-text-analysis",
+    "href": "publications/books/Doing-Computational-Social-Science.html#part-ii-fundamentals-of-text-analysis",
+    "title": "Doing Computational Social Science: A Practical Introduction",
+    "section": "Part II: Fundamentals of text analysis",
+    "text": "Part II: Fundamentals of text analysis\nChapter 9 | Processing natural language data\nChapter 10 | Iterative text analysis\nChapter 11 | Exploratory text analysis\nChapter 12 | Text similarity and latent semantic space"
+  },
+  {
+    "objectID": "publications/books/Doing-Computational-Social-Science.html#part-iii-fundamentals-of-network-analysis",
+    "href": "publications/books/Doing-Computational-Social-Science.html#part-iii-fundamentals-of-network-analysis",
+    "title": "Doing Computational Social Science: A Practical Introduction",
+    "section": "Part III: Fundamentals of network analysis",
+    "text": "Part III: Fundamentals of network analysis\nChapter 13 | Social networks and relational thinking\nChapter 14 | Connection and clustering in social networks\nChapter 15 | Influence, inequality and power in social networks\nChapter 16 | Going viral: Modelling the epidemic spread of simple contagions\nChapter 17 | Not so fast: Modelling the diffusion of complex contagions"
+  },
+  {
+    "objectID": "publications/books/Doing-Computational-Social-Science.html#part-iv-research-ethics-and-machine-learning",
+    "href": "publications/books/Doing-Computational-Social-Science.html#part-iv-research-ethics-and-machine-learning",
+    "title": "Doing Computational Social Science: A Practical Introduction",
+    "section": "Part IV: Research ethics and machine learning",
+    "text": "Part IV: Research ethics and machine learning\nChapter 18 | Research ethics, politics and practices\nChapter 19 | Machine learning: Symbolic and connectionist\nChapter 20 | Supervised learning with regression and cross-validation\nChapter 21 | Supervised learning with tree-based models\nChapter 22 | Neural networks and deep learning\nChapter 23 | Developing neural network models with Keras and Tensorflow"
+  },
+  {
+    "objectID": "publications/books/Doing-Computational-Social-Science.html#part-v-bayesian-machine-learning-and-probabilistic-programming",
+    "href": "publications/books/Doing-Computational-Social-Science.html#part-v-bayesian-machine-learning-and-probabilistic-programming",
+    "title": "Doing Computational Social Science: A Practical Introduction",
+    "section": "Part V: Bayesian machine learning and probabilistic programming",
+    "text": "Part V: Bayesian machine learning and probabilistic programming\nChapter 24 | Statistical machine learning and generative models\nChapter 25 | Probability: A primer\nChapter 26 | Approximate posterior inference with stochastic sampling and MCMC"
+  },
+  {
+    "objectID": "publications/books/Doing-Computational-Social-Science.html#part-vi-bayesian-data-analysis-and-latent-variable-modelling-with-relational-and-text-data",
+    "href": "publications/books/Doing-Computational-Social-Science.html#part-vi-bayesian-data-analysis-and-latent-variable-modelling-with-relational-and-text-data",
+    "title": "Doing Computational Social Science: A Practical Introduction",
+    "section": "Part VI: Bayesian data analysis and latent variable modelling with relational and text data",
+    "text": "Part VI: Bayesian data analysis and latent variable modelling with relational and text data\nChapter 27 | Bayesian regression models with probabilistic programming\nChapter 28 | Bayesian hierarchical regression modelling\nChapter 29 | Variational Bayes and the craft of generative topic modelling\nChapter 30 | Generative network analysis with Bayesian stochastic blockmodels"
+  },
+  {
+    "objectID": "publications/books/Doing-Computational-Social-Science.html#part-vii-embeddings-transformer-models-and-named-entity-recognition",
+    "href": "publications/books/Doing-Computational-Social-Science.html#part-vii-embeddings-transformer-models-and-named-entity-recognition",
+    "title": "Doing Computational Social Science: A Practical Introduction",
+    "section": "Part VII: Embeddings, transformer models and named entity recognition",
+    "text": "Part VII: Embeddings, transformer models and named entity recognition\nChapter 31 | Can we model meaning?: Contextual representation and neural word embeddings\nChapter 32 | Named entity recognition, transfer learning and transformer models"
+  },
+  {
+    "objectID": "publications/books/Sage-Handbook-Social-Network-Analysis.html#part-a-general-issues",
+    "href": "publications/books/Sage-Handbook-Social-Network-Analysis.html#part-a-general-issues",
+    "title": "The SAGE Handbook of Social Network Analysis",
+    "section": "PART A: GENERAL ISSUES",
+    "text": "PART A: GENERAL ISSUES\nChapter 2 | Introducing Social Network AnalysisChristina Prell and David R. Schaefer\nChapter 3 | Social Networks and Social CategoriesRonald Breiger and Robin Wagner-Pacifici\nChapter 4 | Social Networks and Computational Social ScienceJames Kitts, Helene Grogan, and Kevin Lewis\nChapter 5 | Social Networks and Relational SociologyAnn Mische and Jan Fuhse"
+  },
+  {
+    "objectID": "publications/books/Sage-Handbook-Social-Network-Analysis.html#part-b-applications",
+    "href": "publications/books/Sage-Handbook-Social-Network-Analysis.html#part-b-applications",
+    "title": "The SAGE Handbook of Social Network Analysis",
+    "section": "PART B: APPLICATIONS",
+    "text": "PART B: APPLICATIONS\nChapter 6 | Social-ecological NetworksÖrjan Bodin\nChapter 7 | The Evolution of Environmental Policy Network AnalysisTyler A. Scott, Mark Lubell, and Gwen Arnold\nChapter 8 | Health Behaviours and OutcomesKayla de la Haye\nChapter 9 | Political and Policy NetworksMario Diani\nChapter 10 | Social Movements and Collective ActionDavid Tindall\nChapter 11 | Gender and Social NetworksElisa Bellotti\nChapter 12 | Why can’t we be friends? Understanding ethnic relations through network analysisRochelle Cote\nChapter 13 | Culture and NetworksOmar Lizardo\nChapter 14 | Semantic and Cultural NetworksSarah Shugars and Sandra González-Bailón\nChapter 15 | Cognition and Social NetworksMatthew E. Brashears and Victoria Money\nChapter 16 | Scientific NetworksDonghyun Kang and James Evans\nChapter 17 | Crime and NetworksMarie Ouellet and Logan Ledford\nChapter 18 | Historical Network Analysis: Two Problems of ScaleIan Kumekawa\nChapter 19 | The Paradoxes of Behavior Change and the New Science of Network DiffusionDamon Centola\nChapter 20 | Network Interventions: Using Social Networks to Accelerate Diffusion of InnovationsThomas W. Valente\nChapter 21 | Social Media and Digital NetworksAnabel Quan-Haase, Lyndsay Foisey, and Riley McLaughlin\nChapter 22 | Social CapitalBeate Völker\nChapter 23 | Social SupportLijun Song and Zhe Zhang\nChapter 24 | Corporate NetworksWilliam K. Carroll, Jouke Huijzer and J. P. Sapinski"
+  },
+  {
+    "objectID": "publications/books/Sage-Handbook-Social-Network-Analysis.html#part-c-concepts-methods",
+    "href": "publications/books/Sage-Handbook-Social-Network-Analysis.html#part-c-concepts-methods",
+    "title": "The SAGE Handbook of Social Network Analysis",
+    "section": "PART C: CONCEPTS & METHODS",
+    "text": "PART C: CONCEPTS & METHODS\nChapter 25 | International Trade NetworksChristina Prell, James Hollway, Petr Matous, Yasuyuki Todo\nChapter 26 | CentralityMartin Everett and Steve Borgatti\nChapter 2 | Structural Cohesion and Cohesive GroupsJames Moody and Peter J. Mucha\nChapter 28 | Multimodal Social Network AnalysisLorien Jasny\nChapter 29 | Blockmodeling, Positions and RolesPatrick Doreian, Anuška Ferligoj, and Vladimir Batagelj\nChapter 30 | Inferential Network Clustering with Hierarchical Bayesian Stochastic BlockmodelsPierson Browne, Tyler Crick, and John McLevey\nChapter 31 | Personal Networks and Egocentric AnalysisBrea Perry, Adam Roth, and Mario Small\nChapter 32 | Multilevel Network AnalysisEmmanuel Lazega & Peng Wang\nChapter 33 | Exponential Random Graph ModelsJohan Koskinen\nChapter 4 | Network DynamicsTom A.B. Snijders and Christian E.G. Steglich\nChapter 3 | Relational Event ModelsAaron Schecter and Noshir Contractor\nChapter 36 | Latent Position Network ModelsHardeep Kaur, Riccardo Rastelli, Nial Friel, and Adrian E. Raftery\nChapter 37 | Negative Ties and Signed NetworksFilip Agneessens\nChapter 38 | Qualitative and Mixed MethodsBetina Hollstein\nChapter 39 | Spatial Analysis of Social NetworksJohn R. Hipp\nChapter 40 | Social Network Data Collection: Principles and Modalitiesjimi adams and Miranda Lubbers\nChapter 41 | Missing Network DataRobert W. Krause and Mark Huisman\nChapter 42 | Scientific Software for Network AnalysisPierson Browne, Adam Howe, Yasmin Koop-Monteiro, Yixi Yang, and John McLevey"
+  },
+  {
+    "objectID": "pages/research.html",
+    "href": "pages/research.html",
+    "title": "Research",
+    "section": "",
+    "text": "I am currently…"
+  },
+  {
+    "objectID": "pages/research.html#polarization-and-public-opinion-dynamics",
+    "href": "pages/research.html#polarization-and-public-opinion-dynamics",
+    "title": "Research",
+    "section": "Polarization and Public Opinion Dynamics",
+    "text": "Polarization and Public Opinion Dynamics"
+  },
+  {
+    "objectID": "pages/research.html#probabilistic-stance-models",
+    "href": "pages/research.html#probabilistic-stance-models",
+    "title": "Research",
+    "section": "Probabilistic Stance Models",
+    "text": "Probabilistic Stance Models"
+  },
+  {
+    "objectID": "pages/courses.html",
+    "href": "pages/courses.html",
+    "title": "Courses",
+    "section": "",
+    "text": "ID\nCourse\nLevel\nDelivery\nLink\n\n\n\n\nFCIT 607\nData, Methods, and Models for Future Cities\nGraduate\nRemote\nWebsite\n\n\nINTEG 640\nComputational Social Science\nGraduate\nOnline\nWebsite\n\n\nINTEG 440\nComputational Social Science\nUndergraduate\nOnline\nWebsite\n\n\nINTEG 340\nResearch Methods\nUndergraduate\nIn person\nWebsite\n\n\nINTEG 240\nBullshit, Bias, & Bad Arguments\nUndergraduate\nRemote\nWebsite\n\n\nINTEG 140\nThe Art & Science of Learning\nUndergraduate\nIn person\nWebsite"
+  },
+  {
+    "objectID": "pages/lab.html",
+    "href": "pages/lab.html",
+    "title": "NETLAB",
+    "section": "",
+    "text": "Coming soon…"
+  },
+  {
+    "objectID": "pages/lab.html#student-members",
+    "href": "pages/lab.html#student-members",
+    "title": "NETLAB",
+    "section": "Student Members",
+    "text": "Student Members\n\nTyler Crick (PhD)\nKarmvir Padda (PhD)\nSasha Graham (PhD)\nRomina Heshimi (UG)"
+  },
+  {
+    "objectID": "pages/lab.html#lab-alumni",
+    "href": "pages/lab.html#lab-alumni",
+    "title": "NETLAB",
+    "section": "Lab Alumni",
+    "text": "Lab Alumni\nComing soon…"
+  },
+  {
+    "objectID": "pages/cv.html",
+    "href": "pages/cv.html",
+    "title": "Curriculum Vitai",
+    "section": "",
+    "text": "Coming soon…"
+  }
+]
