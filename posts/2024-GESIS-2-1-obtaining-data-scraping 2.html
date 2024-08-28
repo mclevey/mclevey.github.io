@@ -1,0 +1,2727 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="John McLevey">
+<meta name="dcterms.date" content="2024-08-26">
+<meta name="description" content="Module 2.1, Introduction to Computational Social Science (Python), GESIS Fall Seminar 2024">
+
+<title>Web Scraping 101 – Dr.&nbsp;John McLevey</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Dr.&nbsp;John McLevey</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../pages/books.html"> 
+<span class="menu-text">Books</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../pages/cv.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../pages/courses.html"> 
+<span class="menu-text">Courses</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../pages/blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://uwaterloo.ca/networks-lab/profiles"> 
+<span class="menu-text">Lab</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="https://github.com/mclevey" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-code-square"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/mclevey/mclevey.github.io">
+            Source Code
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="../posts/Quarto.html">
+            How I Built This Site
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  </ul></li>
+  <li><a href="#scraping-the-happiness-report-wikipedia-page" id="toc-scraping-the-happiness-report-wikipedia-page" class="nav-link" data-scroll-target="#scraping-the-happiness-report-wikipedia-page">Scraping The Happiness Report Wikipedia Page</a>
+  <ul class="collapse">
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#loading-static-websites-with-requests" id="toc-loading-static-websites-with-requests" class="nav-link" data-scroll-target="#loading-static-websites-with-requests">Loading Static Websites with <code>requests</code></a></li>
+  <li><a href="#parsing-html-with-beautifulsoup" id="toc-parsing-html-with-beautifulsoup" class="nav-link" data-scroll-target="#parsing-html-with-beautifulsoup">Parsing HTML with <code>BeautifulSoup</code></a>
+  <ul class="collapse">
+  <li><a href="#extracting-text-with-beautifulsoup" id="toc-extracting-text-with-beautifulsoup" class="nav-link" data-scroll-target="#extracting-text-with-beautifulsoup">Extracting Text with <code>BeautifulSoup</code></a></li>
+  <li><a href="#extracting-headers" id="toc-extracting-headers" class="nav-link" data-scroll-target="#extracting-headers">Extracting Headers</a></li>
+  <li><a href="#extracting-body-text" id="toc-extracting-body-text" class="nav-link" data-scroll-target="#extracting-body-text">Extracting Body Text</a></li>
+  <li><a href="#extracting-links" id="toc-extracting-links" class="nav-link" data-scroll-target="#extracting-links">Extracting Links</a></li>
+  </ul></li>
+  <li><a href="#extracting-tables" id="toc-extracting-tables" class="nav-link" data-scroll-target="#extracting-tables">Extracting Tables</a>
+  <ul class="collapse">
+  <li><a href="#finding-and-parsing-tables-with-beautifulsoup-and-pandas" id="toc-finding-and-parsing-tables-with-beautifulsoup-and-pandas" class="nav-link" data-scroll-target="#finding-and-parsing-tables-with-beautifulsoup-and-pandas">Finding and Parsing Tables with <code>BeautifulSoup</code> and <code>Pandas</code></a></li>
+  <li><a href="#cleaning-up-extracted-tables" id="toc-cleaning-up-extracted-tables" class="nav-link" data-scroll-target="#cleaning-up-extracted-tables">Cleaning Up Extracted Tables</a></li>
+  <li><a href="#associating-tables-with-dates" id="toc-associating-tables-with-dates" class="nav-link" data-scroll-target="#associating-tables-with-dates">Associating Tables with Dates</a></li>
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization">Visualization</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Web Scraping 101</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Python</div>
+    <div class="quarto-category">GESIS</div>
+    <div class="quarto-category">computational social science</div>
+    <div class="quarto-category">data science</div>
+    <div class="quarto-category">data collection</div>
+    <div class="quarto-category">web scraping</div>
+    <div class="quarto-category">apis</div>
+    <div class="quarto-category">tutorial</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Module 2.1, Introduction to Computational Social Science (Python), GESIS Fall Seminar 2024
+  </div>
+</div>
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author"><a href="https://johnmclevey.com">John McLevey</a> <a href="mailto:john.mclevey@uwaterloo.ca" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Waterloo
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 26, 2024</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">August 28, 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>In this tutorial, you’ll learn some foundational web scraping skills using Python, focusing specifically on working with static web pages. To help you develop your skills, we’ll work through an extended example of extracting data from the World Happiness Report Wikipedia page. We’ll start with the basics – loading and parsing HTML – and gradually move on to more complex tasks like handling nested tables and creating visualizations from the data we collect. By the end of this tutorial, you know how to navigate the structure of an HTML page, extract specific pieces of data such as headers, body text, and tables, and clean the data for analysis.</p>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>In this tutorial, you will learn how to:</p>
+<ul>
+<li>Load a static website using requests to obtain the HTML content of a webpage.</li>
+<li>Parse HTML using BeautifulSoup to structure and navigate the content.</li>
+<li>Extract headers and body text from a webpage for further analysis.</li>
+<li>Extract and process links from the webpage, including differentiating between relative, full, and internal links.</li>
+<li>Create a DataFrame from extracted data, making it easier to analyze and visualize.</li>
+<li>Handle and clean HTML tables, including dealing with nested tables that may complicate data extraction.</li>
+<li>Visualize data by creating simple plots from the cleaned and processed information.</li>
+</ul>
+</section>
+</section>
+<section id="scraping-the-happiness-report-wikipedia-page" class="level1 page-columns page-full">
+<h1>Scraping The Happiness Report Wikipedia Page</h1>
+<p>We’ll use the World Happiness Report Wikipedia page to demonstrate some simple web scraping techniques. We’ll use <a href="https://en.wikipedia.org/w/index.php?title=World_Happiness_Report&amp;oldid=1241093905">an earlier version of the page</a> rather than the version that is currently live.</p>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>As always, we’ll start by importing packages, including</p>
+<ul>
+<li><code>requests</code> for making HTTP requests,</li>
+<li><code>urllib</code> for processing URL data, and</li>
+<li><code>BeautifulSoup</code> from the <code>bs4</code> package for parsing HTML.</li>
+</ul>
+<div id="e0b87ea7" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> io <span class="im">import</span> StringIO</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> urllib.parse <span class="im">import</span> urljoin, urlparse</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> icsspy <span class="im">import</span> set_style</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>set_style()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="loading-static-websites-with-requests" class="level2">
+<h2 class="anchored" data-anchor-id="loading-static-websites-with-requests">Loading Static Websites with <code>requests</code></h2>
+<p>The first step in scraping a website is to inspect its source code in your browser and load its content in a way Python can access. We can do the latter using the <code>requests</code> library. The <code>get()</code> function sends a request to the specified URL and returns a response object, which contains all the information sent back from the server, including the HTML source code.</p>
+<div id="5a06d2a4" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://en.wikipedia.org/w/index.php?title=World_Happiness_Report&amp;oldid=1241093905"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>response</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="46">
+<pre><code>&lt;Response [200]&gt;</code></pre>
+</div>
+</div>
+<p>If you print <code>response.text</code>, you’ll see the raw HTML of the webpage. This is the data we’ll be working with in the rest of this tutorial.</p>
+</section>
+<section id="parsing-html-with-beautifulsoup" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="parsing-html-with-beautifulsoup">Parsing HTML with <code>BeautifulSoup</code></h2>
+<p>Now that we have the HTML content, we need to parse it into a structured format. <code>BeautifulSoup</code> helps us do this by converting the HTML string into a navigable tree structure. This allows us to easily search for and extract specific elements, such as headers, paragraphs, and links.</p>
+<section id="extracting-text-with-beautifulsoup" class="level3">
+<h3 class="anchored" data-anchor-id="extracting-text-with-beautifulsoup">Extracting Text with <code>BeautifulSoup</code></h3>
+<p>First, we create a <code>BeautifulSoup</code> object by passing the HTML content to the <code>BeautifulSoup</code> constructor along with the desired parser. We’ll use the <code>html.parser</code>, which is the default option.</p>
+<div id="6a5c2319" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>html_content <span class="op">=</span> response.text</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>soup <span class="op">=</span> BeautifulSoup(html_content, <span class="st">'html.parser'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="extracting-headers" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="extracting-headers">Extracting Headers</h3>
+<p>To extract headers, we can search the <code>soup</code> object for all header tags (<code>h1</code> to <code>h6</code>). Below, we loop through the results and extract the text content of each header.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;By default, the <code>.get_text()</code> methods removes leading and training whitespace from each header. If we want to be more aggressive about removing whitespace (e.g., replace double spaces with single spaces), we can set the <code>.get_text()</code> method’s <code>strip</code> argument to <code>True</code>.</p></div></div><div id="5f409bfe" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>headers <span class="op">=</span> []</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> header <span class="kw">in</span> soup.find_all([<span class="st">'h1'</span>, <span class="st">'h2'</span>, <span class="st">'h3'</span>, <span class="st">'h4'</span>, <span class="st">'h5'</span>, <span class="st">'h6'</span>]):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    headers.append(header.get_text())</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>headers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="48">
+<pre><code>['Contents',
+ 'World Happiness Report',
+ 'History',
+ 'Methods and philosophy',
+ 'WELLBYs',
+ 'Happiness of the young and old',
+ 'Annual report topics',
+ '2024 World Happiness Report',
+ '2023 World Happiness Report',
+ '2022 World Happiness Report',
+ '2021 World Happiness Report',
+ '2020 World Happiness Report',
+ '2019 World Happiness Report',
+ '2018 World Happiness Report',
+ '2017 World Happiness Report',
+ '2016 World Happiness Report',
+ '2015 World Happiness Report',
+ '2013 World Happiness Report',
+ '2012 World Happiness Report',
+ 'International rankings',
+ '2024 report',
+ '2023 report',
+ '2022 report',
+ '2020 report',
+ '2019 report',
+ '2018 report',
+ '2017 report',
+ '2016 report',
+ '2013 report',
+ 'Criticism',
+ 'Metrics',
+ 'Methodology',
+ 'Legitimacy',
+ 'See also',
+ 'Notes',
+ 'References',
+ 'External links']</code></pre>
+</div>
+</div>
+<p>In my experience, this argument often ends up removing meaningful whitespace, which can causes headaches downstream when doing things like text analysis. For that reason, I prefer not to use it and simply do additional cleaning if/when it is needed.</p>
+<p>This code collects all headers into a list.</p>
+</section>
+<section id="extracting-body-text" class="level3">
+<h3 class="anchored" data-anchor-id="extracting-body-text">Extracting Body Text</h3>
+<p>Similarly, we can extract all paragraphs (<code>&lt;p&gt;</code> tags) from the HTML document. We’ll collect the text from each paragraph into a list.</p>
+<div id="1865d51e" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>body_text <span class="op">=</span> []</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> paragraph <span class="kw">in</span> soup.find_all([<span class="st">'p'</span>]):</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    body_text.append(paragraph.get_text())</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Found </span><span class="sc">{</span><span class="bu">len</span>(body_text)<span class="sc">}</span><span class="ss"> paragraphs'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Found 88 paragraphs</code></pre>
+</div>
+</div>
+<p>There are 88 paragraphs in this document. Let’s preview the first 5.</p>
+<div id="c4c86e55" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>body_text[:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="50">
+<pre><code>['This is an old revision of this page, as edited by 41.189.206.7 (talk) at 08:42, 19 August 2024 (→\u200e2023 report). The present address (URL) is a permanent link to this revision, which may differ significantly from the current revision.',
+ 'The World Happiness Report is a publication that contains articles and rankings of national happiness, based on respondent ratings of their own lives,[1] which the report also correlates with various (quality of) life factors.[2] The report primarily uses data from the Gallup World Poll. As of March 2024, Finland has been ranked the happiest country in the world seven times in a row.[3][4][5][6][7]\n',
+ 'Since 2024, the report has been published under a partnership between Gallup, the Wellbeing Research Centre at the University of Oxford, and the UN Sustainable Development Solutions Network.[8] The editorial team includes three founding editors, John F. Helliwell, Richard Layard, and Jeffrey D. Sachs, and editors, Jan-Emmanuel De Neve, Lara Aknin, and Shun Wang.[9]\n',
+ 'In July 2011, the UN General Assembly adopted resolution 65/309 Happiness: Towards a Holistic Definition of Development[10] inviting member countries to measure the happiness of their people and to use the data to help guide public policy. \n',
+ 'The first World Happiness Report was released on 1 April 2012, as a foundational text for the UN High Level Meeting: Well-being and Happiness: Defining a New Economic Paradigm,[11] drawing international attention.[12] On 2 April 2012, this was followed by the first UN High Level Meeting called Wellbeing and Happiness: Defining a New Economic Paradigm,[13] which was chaired by UN Secretary General Ban Ki-moon and Prime Minister Jigmi Thinley of Bhutan, a nation that adopted gross national happiness instead of gross domestic product as their main development indicator.[14]\n']</code></pre>
+</div>
+</div>
+<p>Extracting text like this is useful for text analysis, which we’ll cover in the next module. For now, we’ll create a dataframe from this data</p>
+<div id="0c9f38a8" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ordered_text <span class="op">=</span> pd.DataFrame(body_text)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ordered_text.columns <span class="op">=</span> [<span class="st">'paragraph'</span>]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>ordered_text[<span class="st">'sequence'</span>] <span class="op">=</span> ordered_text.index.to_list()</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>ordered_text.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="51">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">paragraph</th>
+<th data-quarto-table-cell-role="th">sequence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>This is an old revision of this page, as edite...</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>The World Happiness Report is a publication th...</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Since 2024, the report has been published unde...</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>In July 2011, the UN General Assembly adopted ...</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>The first World Happiness Report was released ...</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>The first report outlined the state of world h...</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>The rankings of national happiness are based o...</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>The life factor variables used in the reports ...</td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>The use of subjective measurements of wellbein...</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>In the reports, experts in fields including ec...</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>and write it to disk for later use.</p>
+<div id="0a54c7bf" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ordered_text.to_csv(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'output/happiness_report_wikipedia_paragraphs.csv'</span>, index<span class="op">=</span><span class="va">False</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="extracting-links" class="level3">
+<h3 class="anchored" data-anchor-id="extracting-links">Extracting Links</h3>
+<p>Next, let’s extract all the links on the page. Once again, we can use the <code>find_all()</code> method to find all the anchor tags (<code>&lt;a&gt;</code>), i.e., links.</p>
+<div id="9bb7ab2d" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>urls <span class="op">=</span> []</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> link <span class="kw">in</span> soup.find_all(<span class="st">'a'</span>):</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> link.get(<span class="st">'href'</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># check if valid href</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> url: </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        urls.append(url)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Found </span><span class="sc">{</span><span class="bu">len</span>(urls)<span class="sc">}</span><span class="ss"> urls'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Found 2052 urls</code></pre>
+</div>
+</div>
+<p>When we print these URLs, we’ll see that many are <strong>relative links</strong> (i.e., links to other Wikipedia pages that start with <code>/</code>). These links won’t work properly if clicked as-is because they’re not full URLs.</p>
+<div id="6dec783e" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> url <span class="kw">in</span> urls[:<span class="dv">10</span>]:</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#bodyContent
+/wiki/Main_Page
+/wiki/Wikipedia:Contents
+/wiki/Portal:Current_events
+/wiki/Special:Random
+/wiki/Wikipedia:About
+//en.wikipedia.org/wiki/Wikipedia:Contact_us
+https://donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_en.wikipedia.org&amp;uselang=en
+/wiki/Help:Contents
+/wiki/Help:Introduction</code></pre>
+</div>
+</div>
+<p>To fix this, we need to prepend the base URL for Wikipedia (<code>https://en.wikipedia.org</code>) to any relative URLs. Let’s iterate over the URLs, identify which ones are relative, and prepend the base URL to them. We’ll create a new list of URLs called <code>full_urls</code> and append each all our full URLs, whether it was full from the start or expanded by prepending the base URL.</p>
+<div id="88ff9628" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>base_url <span class="op">=</span> <span class="st">"https://en.wikipedia.org"</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>full_urls <span class="op">=</span> []</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> url <span class="kw">in</span> urls:</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> url.startswith(<span class="st">'/'</span>): <span class="co"># relative URL</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        full_url <span class="op">=</span> urljoin(base_url, url)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>        full_url <span class="op">=</span> url</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    full_urls.append(full_url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s see what they look like now.</p>
+<div id="824f9a5e" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> url <span class="kw">in</span> full_urls[:<span class="dv">10</span>]:</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#bodyContent
+https://en.wikipedia.org/wiki/Main_Page
+https://en.wikipedia.org/wiki/Wikipedia:Contents
+https://en.wikipedia.org/wiki/Portal:Current_events
+https://en.wikipedia.org/wiki/Special:Random
+https://en.wikipedia.org/wiki/Wikipedia:About
+https://en.wikipedia.org/wiki/Wikipedia:Contact_us
+https://donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_en.wikipedia.org&amp;uselang=en
+https://en.wikipedia.org/wiki/Help:Contents
+https://en.wikipedia.org/wiki/Help:Introduction</code></pre>
+</div>
+</div>
+<section id="processing-links" class="level4">
+<h4 class="anchored" data-anchor-id="processing-links">Processing Links</h4>
+<p>Next, we’ll filter out any internal page links (e.g., links to sections within the same page) by excluding URLs that start with <code>#</code>.</p>
+<div id="6f24f9dd" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span><span class="bu">len</span>(full_urls)<span class="sc">}</span><span class="ss"> URLs before removing internal page links.'</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>full_urls <span class="op">=</span> [url <span class="cf">for</span> url <span class="kw">in</span> full_urls <span class="cf">if</span> <span class="kw">not</span> url.startswith(<span class="st">'#'</span>)]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span><span class="bu">len</span>(full_urls)<span class="sc">}</span><span class="ss"> URLs after removing internal page links.'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2052 URLs before removing internal page links.
+1857 URLs after removing internal page links.</code></pre>
+</div>
+</div>
+<div id="1d581866" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> url <span class="kw">in</span> full_urls[:<span class="dv">10</span>]:</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>https://en.wikipedia.org/wiki/Main_Page
+https://en.wikipedia.org/wiki/Wikipedia:Contents
+https://en.wikipedia.org/wiki/Portal:Current_events
+https://en.wikipedia.org/wiki/Special:Random
+https://en.wikipedia.org/wiki/Wikipedia:About
+https://en.wikipedia.org/wiki/Wikipedia:Contact_us
+https://donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_en.wikipedia.org&amp;uselang=en
+https://en.wikipedia.org/wiki/Help:Contents
+https://en.wikipedia.org/wiki/Help:Introduction
+https://en.wikipedia.org/wiki/Wikipedia:Community_portal</code></pre>
+</div>
+</div>
+</section>
+<section id="creating-a-dataframe-from-links" class="level4">
+<h4 class="anchored" data-anchor-id="creating-a-dataframe-from-links">Creating a DataFrame from Links</h4>
+<p>Now, let’s use what we’ve learned to write a clean code block that:</p>
+<ol type="1">
+<li>Finds all the <code>a</code> tags (URLs)</li>
+<li>Ignores internal links to sections of the source document</li>
+<li>Adds the base Wikipedia URL to any relative links</li>
+<li>Collects the link data into a list called <code>link_data</code></li>
+<li>Creates a dataframe from <code>link_data</code></li>
+</ol>
+<p>Additionally, we’ll include a Boolean column indicating whether the link is external (<code>True</code> for external, <code>False</code> otherwise).</p>
+<div id="9ae55d2f" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>link_data <span class="op">=</span> []</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> link <span class="kw">in</span> soup.find_all(<span class="st">'a'</span>, href<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> link[<span class="st">'href'</span>].startswith(<span class="st">'#'</span>): <span class="co"># ignore internal links</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> link.get_text()</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>        href <span class="op">=</span> link[<span class="st">'href'</span>]</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> href.startswith(<span class="st">'/'</span>): <span class="co"># add base URL to relative links</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>            href <span class="op">=</span> <span class="st">"https://en.wikipedia.org"</span> <span class="op">+</span> href</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>            link_data.append((text, href, <span class="va">False</span>))</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>            link_data.append((text, href, <span class="va">True</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s create a dataframe from this list.</p>
+<div id="366e3505" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>link_df <span class="op">=</span> pd.DataFrame(link_data, columns<span class="op">=</span>[<span class="st">'link-text'</span>, <span class="st">'href'</span>, <span class="st">"external"</span>])</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>link_df.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="60">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">link-text</th>
+<th data-quarto-table-cell-role="th">href</th>
+<th data-quarto-table-cell-role="th">external</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Main page</td>
+<td>https://en.wikipedia.org/wiki/Main_Page</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Contents</td>
+<td>https://en.wikipedia.org/wiki/Wikipedia:Contents</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Current events</td>
+<td>https://en.wikipedia.org/wiki/Portal:Current_e...</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Random article</td>
+<td>https://en.wikipedia.org/wiki/Special:Random</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>About Wikipedia</td>
+<td>https://en.wikipedia.org/wiki/Wikipedia:About</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>Contact us</td>
+<td>https://en.wikipedia.org//en.wikipedia.org/wik...</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>Donate</td>
+<td>https://donate.wikimedia.org/wiki/Special:Fund...</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>Help</td>
+<td>https://en.wikipedia.org/wiki/Help:Contents</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>Learn to edit</td>
+<td>https://en.wikipedia.org/wiki/Help:Introduction</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>Community portal</td>
+<td>https://en.wikipedia.org/wiki/Wikipedia:Commun...</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Now, let’s count the number of internal and external links.</p>
+<div id="aa6be0c8" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>link_df[<span class="st">'external'</span>].value_counts().reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="61">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">external</th>
+<th data-quarto-table-cell-role="th">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>False</td>
+<td>1713</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>True</td>
+<td>144</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="extracting-primary-domains" class="level4">
+<h4 class="anchored" data-anchor-id="extracting-primary-domains">Extracting Primary Domains</h4>
+<p>Let’s extract and count primary domains for external links. We’ll define a simple function to do this.</p>
+<div id="bf5f9e4e" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> extract_primary_domain(url):</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Extracts the primary domain from a URL by splitting the netloc by '.' </span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">    and taking the second-to-last element. Returns the primary domain.</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    netloc <span class="op">=</span> urlparse(url).netloc</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    parts <span class="op">=</span> netloc.split(<span class="st">'.'</span>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(parts) <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>        primary_domain <span class="op">=</span> parts[<span class="op">-</span><span class="dv">2</span>]</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>        primary_domain <span class="op">=</span> parts[<span class="dv">0</span>]  </span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> primary_domain</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can use the <code>apply()</code> methods for dataframes to apply our function to each row in the <code>href</code> column and then add the extracted primary domain to a new column.</p>
+<div id="66ce3edf" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>link_df[<span class="st">'primary_domain'</span>] <span class="op">=</span> link_df[<span class="st">'href'</span>].<span class="bu">apply</span>(extract_primary_domain)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>link_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="63">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">link-text</th>
+<th data-quarto-table-cell-role="th">href</th>
+<th data-quarto-table-cell-role="th">external</th>
+<th data-quarto-table-cell-role="th">primary_domain</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Main page</td>
+<td>https://en.wikipedia.org/wiki/Main_Page</td>
+<td>False</td>
+<td>wikipedia</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Contents</td>
+<td>https://en.wikipedia.org/wiki/Wikipedia:Contents</td>
+<td>False</td>
+<td>wikipedia</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Current events</td>
+<td>https://en.wikipedia.org/wiki/Portal:Current_e...</td>
+<td>False</td>
+<td>wikipedia</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Random article</td>
+<td>https://en.wikipedia.org/wiki/Special:Random</td>
+<td>False</td>
+<td>wikipedia</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>About Wikipedia</td>
+<td>https://en.wikipedia.org/wiki/Wikipedia:About</td>
+<td>False</td>
+<td>wikipedia</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1852</td>
+<td>Statistics</td>
+<td>https://stats.wikimedia.org/#/en.wikipedia.org</td>
+<td>True</td>
+<td>wikimedia</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1853</td>
+<td>Cookie statement</td>
+<td>https://foundation.wikimedia.org/wiki/Special:...</td>
+<td>True</td>
+<td>wikimedia</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1854</td>
+<td>Mobile view</td>
+<td>https://en.wikipedia.org//en.m.wikipedia.org/w...</td>
+<td>False</td>
+<td>wikipedia</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1855</td>
+<td></td>
+<td>https://wikimediafoundation.org/</td>
+<td>True</td>
+<td>wikimediafoundation</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1856</td>
+<td></td>
+<td>https://www.mediawiki.org</td>
+<td>True</td>
+<td>mediawiki</td>
+</tr>
+</tbody>
+</table>
+
+<p>1857 rows × 4 columns</p>
+</div>
+</div>
+</div>
+<p>Finally let’s count the number of times each primary domain appears and print any that appear twice or more.</p>
+<div id="b4752430" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>primary_domain_counts <span class="op">=</span> link_df.value_counts(<span class="st">'primary_domain'</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>primary_domain_counts <span class="op">=</span> primary_domain_counts.sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>primary_domain_counts <span class="op">=</span> primary_domain_counts.reset_index() </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>primary_domain_counts[primary_domain_counts[<span class="st">'count'</span>] <span class="op">&gt;=</span> <span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="64">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">primary_domain</th>
+<th data-quarto-table-cell-role="th">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>wikipedia</td>
+<td>1745</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>worldhappiness</td>
+<td>28</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>archive</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>wikimedia</td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>un</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>ac</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>nytimes</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>nih</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>gallup</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>doi</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>oecd</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>cnn</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>theguardian</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>unsdsn</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>researchgate</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>grossnationalhappiness</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">16</td>
+<td>gov</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17</td>
+<td>wikidata</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="extracting-tables" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="extracting-tables">Extracting Tables</h2>
+<p>Next, let’s learn how to extract and process table data from a static website.</p>
+<section id="finding-and-parsing-tables-with-beautifulsoup-and-pandas" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="finding-and-parsing-tables-with-beautifulsoup-and-pandas">Finding and Parsing Tables with <code>BeautifulSoup</code> and <code>Pandas</code></h3>
+<p>We’ll start by locating all tables within the HTML document. As you might expect, <code>BeautifulSoup</code> allows us to search for all <code>table</code> tags in the HTML.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;In some cases, it may be easier to skip <code>BeautifulSoup</code> entirely when working with tables and instead pass the HTML directly to Pandas. This approach is particularly useful when you’re confident that the page contains well-structured tables. If you run <code>tables = pd.read_html(StringIO(response.text))</code>, Pandas will return a list of dataframes corresponding to each table on the page.</p></div></div><div id="b86027ad" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>tables <span class="op">=</span> soup.find_all(<span class="st">'table'</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Found </span><span class="sc">{</span><span class="bu">len</span>(tables)<span class="sc">}</span><span class="ss"> table(s)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Found 34 table(s)</code></pre>
+</div>
+</div>
+<p>At this point, we’ve identified how many tables are present on the page – 34 – but we aren’t interested in all of them. Let’s take a look at what we have and make a decision about how to proceed.</p>
+<div id="82c672d3" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, table <span class="kw">in</span> <span class="bu">enumerate</span>(tables):</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    headers <span class="op">=</span> []</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> th <span class="kw">in</span> table.find_all(<span class="st">'th'</span>):</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>        headers.append(th.get_text(strip<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Table </span><span class="sc">{</span>index<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss"> Column Names: </span><span class="sc">{</span>headers<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Table 1 Column Names: ['Country rankings for the under-30s', 'Overall rank', 'Country or region', 'Life evaluation']
+Table 2 Column Names: ['Overall rank', 'Country or region', 'Life evaluation']
+Table 3 Column Names: ['Descriptions']
+Table 4 Column Names: ['Descriptions']
+Table 5 Column Names: ['Descriptions']
+Table 6 Column Names: ['Descriptions']
+Table 7 Column Names: ['Descriptions']
+Table 8 Column Names: ['Descriptions']
+Table 9 Column Names: ['Descriptions']
+Table 10 Column Names: ['Descriptions']
+Table 11 Column Names: ['Descriptions']
+Table 12 Column Names: ['Descriptions']
+Table 13 Column Names: ['Descriptions']
+Table 14 Column Names: ['Descriptions']
+Table 15 Column Names: ['Table', 'Overall rank', 'Country or region', 'Life evaluation']
+Table 16 Column Names: ['Overall rank', 'Country or region', 'Life evaluation']
+Table 17 Column Names: ['Table', 'Overall rank', 'Country or region']
+Table 18 Column Names: ['Overall rank', 'Country or region']
+Table 19 Column Names: ['Table', 'Overall rank', 'Country or region']
+Table 20 Column Names: ['Overall rank', 'Country or region']
+Table 21 Column Names: ['Table', 'Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption']
+Table 22 Column Names: ['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption']
+Table 23 Column Names: ['Table', 'Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption']
+Table 24 Column Names: ['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption']
+Table 25 Column Names: ['Table', 'Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption']
+Table 26 Column Names: ['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption']
+Table 27 Column Names: ['Table', 'Overall Rank', 'Change in rank', 'Country', 'Score', 'Change in score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Trust', 'Residual']
+Table 28 Column Names: ['Overall Rank', 'Change in rank', 'Country', 'Score', 'Change in score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Trust', 'Residual']
+Table 29 Column Names: ['Table', 'Overall Rank[61][62]', 'Country', 'Score', 'Change OverPrior Year', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Trust']
+Table 30 Column Names: []
+Table 31 Column Names: ['Overall Rank[61][62]', 'Country', 'Score', 'Change OverPrior Year', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Trust']
+Table 32 Column Names: ['Table', 'Rank[64]', 'Country', 'Happiness']
+Table 33 Column Names: ['Rank[64]', 'Country', 'Happiness']
+Table 34 Column Names: ['vteLists of countriesbyquality of liferankings', 'General', 'Economic', 'Environment', 'Health', 'Social/political']</code></pre>
+</div>
+</div>
+<p>This loop extracts the headers from each table, which can help us identify the tables we want.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Suppose we’re looking for a table that contains information related to “Freedom to make life choices” or other specific indicators. We can easily find tables that contain the relevant column.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;You may notice that I’m using the <code>strip</code> argument for <code>.get_text()</code> this time. I do find it useful in situations like these, where I want to see the column names (which rarely contain spaces) without any additional characters (such as <code>\n</code>, etc.).</p></div></div><div id="1e2ff43e" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>tables_filtered <span class="op">=</span> [</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    table </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> table <span class="kw">in</span> tables </span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"Freedom to make life choices"</span> <span class="kw">in</span> table.get_text(strip<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(tables_filtered)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="67">
+<pre><code>11</code></pre>
+</div>
+</div>
+<p>Now that we’ve filtered the relevant tables, we can convert them into a format that’s easier to work with, such as a Pandas DataFrame.</p>
+<div id="610d30d3" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="op">=</span> pd.read_html(StringIO(<span class="bu">str</span>(tables_filtered)))</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(dfs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="68">
+<pre><code>17</code></pre>
+</div>
+</div>
+<p>Pandas’ <code>read_html()</code> function is quite powerful and can automatically extract tables from HTML content. However, sometimes it might pick up more than we expect. In this case, it found an additional 6 tables in the same HTML string!</p>
+<p>Let’s explore the extracted dataframes to see what we’ve got.</p>
+<div id="db9443cf" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> df <span class="kw">in</span> dfs:</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">list</span>(df.columns))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['Table', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8']
+['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption']
+['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption']
+['Table', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8']
+['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption']
+['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption']
+['Table', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8']
+['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Unnamed: 8']
+['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Unnamed: 8']
+['Table', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11']
+['Overall Rank', 'Change in rank', 'Country', 'Score', 'Change in score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Trust', 'Residual']
+['Overall Rank', 'Change in rank', 'Country', 'Score', 'Change in score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Trust', 'Residual']
+['Table', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9']
+[0, 1]
+['Overall Rank [61][62]', 'Country', 'Score', 'Change Over Prior Year', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Trust']
+[0, 1]
+['Overall Rank [61][62]', 'Country', 'Score', 'Change Over Prior Year', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Trust']</code></pre>
+</div>
+</div>
+</section>
+<section id="cleaning-up-extracted-tables" class="level3">
+<h3 class="anchored" data-anchor-id="cleaning-up-extracted-tables">Cleaning Up Extracted Tables</h3>
+<p>We can see that some of our dataframes have columns that are <code>Unnamed</code>. This generally indicates that the table contains multiple headers; we’ll need to inspect the dataframes to see what’s going on. The first dataframe illustrates the problem:</p>
+<div id="f8321aa2" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>example_df <span class="op">=</span> dfs[<span class="dv">0</span>]</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>example_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="70">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Table</th>
+<th data-quarto-table-cell-role="th">Unnamed: 1</th>
+<th data-quarto-table-cell-role="th">Unnamed: 2</th>
+<th data-quarto-table-cell-role="th">Unnamed: 3</th>
+<th data-quarto-table-cell-role="th">Unnamed: 4</th>
+<th data-quarto-table-cell-role="th">Unnamed: 5</th>
+<th data-quarto-table-cell-role="th">Unnamed: 6</th>
+<th data-quarto-table-cell-role="th">Unnamed: 7</th>
+<th data-quarto-table-cell-role="th">Unnamed: 8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Overall rank Country or region Score GDP per c...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Overall rank</td>
+<td>Country or region</td>
+<td>Score</td>
+<td>GDP per capita</td>
+<td>Social support</td>
+<td>Healthy life expectancy</td>
+<td>Freedom to make life choices</td>
+<td>Generosity</td>
+<td>Perceptions of corruption</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1</td>
+<td>Finland</td>
+<td>7.809</td>
+<td>1.285</td>
+<td>1.500</td>
+<td>0.961</td>
+<td>0.662</td>
+<td>0.160</td>
+<td>0.478</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2</td>
+<td>Denmark</td>
+<td>7.646</td>
+<td>1.327</td>
+<td>1.503</td>
+<td>0.979</td>
+<td>0.665</td>
+<td>0.243</td>
+<td>0.495</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>3</td>
+<td>Switzerland</td>
+<td>7.560</td>
+<td>1.391</td>
+<td>1.472</td>
+<td>1.041</td>
+<td>0.629</td>
+<td>0.269</td>
+<td>0.408</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>If we just had one table, such as the one we’re looking at here, we could easily clean it up by setting the second row as the header and dropping the irrelevant rows.</p>
+<div id="db9ce5b7" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>example_df.columns <span class="op">=</span> example_df.iloc[<span class="dv">1</span>]  </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>example_df.drop([<span class="dv">0</span>, <span class="dv">1</span>], inplace<span class="op">=</span><span class="va">True</span>)  </span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>example_df <span class="op">=</span> example_df.reset_index()</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>example_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="71">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">1</th>
+<th data-quarto-table-cell-role="th">index</th>
+<th data-quarto-table-cell-role="th">Overall rank</th>
+<th data-quarto-table-cell-role="th">Country or region</th>
+<th data-quarto-table-cell-role="th">Score</th>
+<th data-quarto-table-cell-role="th">GDP per capita</th>
+<th data-quarto-table-cell-role="th">Social support</th>
+<th data-quarto-table-cell-role="th">Healthy life expectancy</th>
+<th data-quarto-table-cell-role="th">Freedom to make life choices</th>
+<th data-quarto-table-cell-role="th">Generosity</th>
+<th data-quarto-table-cell-role="th">Perceptions of corruption</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2</td>
+<td>1</td>
+<td>Finland</td>
+<td>7.809</td>
+<td>1.285</td>
+<td>1.500</td>
+<td>0.961</td>
+<td>0.662</td>
+<td>0.160</td>
+<td>0.478</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>3</td>
+<td>2</td>
+<td>Denmark</td>
+<td>7.646</td>
+<td>1.327</td>
+<td>1.503</td>
+<td>0.979</td>
+<td>0.665</td>
+<td>0.243</td>
+<td>0.495</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>4</td>
+<td>3</td>
+<td>Switzerland</td>
+<td>7.560</td>
+<td>1.391</td>
+<td>1.472</td>
+<td>1.041</td>
+<td>0.629</td>
+<td>0.269</td>
+<td>0.408</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>5</td>
+<td>4</td>
+<td>Iceland</td>
+<td>7.504</td>
+<td>1.327</td>
+<td>1.548</td>
+<td>1.001</td>
+<td>0.662</td>
+<td>0.362</td>
+<td>0.145</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>6</td>
+<td>5</td>
+<td>Norway</td>
+<td>7.488</td>
+<td>1.424</td>
+<td>1.495</td>
+<td>1.008</td>
+<td>0.670</td>
+<td>0.288</td>
+<td>0.434</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>This looks much better, but… we aren’t ready to do this for all dataframes just yet. As part of diagnosing the problem, we can spend a bit more time inspecting the page’s source code using our web browser’s developer tools. This reveals the underlying source of the problem: <strong>these tables are nested</strong>! The tables we want are nested inside tables we don’t care about. How do we get them out?</p>
+<p>To address this problem, we can update our approach to identify the outer tables and then, if and when it finds one, look for an inner table. Let’s check the logic of this approach before implementing it.</p>
+<div id="daa2d9d8" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find all the outer tables</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>outer_tables <span class="op">=</span> soup.find_all(<span class="st">'table'</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through all outer tables</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> outer_table <span class="kw">in</span> outer_tables:</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Try to find a nested table inside the outer table</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>    inner_table <span class="op">=</span> outer_table.find(<span class="st">'table'</span>)</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> inner_table:</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Convert the inner table to a DataFrame</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>        table_df <span class="op">=</span> pd.read_html(StringIO(<span class="bu">str</span>(inner_table)))[<span class="dv">0</span>]</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(table_df.head(<span class="dv">3</span>), <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Overall rank Country or region  Life evaluation
+0             1         Lithuania            7.795
+1             2            Israel            7.667
+2             3           Iceland            7.658 
+
+   Overall rank Country or region  Life evaluation
+0             1           Finland            7.741
+1             2           Denmark            7.583
+2             3           Iceland            7.525 
+
+   Overall rank Country or region
+0             1             India
+1             2           Denmark
+2             3           Iceland 
+
+   Overall rank Country or region
+0             1           Finland
+1             2           Denmark
+2             3           Iceland 
+
+   Overall rank Country or region  Score  GDP per capita  Social support  \
+0             1           Finland  7.809           1.285           1.500   
+1             2           Denmark  7.646           1.327           1.503   
+2             3       Switzerland  7.560           1.391           1.472   
+
+   Healthy life expectancy  Freedom to make life choices  Generosity  \
+0                    0.961                         0.662       0.160   
+1                    0.979                         0.665       0.243   
+2                    1.041                         0.629       0.269   
+
+   Perceptions of corruption  
+0                      0.478  
+1                      0.495  
+2                      0.408   
+
+   Overall rank Country or region  Score  GDP per capita  Social support  \
+0             1           Finland  7.769           1.340           1.587   
+1             2           Denmark  7.600           1.383           1.573   
+2             3            Norway  7.554           1.488           1.582   
+
+   Healthy life expectancy  Freedom to make life choices  Generosity  \
+0                    0.986                         0.596       0.153   
+1                    0.996                         0.592       0.252   
+2                    1.028                         0.603       0.271   
+
+   Perceptions of corruption  
+0                      0.393  
+1                      0.410  
+2                      0.341   
+
+   Overall rank Country or region  Score  GDP per capita  Social support  \
+0             1           Finland  7.632           1.305           1.592   
+1             2            Norway  7.594           1.456           1.582   
+2             3           Denmark  7.555           1.351           1.590   
+
+   Freedom to make life choices  Generosity  Perceptions of corruption  \
+0                         0.874       0.681                      0.202   
+1                         0.861       0.686                      0.286   
+2                         0.868       0.683                      0.284   
+
+   Unnamed: 8  
+0       0.393  
+1       0.340  
+2       0.408   
+
+  Overall Rank Change in rank  Country  Score  Change in score  \
+0            1              3   Norway  7.537            0.039   
+1            2              1  Denmark  7.522            0.004   
+2            3            NaN  Iceland  7.504            0.003   
+
+   GDP per capita  Social support  Healthy life expectancy  \
+0           1.616           1.534                    0.797   
+1           1.482           1.551                    0.793   
+2           1.481           1.611                    0.834   
+
+   Freedom to make life choices  Generosity  Trust  Residual  
+0                         0.635       0.362  0.316     2.277  
+1                         0.626       0.355  0.401     2.314  
+2                         0.627       0.476  0.154     2.323   
+
+                                                   0  \
+0  Explained by: GDP per capita  Explained by: So...   
+
+                                                   1  
+0  Explained by: Freedom to make life choices  Ex...   
+
+   Rank[64]      Country  Happiness
+0         1      Denmark      7.693
+1         2       Norway      7.655
+2         3  Switzerland      7.650 
+</code></pre>
+</div>
+</div>
+<p>It appears that finding the inner table gets us the data we want. Before we implement this solution, let’s do one more important bit of data processing: associating tables with the dates of the reports they came from.</p>
+</section>
+<section id="associating-tables-with-dates" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="associating-tables-with-dates">Associating Tables with Dates</h3>
+<p>The main data processing we want to do here is associate each table with the corresponding report year. By inspecting the HTML, we can identify the year each table belongs to by looking at the headers.</p>
+<p>Our goal is to extract tables from the webpage and associate each with the publication year of the report the data come from, and we will do that by using information in the section headers preceding the tables we collect. In other words, we want to capture the year from <code>h3</code> headers and link it to the subsequent table element. We also know that some tables might contain nested tables, and that the data we are interested in is stored in the inner table. We want our code to extract and process these inner tables as needed.</p>
+<p>Our code is getting a bit more complex here. If you’re new to Python, it’s helps to know exactly what we are trying to do and why. Here it is, in brief:</p>
+<ol type="1">
+<li><strong>Identify the year</strong>. We can do this by looking for <code>h3</code> headers that contain a year (formatted as <code>YYYY</code>) followed by the word ‘report.’ We’ll use a regular expression to identify the pattern. We’ll keep track of the current year as we move through the document.</li>
+<li><strong>Associate tables with years</strong>. After identifying a year, we check for the next table element. If a table is found, we associate it with the most recently identified year.</li>
+<li><strong>Handle Nested Tables</strong>. We now know that some tables contain nested tables, and that the data we want is in the inner table. If a nested table is found, we’ll keep and process the inner table and discard the outer table.</li>
+</ol>
+<div id="6ac1f448" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize variables</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>tables_with_years <span class="op">=</span> []</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>year_pattern <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r'(\d</span><span class="sc">{4}</span><span class="vs">) report'</span>)  <span class="co"># Regex pattern to identify years</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>current_year <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through all elements, capturing headings and tables</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> element <span class="kw">in</span> soup.find_all([<span class="st">'h3'</span>, <span class="st">'table'</span>]):</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check if the element is an h3 heading containing the year pattern</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> element.name <span class="op">==</span> <span class="st">'h3'</span>:</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>        header_text <span class="op">=</span> element.get_text(strip<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>        match <span class="op">=</span> year_pattern.search(header_text)</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> match:</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>            current_year <span class="op">=</span> match.group(<span class="dv">1</span>)  <span class="co"># Track the year</span></span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If the element is a table, associate it with the current year</span></span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> element.name <span class="op">==</span> <span class="st">'table'</span> <span class="kw">and</span> current_year:</span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Convert the outer table element to a DataFrame</span></span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>        outer_html_string <span class="op">=</span> <span class="bu">str</span>(element)</span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>        outer_table_df <span class="op">=</span> pd.read_html(StringIO(outer_html_string))[<span class="dv">0</span>] </span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Check for a nested table within the outer table</span></span>
+<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a>        inner_table <span class="op">=</span> element.find(<span class="st">'table'</span>)</span>
+<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> inner_table:</span>
+<span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Convert the inner table to a DataFrame</span></span>
+<span id="cb44-25"><a href="#cb44-25" aria-hidden="true" tabindex="-1"></a>            inner_html_string <span class="op">=</span> <span class="bu">str</span>(inner_table)</span>
+<span id="cb44-26"><a href="#cb44-26" aria-hidden="true" tabindex="-1"></a>            inner_table_df <span class="op">=</span> pd.read_html(StringIO(inner_html_string))[<span class="dv">0</span>]</span>
+<span id="cb44-27"><a href="#cb44-27" aria-hidden="true" tabindex="-1"></a>            inner_table_df[<span class="st">'Year'</span>] <span class="op">=</span> current_year</span>
+<span id="cb44-28"><a href="#cb44-28" aria-hidden="true" tabindex="-1"></a>            tables_with_years.append(inner_table_df)</span>
+<span id="cb44-29"><a href="#cb44-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb44-30"><a href="#cb44-30" aria-hidden="true" tabindex="-1"></a>            <span class="co"># If no nested table, add the outer table DataFrame</span></span>
+<span id="cb44-31"><a href="#cb44-31" aria-hidden="true" tabindex="-1"></a>            outer_table_df[<span class="st">'Year'</span>] <span class="op">=</span> current_year</span>
+<span id="cb44-32"><a href="#cb44-32" aria-hidden="true" tabindex="-1"></a>            tables_with_years.append(outer_table_df)</span>
+<span id="cb44-33"><a href="#cb44-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-34"><a href="#cb44-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the number of tables collected</span></span>
+<span id="cb44-35"><a href="#cb44-35" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(tables_with_years)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="73">
+<pre><code>20</code></pre>
+</div>
+</div>
+<p>Now that we’ve collected the tables and associated them with their respective years, let’s inspect them to ensure the data was extracted correctly. We’ll loop through the list of tables and check their column names.</p>
+<div id="c2dfdaf4" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, table <span class="kw">in</span> <span class="bu">enumerate</span>(tables_with_years):</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Table </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> columns:"</span>, <span class="bu">list</span>(table.columns))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Table 0 columns: ['Overall rank', 'Country or region', 'Life evaluation', 'Year']
+Table 1 columns: ['Overall rank', 'Country or region', 'Life evaluation', 'Year']
+Table 2 columns: ['Overall rank', 'Country or region', 'Year']
+Table 3 columns: ['Overall rank', 'Country or region', 'Year']
+Table 4 columns: ['Overall rank', 'Country or region', 'Year']
+Table 5 columns: ['Overall rank', 'Country or region', 'Year']
+Table 6 columns: ['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Year']
+Table 7 columns: ['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Year']
+Table 8 columns: ['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Year']
+Table 9 columns: ['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Year']
+Table 10 columns: ['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Unnamed: 8', 'Year']
+Table 11 columns: ['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Unnamed: 8', 'Year']
+Table 12 columns: ['Overall Rank', 'Change in rank', 'Country', 'Score', 'Change in score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Trust', 'Residual', 'Year']
+Table 13 columns: ['Overall Rank', 'Change in rank', 'Country', 'Score', 'Change in score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Trust', 'Residual', 'Year']
+Table 14 columns: [0, 1, 'Year']
+Table 15 columns: [0, 1, 'Year']
+Table 16 columns: ['Overall Rank [61][62]', 'Country', 'Score', 'Change Over Prior Year', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Trust', 'Year']
+Table 17 columns: ['Rank[64]', 'Country', 'Happiness', 'Year']
+Table 18 columns: ['Rank[64]', 'Country', 'Happiness', 'Year']
+Table 19 columns: ['vteLists of countries by quality of life rankings', 'vteLists of countries by quality of life rankings.1', 'Year']</code></pre>
+</div>
+</div>
+<p>Most of these tables look good, although there are two tables that look like they may need some additional work (14 and 15), and we seem to have some duplicate tables.</p>
+<div id="e12d6066" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>tables_with_years[<span class="dv">14</span>].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="75">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">0</th>
+<th data-quarto-table-cell-role="th">1</th>
+<th data-quarto-table-cell-role="th">Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Explained by: GDP per capita Explained by: So...</td>
+<td>Explained by: Freedom to make life choices Ex...</td>
+<td>2016</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="1cf44a1c" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>tables_with_years[<span class="dv">15</span>].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="76">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">0</th>
+<th data-quarto-table-cell-role="th">1</th>
+<th data-quarto-table-cell-role="th">Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Explained by: GDP per capita Explained by: So...</td>
+<td>Explained by: Freedom to make life choices Ex...</td>
+<td>2016</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>We’ll set tables 14 and 15 aside for now.</p>
+<div id="55fae7ec" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> tables_with_years[<span class="dv">15</span>] <span class="co"># higher index first!</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> tables_with_years[<span class="dv">14</span>]</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, table <span class="kw">in</span> <span class="bu">enumerate</span>(tables_with_years):</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Table </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> columns:"</span>, <span class="bu">list</span>(table.columns))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Table 0 columns: ['Overall rank', 'Country or region', 'Life evaluation', 'Year']
+Table 1 columns: ['Overall rank', 'Country or region', 'Life evaluation', 'Year']
+Table 2 columns: ['Overall rank', 'Country or region', 'Year']
+Table 3 columns: ['Overall rank', 'Country or region', 'Year']
+Table 4 columns: ['Overall rank', 'Country or region', 'Year']
+Table 5 columns: ['Overall rank', 'Country or region', 'Year']
+Table 6 columns: ['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Year']
+Table 7 columns: ['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Year']
+Table 8 columns: ['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Year']
+Table 9 columns: ['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Year']
+Table 10 columns: ['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Unnamed: 8', 'Year']
+Table 11 columns: ['Overall rank', 'Country or region', 'Score', 'GDP per capita', 'Social support', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Unnamed: 8', 'Year']
+Table 12 columns: ['Overall Rank', 'Change in rank', 'Country', 'Score', 'Change in score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Trust', 'Residual', 'Year']
+Table 13 columns: ['Overall Rank', 'Change in rank', 'Country', 'Score', 'Change in score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Trust', 'Residual', 'Year']
+Table 14 columns: ['Overall Rank [61][62]', 'Country', 'Score', 'Change Over Prior Year', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Trust', 'Year']
+Table 15 columns: ['Rank[64]', 'Country', 'Happiness', 'Year']
+Table 16 columns: ['Rank[64]', 'Country', 'Happiness', 'Year']
+Table 17 columns: ['vteLists of countries by quality of life rankings', 'vteLists of countries by quality of life rankings.1', 'Year']</code></pre>
+</div>
+</div>
+<p>What about the potential duplicate tables? Let’s take a look.</p>
+<div id="248a51cb" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>tables_with_years[<span class="dv">0</span>].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="78">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Overall rank</th>
+<th data-quarto-table-cell-role="th">Country or region</th>
+<th data-quarto-table-cell-role="th">Life evaluation</th>
+<th data-quarto-table-cell-role="th">Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>Finland</td>
+<td>7.741</td>
+<td>2024</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>Denmark</td>
+<td>7.583</td>
+<td>2024</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>Iceland</td>
+<td>7.525</td>
+<td>2024</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
+<td>Sweden</td>
+<td>7.344</td>
+<td>2024</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5</td>
+<td>Israel</td>
+<td>7.341</td>
+<td>2024</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="1de367d5" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>tables_with_years[<span class="dv">1</span>].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="79">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Overall rank</th>
+<th data-quarto-table-cell-role="th">Country or region</th>
+<th data-quarto-table-cell-role="th">Life evaluation</th>
+<th data-quarto-table-cell-role="th">Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>Finland</td>
+<td>7.741</td>
+<td>2024</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>Denmark</td>
+<td>7.583</td>
+<td>2024</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>Iceland</td>
+<td>7.525</td>
+<td>2024</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
+<td>Sweden</td>
+<td>7.344</td>
+<td>2024</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5</td>
+<td>Israel</td>
+<td>7.341</td>
+<td>2024</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="c0c30073" class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>tables_with_years[<span class="dv">0</span>] <span class="op">==</span> tables_with_years[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="80">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Overall rank</th>
+<th data-quarto-table-cell-role="th">Country or region</th>
+<th data-quarto-table-cell-role="th">Life evaluation</th>
+<th data-quarto-table-cell-role="th">Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">138</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">139</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">140</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">141</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">142</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+
+<p>143 rows × 4 columns</p>
+</div>
+</div>
+</div>
+<p>It looks like we do have duplicated data. There are a few ways we can deal with this, but the easiest way is to leave things as they are and proceed. Once we’ve got everything in one clean dataframe, we can solve our duplicate data problem by dropping duplicate rows.</p>
+<p>Our next steps, then, are as follows:</p>
+<ul>
+<li>select the final dataframes,</li>
+<li>align their column names,</li>
+<li>concatenate them into one master dataframe, and</li>
+<li>drop duplicate rows.</li>
+</ul>
+<p>Let’s select the dataframes with a “Life evaluation” column.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> It appears that only two of our dataframes contain this data, but that’s due to inconsistent naming; the “Life evaluation” score is simply labelled “Score” in some dataframes. Additionally, some dataframes have a column called ‘Country or region’ and others have “Country.” Let’s align these column names.</p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;Gallupe’s <strong>Life evaluation index</strong> is a measure of subjective wellbeing based on how people rate their current and expected future lives. Gallupe asks people to pick a number between 0 and 10 where 0 represents their worst possible life and 10 represents their best possible life. Participants say where they feel they are now, and where they thing they will be in 5 years. You can learn a bit more about the index from <a href="https://www.gallup.com/394505/indicator-life-evaluation-index.aspx#:~:text=What%20We%20Measure-,The%20Life%20Evaluation%20Index%20measures%20how%20people%20rate%20their%20current,Global%20Life%20Evaluation%20Index">Gallupe</a>, or by browsing the World Happiness Reports <a href="https://worldhappiness.report/archive/">here</a>.</p></div></div><div id="cba04f09" class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>new_columns <span class="op">=</span> {</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Country"</span>: <span class="st">"Country or region"</span>,</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Score"</span>: <span class="st">"Life evaluation"</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> df <span class="kw">in</span> tables_with_years:</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>    df.rename(columns<span class="op">=</span>new_columns, inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="d60af343" class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, table <span class="kw">in</span> <span class="bu">enumerate</span>(tables_with_years):</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Table </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> columns:"</span>, <span class="bu">list</span>(table.columns))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Table 0 columns: ['Overall rank', 'Country or region', 'Life evaluation', 'Year']
+Table 1 columns: ['Overall rank', 'Country or region', 'Life evaluation', 'Year']
+Table 2 columns: ['Overall rank', 'Country or region', 'Year']
+Table 3 columns: ['Overall rank', 'Country or region', 'Year']
+Table 4 columns: ['Overall rank', 'Country or region', 'Year']
+Table 5 columns: ['Overall rank', 'Country or region', 'Year']
+Table 6 columns: ['Overall rank', 'Country or region', 'Life evaluation', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Year']
+Table 7 columns: ['Overall rank', 'Country or region', 'Life evaluation', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Year']
+Table 8 columns: ['Overall rank', 'Country or region', 'Life evaluation', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Year']
+Table 9 columns: ['Overall rank', 'Country or region', 'Life evaluation', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Year']
+Table 10 columns: ['Overall rank', 'Country or region', 'Life evaluation', 'GDP per capita', 'Social support', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Unnamed: 8', 'Year']
+Table 11 columns: ['Overall rank', 'Country or region', 'Life evaluation', 'GDP per capita', 'Social support', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'Unnamed: 8', 'Year']
+Table 12 columns: ['Overall Rank', 'Change in rank', 'Country or region', 'Life evaluation', 'Change in score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Trust', 'Residual', 'Year']
+Table 13 columns: ['Overall Rank', 'Change in rank', 'Country or region', 'Life evaluation', 'Change in score', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Trust', 'Residual', 'Year']
+Table 14 columns: ['Overall Rank [61][62]', 'Country or region', 'Life evaluation', 'Change Over Prior Year', 'GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Trust', 'Year']
+Table 15 columns: ['Rank[64]', 'Country or region', 'Happiness', 'Year']
+Table 16 columns: ['Rank[64]', 'Country or region', 'Happiness', 'Year']
+Table 17 columns: ['vteLists of countries by quality of life rankings', 'vteLists of countries by quality of life rankings.1', 'Year']</code></pre>
+</div>
+</div>
+<div id="07763d55" class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>final_dfs <span class="op">=</span> []</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> df <span class="kw">in</span> tables_with_years:</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">'Life evaluation'</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>        final_dfs.append(df[[<span class="st">'Country or region'</span>, <span class="st">"Year"</span>, <span class="st">"Life evaluation"</span>]])</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>final_df <span class="op">=</span> pd.concat(final_dfs)</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>final_df.drop_duplicates(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>final_df.dropna(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>final_df <span class="op">=</span> final_df.reset_index()</span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>final_df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 922 entries, 0 to 921
+Data columns (total 4 columns):
+ #   Column             Non-Null Count  Dtype 
+---  ------             --------------  ----- 
+ 0   index              922 non-null    int64 
+ 1   Country or region  922 non-null    object
+ 2   Year               922 non-null    object
+ 3   Life evaluation    922 non-null    object
+dtypes: int64(1), object(3)
+memory usage: 28.9+ KB</code></pre>
+</div>
+</div>
+<p>It <em>looks</em> good, but there’s actually a problem lurking in this dataframe. If you inspect the output from <code>info()</code>, you’ll see that <code>Life evaluation</code> is actually an object / string, not a float. If we convert it to a float, most of our data gets converted to <code>NaN</code>s! 😲</p>
+<div id="48731962" class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>will_have_nans <span class="op">=</span> final_df.copy()</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>will_have_nans[<span class="st">'Life evaluation'</span>] <span class="op">=</span> will_have_nans[<span class="st">'Life evaluation'</span>].<span class="bu">str</span>.strip()</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Try to reapply the extraction and conversion</span></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>will_have_nans[<span class="st">'Life evaluation'</span>] <span class="op">=</span> will_have_nans[<span class="st">'Life evaluation'</span>].<span class="bu">str</span>.extract(<span class="vs">r'([\d\.]+)'</span>)</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>will_have_nans[<span class="st">'Life evaluation'</span>] <span class="op">=</span> pd.to_numeric(will_have_nans[<span class="st">'Life evaluation'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>will_have_nans.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 922 entries, 0 to 921
+Data columns (total 4 columns):
+ #   Column             Non-Null Count  Dtype  
+---  ------             --------------  -----  
+ 0   index              922 non-null    int64  
+ 1   Country or region  922 non-null    object 
+ 2   Year               922 non-null    object 
+ 3   Life evaluation    157 non-null    float64
+dtypes: float64(1), int64(1), object(2)
+memory usage: 28.9+ KB</code></pre>
+</div>
+</div>
+<p>What’s going on here!</p>
+<p>If you print the unique values, you’ll see that Python recognizes some observations as floats while others are floats that Python thinks are strings. And then there is one observation that we can be sure is causing trouble: <code>5.305[b]</code>.</p>
+<div id="3be8da96" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(final_df[<span class="st">'Life evaluation'</span>].unique())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[7.741 7.583 7.525 7.344 7.341 7.319 7.302 7.122 7.06 7.057 7.029 6.955
+ 6.951 6.905 6.9 6.894 6.838 6.822 6.818 6.749 6.743 6.733 6.725 6.719
+ 6.678 6.611 6.609 6.594 6.561 6.523 6.503 6.491 6.469 6.448 6.442 6.421
+ 6.411 6.36 6.358 6.346 6.324 6.287 6.284 6.272 6.257 6.234 6.195 6.188
+ 6.068 6.06 6.058 6.048 6.043 6.03 6.017 5.977 5.976 5.975 5.973 5.968
+ 5.959 5.942 5.934 5.877 5.866 5.842 5.841 5.823 5.816 5.785 5.784 5.725
+ 5.714 5.707 5.696 5.695 5.607 5.568 5.463 5.455 5.422 5.369 5.364 5.316
+ 5.304 5.281 5.221 5.216 5.185 5.166 5.158 5.139 5.106 5.08 5.023 4.975
+ 4.969 4.923 4.893 4.881 4.879 4.874 4.873 4.832 4.795 4.657 4.556 4.548
+ 4.505 4.485 4.471 4.47 4.422 4.377 4.372 4.354 4.341 4.289 4.269 4.232
+ 4.228 4.214 4.186 4.054 3.977 3.898 3.886 3.861 3.781 3.566 3.561 3.502
+ 3.421 3.383 3.341 3.295 3.245 3.186 2.707 1.721 7.809 7.646 7.56 7.504
+ 7.488 7.449 7.353 7.3 7.294 7.238 7.232 7.223 7.165 7.129 7.121 7.094
+ 7.076 6.94 6.911 6.864 6.791 6.773 6.664 6.465 6.455 6.44 6.406 6.401
+ 6.399 6.387 6.377 6.376 6.363 6.348 6.325 6.305 6.281 6.258 6.228 6.227
+ 6.215 6.192 6.186 6.163 6.159 6.137 6.124 6.102 6.101 6.022 6.006 6.0
+ 5.999 5.953 5.95 5.925 5.911 5.89 5.872 5.871 5.797 5.778 5.747 5.693
+ 5.692 5.689 5.674 5.608 5.556 5.546 5.542 5.54 5.536 5.515 5.51 5.505
+ 5.489 5.456 5.384 5.353 5.286 5.233 5.198 5.194 5.165 5.16 5.148 5.137
+ 5.132 5.124 5.119 5.102 5.095 5.085 5.053 5.005 4.981 4.949 4.91 4.889
+ 4.883 4.848 4.833 4.829 4.814 4.785 4.772 4.769 4.751 4.729 4.724 4.677
+ 4.673 4.672 4.633 4.624 4.583 4.571 4.561 4.558 4.553 4.432 4.423 4.392
+ 4.375 4.327 4.311 4.308 4.187 4.166 4.151 3.926 3.775 3.759 3.721 3.653
+ 3.573 3.538 3.527 3.479 3.476 3.312 3.299 2.817 2.567 7.769 7.6 7.554
+ 7.494 7.48 7.343 7.307 7.278 7.246 7.228 7.167 7.139 7.09 7.054 7.021
+ 6.985 6.923 6.892 6.852 6.825 6.726 6.595 6.592 6.446 6.444 6.436 6.375
+ 6.374 6.354 6.321 6.3 6.293 6.262 6.253 6.223 6.199 6.198 6.182 6.174
+ 6.149 6.125 6.118 6.105 6.1 6.086 6.07 6.046 6.028 6.011 6.008 5.94 5.895
+ 5.893 5.888 5.886 5.86 5.809 5.779 5.758 5.743 5.718 5.697 5.653 5.648
+ 5.631 5.603 5.529 5.525 5.523 5.467 5.432 5.43 5.425 5.386 5.373 5.339
+ 5.323 5.287 5.285 5.274 5.265 5.261 5.247 5.211 5.208 5.197 5.192 5.191
+ 5.175 5.082 5.044 5.011 4.996 4.944 4.913 4.906 4.812 4.799 4.796 4.722
+ 4.719 4.707 4.7 4.696 4.681 4.668 4.639 4.628 4.587 4.559 4.534 4.519
+ 4.516 4.509 4.49 4.466 4.461 4.456 4.437 4.418 4.39 4.374 4.366 4.36 4.35
+ 4.332 4.286 4.212 4.189 4.107 4.085 4.015 3.975 3.973 3.933 3.802 3.663
+ 3.597 3.488 3.462 3.41 3.38 3.334 3.231 3.203 3.083 2.853 7.632 7.594
+ 7.555 7.495 7.487 7.441 7.328 7.324 7.314 7.272 7.19 7.072 6.977 6.965
+ 6.927 6.91 6.886 6.814 6.774 6.711 6.627 6.489 6.488 6.476 6.441 6.43
+ 6.419 6.388 6.382 6.379 6.371 6.343 6.322 6.31 6.26 6.173 6.167 6.141
+ 6.123 6.096 6.083 6.072 5.956 5.952 5.948 5.945 5.933 5.915 5.891 5.875
+ 5.835 5.81 5.79 5.762 5.752 5.739 5.681 5.663 5.662 5.64 5.636 5.62 5.566
+ 5.524 5.504 5.483 5.472 5.41 5.398 5.358 5.347 5.321 5.302 5.295 5.254
+ 5.246 5.201 5.199 5.161 5.155 5.131 5.129 5.125 5.103 5.093 4.982 4.933
+ 4.88 4.806 4.758 4.743 4.671 4.631 4.623 4.592 4.586 4.5 4.447 4.441
+ 4.433 4.424 4.419 4.417 4.41 4.356 4.34 4.321 4.301 4.245 4.19 4.161
+ 4.141 4.139 4.103 3.999 3.964 3.808 3.795 3.774 3.692 3.632 3.59 3.587
+ 3.582 3.495 3.408 3.355 3.303 3.254 2.905 '7.537' '7.522' '7.504' '7.494'
+ '7.469' '7.377' '7.316' '7.314' '7.284' '7.213' '7.079' '7.006' '6.993'
+ '6.977' '6.951' '6.891' '6.863' '6.714' '6.652' '6.648' '6.635' '6.609'
+ '6.599' '6.578' '6.572' '6.527' '6.454' '6.452' '6.442' '6.424' '6.422'
+ '6.403' '6.375' '6.357' '6.344' '6.168' '6.105' '6.098' '6.087' '6.084'
+ '6.080' '6.071' '6.008' '6.003' '5.973' '5.971' '5.964' '5.963' '5.956'
+ '5.920' '5.902' '5.872' '5.850' '5.838' '5.825' '5.823' '5.822' '5.819'
+ '5.810' '5.758' '5.715' '5.629' '5.621' '5.611' '5.569' '5.525' '5.500'
+ '5.493' '5.472' '5.430' '5.395' '5.336' '5.324' '5.311' '5.305[b]'
+ '5.293' '5.279' '5.273' '5.269' '5.262' '5.250' '5.237' '5.235' '7.342'
+ '5.230' '5.227' '5.225' '5.195' '5.182' '5.181' '5.175' '5.151' '5.074'
+ '5.041' '5.011' '5.004' '4.962' '4.955' '4.829' '4.805' '4.775' '4.735'
+ '4.714' '4.709' '4.695' '4.692' '4.644' '4.608' '4.574' '4.553' '4.550'
+ '4.545' '4.535' '4.514' '4.497' '4.465' '4.460' '4.440' '4.376' '4.315'
+ '4.292' '4.291' '4.286' '4.280' '4.190' '4.180' '4.168' '4.139' '4.120'
+ '4.096' '4.081' '4.032' '4.028' '3.970' '3.936' '3.875' '3.808' '3.795'
+ '3.794' '3.766' '3.657' '3.644' '3.603' '3.593' '3.591' '3.533' '3.507'
+ '3.495' '3.471' '3.462' '3.349' '2.905' '2.693' 7.526 7.509 7.501 7.498
+ 7.413 7.404 7.339 7.334 7.313 7.291 7.267 7.119 7.104 7.087 7.039 6.994
+ 6.952 6.929 6.907 6.871 6.778 6.739 6.705 6.701 6.65 6.596 6.573 6.545
+ 6.481 6.478 6.474 6.361 6.355 6.269 6.239 6.218 6.168 6.084 6.078 6.005
+ 5.992 5.987 5.921 5.919 5.897 5.856 5.822 5.813 5.802 5.771 5.768 5.658
+ 5.615 5.56 5.538 5.528 5.517 5.488 5.458 5.44 5.401 5.389 5.314 5.303
+ 5.291 5.279 5.245 5.196 5.177 5.163 5.151 5.145 5.123 5.121 5.061 5.057
+ 5.045 5.033 4.907 4.876 4.875 4.871 4.813 4.793 4.754 4.655 4.643 4.635
+ 4.575 4.574 4.513 4.508 4.459 4.415 4.404 4.395 4.362 4.324 4.276 4.272
+ 4.252 4.236 4.219 4.217 4.201 4.193 4.156 4.121 4.073 4.028 3.974 3.956
+ 3.916 3.907 3.866 3.856 3.832 3.763 3.739 3.724 3.695 3.666 3.622 3.607
+ 3.515 3.484 3.36 3.069]</code></pre>
+</div>
+</div>
+<p>If we handle this situation carefully, we’ll get back the data we expect. To target our problematic observation(s), we’ll temporarily create a list, iterate over it to handle each observation as it needs to be handled, and then add the clean values back to our dataframe.</p>
+<div id="2c4c9f0b" class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>vals <span class="op">=</span> final_df[<span class="st">'Life evaluation'</span>].tolist()</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(vals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="86">
+<pre><code>922</code></pre>
+</div>
+</div>
+<p>As we process these values, we’ll check their type. If it’s already a float, we’ll do nothing. If it’s a string, we’ll target the problem we know about and then attempt to convert it to a float. Then we’ll check the outcome.</p>
+<div id="e5cedc72" class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> []</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> val <span class="kw">in</span> vals:  </span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(val, <span class="bu">float</span>):  <span class="co"># Check if the value is already a float</span></span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>        cleaned.append(val)</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(val, <span class="bu">str</span>):  <span class="co"># Check if the value is a string</span></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>        cleaned.append(<span class="bu">float</span>(val.replace(<span class="st">'[b]'</span>, <span class="st">''</span>)))  <span class="co"># Remove '[b]' and convert to float</span></span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Unexpected type: </span><span class="sc">{</span><span class="bu">type</span>(val)<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># Handle unexpected types</span></span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>final_df[<span class="st">'Life evaluation'</span>] <span class="op">=</span> pd.Series(cleaned)</span>
+<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a>final_df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 922 entries, 0 to 921
+Data columns (total 4 columns):
+ #   Column             Non-Null Count  Dtype  
+---  ------             --------------  -----  
+ 0   index              922 non-null    int64  
+ 1   Country or region  922 non-null    object 
+ 2   Year               922 non-null    object 
+ 3   Life evaluation    922 non-null    float64
+dtypes: float64(1), int64(1), object(2)
+memory usage: 28.9+ KB</code></pre>
+</div>
+</div>
+<p>We now have a float without missing values! 🔥😎</p>
+<div id="cd714ce3" class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>final_df.sort_values(<span class="st">'Life evaluation'</span>, ascending<span class="op">=</span><span class="va">False</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>final_df.head(<span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="88">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">index</th>
+<th data-quarto-table-cell-role="th">Country or region</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">Life evaluation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">143</td>
+<td>0</td>
+<td>Finland</td>
+<td>2020</td>
+<td>7.809</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">296</td>
+<td>0</td>
+<td>Finland</td>
+<td>2019</td>
+<td>7.769</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0</td>
+<td>Finland</td>
+<td>2024</td>
+<td>7.741</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">144</td>
+<td>1</td>
+<td>Denmark</td>
+<td>2020</td>
+<td>7.646</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">452</td>
+<td>0</td>
+<td>Finland</td>
+<td>2018</td>
+<td>7.632</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">297</td>
+<td>1</td>
+<td>Denmark</td>
+<td>2019</td>
+<td>7.600</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">453</td>
+<td>1</td>
+<td>Norway</td>
+<td>2018</td>
+<td>7.594</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1</td>
+<td>Denmark</td>
+<td>2024</td>
+<td>7.583</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">145</td>
+<td>2</td>
+<td>Switzerland</td>
+<td>2020</td>
+<td>7.560</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">454</td>
+<td>2</td>
+<td>Denmark</td>
+<td>2018</td>
+<td>7.555</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">298</td>
+<td>2</td>
+<td>Norway</td>
+<td>2019</td>
+<td>7.554</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">608</td>
+<td>0</td>
+<td>Norway</td>
+<td>2017</td>
+<td>7.537</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">765</td>
+<td>0</td>
+<td>Denmark</td>
+<td>2016</td>
+<td>7.526</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2</td>
+<td>Iceland</td>
+<td>2024</td>
+<td>7.525</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">609</td>
+<td>1</td>
+<td>Denmark</td>
+<td>2017</td>
+<td>7.522</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">766</td>
+<td>1</td>
+<td>Switzerland</td>
+<td>2016</td>
+<td>7.509</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">610</td>
+<td>2</td>
+<td>Iceland</td>
+<td>2017</td>
+<td>7.504</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">146</td>
+<td>3</td>
+<td>Iceland</td>
+<td>2020</td>
+<td>7.504</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">767</td>
+<td>2</td>
+<td>Iceland</td>
+<td>2016</td>
+<td>7.501</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">768</td>
+<td>3</td>
+<td>Norway</td>
+<td>2016</td>
+<td>7.498</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">455</td>
+<td>3</td>
+<td>Iceland</td>
+<td>2018</td>
+<td>7.495</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">611</td>
+<td>3</td>
+<td>Switzerland</td>
+<td>2017</td>
+<td>7.494</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">299</td>
+<td>3</td>
+<td>Iceland</td>
+<td>2019</td>
+<td>7.494</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">147</td>
+<td>4</td>
+<td>Norway</td>
+<td>2020</td>
+<td>7.488</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">300</td>
+<td>4</td>
+<td>Netherlands</td>
+<td>2019</td>
+<td>7.488</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">456</td>
+<td>4</td>
+<td>Switzerland</td>
+<td>2018</td>
+<td>7.487</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">301</td>
+<td>5</td>
+<td>Switzerland</td>
+<td>2019</td>
+<td>7.480</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">612</td>
+<td>4</td>
+<td>Finland</td>
+<td>2017</td>
+<td>7.469</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">148</td>
+<td>5</td>
+<td>Netherlands</td>
+<td>2020</td>
+<td>7.449</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">457</td>
+<td>5</td>
+<td>Netherlands</td>
+<td>2018</td>
+<td>7.441</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="visualization" class="level3">
+<h3 class="anchored" data-anchor-id="visualization">Visualization</h3>
+<p>Before we move on to an example of collecting data from an API, let’s create a visualization of the data we just scraped and processed. We’re going to create a small multiples plot. The code below looks a bit complex, but it’s just calculating the size of the figure needed and then looping over each country to create a plot.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>sorted_data <span class="op">=</span> final_df.sort_values([<span class="st">'Country or region'</span>, <span class="st">'Year'</span>])</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>sorted_data <span class="op">=</span> sorted_data[sorted_data[<span class="st">'Country or region'</span>] <span class="op">!=</span> <span class="st">"World"</span>]</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> sorted_data[<span class="st">'Country or region'</span>].unique()</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the number of rows and columns for the subplots</span></span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>n_cols <span class="op">=</span> <span class="dv">4</span>  <span class="co"># You can adjust this based on how many plots you want per row</span></span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>n_rows <span class="op">=</span> <span class="bu">len</span>(countries) <span class="op">//</span> n_cols <span class="op">+</span> (<span class="bu">len</span>(countries) <span class="op">%</span> n_cols <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the figure and subplots</span></span>
+<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(n_rows, n_cols, figsize<span class="op">=</span>(<span class="dv">16</span>, n_rows <span class="op">*</span> <span class="fl">2.5</span>), constrained_layout<span class="op">=</span><span class="va">True</span>, sharex<span class="op">=</span><span class="va">True</span>, sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Flatten the axes array for easier indexing</span></span>
+<span id="cb69-13"><a href="#cb69-13" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten()</span>
+<span id="cb69-14"><a href="#cb69-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-15"><a href="#cb69-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through each country and create a subplot</span></span>
+<span id="cb69-16"><a href="#cb69-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, country <span class="kw">in</span> <span class="bu">enumerate</span>(countries):</span>
+<span id="cb69-17"><a href="#cb69-17" aria-hidden="true" tabindex="-1"></a>    country_data <span class="op">=</span> sorted_data[sorted_data[<span class="st">'Country or region'</span>] <span class="op">==</span> country]</span>
+<span id="cb69-18"><a href="#cb69-18" aria-hidden="true" tabindex="-1"></a>    axes[i].plot(country_data[<span class="st">'Year'</span>], country_data[<span class="st">'Life evaluation'</span>], marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb69-19"><a href="#cb69-19" aria-hidden="true" tabindex="-1"></a>    axes[i].set_title(<span class="ss">f'</span><span class="ch">\n</span><span class="sc">{</span>country<span class="sc">}</span><span class="ss">'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb69-20"><a href="#cb69-20" aria-hidden="true" tabindex="-1"></a>    axes[i].set_xlabel(<span class="st">''</span>)</span>
+<span id="cb69-21"><a href="#cb69-21" aria-hidden="true" tabindex="-1"></a>    axes[i].set_ylabel(<span class="st">''</span>)</span>
+<span id="cb69-22"><a href="#cb69-22" aria-hidden="true" tabindex="-1"></a>    axes[i].set_xlim(final_df[<span class="st">'Year'</span>].<span class="bu">min</span>(), final_df[<span class="st">'Year'</span>].<span class="bu">max</span>())</span>
+<span id="cb69-23"><a href="#cb69-23" aria-hidden="true" tabindex="-1"></a>    axes[i].set_ylim(<span class="dv">0</span>, final_df[<span class="st">'Life evaluation'</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb69-24"><a href="#cb69-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb69-25"><a href="#cb69-25" aria-hidden="true" tabindex="-1"></a>    axes[i].set_yticks(</span>
+<span id="cb69-26"><a href="#cb69-26" aria-hidden="true" tabindex="-1"></a>      np.arange(</span>
+<span id="cb69-27"><a href="#cb69-27" aria-hidden="true" tabindex="-1"></a>        <span class="bu">int</span>(final_df[<span class="st">'Life evaluation'</span>].<span class="bu">min</span>()), </span>
+<span id="cb69-28"><a href="#cb69-28" aria-hidden="true" tabindex="-1"></a>        <span class="bu">int</span>(final_df[<span class="st">'Life evaluation'</span>].<span class="bu">max</span>()) <span class="op">+</span> <span class="dv">1</span>, </span>
+<span id="cb69-29"><a href="#cb69-29" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span></span>
+<span id="cb69-30"><a href="#cb69-30" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb69-31"><a href="#cb69-31" aria-hidden="true" tabindex="-1"></a>    )  </span>
+<span id="cb69-32"><a href="#cb69-32" aria-hidden="true" tabindex="-1"></a>    axes[i].tick_params(axis<span class="op">=</span><span class="st">'x'</span>, labelsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb69-33"><a href="#cb69-33" aria-hidden="true" tabindex="-1"></a>    axes[i].tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb69-34"><a href="#cb69-34" aria-hidden="true" tabindex="-1"></a>    axes[i].grid(<span class="va">True</span>)</span>
+<span id="cb69-35"><a href="#cb69-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-36"><a href="#cb69-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Hide any unused subplots</span></span>
+<span id="cb69-37"><a href="#cb69-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, <span class="bu">len</span>(axes)):</span>
+<span id="cb69-38"><a href="#cb69-38" aria-hidden="true" tabindex="-1"></a>    fig.delaxes(axes[j])</span>
+<span id="cb69-39"><a href="#cb69-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-40"><a href="#cb69-40" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"output/happiness_report_small_multiples.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output/happiness_report_small_multiples.png" class="img-fluid figure-img"></p>
+<figcaption>Looking pretty good!</figcaption>
+</figure>
+</div>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1 page-columns page-full">
+<h1>Conclusion</h1>
+<p>In this tutorial, we learned how to scrape data from a static website by working with the Wikipedia page on the World Happiness Report. We learned how to:</p>
+<ul>
+<li>Load a static website with <code>requests</code></li>
+<li>Parse HTML with <code>BeautifulSoup</code> to extract headers, body text, and links</li>
+<li>Handle relative and internal links</li>
+<li>Extract and process HTML tables, including handling nested tables</li>
+<li>Clean and structure the extracted data, preparing it for analysis</li>
+<li>Create a small multiples plot using <code>matplotlib</code> and <code>seaborn</code></li>
+</ul>
+<p>We’ve just scratched the surface of what’s possible with web scraping. With the skills you’ve learned here, you’ll be able to collect data from a wide variety of static web pages. If you want to learn more, I recommend consulting <span class="citation" data-cites="mitchell2024web">Mitchell (<a href="#ref-mitchell2024web" role="doc-biblioref">2024</a>)</span> and <span class="citation" data-cites="mclevey2022doing">McLevey (<a href="#ref-mclevey2022doing" role="doc-biblioref">2022</a>)</span>. In the next tutorial, we’ll learn about collecting data from APIs, which are another powerful tool in your data collection toolkit!</p>
+
+
+<div class="no-row-height column-margin column-container"><div id="ref-mitchell2024web" class="csl-entry" role="listitem">
+Mitchell, Ryan. 2024. <em>Web Scraping with Python</em>. 3rd ed. O’Reilly.
+</div><div id="ref-mclevey2022doing" class="csl-entry" role="listitem">
+McLevey, John. 2022. <em>Doing Computational Social Science: A Practical Introduction</em>. Sage.
+</div></div>
+</section>
+
+
+<script async="" defer="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -2,7 +2,17 @@
   {
     "listing": "/pages/blog.html",
     "items": [
-      "/posts/Just Another Technical Blog.html"
+      "/posts/2024-GESIS-1-setup.html",
+      "/posts/2024-GESIS-2-1-obtaining-data-scraping.html",
+      "/posts/2024-GESIS-2-2-obtaining-data-apis.html",
+      "/posts/2024-GESIS-3-1-text-analysis-foundations.html",
+      "/posts/2024-GESIS-3-2-text-analysis-transformers.html",
+      "/posts/2024-GESIS-4-1-network-analysis-political-blogs.html",
+      "/posts/2024-GESIS-4-2-network-analysis-enron.html",
+      "/posts/2024-GESIS-5-1-abms.html",
+      "/posts/2024-GESIS-6-1-project.html",
+      "/posts/Just Another Technical Blog.html",
+      "/posts/Quarto.html"
     ]
   }
 ]

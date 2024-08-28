@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="John McLevey">
+<meta name="dcterms.date" content="2024-08-26">
+<meta name="description" content="Module 5, Introduction to Computational Social Science (Python), GESIS Fall Seminar 2024">
+
+<title>Simulation and Agent-based Modelling – Dr.&nbsp;John McLevey</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Dr.&nbsp;John McLevey</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../pages/books.html"> 
+<span class="menu-text">Books</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../pages/cv.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../pages/courses.html"> 
+<span class="menu-text">Courses</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../pages/blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://uwaterloo.ca/networks-lab/profiles"> 
+<span class="menu-text">Lab</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="https://github.com/mclevey" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-code-square"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/mclevey/mclevey.github.io">
+            Source Code
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="../posts/Quarto.html">
+            How I Built This Site
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#simulation-and-agent-based-modelling" id="toc-simulation-and-agent-based-modelling" class="nav-link active" data-scroll-target="#simulation-and-agent-based-modelling">Simulation and Agent-based Modelling</a>
+  <ul class="collapse">
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#load-and-configure-the-models" id="toc-load-and-configure-the-models" class="nav-link" data-scroll-target="#load-and-configure-the-models">Load and Configure the Model(s)</a>
+  <ul class="collapse">
+  <li><a href="#model-1-sir-model-with-high-transmissibility" id="toc-model-1-sir-model-with-high-transmissibility" class="nav-link" data-scroll-target="#model-1-sir-model-with-high-transmissibility">Model 1: SIR Model with High Transmissibility</a></li>
+  <li><a href="#model-2-sir-model-with-low-transmissibility" id="toc-model-2-sir-model-with-low-transmissibility" class="nav-link" data-scroll-target="#model-2-sir-model-with-low-transmissibility">Model 2: SIR Model with Low Transmissibility</a></li>
+  <li><a href="#comparing-the-two-models" id="toc-comparing-the-two-models" class="nav-link" data-scroll-target="#comparing-the-two-models">Comparing the Two Models</a></li>
+  <li><a href="#analyzing-agent-interactions" id="toc-analyzing-agent-interactions" class="nav-link" data-scroll-target="#analyzing-agent-interactions">Analyzing Agent Interactions</a></li>
+  </ul></li>
+  <li><a href="#model-analysis" id="toc-model-analysis" class="nav-link" data-scroll-target="#model-analysis">Model Analysis</a>
+  <ul class="collapse">
+  <li><a href="#correlate-the-parameters-with-the-outcomes" id="toc-correlate-the-parameters-with-the-outcomes" class="nav-link" data-scroll-target="#correlate-the-parameters-with-the-outcomes">Correlate the Parameters with the Outcomes</a></li>
+  </ul></li>
+  <li><a href="#sensitivity-analysis-time-to-peak-proportion-infected" id="toc-sensitivity-analysis-time-to-peak-proportion-infected" class="nav-link" data-scroll-target="#sensitivity-analysis-time-to-peak-proportion-infected">Sensitivity Analysis: Time to Peak Proportion Infected</a></li>
+  </ul></li>
+  <li><a href="#social-learning-influence-and-opinion-dynamics" id="toc-social-learning-influence-and-opinion-dynamics" class="nav-link" data-scroll-target="#social-learning-influence-and-opinion-dynamics">Social Learning, Influence, and Opinion Dynamics</a>
+  <ul class="collapse">
+  <li><a href="#odd-protocol-for-bounded-confidence-model" id="toc-odd-protocol-for-bounded-confidence-model" class="nav-link" data-scroll-target="#odd-protocol-for-bounded-confidence-model">ODD Protocol for Bounded Confidence Model</a></li>
+  <li><a href="#bounded-confidence-models" id="toc-bounded-confidence-models" class="nav-link" data-scroll-target="#bounded-confidence-models">Bounded Confidence Models</a>
+  <ul class="collapse">
+  <li><a href="#run-the-model-collect-data" id="toc-run-the-model-collect-data" class="nav-link" data-scroll-target="#run-the-model-collect-data">Run the Model &amp; Collect Data</a></li>
+  <li><a href="#plot-opinion-distributions" id="toc-plot-opinion-distributions" class="nav-link" data-scroll-target="#plot-opinion-distributions">Plot Opinion Distributions</a></li>
+  <li><a href="#plot-opinions-over-time" id="toc-plot-opinions-over-time" class="nav-link" data-scroll-target="#plot-opinions-over-time">Plot Opinions Over Time</a></li>
+  <li><a href="#experimenting-with-epsilon" id="toc-experimenting-with-epsilon" class="nav-link" data-scroll-target="#experimenting-with-epsilon">Experimenting with <span class="math inline">\(\epsilon\)</span></a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Simulation and Agent-based Modelling</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Python</div>
+    <div class="quarto-category">GESIS</div>
+    <div class="quarto-category">computational social science</div>
+    <div class="quarto-category">data science</div>
+    <div class="quarto-category">tutorial</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Module 5, Introduction to Computational Social Science (Python), GESIS Fall Seminar 2024
+  </div>
+</div>
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author"><a href="https://johnmclevey.com">John McLevey</a> <a href="mailto:john.mclevey@uwaterloo.ca" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            University of Waterloo
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 26, 2024</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">August 28, 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="simulation-and-agent-based-modelling" class="level1">
+<h1>Simulation and Agent-based Modelling</h1>
+<p>This notebook accompanies the recorded lecture on “Simulation and Agent-based Modelling.” It’s intended to provide you with a hands-on experience in building and analyzing agent-based models using Python.</p>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>By the end of this workshop, you will be able to:</p>
+<ol type="1">
+<li>Understand the basic concepts and components of agent-based modeling.</li>
+<li>Implement a simple SIR model using Mesa, a Python library for agent-based modeling.
+<ul>
+<li>In this notebook, this is done via the course package <code>icsspy</code>, but the models we load here are the same ones I developed in the lecture.</li>
+</ul></li>
+<li>Analyze the behavior of the SIR model under different conditions and parameters.</li>
+<li>Explore a Bounded Confidence Model to understand opinion dynamics.</li>
+<li>Conduct sensitivity analysis and parameter sweeps to systematically investigate model behavior.</li>
+</ol>
+</section>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>Let’s start by importing the necessary packages and configuring our environment.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mesa</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mesa.batchrunner <span class="im">import</span> batch_run</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> icsspy</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>icsspy.set_style()</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> icsspy.networks <span class="im">import</span> plot_line_comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="load-and-configure-the-models" class="level2">
+<h2 class="anchored" data-anchor-id="load-and-configure-the-models">Load and Configure the Model(s)</h2>
+<p>We’ll begin by exploring a classic Susceptible-Infected-Recovered (SIR) model. This model is often used to simulate the spread of infectious diseases.</p>
+<section id="model-1-sir-model-with-high-transmissibility" class="level3">
+<h3 class="anchored" data-anchor-id="model-1-sir-model-with-high-transmissibility">Model 1: SIR Model with High Transmissibility</h3>
+<p>First, let’s load the SIRModel class from the course package and define the parameters for our first model, which simulates a disease with a high infection rate.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> icsspy.abms.sir <span class="im">import</span> SIRModel</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>model_1_params <span class="op">=</span> {<span class="st">'N'</span>: <span class="dv">100</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> <span class="st">'grid_height'</span>: <span class="dv">40</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="st">'grid_width'</span>: <span class="dv">40</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> <span class="st">'infection_rate'</span>: <span class="fl">0.3</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a> <span class="st">'max_agent_step_size'</span>: <span class="dv">1</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a> <span class="st">'n_initial_infections'</span>: <span class="dv">2</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a> <span class="st">'n_iterations'</span>: <span class="dv">150</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a> <span class="st">'recovery_time_range'</span>: [<span class="dv">14</span>, <span class="dv">24</span>]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Model 1 Params</span><span class="ch">\n</span><span class="st">"</span>, model_1_params)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here, we have a population of 100 agents on a 40x40 grid. The infection rate is set to 0.3, meaning there’s a 30% chance that a susceptible agent will become infected when in contact with an infected agent. The agents can move to adjacent cells, and their recovery time is randomly chosen between 14 and 24 time steps.</p>
+<p>Now, let’s run the model and store the results.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>model_1 <span class="op">=</span> SIRModel(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    n_initial_infections <span class="op">=</span> model_1_params[<span class="st">'n_initial_infections'</span>],</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    grid_width <span class="op">=</span> model_1_params[<span class="st">'grid_width'</span>],</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    grid_height <span class="op">=</span> model_1_params[<span class="st">'grid_height'</span>],</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> model_1_params[<span class="st">'N'</span>],</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    infection_rate <span class="op">=</span> model_1_params[<span class="st">'infection_rate'</span>],</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    recovery_time_range <span class="op">=</span> model_1_params[<span class="st">'recovery_time_range'</span>],</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    max_agent_step_size <span class="op">=</span> model_1_params[<span class="st">'max_agent_step_size'</span>],</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(model_1_params[<span class="st">'n_iterations'</span>]):</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    model_1.step()</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>m1res <span class="op">=</span> model_1.datacollector.get_model_vars_dataframe()</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>m1res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="model-2-sir-model-with-low-transmissibility" class="level3">
+<h3 class="anchored" data-anchor-id="model-2-sir-model-with-low-transmissibility">Model 2: SIR Model with Low Transmissibility</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>model_2_params <span class="op">=</span> {<span class="st">'N'</span>: <span class="dv">100</span>,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a> <span class="st">'grid_height'</span>: <span class="dv">40</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a> <span class="st">'grid_width'</span>: <span class="dv">40</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a> <span class="st">'infection_rate'</span>: <span class="fl">0.15</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> <span class="st">'max_agent_step_size'</span>: <span class="dv">1</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a> <span class="st">'n_initial_infections'</span>: <span class="dv">2</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a> <span class="st">'n_iterations'</span>: <span class="dv">150</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a> <span class="st">'recovery_time_range'</span>: [<span class="dv">14</span>, <span class="dv">24</span>]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Model 2 Params</span><span class="ch">\n</span><span class="st">"</span>, model_2_params)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We have kept most of the parameters the same as in Model 1, except for the infection rate, which is now 0.15, to simulate a less contagious disease.</p>
+<p>Now, let’s run Model 2.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>model_2 <span class="op">=</span> SIRModel(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    n_initial_infections <span class="op">=</span> model_2_params[<span class="st">'n_initial_infections'</span>],</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    grid_width <span class="op">=</span> model_2_params[<span class="st">'grid_width'</span>],</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    grid_height <span class="op">=</span> model_2_params[<span class="st">'grid_height'</span>],</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> model_2_params[<span class="st">'N'</span>],</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    infection_rate <span class="op">=</span> model_2_params[<span class="st">'infection_rate'</span>],</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    recovery_time_range <span class="op">=</span> model_2_params[<span class="st">'recovery_time_range'</span>],</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    max_agent_step_size <span class="op">=</span> model_2_params[<span class="st">'max_agent_step_size'</span>],</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(model_2_params[<span class="st">'n_iterations'</span>]):</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    model_2.step()</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>m2res <span class="op">=</span> model_2.datacollector.get_model_vars_dataframe()</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>m2res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="comparing-the-two-models" class="level3">
+<h3 class="anchored" data-anchor-id="comparing-the-two-models">Comparing the Two Models</h3>
+<p>Let’s compare the infection curves from both models to see how the different infection rates affect the spread of the disease.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>ax.plot(m1res[<span class="st">'Infected'</span>], label<span class="op">=</span><span class="vs">r'High transmissibility, $\beta$=0.3'</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ax.plot(m2res[<span class="st">'Infected'</span>], label<span class="op">=</span><span class="vs">r'Low transmissibility $\beta$=0.15'</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"</span><span class="ch">\n</span><span class="st">Discrete Steps in Time"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Proportion Infected</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">'upper right'</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'output/sir_compare_models_1-2.png'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="analyzing-agent-interactions" class="level3">
+<h3 class="anchored" data-anchor-id="analyzing-agent-interactions">Analyzing Agent Interactions</h3>
+<p>In addition to tracking the number of infected agents, it’s also useful to analyze how agents interact with each other during the simulation.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>interaction_graphs <span class="op">=</span> {}</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>interaction_graph_summaries <span class="op">=</span> {}</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [model_1, model_2]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, model <span class="kw">in</span> <span class="bu">enumerate</span>(models, start<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    wel <span class="op">=</span> []</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> agent <span class="kw">in</span> model.schedule.agents:</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> k, v <span class="kw">in</span> agent.interactions.items():</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>            wel.append((<span class="bu">int</span>(agent.unique_id), k, v))</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    G <span class="op">=</span> nx.Graph()</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    G.add_weighted_edges_from(wel)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    interaction_graphs[<span class="ss">f'M</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">'</span>] <span class="op">=</span> G</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    avg_degree <span class="op">=</span> <span class="bu">round</span>(<span class="bu">sum</span>(<span class="bu">dict</span>(G.degree()).values()) <span class="op">/</span> <span class="bu">float</span>(G.number_of_nodes()), <span class="dv">2</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    interaction_graph_summaries[<span class="ss">f'M</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">'</span>] <span class="op">=</span> (G.number_of_nodes(), G.number_of_edges(), avg_degree)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>interaction_graph_summaries <span class="op">=</span> pd.DataFrame(interaction_graph_summaries).T</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>interaction_graph_summaries.columns <span class="op">=</span> [<span class="st">'No. Nodes'</span>, <span class="st">'No. Edges'</span>, <span class="st">'Avg. Degree'</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>interaction_graph_summaries</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize an empty graph</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> interaction_graphs[<span class="st">'M2'</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>weights <span class="op">=</span> [d[<span class="st">'weight'</span>] <span class="cf">for</span> u, v, d <span class="kw">in</span> G.edges(data<span class="op">=</span><span class="va">True</span>)]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>sns.ecdfplot(weights)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Interaction Weight'</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'ECDF'</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'ECDF of Interaction Weights'</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'output/compare_agent_networks.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="model-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="model-analysis">Model Analysis</h2>
+<p>Model analysis is critical for understanding the behavior of an ABM and ensuring that it accurately reflects the real-world system being modeled. In this section, we’ll cover various analysis techniques, including descriptive, exploratory, comparative, and predictive analyses.</p>
+<p>Sensitivity Analysis: Peak Proportion Infected Sensitivity analysis helps determine how changes in model parameters affect the outcomes. Here, we’ll focus on the peak proportion of infected agents as our outcome of interest.</p>
+<p>First, let’s set up a parameter sweep for the sensitivity analysis.</p>
+<!--
+
+- Understand and interpret model behavior to better understand the system being modeled
+- Validate the model against real-world data, check robustness and reliability
+- Explore the effects of different parameters and conditions and identify key drivers of model outcomes
+
+- Track agent states, interactions, and other metrics
+- Visualize model dynamics over time
+- Use statistical or other approaches
+
+So far we have not been very systematic in how we've approaches analyzing the outputs of our SIR model. What's involved in more systematic analyses?
+
+The primary goal of analyzing an agent-based model is to gain insights into how the model behaves and how well it represents the real-world system it's designed to simulate. This involves understanding the dynamics of the model, validating it against empirical data, and exploring the implications of different parameter settings.
+
+We can break ABM model analysis down into several types. Descriptive analysis helps summarize what's happening in the model, while exploratory analysis digs deeper into patterns and relationships within the data. Comparative analysis is useful when we want to understand how different scenarios or versions of the model compare, and predictive analysis leverages the model to forecast future outcomes.
+
+Usually, we use several techniques at once to analyze ABMs effectively. Data collection is crucial for tracking the various states and interactions within the model, often using tools like Mesa's DataCollector. Visualization helps us see the trends and dynamics within the model, and statistical analysis allows us to quantify and interpret the data meaningfully.
+
+Ultimately, the goal of analyzing an ABM is to ensure that the model is providing accurate, reliable insights into the system being studied. This includes identifying the key factors that drive model outcomes and ensuring that the model can withstand scrutiny through robust analysis.
+
+This high-level overview sets the stage for more detailed discussions on specific analysis methods like sensitivity analysis, parameter sweeps, and computational experiments, which are essential for thoroughly understanding and validating our ABMs.
+
+- Sensitivity Analysis helps determine which model parameters are most important and/or uncertain, and which require careful estimation and interpretation.
+- Parameter Sweeps allow for a systematic exploration of how different settings influence model behavior, which helps in understanding the model's response landscape.
+- Computational Experiments involve systematically investigating the model's behavior to answer specific questions, understand mechanisms, or test hypotheses.
+
+When iteratively analyzing models, we can use Sensitivity Analysis, Parameter Sweeps, and Computational Experiments to understand, test, and analyze the behavior of the model under various conditions. These methods are essential for ensuring the model's reliability and for interpreting its results. Here's what they mean:
+
+### Sensitivity Analysis
+
+Sensitivity analysis involves systematically varying model parameters to assess how changes in these parameters affect the model's output. It helps identify which parameters are most influential in determining model behavior and which ones have less impact.
+
+The main goal is to understand how robust the model's results are. If small changes in a parameter lead to significant changes in outcomes, for example, that parameter is considered sensitive and could indicate areas where the model might need refinement or better data.
+
+Local Sensitivity Analysis involves small variations in one parameter at a time to observe the local impact on the model, whereas Global Sensitivity Analysis considers a broader range of variations and the combined effects of multiple parameters.
+
+### Parameter Sweeps
+
+This allows us to map out the response of the model across the entire space of possible parameter values, which helps identify trends, tipping points, or regions of parameter space where the model behaves in a particular way. Typically, this is done by running a series of simulations where one or more parameters are adjusted incrementally. The results are then analyzed to understand the relationship between parameters and outcomes.
+
+### Computational Experiments:
+
+In the context of ABM, computational experiments refer to the process of systematically testing the model by varying initial conditions, parameter values, or model structures to observe the resulting behavior. Most importantly, this is done with the goal of answering scientific questions, understanding mechanisms, or testing hypotheses. Sometimes this is explicitly causal and may be similar to laboratory experiments, only in a simulated environment where variables can easily be manipulated and controlled. Other times it is more exploratory, with the goal of mapping out the model's behavior across a wide range of conditions.
+
+## Sensitivity Analysis: Peak Proportion Infected
+
+Let's do a sensitivity analysis! We'll follow these steps:
+
+1. Set up the **parameter sweep** dictionary
+2. Run the model according to the sweep dictionary<br>[+ plot results from batch run]{.nord-light}
+3. Aggregate the model results
+4. Plot the results
+5. Correlate parameters with peak proportion infected^[This is an additional step, not necessarily part of a sensitivity analysis but often done alongside.]
+6. Interpret, critique... *repeat*
+7. Prepare the data
+8. Plot the results
+9. Interpret, critique... *repeat*
+
+First, we'll focus on peak proportion infected as the outcome of interest.
+
+Sensitivity plots will show how the peak number of infections varies with changes in each parameter. Parameters with more spread (higher variability in the boxplots) are more sensitive.
+
+The correlation analysis will help identify which parameters have the most substantial impact on the peak number of infections.
+
+Let's set up our parameter sweep dict for the sensitivity analysis. In the fict, values that are single elements represent fixed parameters (the dimensions of the grid, etc.) and lists `[]` represent groups of parameters to iterate over. The model's response space is made up of every combination of these fixed and global parameters.
+-->
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"N"</span>: <span class="dv">100</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"grid_height"</span>: <span class="dv">40</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"grid_width"</span>: <span class="dv">40</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"infection_rate"</span>: [<span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>,],</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"recovery_time_range"</span>: [(<span class="dv">7</span>,<span class="dv">14</span>), (<span class="dv">14</span>,<span class="dv">24</span>)],</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"max_agent_step_size"</span>: [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">12</span>],</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"n_initial_infections"</span>: [<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>]</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then we can run multiple mpdels for every combination of parameters using the batch_run() function.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> mesa.batch_run(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    model_cls<span class="op">=</span>SIRModel,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    parameters<span class="op">=</span>params,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    iterations<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    max_steps<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    number_processes<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    data_collection_period<span class="op">=</span><span class="dv">1</span>,  <span class="co"># collect data at every step</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    display_progress<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> pd.DataFrame(results)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>results_df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>results_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s create a small multiples plot to compare some high-level patterns across different parameter settings.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>melted_df <span class="op">=</span> pd.melt(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    results_df,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># include 'RunId' to differentiate runs</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    id_vars<span class="op">=</span>[<span class="st">'n_initial_infections'</span>, <span class="st">'infection_rate'</span>, <span class="st">'Step'</span>, <span class="st">'RunId'</span>],</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    value_vars<span class="op">=</span>[<span class="st">'Susceptible'</span>, <span class="st">'Infected'</span>, <span class="st">'Recovered'</span>],</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    var_name<span class="op">=</span><span class="st">'State'</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    value_name<span class="op">=</span><span class="st">'Proportion'</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># create the FacetGrid</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.FacetGrid(</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    melted_df, col<span class="op">=</span><span class="st">"n_initial_infections"</span>, hue<span class="op">=</span><span class="st">"State"</span>,</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    col_wrap<span class="op">=</span><span class="dv">3</span>, height<span class="op">=</span><span class="dv">4</span>, aspect<span class="op">=</span><span class="fl">1.5</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># map the scatterplot for individual observations</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>g.map_dataframe(</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    sns.scatterplot, x<span class="op">=</span><span class="st">'Step'</span>, y<span class="op">=</span><span class="st">'Proportion'</span>, alpha<span class="op">=</span><span class="fl">0.005</span>, edgecolor<span class="op">=</span><span class="va">None</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co"># map the lineplot for aggregated data</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>g.map_dataframe(</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    sns.lineplot, x<span class="op">=</span><span class="st">'Step'</span>, y<span class="op">=</span><span class="st">'Proportion'</span>, linewidth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>g.add_legend()</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>g.set_axis_labels(<span class="st">"Time Step"</span>, <span class="st">"Proportion"</span>)</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>g.set_titles(<span class="st">"Initial Infections: </span><span class="sc">{col_name}</span><span class="st">"</span>)</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"images/sir_subplots.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/sir_subplots.png" class="img-fluid figure-img"></p>
+<figcaption>Batch results for Model 2 with mean trends emphasized.</figcaption>
+</figure>
+</div>
+<p>Next, we aggreate the results for the sensitivity analysis.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>aggregated_results <span class="op">=</span> results_df.groupby([<span class="st">"RunId"</span>, <span class="st">"infection_rate"</span>, <span class="st">"recovery_time_range"</span>, <span class="st">"max_agent_step_size"</span>, <span class="st">"n_initial_infections"</span>]).agg(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    peak_infected<span class="op">=</span>(<span class="st">"Infected"</span>, <span class="st">"max"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>).reset_index()</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>aggregated_results.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s plot the sensitivity analysis results. We’ll need to convert the <code>recovery_time_range</code> tuples into strings first.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>aggregated_results[<span class="st">'recovery_time_range_str'</span>] <span class="op">=</span> aggregated_results[<span class="st">'recovery_time_range'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="ss">f"</span><span class="sc">{</span>x[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>x[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And then we can set up the plot.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">12</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># infection rate</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>sns.boxplot(ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">0</span>], x<span class="op">=</span><span class="st">"infection_rate"</span>, y<span class="op">=</span><span class="st">"peak_infected"</span>, data<span class="op">=</span>aggregated_results)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_title(<span class="st">"</span><span class="ch">\n</span><span class="st">(a) Sensitivity to Infection Rate"</span>, loc<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_xlabel(<span class="st">"</span><span class="ch">\n</span><span class="st">Infection Rate"</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_ylabel(<span class="st">"Peak Infected</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># recovery time range (use the string version we just created)</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>sns.boxplot(ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">1</span>], x<span class="op">=</span><span class="st">"recovery_time_range_str"</span>, y<span class="op">=</span><span class="st">"peak_infected"</span>, data<span class="op">=</span>aggregated_results)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_title(<span class="st">"</span><span class="ch">\n</span><span class="st">(b) Sensitivity to Recovery Time Range"</span>, loc<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_xlabel(<span class="st">"</span><span class="ch">\n</span><span class="st">Recovery Time Range"</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_ylabel(<span class="st">"Peak Infected</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># max agent step size</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>sns.boxplot(ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">0</span>], x<span class="op">=</span><span class="st">"max_agent_step_size"</span>, y<span class="op">=</span><span class="st">"peak_infected"</span>, data<span class="op">=</span>aggregated_results)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].set_title(<span class="st">"</span><span class="ch">\n</span><span class="st">(c) Sensitivity to Max Agent Step Size"</span>, loc<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].set_xlabel(<span class="st">"</span><span class="ch">\n</span><span class="st">Max Agent Step Size"</span>)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].set_ylabel(<span class="st">"Peak Infected</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co"># initial infections</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>sns.boxplot(ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">1</span>], x<span class="op">=</span><span class="st">"n_initial_infections"</span>, y<span class="op">=</span><span class="st">"peak_infected"</span>, data<span class="op">=</span>aggregated_results)</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].set_title(<span class="st">"</span><span class="ch">\n</span><span class="st">(d) Sensitivity to Initial Infections"</span>, loc<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].set_xlabel(<span class="st">"</span><span class="ch">\n</span><span class="st">Initial Infections"</span>)</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].set_ylabel(<span class="st">"Peak Infected</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"images/sir_sensitivity_analysis.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/sir_sensitivity_analysis.png" class="img-fluid figure-img"></p>
+<figcaption>Sensitivity plot for our SIR model parameters and peak proportion infected across all model runs.</figcaption>
+</figure>
+</div>
+<section id="correlate-the-parameters-with-the-outcomes" class="level3">
+<h3 class="anchored" data-anchor-id="correlate-the-parameters-with-the-outcomes">Correlate the Parameters with the Outcomes</h3>
+<p>As an additional step, we can correlate our parameters with the peak proportion infected to get a sense of the relative influence of each parameter. To do so, we have to transform the recovery time ranges into a single number. There are a few ways we could do this, but to keep things simple we’ll take the mean of the two values.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>aggregated_results[<span class="st">"recovery_time_range_numeric"</span>] <span class="op">=</span> aggregated_results[<span class="st">"recovery_time_range"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">sum</span>(x) <span class="op">/</span> <span class="bu">len</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Once we’ve done that, we’ll drop the original tuple (<code>recovery_time_range</code>) and it’s string representation (<code>recovery_time_range_str</code>). I’ll create a new dataframe for these modifications, since we’ll use the dropped variables in our second sensitivity analysis.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>aggregated_results_4corr <span class="op">=</span> aggregated_results.copy()</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>aggregated_results_4corr.drop([<span class="st">'recovery_time_range'</span>, <span class="st">'recovery_time_range_str'</span>], axis<span class="op">=</span><span class="dv">1</span>, inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And now we can correlate!</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>correlation_matrix <span class="op">=</span> aggregated_results_4corr.corr()</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>peak_infected_correlations <span class="op">=</span> correlation_matrix[<span class="st">"peak_infected"</span>].drop(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"peak_infected"</span>, <span class="st">"RunId"</span>]</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s visualize the correlations using a line comparison plot.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>for_plotting <span class="op">=</span> {}</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> parameter, correlation <span class="kw">in</span> <span class="bu">zip</span>(peak_infected_correlations.index, peak_infected_correlations.values):</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    for_plotting[parameter] <span class="op">=</span> <span class="bu">round</span>(correlation, <span class="dv">4</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>plot_line_comparison(</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    for_plotting,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">xrange</span><span class="op">=</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="co"># all positive correlations</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    print_decimals<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">""</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    xlabel<span class="op">=</span><span class="st">'</span><span class="ch">\n</span><span class="st">Correlations between model parameters and peak infection.'</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    filename<span class="op">=</span><span class="st">"images/sir_correlations_params_peak_infection.png"</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-sir_correlations_params_peak_infection" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sir_correlations_params_peak_infection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/sir_correlations_params_peak_infection.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sir_correlations_params_peak_infection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Correlations between model parameters and peak infection proportion.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="sensitivity-analysis-time-to-peak-proportion-infected" class="level2">
+<h2 class="anchored" data-anchor-id="sensitivity-analysis-time-to-peak-proportion-infected">Sensitivity Analysis: Time to Peak Proportion Infected</h2>
+<p>Next, let’s analyze how different parameters affect the time it takes for the infection to reach its peak. <!--
+We have to do a bit more data prep.
+
+- Group the data by `RunId` and find the step with the maximum number of infections for each run
+- Extract the relevant columns: `RunId`, `Step` (time to peak), and `Infected` (peak infections)
+- Merge with the original parameter data
+
+After this, `time_to_peak_merged` will contain the data on time to peak infection along with the parameters used in each run. --></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>time_to_peak <span class="op">=</span> results_df.loc[results_df.groupby(<span class="st">"RunId"</span>)[<span class="st">"Infected"</span>].idxmax()]</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>time_to_peak <span class="op">=</span> time_to_peak[[<span class="st">"RunId"</span>, <span class="st">"Step"</span>, <span class="st">"Infected"</span>]].rename(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>{<span class="st">"Step"</span>: <span class="st">"time_to_peak"</span>, <span class="st">"Infected"</span>: <span class="st">"peak_infected"</span>}</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>time_to_peak_merged <span class="op">=</span> pd.merge(time_to_peak, aggregated_results, on<span class="op">=</span><span class="st">"RunId"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s visualize how the time to peak infection varies with different parameters.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">12</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Infection rate</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>sns.boxplot(ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">0</span>], x<span class="op">=</span><span class="st">"infection_rate"</span>, y<span class="op">=</span><span class="st">"time_to_peak"</span>, data<span class="op">=</span>time_to_peak_merged)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_title(<span class="st">"</span><span class="ch">\n</span><span class="st">(a) Time to Peak Infection vs. Infection Rate"</span>, loc<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_xlabel(<span class="st">"</span><span class="ch">\n</span><span class="st">Infection Rate"</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_ylabel(<span class="st">"Time to Peak Infection</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Recovery time range</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>sns.boxplot(ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">1</span>], x<span class="op">=</span><span class="st">"recovery_time_range_str"</span>, y<span class="op">=</span><span class="st">"time_to_peak"</span>, data<span class="op">=</span>time_to_peak_merged)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_title(<span class="st">"</span><span class="ch">\n</span><span class="st">(b) Time to Peak Infection vs. Recovery Time Range"</span>, loc<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_xlabel(<span class="st">"</span><span class="ch">\n</span><span class="st">Recovery Time Range"</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_ylabel(<span class="st">"Time to Peak Infection</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Max agent step size</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>sns.boxplot(ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">0</span>], x<span class="op">=</span><span class="st">"max_agent_step_size"</span>, y<span class="op">=</span><span class="st">"time_to_peak"</span>, data<span class="op">=</span>time_to_peak_merged)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].set_title(<span class="st">"</span><span class="ch">\n</span><span class="st">(c) Time to Peak Infection vs. Max Agent Step Size"</span>, loc<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].set_xlabel(<span class="st">"</span><span class="ch">\n</span><span class="st">Max Agent Step Size"</span>)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].set_ylabel(<span class="st">"Time to Peak Infection</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial infections</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>sns.boxplot(ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">1</span>], x<span class="op">=</span><span class="st">"n_initial_infections"</span>, y<span class="op">=</span><span class="st">"time_to_peak"</span>, data<span class="op">=</span>time_to_peak_merged)</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].set_title(<span class="st">"</span><span class="ch">\n</span><span class="st">(d) Time to Peak Infection vs. Initial Infections"</span>, loc<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].set_xlabel(<span class="st">"</span><span class="ch">\n</span><span class="st">Initial Infections"</span>)</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].set_ylabel(<span class="st">"Time to Peak Infection</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"images/sir_time_to_peak_analysis.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-sir_time_to_peak_analysis" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sir_time_to_peak_analysis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/sir_time_to_peak_analysis.png" class="img-fluid figure-img" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sir_time_to_peak_analysis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Sensitivity plot for our SIR model parameters and time to peak proportion infected across all model runs.
+</figcaption>
+</figure>
+</div>
+<p>There is much more we could do here, but let’s move on to a different example.</p>
+</section>
+</section>
+<section id="social-learning-influence-and-opinion-dynamics" class="level1 page-columns page-full">
+<h1>Social Learning, Influence, and Opinion Dynamics</h1>
+<p>Opinion dynamics models explore how individual opinions form, cluster, and change over time, and how these dynamics lead to group-level outcomes such as consensus, polarization, or fragmentation. These models are crucial for understanding social phenomena like political polarization, consensus formation, and the spread of misinformation.</p>
+<p>The Bounded Confidence Model (BCM) The Bounded Confidence Model (BCM) simulates opinion evolution in a continuous opinion space. Agents interact and influence each other only if their opinions are within a certain confidence bound (<span class="math inline">\(\epsilon\)</span>).</p>
+<p>ODD Protocol for Bounded Confidence Model Below is a simplified ODD (Overview, Design concepts, Details) protocol for the Bounded Confidence Model.</p>
+<!--
+Some key questions in opinion dynamics: How do opinions form, cluster, and change in populations? How do populations reach opinion consensus, polarization, or fragmentation? What are the key drivers of formation, clustering, change, as well as population-level consensus, polarization, or fragmentation? What are the roles played by: the structure and dynamics of multi-layer social networks; disinformation and propaganda; echo chambers and filter bubbles; agent cognition, emotion, and identity, etc.? How do we best model diversity and heterogenous populations?
+
+BCMs simulate opinion evolution in a continuous opinion space. People interact and influence each other if their opinions are within a certain threshold ($\epsilon$).
+
+- Agents have continuous opinions (e.g., -1 to 1).
+- A Confidence Bound ($\epsilon$) determines the range within which agents are influenced by others.
+- In interactions, agents adjust opinions if the difference between their opinion and their alter's opinion is within their confidence bound.
+- The outcome is typically opinion clusters indicating polarization, fragmentation, or consensus.
+
+Opinion dynamics research is a key area in computational social science, focusing on how individuals' opinions are shaped and how these opinions influence group decisions.
+
+This research is especially relevant to understanding phenomena like political polarization, consensus formation in teams, and the spread of misinformation.
+
+In this part of the lecture, we'll explore one of the foundational models in opinion dynamics: the Bounded Confidence Model (BCM), which offers a way to understand how opinions evolve when individuals are influenced only by those with similar views.
+
+The Bounded Confidence Model was introduced as a way to simulate how people influence each other's opinions when they only engage with those who hold similar views.
+
+This model is particularly powerful for studying polarization, where society splits into groups with opposing opinions, and for understanding the conditions under which consensus can be reached.
+
+Let's break down the components of a Bounded Confidence Model:
+
+Agents: Each agent represents an individual with an opinion, typically modeled as a number between -1 and 1.
+
+Confidence Bound ($\epsilon$): This is a critical parameter. It represents how open an agent is to interacting with others. If another agent's opinion is within this bound, they will influence each other.
+
+Interaction: When two agents interact, they adjust their opinions towards each other. This models the idea of social influence, where people often adjust their views based on those they interact with.
+
+Outcome: Depending on the value of $\epsilon$ and the initial distribution of opinions, the model can result in different outcomes: the formation of distinct opinion clusters, complete polarization, or consensus. -->
+<section id="odd-protocol-for-bounded-confidence-model" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="odd-protocol-for-bounded-confidence-model">ODD Protocol for Bounded Confidence Model</h3>
+<ul>
+<li>import or link here; readme in the package, maybe?</li>
+</ul>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/odd.png" class="shadow-img img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Figure reproduced from <span class="citation" data-cites="railsback2019agent">Railsback and Grimm (<a href="#ref-railsback2019agent" role="doc-biblioref">2019</a>)</span>.</figcaption>
+<div class="no-row-height column-margin column-container"><div id="ref-railsback2019agent" class="csl-entry" role="listitem">
+Railsback, Steven, and Volker Grimm. 2019. <em>Agent-Based and Individual-Based Modeling: A Practical Introduction</em>. Princeton university press.
+</div></div></figure>
+</div>
+</section>
+<section id="bounded-confidence-models" class="level2">
+<h2 class="anchored" data-anchor-id="bounded-confidence-models">Bounded Confidence Models</h2>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mesa <span class="im">import</span> Agent</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mesa <span class="im">import</span> Model</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mesa.space <span class="im">import</span> MultiGrid</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mesa.time <span class="im">import</span> RandomActivation</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mesa.datacollection <span class="im">import</span> DataCollector</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pprint <span class="im">import</span> pprint</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> yaml</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> icsspy</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>icsspy.set_style()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> icsspy.abms.bounded_confidence <span class="im">import</span> BoundedConfidenceModel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'_variables.yml'</span>, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    params <span class="op">=</span> yaml.safe_load(<span class="bu">file</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>model_params <span class="op">=</span> params.get(<span class="st">'bounded_confidence_model_1'</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>pprint(model_params)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>model_params <span class="op">=</span> {<span class="st">'N'</span>: <span class="dv">100</span>,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a> <span class="st">'epsilon'</span>: <span class="fl">0.5</span>,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a> <span class="st">'grid_height'</span>: <span class="dv">40</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a> <span class="st">'grid_width'</span>: <span class="dv">40</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a> <span class="st">'max_agent_step_size'</span>: <span class="dv">1</span>,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a> <span class="st">'n_iterations'</span>: <span class="dv">1500</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>pprint(model_params)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="run-the-model-collect-data" class="level3">
+<h3 class="anchored" data-anchor-id="run-the-model-collect-data">Run the Model &amp; Collect Data</h3>
+<p>Let’s run the model with the parameters we’ve defined and collect the data.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> BoundedConfidenceModel(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    grid_width<span class="op">=</span>model_params[<span class="st">'grid_width'</span>],</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    grid_height<span class="op">=</span>model_params[<span class="st">'grid_height'</span>],</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    N<span class="op">=</span>model_params[<span class="st">'N'</span>],</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    epsilon<span class="op">=</span>model_params[<span class="st">'epsilon'</span>],</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    max_agent_step_size<span class="op">=</span>model_params[<span class="st">'max_agent_step_size'</span>],</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(model_params[<span class="st">'n_iterations'</span>]):</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    model.step()</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.datacollector.get_agent_vars_dataframe().reset_index()</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>results.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="plot-opinion-distributions" class="level3">
+<h3 class="anchored" data-anchor-id="plot-opinion-distributions">Plot Opinion Distributions</h3>
+<p>Now, we’ll visualize the evolution of the opinion distribution over time.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>grouped <span class="op">=</span> results.groupby(<span class="st">'Step'</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> grouped:</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    sns.kdeplot(group[<span class="st">'Opinion'</span>], color<span class="op">=</span><span class="st">'C0'</span>, alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'</span><span class="ch">\n</span><span class="st">Opinion'</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Density</span><span class="ch">\n</span><span class="st">'</span>)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">"Bounded Confidence Model</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="vs">r"$\epsilon$"</span> <span class="op">+</span> <span class="ss">f" = </span><span class="sc">{</span>model_params[<span class="st">'epsilon'</span>]<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>plt.title(title, loc<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'output/bounded-confidence-opinion-distribution-evolution.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-bcmevo" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bcmevo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="output/bounded-confidence-opinion-distribution-evolution.png" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bcmevo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: A collection of KDE plots showing the evolution of the opinion distribution at each time step in the model.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="plot-opinions-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="plot-opinions-over-time">Plot Opinions Over Time</h3>
+<p>Let’s visualize how opinions change over time for individual agents.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>time_steps <span class="op">=</span> results[<span class="st">'Step'</span>]</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>opinions <span class="op">=</span> results[<span class="st">'Opinion'</span>]</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">"Bounded Confidence Model</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="vs">r"$\epsilon$"</span> <span class="op">+</span> <span class="ss">f" = </span><span class="sc">{</span>model_params[<span class="st">'epsilon'</span>]<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> plt.scatter(time_steps, opinions, c<span class="op">=</span>opinions, cmap<span class="op">=</span><span class="st">'coolwarm'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, s<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> plt.colorbar(sc)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>cbar.set_label(<span class="st">'Opinion'</span>)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Time (Steps)'</span>)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Opinion'</span>)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>plt.title(title, loc<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>plt.xlim(time_steps.<span class="bu">min</span>(), time_steps.<span class="bu">max</span>())</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="fl">1.01</span>, <span class="dv">1</span>)</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'output/bounded_confidence_epsilon_one_run.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-bounded_confidence_epsilon_one_run" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bounded_confidence_epsilon_one_run-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="output/bounded_confidence_epsilon_one_run.png" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bounded_confidence_epsilon_one_run-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Three opinion clusters forming over time in a single run of a BCM with <span class="math inline">\(\epsilon\)</span> = 5. Note the center and two extremes.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="experimenting-with-epsilon" class="level3">
+<h3 class="anchored" data-anchor-id="experimenting-with-epsilon">Experimenting with <span class="math inline">\(\epsilon\)</span></h3>
+<p>Finally, let’s run the simulation with different <span class="math inline">\(\epsilon\)</span> values and compare the results.</p>
+<!-- Lets run the simulation with different $\epsilon$ values (e.g., -1 to 1 in steps) and collect the results in a DataFrame. The DataFrame will include an additional column to track the $\epsilon$ used in each run. -->
+<div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_simulation_with_different_epsilons(model_params, epsilon_values):</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    all_results <span class="op">=</span> []</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> epsilon <span class="kw">in</span> epsilon_values:</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>        model <span class="op">=</span> BoundedConfidenceModel(</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>            grid_width<span class="op">=</span>model_params[<span class="st">'grid_width'</span>],</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>            grid_height<span class="op">=</span>model_params[<span class="st">'grid_height'</span>],</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>            N<span class="op">=</span>model_params[<span class="st">'N'</span>],</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>            epsilon<span class="op">=</span>epsilon,</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>            max_agent_step_size<span class="op">=</span>model_params[<span class="st">'max_agent_step_size'</span>],</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(model_params[<span class="st">'n_iterations'</span>]):</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>            model.step()</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>        epsilon_results <span class="op">=</span> model.datacollector.get_agent_vars_dataframe().reset_index()</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>        epsilon_results[<span class="st">'Epsilon'</span>] <span class="op">=</span> epsilon  <span class="co"># Add epsilon to track different values</span></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>        all_results.append(epsilon_results)</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Combine all results into a single DataFrame</span></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>    combined_results <span class="op">=</span> pd.concat(all_results, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> combined_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s run the model for a range of <span class="math inline">\(\epsilon\)</span> values and then plot the results.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>epsilon_values <span class="op">=</span> [<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>, <span class="fl">0.5</span>, <span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>, <span class="dv">1</span>]</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>epsilon_results <span class="op">=</span> run_simulation_with_different_epsilons(</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    model_params, epsilon_values</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>epsilon_results.sample(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s create some subplots to compare runs for each of our <span class="math inline">\(\epsilon\)</span> values.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>grouped <span class="op">=</span> epsilon_results.groupby(<span class="st">'Epsilon'</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">11</span>, <span class="dv">1</span>,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">30</span>),</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    sharex<span class="op">=</span><span class="va">True</span>, sharey<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    constrained_layout<span class="op">=</span><span class="va">True</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (epsilon, group), ax <span class="kw">in</span> <span class="bu">zip</span>(grouped, axs):</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    time_steps <span class="op">=</span> group[<span class="st">'Step'</span>]</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    opinions <span class="op">=</span> group[<span class="st">'Opinion'</span>]</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    sc <span class="op">=</span> ax.scatter(</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>        time_steps,</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>        opinions,</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>        c<span class="op">=</span>opinions,</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>        cmap<span class="op">=</span><span class="st">'coolwarm'</span>,</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>        alpha<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>        s<span class="op">=</span><span class="dv">10</span></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>    cbar <span class="op">=</span> fig.colorbar(sc, ax<span class="op">=</span>ax)</span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># cbar.set_label('Opinion')</span></span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="vs">r"$\epsilon$"</span> <span class="op">+</span> <span class="ss">f" = </span><span class="sc">{</span>epsilon<span class="sc">}</span><span class="ss">"</span>, loc<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(time_steps.<span class="bu">min</span>(), time_steps.<span class="bu">max</span>())</span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="op">-</span><span class="fl">1.01</span>, <span class="dv">1</span>)</span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a><span class="co"># custom positions for shared x and y labels</span></span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>fig.text(</span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.01</span>,</span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Time (Steps)'</span>,</span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>    ha<span class="op">=</span><span class="st">'center'</span>,</span>
+<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a>    va<span class="op">=</span><span class="st">'center'</span>,</span>
+<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="dv">18</span></span>
+<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a>fig.text(</span>
+<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a>    <span class="op">-</span><span class="fl">0.01</span>, <span class="fl">0.5</span>,</span>
+<span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Opinion'</span>,</span>
+<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a>    ha<span class="op">=</span><span class="st">'center'</span>,</span>
+<span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a>    va<span class="op">=</span><span class="st">'center'</span>,</span>
+<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a>    rotation<span class="op">=</span><span class="st">'vertical'</span>,</span>
+<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="dv">18</span></span>
+<span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'output/epsilon_comparison_one_run.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-epsilon_comparison_one_run" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-epsilon_comparison_one_run-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="output/epsilon_comparison_one_run.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-epsilon_comparison_one_run-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Results of a parameter sweep on <span class="math inline">\(\epsilon\)</span>. Note tendencies towards fragmentation, polarization, and consensus at different <span class="math inline">\(\epsilon\)</span> values.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>We explored the basic components of agent-based models and how to implement them in Python using Mesa and icsspy, aa various techniques for analyzing the results. Through sensitivity analysis and parameter sweeps, we gained insights into how different parameters influence model outcomes.</p>
+<p>We’ve just scratched the surface of what’s possible with agent-based models!</p>
+
+
+
+</section>
+
+<script async="" defer="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
