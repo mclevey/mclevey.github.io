@@ -43,12 +43,16 @@ appointments:
   notes: 'ADDS Status (Approved Doctoral Dissertation Supervisor)'
 
 leaves:
-- years: January 2023--August 2023
-  type: Sabbatical leave
-  employer: University of Waterloo
 - years: November 2023--November 2024
-  type: Parental leave
+  type: Parental Leave
   employer: University of Waterloo
+- years: January 2023--August 2023
+  type: Half Sabbatical (6 months)
+  employer: University of Waterloo
+- years: January 2016--August 2016
+  type: Half Sabbatical (6 months)
+  employer: University of Waterloo
+
 
 affiliations:
 - years: 2023
@@ -377,17 +381,16 @@ reports:
 
 article-manuscripts:
 - year: In Progress
-  authors: 'Owen Gallupe, Noam Gidron, John McLevey, and Annika Hillebrandt'
-  title: "Unpacking the crime-generating effect of exclusionary political rhetoric"
-  journal: "Criminology"
+  authors: 'John McLevey'
+  title: "What makes you say that? Reconstruction and recovery in semantic/belief network analysis"
   status: "In Progress"
+- year: Under Review
+  authors: Owen Gallupe, Noam Gidron, and John McLevey
+  title: "Unpacking the crime-generating effect of exclusionary political rhetoric"
+  status: Under Review
 - year: In Progress
   authors: 'John McLevey, Tyler Crick, Darrin Durant, and Karmvir Padda'
   title: "How Political Beliefs Form and Evolve in Interaction Networks: A Generative Stance Model"
-  status: "In Progress"
-- year: In Progress
-  authors: 'John McLevey'
-  title: "A Generative Method for Constructing and Analyzing Belief Networks from Survey and Text Data"
   status: "In Progress"
 
 book-manuscripts:
@@ -411,6 +414,13 @@ misc:
   details: 'Baltimore: Johns Hopkins University Press. Review published in *American Journal of Sociology*. 125(1)'
 
 grants:
+- years: 2024
+  pi: John McLevey
+  ci: ''
+  collaborators:
+  title: 'Faculty Research Startup Grant'
+  grant: 'Memorial University (Internal)'
+  amount: '$15,000'
 - years: 2020--2025
   pi: James Kim
   ci: 'Toni Serafini'
@@ -421,7 +431,7 @@ grants:
 - years: 2020--2025
   pi: John McLevey
   ci: Anabel Quan-Haase, David Tindall
-  collaborators: 'Darrin Durant, Deena Abul-Fottouh, Owen Gallupe, and Martin Innes'
+  collaborators: 'Darrin Durant, Deena Abul-Fottouh, Owen Gallupe, Martin Innes'
   title: 'Disinformation, Democracy, and Online Political Deliberation'
   grant: 'SSHRC Insight Grant'
   amount: '$219,003'
@@ -507,7 +517,7 @@ grants:
   ci: ''
   collaborators:
   title: 'Faculty Research Startup Grant'
-  grant: 'University of Waterloo'
+  grant: 'University of Waterloo (Internal)'
   amount: '$15,000'
 
 teachinggrants:

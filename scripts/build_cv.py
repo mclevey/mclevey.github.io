@@ -172,7 +172,7 @@ def build_cv():
             )
         sections.append(
             f"""
-<h2>leaves</h2>
+<h3>Leaves</h3>
 {"\n".join(leave_items)}
 """.replace(
                 "--", " to "
@@ -311,7 +311,7 @@ def build_cv():
             manuscripts.append(
                 f'<li>{clean_text(ms.get("authors", ""))}. '
                 f'"{clean_text(ms.get("title", ""))}." '
-                f'<em>{ms.get("status", "In Progress")}</em>.</li>'
+                f'{ms.get("status", "In Progress")}.</li>'
             )
     if data.get("book-manuscripts"):
         for ms in data["book-manuscripts"]:
@@ -352,22 +352,17 @@ def build_cv():
     if data.get("grants"):
         grant_items = []
         for g in data["grants"]:
-            ci = (
-                f', Co-Investigators: {clean_text(g.get("ci", ""))}'
-                if g.get("ci")
-                else ""
-            )
-            collab = (
-                f', Collaborators: {clean_text(g.get("collaborators", ""))}'
-                if g.get("collaborators")
-                else ""
-            )
             years = str(g.get("years", "")).replace("--", " to ")
-            grant_items.append(
-                f'<li>{years}. "{clean_text(g.get("title", ""))}." '
-                f'{clean_text(g.get("grant", ""))}. PI: {clean_text(g.get("pi", ""))}{ci}{collab}. '
-                f'{g.get("amount", "")}.</li>'
-            )
+            grant_string = f'<li><strong>{clean_text(g.get("title", ""))}</strong> <br>'
+            grant_string += f'{years}. PI: {clean_text(g.get("pi", ""))}. {clean_text(g.get("grant", ""))}. {g.get("amount", "")}<br>'
+
+            if g.get("ci"):
+                grant_string += f"CI: {g.get("ci")}.<br>"
+            if g.get("collaborators"):
+                grant_string += f"CO: {g.get("collaborators")}."
+            grant_string += "</li>"
+
+            grant_items.append(grant_string)
         sections.append(
             f"""
 <h2>Research Grants</h2>
@@ -810,7 +805,7 @@ def build_cv():
                 <path fill="currentColor"
                     d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zM6 20V4h5v7h7v9H6zm2-6h8v2H8v-2zm0 3h8v2H8v-2z" />
             </svg>
-            Download as PDF
+            Download my CV (PDF)
         </a></p>
         <div class="post-header">
             <h1>Professor John McLevey</h1>
