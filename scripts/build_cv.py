@@ -11,6 +11,9 @@ Reads cv.md and outputs site/cv.html.
 import re
 from pathlib import Path
 
+LEADING_WS = "&nbsp;&nbsp;&nbsp;&nbsp;"
+
+
 try:
     import yaml
 except ImportError:
@@ -61,7 +64,7 @@ def format_volume_issue(volume, issue):
 
 
 def build_cv():
-    base_dir = Path(__file__).parent.parent
+    base_dir = Path(__file__).resolve().parent.parent
     cv_file = base_dir / "records" / "cv.md"
     output_file = base_dir / "docs" / "cv.html"
 
@@ -78,17 +81,29 @@ def build_cv():
     name = re.sub(r"\s+", " ", name).strip()
     if "Dr." in name:
         name = name.replace("Dr. ", "")
+    # sections.append(f"<h1>{name}</h1>")
 
-    contact_html = '<div class="cv-contact">'
-    contact_html += f'<p><strong>Email:</strong> <a href="mailto:{data.get("email", "")}">{data.get("email", "")}</a></p>'
-    contact_html += f'<p><strong>Phone:</strong> {data.get("phone", "")}</p>'
-    if data.get("urls"):
-        urls_html = ", ".join([f'<a href="https://{u}">{u}</a>' for u in data["urls"]])
-        contact_html += f"<p><strong>Web:</strong> {urls_html}</p>"
-    if data.get("address"):
-        addr = " | ".join(data["address"])
-        contact_html += f"<p><strong>Address:</strong> {addr}</p>"
-    contact_html += "</div>"
+    address = data.get("address", [])
+    address = "<br>".join(address)
+    email = data.get("email", "")
+    phone = data.get("phone", "")
+    urls = data.get("urls", [])
+    urls = "<br>".join(urls)
+
+    contact_html = "<h2>Contact Information</h2>\n"
+    if len(address) > 0:
+        contact_html += f"<p>{address}</p>\n"
+
+    contact_html += "<p>\n"
+    if len(email) > 0:
+        contact_html += f'<a href="mailto:{email}">{email}</a>\n'
+    if len(phone) > 0:
+        contact_html += f"<br>\n{phone}\n"
+    contact_html += "</p>\n"
+
+    if len(urls) > 0:
+        contact_html += f"<p>{urls}</p>\n"
+
     sections.append(contact_html)
 
     # Areas
@@ -96,7 +111,7 @@ def build_cv():
         sections.append(
             f"""
 <h2>Research Areas</h2>
-<p>{clean_text(data["areas"])}</p>
+<p>{clean_text(" ⋅ ".join(data["areas"]))}</p>
 """
         )
 
@@ -105,14 +120,13 @@ def build_cv():
         edu_items = []
         for edu in data["education"]:
             edu_items.append(
-                f'<li><strong>{edu.get("year", "")}</strong> — {clean_text(edu.get("subject", ""))}, {clean_text(edu.get("institute", ""))}, {clean_text(edu.get("city", ""))}</li>'
+                f'<p>{edu.get("year", "")} | <strong>{clean_text(edu.get("subject", ""))}</strong><br>{LEADING_WS}{clean_text(edu.get("institute", ""))}, {clean_text(edu.get("city", ""))}</p>'
             )
+
         sections.append(
             f"""
 <h2>Education</h2>
-<ul>
-{"".join(edu_items)}
-</ul>
+{"\n".join(edu_items)}
 """
         )
 
@@ -120,26 +134,32 @@ def build_cv():
     if data.get("appointments"):
         appt_items = []
         for appt in data["appointments"]:
-            notes = (
-                f' <em>{clean_text(appt.get("notes", ""))}</em>'
-                if appt.get("notes")
-                else ""
-            )
-            cross = (
-                f'<br>Cross-appointed: {clean_text(appt.get("cross", ""))}'
-                if appt.get("cross")
-                else ""
-            )
-            appt_items.append(
-                f"""<li><strong>{appt.get("years", "")}</strong> — {clean_text(appt.get("job", ""))}, {clean_text(appt.get("department", ""))}, {clean_text(appt.get("employer", ""))}{cross}{notes}</li>"""
-            )
+            appointment_str = f"""
+<p>{appt.get("years", "")} | <strong>{clean_text(appt.get("job", ""))}</strong><br>
+"""
+
+            if appt.get("notes"):
+                appointment_str += f"{LEADING_WS}{appt.get("notes")}<br>"
+
+            appointment_str += f"""
+{LEADING_WS}{clean_text(appt.get("department", ""))}, {clean_text(appt.get("faculty", ""))}<br>
+"""
+
+            if appt.get("cross"):
+                appointment_str += f"{LEADING_WS}{appt.get("cross")}<br>"
+
+            appointment_str += f"{LEADING_WS}{clean_text(appt.get("employer", ""))}"
+
+            appointment_str += "</p>"
+            appt_items.append(appointment_str)
+
         sections.append(
             f"""
 <h2>Academic Appointments</h2>
-<ul>
-{"".join(appt_items)}
-</ul>
-"""
+{"\n".join(appt_items)}
+""".replace(
+                "--", " to "
+            )
         )
 
     # Affiliations
@@ -148,15 +168,16 @@ def build_cv():
         for aff in data["affiliations"]:
             notes = f' ({clean_text(aff.get("notes", ""))})' if aff.get("notes") else ""
             aff_items.append(
-                f'<li><strong>{aff.get("years", "")}</strong> — {clean_text(aff.get("role", ""))}, {clean_text(aff.get("organization", ""))}{notes}</li>'
+                f'<p>{aff.get("years", "")} | <strong>{clean_text(aff.get("role", ""))}</strong><br>'
+                f'{LEADING_WS}{clean_text(aff.get("organization", ""))}{notes}</p>'
             )
         sections.append(
             f"""
 <h2>Affiliations</h2>
-<ul>
-{"".join(aff_items)}
-</ul>
-"""
+{"\n".join(aff_items)}
+""".replace(
+                "--", " to "
+            )
         )
 
     # Books
@@ -169,14 +190,14 @@ def build_cv():
                 else ""
             )
             book_items.append(
-                f'<li><strong>{book.get("year", "")}</strong> — {clean_text(book.get("authors", ""))}. <em>{clean_text(book.get("title", ""))}</em>. {clean_text(book.get("city", ""))}: {clean_text(book.get("press", ""))}.{link}</li>'
+                f'<li>{clean_text(book.get("authors", ""))}. {book.get("year", "")}. <em>{clean_text(book.get("title", ""))}</em>. {clean_text(book.get("press", ""))}: {clean_text(book.get("city", ""))}.</li>'
             )
         sections.append(
             f"""
 <h2>Books</h2>
-<ul>
-{"".join(book_items)}
-</ul>
+<ol reversed>
+{"\n".join(book_items)}
+</ol>
 """
         )
 
@@ -187,14 +208,16 @@ def build_cv():
             vol_issue = format_volume_issue(art.get("volume"), art.get("issue"))
             pages = format_pages(art.get("pages"))
             article_items.append(
-                f'<li><strong>{art.get("year", "")}</strong> — {clean_text(art.get("authors", ""))}. "{clean_text(art.get("title", ""))}." <em>{clean_text(art.get("journal", ""))}</em>{vol_issue}{pages}.</li>'
+                f'<li>{clean_text(art.get("authors", ""))}. {art.get("year", "")}. '
+                f'"{clean_text(art.get("title", ""))}." '
+                f'<em>{clean_text(art.get("journal", ""))}</em>{vol_issue}{pages}.</li>'
             )
         sections.append(
             f"""
 <h2>Peer-Reviewed Articles</h2>
-<ul>
-{"".join(article_items)}
-</ul>
+<ol reversed>
+{"\n".join(article_items)}
+</ol>
 """
         )
 
@@ -208,14 +231,18 @@ def build_cv():
                 else ""
             )
             chap_items.append(
-                f'<li><strong>{chap.get("year", "")}</strong> — {clean_text(chap.get("authors", ""))}. "{clean_text(chap.get("title", ""))}." In {clean_text(chap.get("editors", ""))} (Eds.), <em>{clean_text(chap.get("book", ""))}</em>. {clean_text(chap.get("city", ""))}: {clean_text(chap.get("press", ""))}.{oa_link}</li>'
+                f'<li>{clean_text(chap.get("authors", ""))}. {chap.get("year", "")}. '
+                f'"{clean_text(chap.get("title", ""))}." '
+                f'In {clean_text(chap.get("editors", ""))} (Eds.), '
+                f'<em>{clean_text(chap.get("book", ""))}</em>. '
+                f'{clean_text(chap.get("press", ""))}: {clean_text(chap.get("city", ""))}.{oa_link}</li>'
             )
         sections.append(
             f"""
 <h2>Book Chapters</h2>
-<ul>
-{"".join(chap_items)}
-</ul>
+<ol reversed>
+{"\n".join(chap_items)}
+</ol>
 """
         )
 
@@ -224,14 +251,16 @@ def build_cv():
         issue_items = []
         for iss in data["issues"]:
             issue_items.append(
-                f'<li><strong>{iss.get("year", "")}</strong> — {clean_text(iss.get("editors", ""))} (Eds.). Special Issue: "{clean_text(iss.get("theme", ""))}." <em>{clean_text(iss.get("journal", ""))}</em>.</li>'
+                f'<li>{clean_text(iss.get("editors", ""))} (Eds.). {iss.get("year", "")}. '
+                f'"{clean_text(iss.get("theme", ""))}." '
+                f'<em>{clean_text(iss.get("journal", ""))}</em>.</li>'
             )
         sections.append(
             f"""
 <h2>Edited Special Issues</h2>
-<ul>
-{"".join(issue_items)}
-</ul>
+<ol reversed>
+{"\n".join(issue_items)}
+</ol>
 """
         )
 
@@ -240,14 +269,16 @@ def build_cv():
         report_items = []
         for rep in data["reports"]:
             report_items.append(
-                f'<li><strong>{rep.get("year", "")}</strong> — {clean_text(rep.get("authors", ""))}. "{clean_text(rep.get("report", ""))}." {clean_text(rep.get("client", ""))}.</li>'
+                f'<li>{clean_text(rep.get("authors", ""))}. {rep.get("year", "")}. '
+                f'"{clean_text(rep.get("report", ""))}." '
+                f'{clean_text(rep.get("client", ""))}.</li>'
             )
         sections.append(
             f"""
 <h2>Research Reports</h2>
-<ul>
-{"".join(report_items)}
-</ul>
+<ol reversed>
+{"\n".join(report_items)}
+</ol>
 """
         )
 
@@ -256,20 +287,24 @@ def build_cv():
     if data.get("article-manuscripts"):
         for ms in data["article-manuscripts"]:
             manuscripts.append(
-                f'<li>{clean_text(ms.get("authors", ""))}. "{clean_text(ms.get("title", ""))}." <em>{ms.get("status", "In Progress")}</em>.</li>'
+                f'<li>{clean_text(ms.get("authors", ""))}. '
+                f'"{clean_text(ms.get("title", ""))}." '
+                f'<em>{ms.get("status", "In Progress")}</em>.</li>'
             )
     if data.get("book-manuscripts"):
         for ms in data["book-manuscripts"]:
             manuscripts.append(
-                f'<li>{clean_text(ms.get("authors", ""))}. <em>{clean_text(ms.get("title", ""))}</em>. {ms.get("status", "In Progress")}.</li>'
+                f'<li>{clean_text(ms.get("authors", ""))}. '
+                f'<em>{clean_text(ms.get("title", ""))}</em>. '
+                f'{ms.get("status", "In Progress")}.</li>'
             )
     if manuscripts:
         sections.append(
             f"""
 <h2>Manuscripts in Progress</h2>
-<ul>
-{"".join(manuscripts)}
-</ul>
+<ol reversed>
+{"\n".join(manuscripts)}
+</ol>
 """
         )
 
@@ -278,14 +313,16 @@ def build_cv():
         misc_items = []
         for m in data["misc"]:
             misc_items.append(
-                f'<li><strong>{m.get("year", "")}</strong> — {clean_text(m.get("authors", ""))}. "{clean_text(m.get("title", ""))}." {clean_text(m.get("details", ""))}</li>'
+                f'<li>{clean_text(m.get("authors", ""))}. {m.get("year", "")}. '
+                f'"{clean_text(m.get("title", ""))}." '
+                f'{clean_text(m.get("details", ""))}</li>'
             )
         sections.append(
             f"""
 <h2>Other Publications</h2>
-<ul>
-{"".join(misc_items)}
-</ul>
+<ol reversed>
+{"\n".join(misc_items)}
+</ol>
 """
         )
 
@@ -715,13 +752,6 @@ def build_cv():
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV – John McLevey</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .cv-contact {{ margin-bottom: 2rem; }}
-        .cv-contact p {{ margin-bottom: 0.5rem; }}
-        .post-content h2 {{ margin-top: 2.5rem; }}
-        .post-content ul {{ margin-bottom: 1.5rem; }}
-        .post-content li {{ margin-bottom: 0.75rem; line-height: 1.5; }}
-    </style>
 </head>
 <body>
     <header>
@@ -739,18 +769,18 @@ def build_cv():
     </header>
 
     <main>
-        <div class="post-header">
-            <h1>Curriculum Vitae</h1>
-            <p class="meta">John McLevey, PhD</p>
-        </div>
         <p><a href="pdfs/cv.pdf" download class="pdf-button">
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                 <path fill="currentColor"
                     d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zM6 20V4h5v7h7v9H6zm2-6h8v2H8v-2zm0 3h8v2H8v-2z" />
             </svg>
-            Download PDF
+            Download as PDF
         </a></p>
-        <div class="post-content">
+        <div class="post-header">
+            <h1>Professor John McLevey</h1>
+            <p class="meta">he/him</p>
+        </div>
+        <div class="cv-content">
 {"".join(sections)}
         </div>
     </main>

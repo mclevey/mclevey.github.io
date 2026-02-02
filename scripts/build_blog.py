@@ -193,7 +193,7 @@ def get_excerpt(html_content: str, max_length: int = 200) -> str:
 
 
 def build_blog():
-    base_dir = Path(__file__).parent.parent
+    base_dir = Path(__file__).resolve().parent.parent
     posts_dir = base_dir / "posts"
     output_dir = base_dir / "docs" / "blog"
 

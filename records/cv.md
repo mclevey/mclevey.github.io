@@ -1,38 +1,46 @@
 ---
-name: "Dr. John McLevey \\newline \\footnotesize he/him "
+name: "Professor John McLevey \\newline \\footnotesize he/him "
 address:
-- Knowledge Integration (KI)
-- Sociology & Legal Studies (SLS)
-- "University of Waterloo"
-- "Waterloo, ON, Canada"
-phone: "+1 (647) 921-2044"
+- AA-4055, Department of Sociology & Criminology
+- Faculty of Humanities and Social Sciences (HSS)
+- "Memorial University, St. John's NL, Canada"
+phone: "+1 (709) 864-7447"
 email: john.mclevey@uwaterloo.ca
 urls:
 - www.johnmclevey.com/
 - github.com/mclevey/
 
 appointments:
-- years: 2024--Present
+- years: 2025--present
+  job: Department Head
+  employer: Memorial University
+  department: 'Department of Sociology'
+  faculty: 'Faculty of Humanities and Social Sciences'
+- years: 2024--present
   employer: Memorial University
   job: Full Professor
-  department: 'Sociology & Criminology, Faculty of Humanities and Social Sciences'
+  department: 'Department of Sociology'
+  faculty: 'Faculty of Humanities and Social Sciences'
 - years: "2022, 2023, 2024"
   employer: University of Waterloo
   job: "Associate Chair (Undergraduate)"
-  department: 'Knowledge Integration, Faculty of Environment'
-  notes: "*Vanessa Schweizer was ACUG during my sabbatical and parental leave*"
+  department: Department of Knowledge Integration
+  faculty: Faculty of Environment
+  notes: "(Vanessa Schweizer was ACUG during my sabbatical and parental leave)"
 - years: 2019--2024
   employer: University of Waterloo
   job: Associate Professor (with tenure)
-  department: 'Knowledge Integration, Faculty of Environment'
-  cross: 'Sociology & Legal Studies, Faculty of Arts'
-  notes: '*ADDS Status - Approved Doctoral Dissertation Supervisor*'
+  department: Department of Knowledge Integration
+  faculty: Faculty of Environment
+  cross: Sociology & Legal Studies, Faculty of Arts
+  notes: 'ADDS Status (Approved Doctoral Dissertation Supervisor)'
 - years: 2013--2019
   employer: University of Waterloo
   job: Assistant Professor (tenure track) 
-  department: 'Knowledge Integration, Faculty of Environment'
-  cross: 'Sociology & Legal Studies, Faculty of Arts'
-  notes: '*ADDS Status - Approved Doctoral Dissertation Supervisor*'
+  department: Department of Knowledge Integration
+  faculty: Faculty of Environment
+  cross: Sociology & Legal Studies, Faculty of Arts
+  notes: 'ADDS Status (Approved Doctoral Dissertation Supervisor)'
 
 affiliations:
 - years: 2023
@@ -74,11 +82,21 @@ education:
   institute: McMaster University
   city: Hamilton, ON, Canada
 - year: 2008
-  subject: 'BA(H), Sociology & Political Science'
+  subject: 'BA (Hons), Sociology & Political Science'
   institute: Memorial University
   city: "St. John's, NL, Canada"
 
-areas: "Computational Social Science, Networks, Cognitive Social Science, Public Opinion, Political Sociology, Sociology of Science and Technology, Environmental Politics, Quantitative Methodology and Scientific Computing, Generative Modelling, Bayesian Statistics, Natural Language Processing and Text Analysis"
+areas: 
+  - Computational Social Science
+  - Networks
+  - Culture and Cognition
+  - Emotion and Affect
+  - Science and Technology
+  - Political Sociology
+  - Environmental Sociology
+  - Quantitative Methodology
+
+# "Computational Social Science, Networks, Cognitive Social Science, Public Opinion, Political Sociology, Sociology of Science and Technology, Environmental Politics, Quantitative Methodology and Scientific Computing, Generative Modelling, Bayesian Statistics, Natural Language Processing and Text Analysis"
 
 books:
 - year: 2023
@@ -1576,31 +1594,31 @@ othergrad:
 undergraduate:
 - year: 2019-2020
   student: Harrison Lobb
-  department: Knowledge Integration
+  department: Department of Knowledge Integration
   thesis: 'Rogan to Spencer: Using Discourse Analysis to Diagnose Pathways of Radicalization From the Mainstream to the Reactionary Right'
 - year: 2019-2020
   student: Jessica Clark
-  department: Knowledge Integration
+  department: Department of Knowledge Integration
   thesis: 'Degree Planning Website for University of Waterloo Students'
 - year: 2019-2020
   student: Aidan Power
-  department: Knowledge Integration
+  department: Department of Knowledge Integration
   thesis: 'An Analysis of Integrating Ethics Into Computer Science Curricula: Implications for the Cheriton School of Computer Science'
 - year: 2018-2019
   student: Jessilyn Wolfe
-  department: Knowledge Integration
+  department: Department of Knowledge Integration
   thesis: 'Escaping the Office: Developing Escape Room Experiences to Improve Corporate Small Group Teambuilding'
 - year: 2018-2019
   student: Jason Kurian
-  department: Knowledge Integration
+  department: Department of Knowledge Integration
   thesis: 'Pocket Blues'
 - year: 2017-2018
   student: Rachel Wood
-  department: Knowledge Integration
+  department: Department of Knowledge Integration
   thesis: 'Designing and developing `mkd3`, software for learning about academic literature'
 - year: 2016-2017
   student: Jillian Anderson
-  department: Knowledge Integration
+  department: Department of Knowledge Integration
   thesis: '`cydr`: An R Package for Cleaning Agricultural Yield Data'
 - year: 2015-2016
   student: Julia Yaroshinsky
@@ -1608,11 +1626,11 @@ undergraduate:
   thesis: "Top Contributors of the Linux Kernel: Similarities and Differences"
 - year: 2014-2015
   student: Tiffany Lin
-  department: Knowledge Integration
+  department: Department of Knowledge Integration
   thesis: 'Framing Controversial Internet Technologies: An Exploratory Network Analysis of TOR'
 - year: 2014-2015
   student: Ben Carr
-  department: Knowledge Integration
+  department: Department of Knowledge Integration
   thesis: "Paradigms, Learning, and Change in Organizations"
 - year: 2013-2014
   student: Christina Minji Chung
@@ -1620,7 +1638,7 @@ undergraduate:
   thesis: 'Organizational Dynamics of Tech Startups in the Kitchener-Waterloo Region'
 - year: 2013-2014
   student: Chelsea Mills
-  department: Knowledge Integration
+  department: Department of Knowledge Integration
   thesis: 'Keep the Ideas Coming: How startups encourage creativity and what other organizations can learn from their example'
 
 
