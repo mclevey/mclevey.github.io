@@ -800,6 +800,7 @@ def build_cv():
     </header>
 
     <main>
+        <!--
         <p><a href="pdfs/cv.pdf" download class="pdf-button">
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                 <path fill="currentColor"
@@ -807,6 +808,7 @@ def build_cv():
             </svg>
             Download my CV (PDF)
         </a></p>
+        -->
         <div class="post-header">
             <h1>Professor John McLevey</h1>
             <p class="meta">he/him</p>
