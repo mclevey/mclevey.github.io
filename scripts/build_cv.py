@@ -162,15 +162,37 @@ def build_cv():
             )
         )
 
+    # leaves
+    if data.get("leaves"):
+        leave_items = []
+        for leave in data["leaves"]:
+            leave_items.append(
+                f'<p>{leave.get("years", "")} | <strong>{clean_text(leave.get("type", ""))}</strong><br>'
+                f"{LEADING_WS}{leave.get("employer", "")}</p>"
+            )
+        sections.append(
+            f"""
+<h2>leaves</h2>
+{"\n".join(leave_items)}
+""".replace(
+                "--", " to "
+            )
+        )
+
     # Affiliations
     if data.get("affiliations"):
         aff_items = []
         for aff in data["affiliations"]:
-            notes = f' ({clean_text(aff.get("notes", ""))})' if aff.get("notes") else ""
-            aff_items.append(
-                f'<p>{aff.get("years", "")} | <strong>{clean_text(aff.get("role", ""))}</strong><br>'
-                f'{LEADING_WS}{clean_text(aff.get("organization", ""))}{notes}</p>'
+            aff_str = f'<p>{aff.get("years", "")} | <strong>{clean_text(aff.get("role", ""))}</strong><br>'
+            aff_str += f'{LEADING_WS}{clean_text(aff.get("organization", ""))}'.replace(
+                ": ", f"<br>{LEADING_WS}"
             )
+            if aff.get("notes"):
+                aff_str += f"<br>{LEADING_WS}"
+                aff_str += f"{aff.get("notes")}"
+            aff_str += "</p>"
+
+            aff_items.append(aff_str)
         sections.append(
             f"""
 <h2>Affiliations</h2>
@@ -340,15 +362,18 @@ def build_cv():
                 if g.get("collaborators")
                 else ""
             )
+            years = str(g.get("years", "")).replace("--", " to ")
             grant_items.append(
-                f'<li><strong>{g.get("years", "")}</strong> — "{clean_text(g.get("title", ""))}." {clean_text(g.get("grant", ""))}. PI: {clean_text(g.get("pi", ""))}{ci}{collab}. {g.get("amount", "")}.</li>'
+                f'<li>{years}. "{clean_text(g.get("title", ""))}." '
+                f'{clean_text(g.get("grant", ""))}. PI: {clean_text(g.get("pi", ""))}{ci}{collab}. '
+                f'{g.get("amount", "")}.</li>'
             )
         sections.append(
             f"""
 <h2>Research Grants</h2>
-<ul>
-{"".join(grant_items)}
-</ul>
+<ol reversed>
+{"\n".join(grant_items)}
+</ol>
 """
         )
 
@@ -356,15 +381,17 @@ def build_cv():
     if data.get("teachinggrants"):
         tg_items = []
         for tg in data["teachinggrants"]:
+            years = str(tg.get("years", "")).replace("--", " to ")
             tg_items.append(
-                f'<li><strong>{tg.get("years", "")}</strong> — "{clean_text(tg.get("title", ""))}." {clean_text(tg.get("grant", ""))}. {tg.get("amount", "")}.</li>'
+                f'<li>{years}. "{clean_text(tg.get("title", ""))}." '
+                f'{clean_text(tg.get("grant", ""))}. {tg.get("amount", "")}.</li>'
             )
         sections.append(
             f"""
 <h2>Teaching Grants</h2>
-<ul>
-{"".join(tg_items)}
-</ul>
+<ol reversed>
+{"\n".join(tg_items)}
+</ol>
 """
         )
 
@@ -374,14 +401,17 @@ def build_cv():
         for a in data["awards"]:
             amount = f' ({a.get("amount", "")})' if a.get("amount") else ""
             award_items.append(
-                f'<li><strong>{a.get("year", "")}</strong> — {clean_text(a.get("award", ""))}, {clean_text(a.get("organization", ""))}{amount}</li>'
+                f'<li>{a.get("year", "")}. {clean_text(a.get("award", ""))}. '
+                f'{clean_text(a.get("organization", ""))}{amount}.</li>'.replace(
+                    "--", " to "
+                )
             )
         sections.append(
             f"""
 <h2>Awards and Scholarships</h2>
-<ul>
-{"".join(award_items)}
-</ul>
+<ol reversed>
+{"\n".join(award_items)}
+</ol>
 """
         )
 
@@ -389,15 +419,17 @@ def build_cv():
     if data.get("contracts"):
         contract_items = []
         for c in data["contracts"]:
+            years = str(c.get("years", "")).replace("--", " to ")
             contract_items.append(
-                f'<li><strong>{c.get("years", "")}</strong> — "{clean_text(c.get("title", ""))}." {clean_text(c.get("organization", ""))}.</li>'
+                f'<li>{years}. "{clean_text(c.get("title", ""))}." '
+                f'{clean_text(c.get("organization", ""))}.</li>'
             )
         sections.append(
             f"""
 <h2>Research Contracts</h2>
-<ul>
-{"".join(contract_items)}
-</ul>
+<ol reversed>
+{"\n".join(contract_items)}
+</ol>
 """
         )
 
@@ -406,14 +438,15 @@ def build_cv():
         sw_items = []
         for sw in data["software"]:
             sw_items.append(
-                f'<li><strong>{sw.get("package", "")}</strong> — {clean_text(sw.get("description", ""))} <em>License: {sw.get("license", "")}. Development: {clean_text(sw.get("development", ""))}</em></li>'
+                f'<li><strong>{sw.get("package", "")}</strong>. {clean_text(sw.get("description", ""))}. '
+                f'License: {sw.get("license", "")}. Development: {clean_text(sw.get("development", ""))}.</li>'
             )
         sections.append(
             f"""
 <h2>Software</h2>
-<ul>
-{"".join(sw_items)}
-</ul>
+<ol reversed>
+{"\n".join(sw_items)}
+</ol>
 """
         )
 
@@ -422,14 +455,14 @@ def build_cv():
         osw_items = []
         for osw in data["othersoftware"]:
             osw_items.append(
-                f'<li><strong>{osw.get("package", "")}</strong> — {clean_text(osw.get("description", ""))}</li>'
+                f'<li><strong>{osw.get("package", "")}</strong>. {clean_text(osw.get("description", ""))}.</li>'
             )
         sections.append(
             f"""
 <h2>Software Contributions</h2>
-<ul>
-{"".join(osw_items)}
-</ul>
+<ol reversed>
+{"\n".join(osw_items)}
+</ol>
 """
         )
 
@@ -440,14 +473,16 @@ def build_cv():
             data["conferences"], key=lambda x: str(x.get("year", "")), reverse=True
         ):
             conf_items.append(
-                f'<li><strong>{str(c.get("year", ""))[:7]}</strong> — {clean_text(c.get("authors", ""))}. "{clean_text(c.get("title", ""))}." {clean_text(c.get("conference", ""))}. {clean_text(c.get("location", ""))}.</li>'
+                f'<li>{clean_text(c.get("authors", ""))}. {str(c.get("year", ""))[:7]}. '
+                f'"{clean_text(c.get("title", ""))}." '
+                f'{clean_text(c.get("conference", ""))}. {clean_text(c.get("location", ""))}.</li>'
             )
         sections.append(
             f"""
 <h2>Conference Presentations</h2>
-<ul>
-{"".join(conf_items)}
-</ul>
+<ol reversed>
+{"\n".join(conf_items)}
+</ol>
 """
         )
 
@@ -458,14 +493,16 @@ def build_cv():
             data["invited"], key=lambda x: str(x.get("year", "")), reverse=True
         ):
             inv_items.append(
-                f'<li><strong>{str(i.get("year", ""))[:7]}</strong> — {clean_text(i.get("authors", ""))}. "{clean_text(i.get("title", ""))}." {clean_text(i.get("conference", ""))}. {clean_text(i.get("location", ""))}.</li>'
+                f'<li>{clean_text(i.get("authors", ""))}. {str(i.get("year", ""))[:7]}. '
+                f'"{clean_text(i.get("title", ""))}." '
+                f'{clean_text(i.get("conference", ""))}. {clean_text(i.get("location", ""))}.</li>'
             )
         sections.append(
             f"""
 <h2>Invited Talks</h2>
-<ul>
-{"".join(inv_items)}
-</ul>
+<ol reversed>
+{"\n".join(inv_items)}
+</ol>
 """
         )
 
@@ -474,14 +511,15 @@ def build_cv():
         course_items = []
         for c in data["courses"]:
             course_items.append(
-                f'<li><strong>{c.get("year", "")}</strong> — {c.get("id", "")}: {clean_text(c.get("name", ""))} ({c.get("level", "")})</li>'
+                f'<li>{c.get("year", "")}. {c.get("id", "")}: '
+                f'{clean_text(c.get("name", ""))} ({c.get("level", "")}).</li>'
             )
         sections.append(
             f"""
 <h2>Courses Taught</h2>
-<ul>
-{"".join(course_items)}
-</ul>
+<ol reversed>
+{"\n".join(course_items)}
+</ol>
 """
         )
 
@@ -489,16 +527,16 @@ def build_cv():
     if data.get("reading"):
         read_items = []
         for r in data["reading"]:
-            who = f' — {clean_text(r.get("who", ""))}' if r.get("who") else ""
+            who = f' ({clean_text(r.get("who", ""))})' if r.get("who") else ""
             read_items.append(
-                f'<li><strong>{r.get("year", "")}</strong> — {clean_text(r.get("name", ""))} ({r.get("level", "")}){who}</li>'
+                f'<li>{r.get("year", "")}. {clean_text(r.get("name", ""))} ({r.get("level", "")}){who}.</li>'
             )
         sections.append(
             f"""
 <h2>Directed Reading Courses</h2>
-<ul>
-{"".join(read_items)}
-</ul>
+<ol reversed>
+{"\n".join(read_items)}
+</ol>
 """
         )
 
@@ -506,9 +544,9 @@ def build_cv():
     if data.get("phd"):
         phd_items = []
         for p in data["phd"]:
-            status = f' — {p.get("status", "")}' if p.get("status") else ""
+            status = f' ({p.get("status", "")})' if p.get("status") else ""
             diss = (
-                f'<br><em>Dissertation: {clean_text(p.get("dissertation", ""))}</em>'
+                f' Dissertation: "{clean_text(p.get("dissertation", ""))}".'
                 if p.get("dissertation")
                 else ""
             )
@@ -518,14 +556,16 @@ def build_cv():
                 else f'Committee Member (Supervisor: {clean_text(p.get("supervisor", ""))})'
             )
             phd_items.append(
-                f'<li><strong>{clean_text(p.get("student", ""))}</strong>{status}<br>{clean_text(p.get("department", ""))} — {role}<br>Committee: {clean_text(p.get("committee", ""))}{diss}</li>'
+                f'<li>{clean_text(p.get("student", ""))}{status}. '
+                f'{clean_text(p.get("department", ""))}. {role}. '
+                f'Committee: {clean_text(p.get("committee", ""))}.{diss}</li>'
             )
         sections.append(
             f"""
 <h2>PhD Supervision</h2>
-<ul>
-{"".join(phd_items)}
-</ul>
+<ol reversed>
+{"\n".join(phd_items)}
+</ol>
 """
         )
 
@@ -533,20 +573,18 @@ def build_cv():
     if data.get("masters"):
         ma_items = []
         for m in data["masters"]:
-            thesis = (
-                f'<br><em>{clean_text(m.get("thesis", ""))}</em>'
-                if m.get("thesis")
-                else ""
-            )
+            thesis = f' "{clean_text(m.get("thesis", ""))}".' if m.get("thesis") else ""
             ma_items.append(
-                f'<li><strong>{clean_text(m.get("student", ""))}</strong> ({m.get("status", "")}) — {m.get("degree", "")}, {clean_text(m.get("department", ""))}. {m.get("role", "")}.{thesis}</li>'
+                f'<li>{clean_text(m.get("student", ""))} ({m.get("status", "")}). '
+                f'{m.get("degree", "")}, {clean_text(m.get("department", ""))}. '
+                f'{m.get("role", "")}.{thesis}</li>'
             )
         sections.append(
             f"""
 <h2>Masters Supervision</h2>
-<ul>
-{"".join(ma_items)}
-</ul>
+<ol reversed>
+{"\n".join(ma_items)}
+</ol>
 """
         )
 
@@ -555,22 +593,22 @@ def build_cv():
         hqp_items = []
         for h in data["hqp"]:
             gra = (
-                f'<br>Graduate RAs: {clean_text(h.get("gra", ""))}'
+                f' Graduate RAs: {clean_text(h.get("gra", ""))}.'
                 if h.get("gra")
                 else ""
             )
             ura = (
-                f'<br>Undergraduate RAs: {clean_text(h.get("ura", ""))}'
+                f' Undergraduate RAs: {clean_text(h.get("ura", ""))}.'
                 if h.get("ura")
                 else ""
             )
-            hqp_items.append(f'<li><strong>{h.get("year", "")}</strong>{gra}{ura}</li>')
+            hqp_items.append(f'<li>{h.get("year", "")}.{gra}{ura}</li>')
         sections.append(
             f"""
 <h2>Research Assistants (HQP)</h2>
-<ul>
-{"".join(hqp_items)}
-</ul>
+<ol reversed>
+{"\n".join(hqp_items)}
+</ol>
 """
         )
 
@@ -579,14 +617,14 @@ def build_cv():
         og_items = []
         for og in data["othergrad"]:
             og_items.append(
-                f'<li><strong>{og.get("year", "")}</strong> — {clean_text(og.get("training", ""))}</li>'
+                f'<li>{og.get("year", "")}. {clean_text(og.get("training", ""))}.</li>'
             )
         sections.append(
             f"""
 <h2>Graduate Training and Workshops</h2>
-<ul>
-{"".join(og_items)}
-</ul>
+<ol reversed>
+{"\n".join(og_items)}
+</ol>
 """
         )
 
@@ -595,14 +633,15 @@ def build_cv():
         ug_items = []
         for ug in data["undergraduate"]:
             ug_items.append(
-                f'<li><strong>{ug.get("year", "")}</strong> — {clean_text(ug.get("student", ""))}, {clean_text(ug.get("department", ""))}. "{clean_text(ug.get("thesis", ""))}"</li>'
+                f'<li>{ug.get("year", "")}. {clean_text(ug.get("student", ""))}. '
+                f'{clean_text(ug.get("department", ""))}. "{clean_text(ug.get("thesis", ""))}".</li>'
             )
         sections.append(
             f"""
 <h2>Undergraduate Thesis Supervision</h2>
-<ul>
-{"".join(ug_items)}
-</ul>
+<ol reversed>
+{"\n".join(ug_items)}
+</ol>
 """
         )
 
@@ -610,16 +649,15 @@ def build_cv():
     prof_service = []
     if data.get("profession"):
         for p in data["profession"]:
-            prof_service.append(
-                f'<li><strong>{p.get("year", "")}</strong> — {clean_text(p.get("role", ""))}</li>'
-            )
+            years = str(p.get("year", "")).replace("--", " to ")
+            prof_service.append(f'<li>{years}. {clean_text(p.get("role", ""))}.</li>')
     if prof_service:
         sections.append(
             f"""
 <h2>Professional Service</h2>
-<ul>
-{"".join(prof_service)}
-</ul>
+<ol reversed>
+{"\n".join(prof_service)}
+</ol>
 """
         )
 
@@ -628,19 +666,19 @@ def build_cv():
         sess_items = []
         for s in data["sessions"]:
             panelists = (
-                f' Panelists: {clean_text(s.get("panelists", ""))}'
+                f' Panelists: {clean_text(s.get("panelists", ""))}.'
                 if s.get("panelists")
                 else ""
             )
             sess_items.append(
-                f'<li><strong>{s.get("year", "")}</strong> — {clean_text(s.get("session", ""))}{panelists}</li>'
+                f'<li>{s.get("year", "")}. {clean_text(s.get("session", ""))}.{panelists}</li>'
             )
         sections.append(
             f"""
 <h2>Conference Sessions Organized</h2>
-<ul>
-{"".join(sess_items)}
-</ul>
+<ol reversed>
+{"\n".join(sess_items)}
+</ol>
 """
         )
 
@@ -650,24 +688,24 @@ def build_cv():
         journals = ", ".join(
             [clean_text(j.get("journal", "")) for j in data["prarticles"]]
         )
-        pr_items.append(f"<li><strong>Journal Articles:</strong> {journals}</li>")
+        pr_items.append(f"<li>Journal Articles: {journals}.</li>")
     if data.get("prbooks"):
         for prb in data["prbooks"]:
             pr_items.append(
-                f'<li><strong>{prb.get("year", "")}</strong> — {clean_text(prb.get("book", ""))}</li>'
+                f'<li>{prb.get("year", "")}. {clean_text(prb.get("book", ""))}.</li>'
             )
     if data.get("prgrants"):
         for prg in data["prgrants"]:
             pr_items.append(
-                f'<li><strong>{prg.get("year", "")}</strong> — {clean_text(prg.get("grant", ""))}</li>'
+                f'<li>{prg.get("year", "")}. {clean_text(prg.get("grant", ""))}.</li>'
             )
     if pr_items:
         sections.append(
             f"""
 <h2>Peer Review</h2>
-<ul>
-{"".join(pr_items)}
-</ul>
+<ol reversed>
+{"\n".join(pr_items)}
+</ol>
 """
         )
 
@@ -675,15 +713,14 @@ def build_cv():
     if data.get("suwaterloo"):
         uw_items = []
         for uw in data["suwaterloo"]:
-            uw_items.append(
-                f'<li><strong>{uw.get("year", "")}</strong> — {clean_text(uw.get("role", ""))}</li>'
-            )
+            years = str(uw.get("year", "")).replace("--", " to ")
+            uw_items.append(f'<li>{years}. {clean_text(uw.get("role", ""))}.</li>')
         sections.append(
             f"""
 <h2>University Service (Waterloo)</h2>
-<ul>
-{"".join(uw_items)}
-</ul>
+<ol reversed>
+{"\n".join(uw_items)}
+</ol>
 """
         )
 
@@ -691,15 +728,14 @@ def build_cv():
     if data.get("mcmaster"):
         mc_items = []
         for mc in data["mcmaster"]:
-            mc_items.append(
-                f'<li><strong>{mc.get("year", "")}</strong> — {clean_text(mc.get("role", ""))}</li>'
-            )
+            years = str(mc.get("year", "")).replace("--", " to ")
+            mc_items.append(f'<li>{years}. {clean_text(mc.get("role", ""))}.</li>')
         sections.append(
             f"""
 <h2>University Service (McMaster)</h2>
-<ul>
-{"".join(mc_items)}
-</ul>
+<ol reversed>
+{"\n".join(mc_items)}
+</ol>
 """
         )
 
@@ -708,14 +744,14 @@ def build_cv():
         tr_items = []
         for tr in data["training"]:
             tr_items.append(
-                f'<li><strong>{tr.get("year", "")}</strong> — {clean_text(tr.get("training", ""))}</li>'
+                f'<li>{tr.get("year", "")}. {clean_text(tr.get("training", ""))}.</li>'
             )
         sections.append(
             f"""
 <h2>Professional Development</h2>
-<ul>
-{"".join(tr_items)}
-</ul>
+<ol reversed>
+{"\n".join(tr_items)}
+</ol>
 """
         )
 
@@ -724,14 +760,14 @@ def build_cv():
         rata_items = []
         for r in data["rata"]:
             rata_items.append(
-                f'<li><strong>{r.get("year", "")}</strong> — {clean_text(r.get("position", ""))}</li>'
+                f'<li>{r.get("year", "")}. {clean_text(r.get("position", ""))}.</li>'
             )
         sections.append(
             f"""
 <h2>Research and Teaching Assistantships</h2>
-<ul>
-{"".join(rata_items)}
-</ul>
+<ol reversed>
+{"\n".join(rata_items)}
+</ol>
 """
         )
 
@@ -740,7 +776,7 @@ def build_cv():
         sections.append(
             f"""
 <h2>Professional Memberships</h2>
-<p>{clean_text(data["memberships"])}</p>
+<p>{clean_text(" ⋅ ".join(data["memberships"]))}</p>
 """
         )
 

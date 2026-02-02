@@ -42,6 +42,14 @@ appointments:
   cross: Sociology & Legal Studies, Faculty of Arts
   notes: 'ADDS Status (Approved Doctoral Dissertation Supervisor)'
 
+leaves:
+- years: January 2023--August 2023
+  type: Sabbatical leave
+  employer: University of Waterloo
+- years: November 2023--November 2024
+  type: Parental leave
+  employer: University of Waterloo
+
 affiliations:
 - years: 2023
   role: Visiting Scholar
@@ -1829,7 +1837,13 @@ rata:
 - year: 2008-2009
   position: "Research Assistant for Neil McLaughlin, Sociology, McMaster University. '*Professors as Public Intellectuals*,' Funded by SSHRC Standard Research Grant."
 
-memberships: "Canadian Sociological Association (CSA), American Sociological Association (ASA), International Network for Social Network Analysis (INSNA), Network Science Society (NetSci), International Sociological Association (ISA), European Consortium for Political Research (ECPR)"
+memberships: 
+  - International Network for Social Network Analysis (INSNA)
+  - Network Science Society (NetSci)
+  - Canadian Sociological Association (CSA)
+  - International Sociological Association (ISA)
+  - European Consortium for Political Research (ECPR)
+  - American Sociological Association (ASA)
 
 
 # Settings

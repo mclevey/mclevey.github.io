@@ -480,6 +480,10 @@ p {
   line-height: 1.4;
 }
 
+.cv-content ol[reversed] li::marker {
+  color: var(--text-muted);
+}
+
 .back-link {
   display: inline-block;
   margin-top: 2.5rem;
