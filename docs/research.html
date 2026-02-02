@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research – John McLevey</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="nav-home">JM.</a>
+      <a href="research.html" class="active">Research</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="supervision.html">Supervision</a>
+      <a href="software.html">Software</a>
+      <a href="data.html">Data</a>
+      <a href="blog.html">Blog</a>
+      <a href="cv.html">CV</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-moon">☽</span>
+        <span class="icon-sun">☼</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Research</h1>
+    <p class="intro">My work focuses on computational methods for social science, with applications in science studies, political sociology, and environmental politics.</p>
+
+<!-- UPDATE AND FOCUS PERSONAL ACCOUNT AROUND:
+1. theoretical and methodological foundations of belief formation and change
+2. generative models of information operations and disinformation campaigns
+3. computational text analysis of online political discussions
+4. factorial experiments and computational simulations of belief networks for polarization and cultural change
+5. the role of face to face and online in mobilization into environmental activism
+6. privacy, AI, agentic AI systems, belief formation and risk perception and assessment
+7. collaborative work with Ally, Meghan, Matt, and others
+
+You also want to think about the future IG (November)? Also, clearly you have NO MORE SPACE for projects this year.
+-->
+
+<!-- 
+<p>My current research addresses three broad and longstanding themes that cut across the social, cognitive, and computational/statistical sciences. First, I am developing generative models of schematic cognition, social influence, and cultural learning to deepen our knowledge of how latent opinions, identities, beliefs, and behaviors form and co-evolve, and to better measure polarization and large-scale cultural change. In developing these models, I am primarily focused on culture related to (a) climate change and environmental policy; (a) harm reduction initiatives and public health responses to the toxic drug supply and overdose crisis; (c) generative artificial intelligence; (d) privacy, security, and surveillance; and (e) lifestyle preferences and politics.</p>
+
+<p>Second, I am using these models as digital ’laboratories’ (of a sort) to better understand the workings and impacts of coordinated information operations such as disinformation campaigns and censorship on populations. Third, I am using data from social media platforms to better understand the role of emotional dynamics and identity-related processes in online political discussions. I approach each of these projects as a computational social scientist with expertise in network science and social network analysis, probabilistic and generative modelling, and computational text analysis.</p>
+
+<p>My work is funded by research grants from the Social Science and Humanities Research Council of Canada (SSHRC) and an Early Researcher Award from the Ontario Ministry of Research and Innovation. To learn more, browse my CV (with links to preprints and open access publications) or check out my books.</p>    
+-->
+
+    <h2>Books</h2>
+    <div class="item">
+      <h3>The Sage Handbook of Social Network Analysis, Volume 2</h3>
+      <div class="meta">John McLevey, John Scott, and Peter J. Carrington (Eds) · Sage, 2023</div>
+    </div>
+    <div class="item">
+      <h3>Doing Computational Social Science</h3>
+      <div class="meta">John McLevey · Sage, 2022</div>
+    </div>
+    <div class="item">
+      <h3>The Face-to-Face Principle and the Internet: Science, Trust, Truth and Democracy</h3>
+      <div class="meta">Harry Collins, Rob Evans, Martin Innes, Will Mason-Wilkes, Eric Kennedy, and John McLevey · Cardiff University Press, 2022</div>
+    </div>
+    <div class="item">
+      <h3>Industrial Development and Eco-Tourisms: Is Co-existence Possible Between Oil Exploration and Nature Conservation?</h3>
+      <div class="meta">Mark Stoddart, Alice Mattoni, and John McLevey · Palgrave MacMillan, 2020</div>
+    </div>
+
+    <h2>Selected Articles</h2>
+    <div class="item">
+      <h3>Social Networks and Anthropogenic Climate Change</h3>
+      <div class="meta">David Tindall, Nina Kolleck, and John McLevey · Social Networks, 2023</div>
+    </div>
+    <div class="item">
+      <h3>Structural Diversity is a Poor Proxy for Information Diversity</h3>
+      <div class="meta">Alexander Graham, John McLevey, Tyler Crick, and Pierson Browne · Social Networks, 2022</div>
+    </div>
+    <div class="item">
+      <h3>A New Method for Computational Cultural Cartography</h3>
+      <div class="meta">John McLevey, Tyler Crick, Pierson Browne, and Darrin Durant · Canadian Review of Sociology, 2022</div>
+    </div>
+    <div class="item">
+      <h3>Expert Predictions of Societal Change: Insights from the World after COVID Project</h3>
+      <div class="meta">Igor Grossman et al. · American Psychologist, 2021</div>
+    </div>
+    <div class="item">
+      <h3>Introducing metaknowledge: Software for Computational Research in Information Science</h3>
+      <div class="meta">John McLevey and Reid McIlroy-Young · Journal of Informetrics, 2017</div>
+    </div>
+
+    <h2>Current Projects</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Disinformation, Democracy, and Online Political Deliberation</h3>
+        <p>SSHRC Insight Grant studying how disinformation shapes online political discourse</p>
+      </div>
+      <div class="card">
+        <h3>Making Sense of Climate Action</h3>
+        <p>Understanding social mobilization to curb anthropogenic climate change through advances in social network analysis</p>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script>
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('site-footer').innerHTML = html;
+      });
+  </script>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  </script>
+</body>
+</html>

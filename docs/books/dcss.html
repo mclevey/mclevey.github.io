@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doing Computational Social Science – John McLevey</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html" class="nav-home">JM.</a>
+      <a href="../research.html">Research</a>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../supervision.html">Supervision</a>
+      <a href="../software.html">Software</a>
+      <a href="../data.html">Data</a>
+      <a href="../blog.html">Blog</a>
+      <a href="../cv.html">CV</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-moon">☽</span>
+        <span class="icon-sun">☼</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="book-header">
+      <img src="../images/DCSS.png" alt="Doing Computational Social Science">
+      <div class="book-info">
+        <h1>Doing Computational Social Science</h1>
+        <p class="meta">John McLevey<br>Sage, London, 2022</p>
+      </div>
+    </div>
+
+    <p>A practical guide to computational methods for social scientists. This book covers the full research workflow from data collection and processing to analysis and visualization, with an emphasis on reproducibility and principled data processing.</p>
+
+    <h2>Topics Covered</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Data Collection</h3>
+        <p>Web scraping, APIs, and working with digital behavioral data</p>
+      </div>
+      <div class="card">
+        <h3>Text Analysis</h3>
+        <p>From foundations to transformer-based approaches</p>
+      </div>
+      <div class="card">
+        <h3>Network Analysis</h3>
+        <p>Methods for analyzing social and information networks</p>
+      </div>
+      <div class="card">
+        <h3>Simulation</h3>
+        <p>Agent-based modeling and generative approaches</p>
+      </div>
+    </div>
+
+    <h2>Companion Package</h2>
+    <p>The book is accompanied by the <code>dcss</code> Python package, which includes curated datasets and utility functions for data processing, statistical modeling, and machine learning.</p>
+
+    <a href="../index.html" class="back-link">← Back</a>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script>
+    fetch('../footer.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('site-footer').innerHTML = html;
+      });
+  </script>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  </script>
+</body>
+</html>

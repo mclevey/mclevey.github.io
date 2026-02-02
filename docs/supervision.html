@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supervision – John McLevey</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="nav-home">JM.</a>
+      <a href="research.html">Research</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="supervision.html" class="active">Supervision</a>
+      <a href="software.html">Software</a>
+      <a href="data.html">Data</a>
+      <a href="blog.html">Blog</a>
+      <a href="cv.html">CV</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-moon">☽</span>
+        <span class="icon-sun">☼</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Supervision</h1>
+
+    <p class="intro">I supervise graduate students working on computational social science, network analysis, political sociology, and related areas.</p>
+
+    <h2>Prospective Students</h2>
+    <p>I welcome inquiries from prospective graduate students interested in computational approaches to social research. Strong candidates typically have background in quantitative methods, programming (Python preferred), and substantive interests in political sociology, science studies, or environmental sociology.</p>
+
+    <h2>Current Students</h2>
+    <p>Information about current graduate students coming soon.</p>
+
+    <h2>Past Students</h2>
+    <p>Information about past graduate students coming soon.</p>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script>
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('site-footer').innerHTML = html;
+      });
+  </script>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  </script>
+</body>
+</html>

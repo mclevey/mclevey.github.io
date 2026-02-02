@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Software – John McLevey</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="nav-home">JM.</a>
+      <a href="research.html">Research</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="supervision.html">Supervision</a>
+      <a href="software.html" class="active">Software</a>
+      <a href="data.html">Data</a>
+      <a href="blog.html">Blog</a>
+      <a href="cv.html">CV</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-moon">☽</span>
+        <span class="icon-sun">☼</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Software</h1>
+    <p class="intro">Open-source Python packages for computational social science research.</p>
+
+    <h2>Packages</h2>
+    <div class="item">
+      <h3>dcss</h3>
+      <div class="meta">GNU GPL 2 · John McLevey, Tyler Crick, Pierson Browne</div>
+      <p>Python package accompanying <em>Doing Computational Social Science</em>. Includes curated datasets and utility functions for data processing, statistical modeling, and machine learning.</p>
+    </div>
+    <div class="item">
+      <h3>metaknowledge (mk)</h3>
+      <div class="meta">GNU GPL 2 · Reid McIlroy-Young and John McLevey</div>
+      <p>Python package for quantitative and network research in the sociology of science and information science. First released 2015, under active development.</p>
+    </div>
+    <div class="item">
+      <h3>pdpp</h3>
+      <div class="meta">MIT License · Pierson Browne, Tyler Crick, Rachel Wood, John McLevey</div>
+      <p>Principled data processing with Python. Tools for reproducible data workflows. First released 2015, under active development.</p>
+    </div>
+    <div class="item">
+      <h3>Nate</h3>
+      <div class="meta">MIT License · John McLevey, Pierson Browne, Tyler Crick</div>
+      <p>Network analysis with text. Python package for network-based text analysis.</p>
+    </div>
+    <div class="item">
+      <h3>simkit</h3>
+      <div class="meta">MIT License · John McLevey</div>
+      <p>Probabilistic and agent-based computational models of opinion dynamics, diffusion, learning, and influence. Currently in beta.</p>
+    </div>
+    <div class="item">
+      <h3>tidyextractors</h3>
+      <div class="meta">MIT License · Joel Becker</div>
+      <p>Extract quantitative datasets from source code repositories, email mbox files, and social media APIs.</p>
+    </div>
+
+    <h2>Contributions</h2>
+    <div class="item">
+      <h3>recordlinkage</h3>
+      <p>Contributions to Jonathan de Bruin's Python package for record linkage. NetLab contributions focused on comparison and fusion algorithms for cross-sectoral collaboration network research.</p>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script>
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('site-footer').innerHTML = html;
+      });
+  </script>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  </script>
+</body>
+</html>

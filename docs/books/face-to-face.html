@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Face-to-Face Principle and the Internet – John McLevey</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html" class="nav-home">JM.</a>
+      <a href="../research.html">Research</a>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../supervision.html">Supervision</a>
+      <a href="../software.html">Software</a>
+      <a href="../data.html">Data</a>
+      <a href="../blog.html">Blog</a>
+      <a href="../cv.html">CV</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-moon">☽</span>
+        <span class="icon-sun">☼</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="book-header">
+      <img src="../images/F2FP.png" alt="The Face-to-Face Principle and the Internet">
+      <div class="book-info">
+        <h1>The Face-to-Face Principle and the Internet</h1>
+        <p class="meta">Harry Collins, Rob Evans, Martin Innes, Will Mason-Wilkes, Eric Kennedy, and John McLevey<br>Cardiff University Press, 2022</p>
+      </div>
+    </div>
+
+    <p>An exploration of science, trust, truth, and democracy in the age of the internet. This book examines how the shift from face-to-face interaction to online communication affects the formation of expertise, the spread of knowledge, and the functioning of democratic institutions.</p>
+
+    <h2>Key Themes</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Expertise and Trust</h3>
+        <p>How face-to-face interaction shapes the development and recognition of specialist expertise</p>
+      </div>
+      <div class="card">
+        <h3>Science and Democracy</h3>
+        <p>The relationship between scientific knowledge and democratic decision-making</p>
+      </div>
+      <div class="card">
+        <h3>Online Communication</h3>
+        <p>What is gained and lost when interactions move from physical to virtual spaces</p>
+      </div>
+    </div>
+
+    <a href="../index.html" class="back-link">← Back</a>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script>
+    fetch('../footer.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('site-footer').innerHTML = html;
+      });
+  </script>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  </script>
+</body>
+</html>

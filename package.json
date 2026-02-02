@@ -1,0 +1,24 @@
+{
+  "name": "black-book-talks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vuepress dev docs",
+    "start": "webpack serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "chokidar": "^5.0.0",
+    "vuepress": "^1.8.3",
+    "watchpack": "^2.5.1",
+    "webpack-cli": "^6.0.1"
+  }
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teaching – John McLevey</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="nav-home">JM.</a>
+      <a href="research.html">Research</a>
+      <a href="teaching.html" class="active">Teaching</a>
+      <a href="supervision.html">Supervision</a>
+      <a href="software.html">Software</a>
+      <a href="data.html">Data</a>
+      <a href="blog.html">Blog</a>
+      <a href="cv.html">CV</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-moon">☽</span>
+        <span class="icon-sun">☼</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Undergraduate Courses</h1>
+    
+    <div class="cards">
+      <a href="teaching/3040.html" class="card">
+        <p>Sociology / Criminology 3040</p>
+        <br>
+        <h3>Quantitative Research Methods</h3>
+        <p>This course introduces students to foundational concepts, principles, and practices in contemporary quantitative social science. Core topics include research computing, data collection and processing, descriptive and inferential statistics, measurement, visualization, and statistical modelling. Research ethics, transparency and reproducibility, and effective communication are emphasized throughout.</p>
+        <p>
+          This course follows the Faculty of Humanities and Social Sciences' <strong>Quantitative Reasoning Course Guidelines</strong>
+          (see <span>www.mun.ca/hss/qr</span>).
+        </p>
+      </a>
+      <div class="card">
+        <p>Sociology / Criminology 4420</p>
+        <br>
+        <h3>Networks, Culture, and Social Control</h3>
+        <p>This course introduces students to social network analysis in sociology and criminology, emphasizing how patterns of relationships shape behavior, meaning, and social outcomes. Topics include personal networks, belief polarization, organized crime, and institutional deviance.</p>
+      </div>
+    </div>
+
+    
+    <br><br>
+    <h1>Graduate Courses</h1>
+    <div class="cards">
+      <div class="card">
+        <p>Sociology 6044</p>
+        <br>
+        <h3>Networks, Culture, and Social Control</h3>
+        <p>SOCI 6044 is a graduate seminar, held alongside SOCI 4420, that introduces students to social network analysis in
+          sociology and criminology, emphasizing how patterns of relationships shape behavior, meaning, and social outcomes.
+          Topics include personal networks, belief polarization, organized crime, and institutional deviance.</p>
+      </div>
+    </div>
+
+    <br><br>
+    <h1>Workshops</h1>
+    <div class="cards">
+      <div class="card">
+        <p>Computational Social Science Symposium<br>January 2026, Dalhousie University, Halifax NS, Canada</p>
+        <br>
+        <h3>Introduction to Topic Modelling</h3>
+        <p>This workshop introduces the core concepts, methods, and underlying logic of topic modelling for research. It is
+        designed for researchers with little or no prior experience in quantitative text analysis who want to work with text
+        data in their own projects. Participants will learn how to prepare and process text data, fit topic models, and assess
+        and interpret the results. Examples are provided in Python, but the content is not specific to any particular
+        programming language or software.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script>
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('site-footer').innerHTML = html;
+      });
+  </script>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  </script>
+</body>
+</html>

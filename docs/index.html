@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>John McLevey</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="nav-home">JM.</a>
+      <a href="research.html">Research</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="supervision.html">Supervision</a>
+      <a href="software.html">Software</a>
+      <a href="data.html">Data</a>
+      <a href="blog.html">Blog</a>
+      <a href="cv.html">CV</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-moon">☽</span>
+        <span class="icon-sun">☼</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="profile-section">
+      <img src="images/john_mclevey.jpeg" alt="John McLevey" class="profile-img">
+      <div class="profile-text">
+        <h1><span class="first-name">John</span> <span class="last-name">McLevey</span></h1>
+        <p class="subtitle"></a><strong>Professor and Head</strong>, <a href="https://www.mun.ca/sociology/">Sociology & Criminology</a><br>Faculty of Humanities and Social Sciences<br><strong>Memorial University</strong>, St. John's NL, Canada<br><br>E: <a href="mailto:mclevey@mun.ca">mclevey@mun.ca</a><br>P: (709) 864-7447<br>O: AA-4055</p>
+      </div>
+    </div>
+
+    <p class="intro">Hi! 👋 I'm John (he/him).</p>
+
+    <p>
+      I’m Professor and Head of the <a href="https://www.mun.ca/sociology/">Department of Sociology & Criminology</a> at Memorial University (2025-present). Before moving to Memorial, I completed a PhD in Sociology at McMaster University (2013) and was a faculty member at the University of Waterloo for 11 years (2013-2024). I spent the last year of my time at Waterloo on parental leave with my partner Ally and our identical twins, Quinn and Nora.
+    </p>
+
+    <p>
+      I work primarily in the areas of computational social science, network science, cognitive social science, political sociology, sociology of science, and environmental sociology. My research has been funded by grants from a variety of sources, including the Social Science and Humanities Research Council of Canada (SSHRC) and an Early Researcher Award from the Ontario Ministry of Research and Innovation.
+    </p>
+
+    <p>
+      <a href="books/sage-handbook.html"><img src="images/SHSNA.png" alt="Sage Handbook of Social Network Analysis" class="float-left"></a>
+      My recent work includes co-editing the <a href="books/sage-handbook.html"><em>Sage Handbook of Social Network Analysis, Volume 2</em></a> with John Scott and Peter J. Carrington. You can learn more about the book <u><a href="books/sage-handbook.html">here</a></u>.
+    </p>
+
+<!-- <h2>Areas</h2>
+<p>Computational Social Science · Network Science · Bayesian Data Analysis and Generative Modeling · Natural Language Processing</p>
+<p>Culture, Cognition, and Emotion · Political Sociology · Science and Technology · Environmental Sociology</p> -->
+
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script>
+    // Dynamically load footer content
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('site-footer').innerHTML = html;
+      });
+  </script>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  </script>
+</body>
+</html>

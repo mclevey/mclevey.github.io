@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industrial Development and Eco-Tourisms – John McLevey</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html" class="nav-home">JM.</a>
+      <a href="../research.html">Research</a>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../supervision.html">Supervision</a>
+      <a href="../software.html">Software</a>
+      <a href="../data.html">Data</a>
+      <a href="../blog.html">Blog</a>
+      <a href="../cv.html">CV</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-moon">☽</span>
+        <span class="icon-sun">☼</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="book-header">
+      <img src="../images/IDET.png" alt="Industrial Development and Eco-Tourisms">
+      <div class="book-info">
+        <h1>Industrial Development and Eco-Tourisms</h1>
+        <p class="meta">Mark Stoddart, Alice Mattoni, and John McLevey<br>Palgrave MacMillan, 2020</p>
+      </div>
+    </div>
+
+    <p>Is co-existence possible between oil exploration and nature conservation? This book examines the tensions and potential compatibilities between industrial development and eco-tourism in northern coastal societies, with comparative case studies from Norway, Scotland, and Newfoundland and Labrador.</p>
+
+    <h2>Case Studies</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Norway</h3>
+        <p>Balancing petroleum wealth with environmental protection in the North Sea</p>
+      </div>
+      <div class="card">
+        <h3>Scotland</h3>
+        <p>Energy transition debates and coastal community perspectives</p>
+      </div>
+      <div class="card">
+        <h3>Newfoundland & Labrador</h3>
+        <p>Oil development and nature-based tourism in Atlantic Canada</p>
+      </div>
+    </div>
+
+    <a href="../index.html" class="back-link">← Back</a>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script>
+    fetch('../footer.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('site-footer').innerHTML = html;
+      });
+  </script>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  </script>
+</body>
+</html>
