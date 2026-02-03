@@ -21,6 +21,82 @@ LEADING_WS = "&nbsp;&nbsp;&nbsp;&nbsp;"
 # Global for tracking GitHub fetch statistics
 _github_stats = {"fresh": 0, "cached": 0}
 
+# Global for tracking TOC entries
+_toc_entries = []
+
+
+def slugify(text):
+    """Convert heading text to a URL-friendly ID."""
+    # Remove HTML tags
+    text = re.sub(r"<[^>]+>", "", text)
+    # Convert to lowercase
+    text = text.lower()
+    # Replace spaces and non-alphanumeric chars with hyphens
+    text = re.sub(r"[^a-z0-9]+", "-", text)
+    # Remove leading/trailing hyphens
+    text = text.strip("-")
+    return text
+
+
+def add_heading_ids(html_content):
+    """Add IDs to h2 and h3 tags and track them for TOC."""
+    global _toc_entries
+    _toc_entries = []
+
+    def replace_heading(match):
+        tag = match.group(1)  # h2 or h3
+        content = match.group(2)
+        slug = slugify(content)
+
+        # Make slugs unique if needed
+        base_slug = slug
+        counter = 1
+        existing_slugs = [e["id"] for e in _toc_entries]
+        while slug in existing_slugs:
+            slug = f"{base_slug}-{counter}"
+            counter += 1
+
+        # Track for TOC
+        level = int(tag[1])  # 2 or 3
+        _toc_entries.append(
+            {
+                "id": slug,
+                "text": re.sub(r"<[^>]+>", "", content),  # Strip HTML for TOC text
+                "level": level,
+            }
+        )
+
+        return f'<{tag} id="{slug}">{content}</{tag}>'
+
+    # Match h2 and h3 tags
+    pattern = r"<(h[23])>([^<]+)</\1>"
+    return re.sub(pattern, replace_heading, html_content)
+
+
+def generate_toc_html():
+    """Generate the table of contents HTML from tracked headings."""
+    if not _toc_entries:
+        return ""
+
+    toc_items = []
+    for entry in _toc_entries:
+        level_class = f"toc-h{entry['level']}"
+        toc_items.append(
+            f'<li class="{level_class}">'
+            f'<a href="#{entry["id"]}">{entry["text"]}</a>'
+            f"</li>"
+        )
+
+    return f"""<aside class="toc-sidebar">
+    <div class="toc-title">On this page</div>
+    <nav>
+        <ul>
+{chr(10).join("            " + item for item in toc_items)}
+        </ul>
+    </nav>
+</aside>"""
+
+
 # Cache file path
 CACHE_FILE = Path(__file__).resolve().parent.parent / "records" / "github_cache.json"
 
@@ -739,6 +815,20 @@ def build_cv():
 """
         )
 
+    # Publication Supplements and Replication Kits
+    if data.get("publication_supplements_and_replication_kits"):
+        supp_items = []
+        for item in data["publication_supplements_and_replication_kits"]:
+            supp_items.append(f"<li>{clean_text(item)}</li>")
+        sections.append(
+            f"""
+<h2>Replication Kits & Supplements</h2>
+<ol reversed>
+{chr(10).join(supp_items)}
+</ol>
+"""
+        )
+
     # Manuscripts in Progress
     manuscripts = []
     if data.get("article-manuscripts"):
@@ -1037,21 +1127,16 @@ def build_cv():
             #     learn_more_line = ""
 
             software_str = "<li>\n"
-            software_str += f"{package_html} | {description}<br>\n"
+            software_str += f'{package_html} | {description}. Developed by {team}. <a href="{github_url}">{github_url}</a><br>\n'
+            # {doc_line}
             software_str += f"{language_html} {license_html} {github_html}<br>\n"
-            software_str += f"{team}<br>\n"
-            # software_str += f"{description}<br>\n"
-
-            software_str += f"{LEADING_WS}{doc_line}"
-            if github_url:
-                software_str += f'{LEADING_WS}Source Code: <a href="{github_url}">{github_url.replace("https://", "")}</a><br>\n'
-            software_str += f"{LEADING_WS}{last_commit_line}"
+            software_str += f"{last_commit_line}"
             software_str += "</li>"
 
             # Add to appropriate status group
             if status not in sw_by_status:
                 sw_by_status[status] = []
-            sw_by_status[status].append(software_str)
+            sw_by_status[status].append(software_str.replace("..", "."))
 
         # Print summary
         print(
@@ -1075,22 +1160,6 @@ def build_cv():
                 software_html += "\n</ol>\n"
 
         sections.append(software_html)
-
-    # Other Software
-    #     if data.get("othersoftware"):
-    #         osw_items = []
-    #         for osw in data["othersoftware"]:
-    #             osw_items.append(
-    #                 f'<li><strong>{osw.get("package", "")}</strong>. {clean_text(osw.get("description", ""))}</li>'
-    #             )
-    #         sections.append(
-    #             f"""
-    # <h2>Software Contributions</h2>
-    # <ol reversed>
-    # {"\n".join(osw_items)}
-    # </ol>
-    # """
-    #         )
 
     # Conference Presentations
     if data.get("conferences"):
@@ -1217,7 +1286,10 @@ def build_cv():
         phd_completed = []
         for p in data["phd"]:
             status_val = p.get("status", "")
-            is_completed = isinstance(status_val, int)
+            # Check if completed: status is a year (int or string that's a 4-digit number)
+            is_completed = isinstance(status_val, int) or (
+                isinstance(status_val, str) and status_val.isdigit()
+            )
             role = (
                 "Supervisor"
                 if p.get("supervisor") == "John McLevey"
@@ -1227,12 +1299,13 @@ def build_cv():
                 phd_completed.append(
                     f"<li>{role} for "
                     f'<strong>{clean_text(p.get("student", ""))} ({status_val})</strong><br>'
-                    f'{clean_text(p.get("department", ""))}<br>'
-                    f'Supervisor: {p.get("supervisor", "")}<br>'
-                    f'Committee: {p.get("committee", "")}</li>'
+                    f'{LEADING_WS}{clean_text(p.get("department", ""))}<br>'
+                    f'{LEADING_WS}Supervisor: {p.get("supervisor", "")}<br>'
+                    f'{LEADING_WS}Committee: {p.get("committee", "")}</li>'
                 )
             else:
-                status_str = f" ({status_val})" if status_val else ""
+                # Only show status if it's "ABD", otherwise hide it
+                status_str = " (ABD)" if status_val == "ABD" else ""
                 phd_active.append(
                     f"<p>{role} for "
                     f'<strong>{clean_text(p.get("student", ""))}{status_str}</strong><br>'
@@ -1311,15 +1384,17 @@ def build_cv():
         og_items = []
         for og in data["othergrad"]:
             og_items.append(
-                f'<li>{og.get("year", "")}. {clean_text(og.get("training", ""))}.</li>'
+                f'<li>{og.get("who", "")}. {og.get("year", "")}. <strong>{clean_text(og.get("training", ""))}</strong>. {clean_text(og.get("details", ""))}. {clean_text(og.get("length", ""))}.</li>'
             )
         sections.append(
             f"""
-<h2>Graduate Training and Workshops</h2>
+<h2>Methods & Scientific Computing Workshops</h2>
 <ol reversed>
 {"\n".join(og_items)}
 </ol>
-"""
+""".replace(
+                "..", "."
+            )
         )
 
     # Undergraduate Supervision
@@ -1327,8 +1402,7 @@ def build_cv():
         ug_items = []
         for ug in data["undergraduate"]:
             ug_items.append(
-                f'<li>{ug.get("year", "")}. {clean_text(ug.get("student", ""))}. '
-                f'{clean_text(ug.get("department", ""))}. "{clean_text(ug.get("thesis", ""))}".</li>'
+                f'<li>{clean_text(ug.get("student", ""))} ({ug.get("year", "")})<br>{clean_text(ug.get("department", ""))}</li>'
             )
         sections.append(
             f"""
@@ -1339,129 +1413,183 @@ def build_cv():
 """
         )
 
-    # Professional Service
-    prof_service = []
+    # Professional Service (year-marker format)
     if data.get("profession"):
+        prof_items = []
         for p in data["profession"]:
-            years = str(p.get("year", "")).replace("--", " to ")
-            prof_service.append(f'<li>{years}. {clean_text(p.get("role", ""))}.</li>')
-    if prof_service:
+            years = str(p.get("year", "")).replace("--", "-")
+            role = clean_text(p.get("role", ""))
+            prof_items.append(
+                f'<li><span class="year">{years}</span>'
+                f'<span class="content">{role}</span></li>'
+            )
         sections.append(
             f"""
 <h2>Professional Service</h2>
-<ol reversed>
-{"\n".join(prof_service)}
-</ol>
+<ul class="cv-year-list">
+{chr(10).join(prof_items)}
+</ul>
 """
         )
 
-    # Sessions Organized
+    # Sessions Organized (year-marker format)
     if data.get("sessions"):
         sess_items = []
         for s in data["sessions"]:
+            year = s.get("year", "")
+            session = clean_text(s.get("session", ""))
             panelists = (
                 f' Panelists: {clean_text(s.get("panelists", ""))}.'
                 if s.get("panelists")
                 else ""
             )
             sess_items.append(
-                f'<li>{s.get("year", "")}. {clean_text(s.get("session", ""))}.{panelists}</li>'
+                f'<li><span class="year">{year}</span>'
+                f'<span class="content">{session}.{panelists}</span></li>'
             )
         sections.append(
             f"""
 <h2>Conference Sessions Organized</h2>
-<ol reversed>
-{"\n".join(sess_items)}
-</ol>
+<ul class="cv-year-list">
+{chr(10).join(sess_items)}
+</ul>
 """
         )
 
-    # Peer Review
-    pr_items = []
+    # Peer Review (separate subsections)
+    pr_section = ""
     if data.get("prarticles"):
-        journals = ", ".join(
-            [clean_text(j.get("journal", "")) for j in data["prarticles"]]
-        )
-        pr_items.append(f"<li>Journal Articles: {journals}.</li>")
+        journals = [
+            f"<li><em>{clean_text(j.get('journal', ''))}</em></li>"
+            for j in data["prarticles"]
+        ]
+        pr_section += f"""
+<h3>Peer Reviewing - Academic Journals</h3>
+<ul>
+{chr(10).join(journals)}
+</ul>
+"""
     if data.get("prbooks"):
-        for prb in data["prbooks"]:
-            pr_items.append(
-                f'<li>{prb.get("year", "")}. {clean_text(prb.get("book", ""))}.</li>'
-            )
+        books = [
+            f"<li>{clean_text(prb.get('book', ''))}</li>" for prb in data["prbooks"]
+        ]
+        pr_section += f"""
+<h3>Peer Reviewing - Books</h3>
+<ul>
+{chr(10).join(books)}
+</ul>
+"""
     if data.get("prgrants"):
+        grant_items = []
         for prg in data["prgrants"]:
-            pr_items.append(
-                f'<li>{prg.get("year", "")}. {clean_text(prg.get("grant", ""))}.</li>'
+            year = prg.get("year", "")
+            grant = clean_text(prg.get("grant", ""))
+            grant_items.append(
+                f'<li><span class="year">{year}</span>'
+                f'<span class="content">{grant}</span></li>'
             )
-    if pr_items:
+        pr_section += f"""
+<h3>Peer Reviewing / Evaluation - Grants</h3>
+<ul class="cv-year-list">
+{chr(10).join(grant_items)}
+</ul>
+"""
+    if pr_section:
+        sections.append(f"\n<h2>Peer Review</h2>\n{pr_section}")
+
+    # University Service - Memorial (year-marker format)
+    if data.get("smemorial"):
+        mem_items = []
+        for mem in data["smemorial"]:
+            years = str(mem.get("year", "")).replace("--", "-")
+            role = clean_text(mem.get("role", ""))
+            mem_items.append(
+                f'<li><span class="year">{years}</span>'
+                f'<span class="content">{role}</span></li>'
+            )
         sections.append(
             f"""
-<h2>Peer Review</h2>
-<ol reversed>
-{"\n".join(pr_items)}
-</ol>
+<h2>University Service</h2>
+<h3>Memorial University</h3>
+<ul class="cv-year-list">
+{chr(10).join(mem_items)}
+</ul>
 """
         )
 
-    # University Service - Waterloo
+    # University Service - Waterloo (year-marker format)
     if data.get("suwaterloo"):
         uw_items = []
         for uw in data["suwaterloo"]:
-            years = str(uw.get("year", "")).replace("--", " to ")
-            uw_items.append(f'<li>{years}. {clean_text(uw.get("role", ""))}.</li>')
+            years = str(uw.get("year", "")).replace("--", "-")
+            role = clean_text(uw.get("role", ""))
+            uw_items.append(
+                f'<li><span class="year">{years}</span>'
+                f'<span class="content">{role}</span></li>'
+            )
         sections.append(
             f"""
-<h2>University Service (Waterloo)</h2>
-<ol reversed>
-{"\n".join(uw_items)}
-</ol>
+<h3>University of Waterloo</h3>
+<ul class="cv-year-list">
+{chr(10).join(uw_items)}
+</ul>
 """
         )
 
-    # University Service - McMaster
+    # University Service - McMaster (year-marker format)
     if data.get("mcmaster"):
         mc_items = []
         for mc in data["mcmaster"]:
-            years = str(mc.get("year", "")).replace("--", " to ")
-            mc_items.append(f'<li>{years}. {clean_text(mc.get("role", ""))}.</li>')
+            years = str(mc.get("year", "")).replace("--", "-")
+            role = clean_text(mc.get("role", ""))
+            mc_items.append(
+                f'<li><span class="year">{years}</span>'
+                f'<span class="content">{role}</span></li>'
+            )
         sections.append(
             f"""
-<h2>University Service (McMaster)</h2>
-<ol reversed>
-{"\n".join(mc_items)}
-</ol>
+<h3>McMaster University</h3>
+<ul class="cv-year-list">
+{chr(10).join(mc_items)}
+</ul>
 """
         )
 
-    # Professional Training
+    # Professional Training (year-marker format)
     if data.get("training"):
         tr_items = []
         for tr in data["training"]:
+            year = str(tr.get("year", "")).replace("--", "-")
+            training = clean_text(tr.get("training", ""))
             tr_items.append(
-                f'<li>{tr.get("year", "")}. {clean_text(tr.get("training", ""))}.</li>'
+                f'<li><span class="year">{year}</span>'
+                f'<span class="content">{training}</span></li>'
             )
         sections.append(
             f"""
 <h2>Professional Development</h2>
-<ol reversed>
-{"\n".join(tr_items)}
-</ol>
+<ul class="cv-year-list">
+{chr(10).join(tr_items)}
+</ul>
 """
         )
 
-    # RA/TA Experience
+    # RA/TA Experience (year-marker format)
     if data.get("rata"):
         rata_items = []
         for r in data["rata"]:
+            year = str(r.get("year", "")).replace("--", "-")
+            position = clean_text(r.get("position", ""))
             rata_items.append(
-                f'<li>{r.get("year", "")}. {clean_text(r.get("position", ""))}.</li>'
+                f'<li><span class="year">{year}</span>'
+                f'<span class="content">{position}</span></li>'
             )
         sections.append(
             f"""
 <h2>Research and Teaching Assistantships</h2>
-<ol reversed>
-{"\n".join(rata_items)}
-</ol>
+<ul class="cv-year-list">
+{chr(10).join(rata_items)}
+</ul>
 """
         )
 
@@ -1473,6 +1601,12 @@ def build_cv():
 <p>{clean_text(" ⋅ ".join(data["memberships"]))}</p>
 """
         )
+
+    # Build sections content and add heading IDs
+    sections_html = add_heading_ids("".join(sections))
+
+    # Generate TOC from tracked headings
+    toc_html = generate_toc_html()
 
     # Build final HTML
     html = f"""<!DOCTYPE html>
@@ -1498,6 +1632,8 @@ def build_cv():
         </nav>
     </header>
 
+{toc_html}
+
     <main>
         <!--
         <p><a href="pdfs/cv.pdf" download class="pdf-button">
@@ -1513,7 +1649,7 @@ def build_cv():
             <p class="meta">he/him</p>
         </div>
         <div class="cv-content">
-{"".join(sections)}
+{sections_html}
         </div>
     </main>
 
@@ -1535,6 +1671,77 @@ def build_cv():
         }}
         const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    </script>
+
+    <!-- Scroll spy for TOC -->
+    <script>
+        (function() {{
+            const tocLinks = document.querySelectorAll('.toc-sidebar a');
+            const headings = [];
+
+            // Collect all headings that have IDs
+            tocLinks.forEach(link => {{
+                const id = link.getAttribute('href').slice(1);
+                const heading = document.getElementById(id);
+                if (heading) {{
+                    headings.push({{ id, element: heading, link }});
+                }}
+            }});
+
+            if (headings.length === 0) return;
+
+            function updateActiveLink() {{
+                const scrollPos = window.scrollY + 120; // Offset for better UX
+
+                // Find the current section
+                let current = headings[0];
+                for (const heading of headings) {{
+                    if (heading.element.offsetTop <= scrollPos) {{
+                        current = heading;
+                    }} else {{
+                        break;
+                    }}
+                }}
+
+                // Update active class
+                tocLinks.forEach(link => link.classList.remove('active'));
+                if (current) {{
+                    current.link.classList.add('active');
+                }}
+            }}
+
+            // Throttle scroll events
+            let ticking = false;
+            window.addEventListener('scroll', () => {{
+                if (!ticking) {{
+                    requestAnimationFrame(() => {{
+                        updateActiveLink();
+                        ticking = false;
+                    }});
+                    ticking = true;
+                }}
+            }});
+
+            // Initial update
+            updateActiveLink();
+
+            // Smooth scroll for TOC links
+            tocLinks.forEach(link => {{
+                link.addEventListener('click', (e) => {{
+                    e.preventDefault();
+                    const id = link.getAttribute('href').slice(1);
+                    const target = document.getElementById(id);
+                    if (target) {{
+                        const offset = 80;
+                        const targetPosition = target.offsetTop - offset;
+                        window.scrollTo({{
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        }});
+                    }}
+                }});
+            }});
+        }})();
     </script>
 </body>
 </html>

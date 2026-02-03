@@ -646,8 +646,7 @@ othersoftware:
     description: All dead/retired/merged/forgotten.
 
 publication_supplements_and_replication_kits:
-  - Example 1, add CRS and other stuff.
-  - Example 2, add birss and other stuff.
+  - Coming soon...
 
 conferences:
   - year: 2026-01
@@ -1254,15 +1253,15 @@ phd:
     status: 2025
     startdate: 2021-09
     enddate: Defended 2025-12
-    supervisor: John McLevey
-    committee: Owen Gallupe and Veronica Kitchen
+    supervisor: John McLevey (with Owen Gallupe since Dec. 2024)
+    committee: Veronica Kitchen, Lai-Tze Fan
     dissertation:
   - student: Tyler Crick
     department: Sociology & Legal Studies, University of Waterloo
     status: ABD
     startdate: 2017-09
     enddate: Expected defence in 2024
-    supervisor: John McLevey
+    supervisor: John McLevey (with Owen Gallupe since Dec. 2024)
     committee: Owen Gallupe and Peter Carrington
     dissertation:
   - student: Alexander (Sasha) Graham
@@ -1270,8 +1269,8 @@ phd:
     status: ABD
     startdate: 2017-09
     enddate: Expected defence in 2024
-    supervisor: John McLevey
-    committee: Owen Gallupe, Peter Carrington, Goetz Hoeppe
+    supervisor: John McLevey (with Owen Gallupe since Dec. 2024)
+    committee: Peter Carrington and Goetz Hoeppe
     dissertation:
   - student: Jessica Gill
     department: Sociology & Legal Studies, University of Waterloo
@@ -1287,7 +1286,7 @@ phd:
     startdate: 2020-09
     enddate: Expected defence in 2024
     supervisor: Sarah Burch
-    committee: Bipashyee Ghosh, Olaf Weber and John McLevey
+    committee: Bipashyee Ghosh, Olaf Weber, and John McLevey
     dissertation:
   - student: Mark Shakespear
     department: Sociology, University of British Columbia
@@ -1621,7 +1620,14 @@ masters:
     startdate: 2014
     enddate: "Defended 2016"
 
+# WHERE SHOULD I PUT MUN GAs?
+# FELIX, SANNAZ (OPPS), ANTINUKE, ...
+
 hqp:
+  - year: 2026
+    gra: "Tyler Crick (1 semester)"
+  - year: 2025
+    gra: "Felix Morrow (1 semester), Karmvir Padda (1 semester), Tyler Crick (1 semester)"
   - year: 2023
     gra: "Karmvir Padda (1 semester), Tyler Crick (3 semesters), Pierson Browne (3 semesters), Alexander Graham (3 semesters)"
     ura:
@@ -1656,52 +1662,88 @@ hqp:
     gra: "Skaidra Puodziunas (1 semester), Alexander V. Graham (1 semester), Evaleen Hellinga (1 semester)"
     ura:
 
+# ADD THE WASHINGTON WORKSHOP I GAVE WITH REID + ANY SUNBELT ONES???
+
 othergrad:
+  - year: 2026
+    who: John McLevey
+    training: "Introduction to Topic Modeling"
+    details: "Workshop instructed at the Symposium on Computational Social Science at Dalhousie University, Halifax NS, in January 2026."
+    length: 2 hours
+  - year: 2025
+    who: John McLevey
+    training: "Introduction to Computational Social Science with Python"
+    details: "GESIS Fall Seminar in Computational Social Science, Leibniz Institute for the Social Sciences, Cologne Germany."
+    length: 5 days
   - year: 2024
-    training: "Instructor for *Introduction to Computational Social Science with Python* (5 days), GESIS Fall Seminar in Computational Social Science, Leibniz Institute for the Social Sciences, Cologne Germany. Course materials co-designed with Johannes Gruber (University of Amsterdam), who teaches the R course."
-  - year: 2018-Present
-    training: "Co-Instructor (with Eric Kennedy) for *Science Outside the Lab (SOtL) North*: a week long intensive course in science policy held annually in Ottawa and Montréal or Vancouver and Victoria. Each course cohort is ~ 14 graduate students from science and engineering disciplines across Canada."
+    who: John McLevey
+    training: "Introduction to Computational Social Science with Python"
+    details: "GESIS Fall Seminar in Computational Social Science, Leibniz Institute for the Social Sciences, Cologne Germany. Course materials co-designed with Johannes Gruber (University of Amsterdam), who teaches the R course."
+    length: 5 days
+  - year: 2018-2023 (paused during covid)
+    who: Eric Kennedy and John McLevey
+    training: "Science Outside the Lab (SOtL) North"
+    details: "A week long intensive course in science policy held annually in Ottawa and Montréal or Vancouver and Victoria. Each course cohort is ~ 14 graduate students from science and engineering disciplines across Canada."
+    length: 1 week each
   - year: 2020
-    training: "Research Methods Workshop (5 days), GESIS Spring Seminar, Leibniz Institute for the Social Sciences, Cologne Germany. *Working with Digital Behavioural Data.* Co-designed and instructed with Jillian Anderson."
+    who: John McLevey and Jillian Anderson
+    training: "Working with Digital Behavioural Data"
+    details: "GESIS Spring Seminar, Leibniz Institute for the Social Sciences, Cologne Germany"
+    length: 5 days
   - year: 2019
-    training: "Research Methods Workshop (1 day), Transylvania Summer School in Research Methods. *Using Network Analysis to (Partially) Automate Literature Reviews*"
+    who: John McLevey
+    training: "Using Network Analysis to (Partially) Automate Literature Reviews"
+    details: "Transylvania Summer School in Research Methods"
+    length: 1 day
   - year: 2019
-    training: "Research Methods Workshop (2 days) instructed at University of British Columbia, Department of Sociology. *Introduction to Big Data and Automated Text Analysis for Social Scientists*"
+    who: John McLevey
+    training: "Introduction to Big Data and Automated Text Analysis for Social Scientists"
+    details: "University of British Columbia, Department of Sociology"
+    length: 2 days
   - year: 2019
-    training: "Research Methods Workshop (2 days) instructed at University of Waterloo. *(Partially) Automating Literature Reviews for Knowledge Synthesis and Discovery*"
+    who: John McLevey
+    training: "(Partially) Automating Literature Reviews for Knowledge Synthesis and Discovery"
+    details: "University of Waterloo"
+    length: 2 days
   - year: 2019
-    training: "Research Methods Workshop (2 days) instructed at University of Waterloo. *How to Analyze Networks with R*"
+    who: John McLevey
+    training: "How to Analyze Networks with R"
+    details: "University of Waterloo"
+    length: 2 days
   - year: 2019
-    training: "Research Methods Workshop (1 day) instructed at University of Waterloo. *Automated Content Analysis for Social Scientists*"
+    who: John McLevey
+    training: "Automated Content Analysis for Social Scientists"
+    details: "University of Waterloo"
+    length: 1 day
 
 undergraduate:
   - year: 2019-2020
     student: Harrison Lobb
-    department: Department of Knowledge Integration
+    department: Knowledge Integration, University of Waterloo
     thesis: "Rogan to Spencer: Using Discourse Analysis to Diagnose Pathways of Radicalization From the Mainstream to the Reactionary Right"
   - year: 2019-2020
     student: Jessica Clark
-    department: Department of Knowledge Integration
+    department: Knowledge Integration, University of Waterloo
     thesis: "Degree Planning Website for University of Waterloo Students"
   - year: 2019-2020
     student: Aidan Power
-    department: Department of Knowledge Integration
+    department: Knowledge Integration, University of Waterloo
     thesis: "An Analysis of Integrating Ethics Into Computer Science Curricula: Implications for the Cheriton School of Computer Science"
   - year: 2018-2019
     student: Jessilyn Wolfe
-    department: Department of Knowledge Integration
+    department: Knowledge Integration, University of Waterloo
     thesis: "Escaping the Office: Developing Escape Room Experiences to Improve Corporate Small Group Teambuilding"
   - year: 2018-2019
     student: Jason Kurian
-    department: Department of Knowledge Integration
+    department: Knowledge Integration, University of Waterloo
     thesis: "Pocket Blues"
   - year: 2017-2018
     student: Rachel Wood
-    department: Department of Knowledge Integration
+    department: Knowledge Integration, University of Waterloo
     thesis: "Designing and developing `mkd3`, software for learning about academic literature"
   - year: 2016-2017
     student: Jillian Anderson
-    department: Department of Knowledge Integration
+    department: Knowledge Integration, University of Waterloo
     thesis: "`cydr`: An R Package for Cleaning Agricultural Yield Data"
   - year: 2015-2016
     student: Julia Yaroshinsky
@@ -1709,11 +1751,11 @@ undergraduate:
     thesis: "Top Contributors of the Linux Kernel: Similarities and Differences"
   - year: 2014-2015
     student: Tiffany Lin
-    department: Department of Knowledge Integration
+    department: Knowledge Integration, University of Waterloo
     thesis: "Framing Controversial Internet Technologies: An Exploratory Network Analysis of TOR"
   - year: 2014-2015
     student: Ben Carr
-    department: Department of Knowledge Integration
+    department: Knowledge Integration, University of Waterloo
     thesis: "Paradigms, Learning, and Change in Organizations"
   - year: 2013-2014
     student: Christina Minji Chung
@@ -1721,7 +1763,7 @@ undergraduate:
     thesis: "Organizational Dynamics of Tech Startups in the Kitchener-Waterloo Region"
   - year: 2013-2014
     student: Chelsea Mills
-    department: Department of Knowledge Integration
+    department: Knowledge Integration, University of Waterloo
     thesis: "Keep the Ideas Coming: How startups encourage creativity and what other organizations can learn from their example"
 
 profession:
@@ -1768,6 +1810,7 @@ prarticles:
   - journal: "*American Journal of Sociology*"
   - journal: "*American Sociological Review*"
   - journal: "*Social Networks*"
+  - journal: "*Network Science*"
   - journal: "*Canadian Review of Sociology*"
   - journal: "*Science and Public Policy*"
   - journal: "*Scientometrics*"
@@ -1801,6 +1844,12 @@ prother:
     what: "Sage Campus Course. (Online research design classes)"
   - year: 2018
     what: "Sage Campus Course. (Online research design classes)"
+
+smemorial:
+  - year: 2026
+    role: Contributions to the Memorial University <strong>Data Excellence</strong> project lead by Bill Downey in the VP Academic / Provost's Office.
+  - year: 2025
+    role: <strong>Data for HSS</strong> data portal and report, with Meghan Burchell. Used to inform Dean Hurley's (2024) State of HSS address and the work done of 6 faculty-level committees formed in response.
 
 suwaterloo:
   - year: 2022-2023

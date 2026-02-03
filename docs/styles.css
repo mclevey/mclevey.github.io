@@ -484,6 +484,40 @@ p {
   color: var(--text-muted);
 }
 
+.cv-content p {
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+/* Year-aligned list for CV service/sessions sections */
+.cv-content ul.cv-year-list {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin: 0 0 1rem 0;
+}
+
+.cv-content ul.cv-year-list li {
+  display: grid !important;
+  grid-template-columns: 7rem 1fr;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.cv-content ul.cv-year-list li::before {
+  content: none !important;
+}
+
+.cv-year-list .year {
+  color: var(--text-muted);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.cv-year-list .content {
+  color: var(--text);
+}
+
 .cv-table {
   width: 100%;
   border-collapse: collapse;
@@ -800,5 +834,113 @@ footer {
 
   .book-grid {
     gap: 0.75rem;
+  }
+}
+
+/* Floating Table of Contents */
+aside.toc-sidebar {
+  position: fixed !important;
+  top: 6rem;
+  right: 2rem;
+  width: 220px;
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
+  font-size: 0.85rem;
+  z-index: 100;
+  background: var(--bg);
+}
+
+aside.toc-sidebar .toc-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+}
+
+aside.toc-sidebar nav {
+  display: block !important;
+  flex-wrap: unset;
+  align-items: unset;
+  gap: unset;
+  border: none !important;
+  border-bottom: none !important;
+  padding: 0 !important;
+  padding-bottom: 0 !important;
+  max-width: none;
+  margin: 0;
+}
+
+aside.toc-sidebar nav ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+aside.toc-sidebar nav ul li {
+  display: block;
+  margin-bottom: 0;
+  line-height: 1.4;
+}
+
+aside.toc-sidebar nav a {
+  display: block;
+  padding: 0.35rem 0 0.35rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border-left: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  text-decoration: none;
+}
+
+aside.toc-sidebar nav a:hover {
+  color: var(--text);
+}
+
+aside.toc-sidebar nav a.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
+
+/* Level 2 headings (h2) */
+aside.toc-sidebar .toc-h2 > a {
+  font-weight: 500;
+}
+
+/* Level 3 headings (h3) - indented */
+aside.toc-sidebar .toc-h3 > a {
+  padding-left: 1.75rem;
+  font-size: 0.8rem;
+}
+
+/* Scrollbar styling for TOC */
+aside.toc-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+aside.toc-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+aside.toc-sidebar::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+aside.toc-sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Hide TOC on smaller screens */
+@media (max-width: 1200px) {
+  aside.toc-sidebar {
+    display: none !important;
+  }
+}
+
+/* Adjust TOC position for wider screens */
+@media (min-width: 1400px) {
+  aside.toc-sidebar {
+    right: calc((100vw - 720px) / 2 - 280px);
   }
 }
