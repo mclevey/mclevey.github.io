@@ -571,13 +571,21 @@ contracts:
     organization: "Project for the Council of Ontario Directors of Education (CODE) and the Ontario Ministry of Education"
 
 software:
+  - package: unicore
+    license: MIT
+    github: https://github.com/mclevey/unicore
+    language: Python
+    description: "unicore is for doing stuff."
+    development: "John McLevey"
+    status: Active Development
+
   - package: dcss
     license: GNU GPL2
     github: https://github.com/mclevey/dcss
     language: Python
     description: "`dcss` is a Python package accompanying John McLevey (2022) *Doing Computational Social Science*. It includes curated datasets and a large collection of utility functions for data processing and working with statistical and machine learning models."
     development: "John McLevey, Tyler Crick, Pierson Browne"
-    status: Active maintenance
+    status: Maintained, Occasional Updates
 
   - package: metaknowledge
     license: GNU GPL2
@@ -585,7 +593,7 @@ software:
     language: Python
     description: "`metaknowledge` (or `mk`) is a Python package for quantitative and social networks research in the sociology of science and information science. First released in 2015. Under active development. Website and documentation: [http://networkslab.org/metaknowledge/](http://networkslab.org/metaknowledge/)."
     development: Reid McIlroy-Young and John McLevey
-    status: Active maintenance
+    status: Maintained, Occasional Updates
 
   - package: pdpp
     license: MIT License
@@ -593,7 +601,7 @@ software:
     language: Python
     description: "`pdpp` is a Python package for principled data processing with Python. It was first released in 2015 and is under active development."
     development: "Pierson Browne, Tyler Crick, Rachel Wood, and John McLevey"
-    status: Active maintenance
+    status: Maintained, Occasional Updates
 
   - package: nate
     license: MIT License

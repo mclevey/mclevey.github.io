@@ -1,0 +1,174 @@
+{
+  "UWNETLAB/gitnet": {
+    "contributor_count": 3,
+    "contributors": [
+      "stevemccoll",
+      "jillianderson8",
+      "drjtests"
+    ],
+    "created_at": "2016-06-08",
+    "description": "A Python 3 package with tools for collecting, cleaning, and exporting datasets from local Git repositories, as well as creating network datasets and visualizations.",
+    "first_commit_date": "2016-05-10",
+    "forks": 0,
+    "last_commit_date": "2020-02-02",
+    "last_commit_sha": "49d059a",
+    "last_fetched": "2026-02-03T13:10:49.082181+00:00",
+    "license_spdx": "GPL-3.0",
+    "open_issues": 0,
+    "stars": 9,
+    "topics": [
+      "collaboration",
+      "collaboration-analytics",
+      "data-science",
+      "git",
+      "git-log",
+      "social-network-analysis",
+      "version-control"
+    ],
+    "total_commits": 245,
+    "updated_at": "2025-12-05",
+    "version": "0.1.1"
+  },
+  "UWNETLAB/metaknowledge": {
+    "contributor_count": 9,
+    "contributors": [
+      "reidmcy",
+      "tcrick",
+      "mclevey",
+      "drjtests",
+      "jillianderson8",
+      "ConnectedSystems",
+      "reversingentropy",
+      "bencomp",
+      "mhaeussermann"
+    ],
+    "created_at": "2015-07-16",
+    "description": "A Python library for doing bibliometric and network analysis in science and health policy research",
+    "first_commit_date": "2015-03-10",
+    "forks": 35,
+    "last_commit_date": "2022-02-09",
+    "last_commit_sha": "05ee6a3",
+    "last_fetched": "2026-02-03T13:23:40.355621+00:00",
+    "license_spdx": "GPL-2.0",
+    "open_issues": 10,
+    "stars": 178,
+    "topics": [
+      "bibliometrics",
+      "citations",
+      "co-citation",
+      "informetrics",
+      "metaknowledge",
+      "natural-language-processing",
+      "scientometrics",
+      "social-network-analysis",
+      "sociology-of-science"
+    ],
+    "total_commits": 765,
+    "updated_at": "2026-01-26",
+    "version": "3.4.1"
+  },
+  "UWNETLAB/nate": {
+    "contributor_count": 5,
+    "contributors": [
+      "pbrowne88",
+      "tcrick",
+      "drjtests",
+      "nafnlaus",
+      "mclevey"
+    ],
+    "created_at": "2019-11-27",
+    "description": "Research at the intersection of natural language processing and social network analysis.",
+    "first_commit_date": "2019-11-27",
+    "forks": 2,
+    "last_commit_date": "2020-12-06",
+    "last_commit_sha": "9029670",
+    "last_fetched": "2026-02-03T13:23:43.292989+00:00",
+    "license_spdx": "MIT",
+    "open_issues": 7,
+    "stars": 13,
+    "topics": [
+      "burst-analysis",
+      "data-science",
+      "natural-language-processing",
+      "python",
+      "social-network-analysis"
+    ],
+    "total_commits": 232,
+    "updated_at": "2026-01-26"
+  },
+  "UWNETLAB/pdpp": {
+    "contributor_count": 3,
+    "contributors": [
+      "pbrowne88",
+      "mclevey",
+      "dependabot[bot]"
+    ],
+    "created_at": "2020-03-26",
+    "description": "Principled Data Processing for Python",
+    "first_commit_date": "2020-03-26",
+    "forks": 2,
+    "last_commit_date": "2024-08-05",
+    "last_commit_sha": "5e15d43",
+    "last_fetched": "2026-02-03T13:23:41.867727+00:00",
+    "license_spdx": "MIT",
+    "open_issues": 5,
+    "stars": 6,
+    "topics": [],
+    "total_commits": 88,
+    "updated_at": "2026-01-26",
+    "version": "0.5.1"
+  },
+  "UWNETLAB/tidyextractors": {
+    "contributor_count": 5,
+    "contributors": [
+      "joelbecker",
+      "mclevey",
+      "jillianderson8",
+      "drjtests",
+      "stevemccoll"
+    ],
+    "created_at": "2017-06-06",
+    "description": "A collection of tools for extracting tidy data.",
+    "first_commit_date": "2017-06-06",
+    "forks": 4,
+    "last_commit_date": "2022-12-10",
+    "last_commit_sha": "132ee88",
+    "last_fetched": "2026-02-03T13:11:40.914664+00:00",
+    "license_spdx": "GPL-3.0",
+    "open_issues": 1,
+    "stars": 12,
+    "topics": [],
+    "total_commits": 102,
+    "updated_at": "2023-12-05",
+    "version": "0.3.4"
+  },
+  "mclevey/dcss": {
+    "contributor_count": 2,
+    "contributors": [
+      "mclevey",
+      "tcrick"
+    ],
+    "created_at": "2023-01-12",
+    "description": "Python package accompanying McLevey (2022) Doing Computational Social Science",
+    "first_commit_date": "2023-01-12",
+    "forks": 0,
+    "last_commit_date": "2023-01-12",
+    "last_commit_sha": "520a78b",
+    "last_fetched": "2026-02-03T13:23:38.772505+00:00",
+    "license_spdx": "MIT",
+    "open_issues": 0,
+    "stars": 0,
+    "topics": [],
+    "total_commits": 4,
+    "updated_at": "2023-01-12"
+  },
+  "mclevey/simkit": {
+    "contributor_count": 0,
+    "contributors": [],
+    "first_commit_date": "",
+    "last_commit_date": "",
+    "last_commit_sha": "",
+    "last_fetched": "2026-02-03T13:11:39.658729+00:00",
+    "total_commits": 0
+  }
+}

@@ -12,96 +12,414 @@ import re
 import urllib.request
 import urllib.error
 import json
+import os
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 
 LEADING_WS = "&nbsp;&nbsp;&nbsp;&nbsp;"
 
+# Global for tracking GitHub fetch statistics
+_github_stats = {"fresh": 0, "cached": 0}
 
-def fetch_github_info(github_url, yaml_data=None):
+# Cache file path
+CACHE_FILE = Path(__file__).resolve().parent.parent / "records" / "github_cache.json"
+
+# Default cache max age in minutes
+CACHE_MAX_AGE_MINUTES = 15
+
+
+# GitHub API headers (with optional token for higher rate limits)
+def get_github_headers():
+    """Get headers for GitHub API requests, including auth token if available."""
+    headers = {"User-Agent": "CV-Builder"}
+    token = os.environ.get("GITHUB_TOKEN")
+    if token:
+        headers["Authorization"] = f"token {token}"
+    return headers
+
+
+def format_date_long(date_str):
+    """Format YYYY-MM-DD date string as 'Feb 3, 2026' (no leading zero)."""
+    if not date_str or date_str == "XXXX-XX-XX":
+        return date_str
+    try:
+        dt = datetime.fromisoformat(date_str)
+        return f"{dt.strftime('%b')} {dt.day}, {dt.year}"
+    except ValueError:
+        return date_str
+
+
+def load_github_cache():
+    """Load cache file, return empty dict if doesn't exist."""
+    if CACHE_FILE.exists():
+        try:
+            with open(CACHE_FILE, "r") as f:
+                return json.load(f)
+        except (json.JSONDecodeError, IOError) as e:
+            print(f"  ⚠ Warning: Could not load cache file: {e}")
+    return {}
+
+
+def save_github_cache(cache):
+    """Save cache to file with pretty formatting."""
+    try:
+        with open(CACHE_FILE, "w") as f:
+            json.dump(cache, f, indent=2, sort_keys=True)
+    except IOError as e:
+        print(f"  ⚠ Warning: Could not save cache file: {e}")
+
+
+def is_cache_fresh(cache_entry, max_age_minutes=CACHE_MAX_AGE_MINUTES):
+    """Check if cache entry is fresh (within max_age_minutes)."""
+    if not cache_entry or "last_fetched" not in cache_entry:
+        return False, 0
+
+    try:
+        last_fetched = datetime.fromisoformat(
+            cache_entry["last_fetched"].replace("Z", "+00:00")
+        )
+        now = datetime.now(timezone.utc)
+        age_minutes = (now - last_fetched).total_seconds() / 60
+        return age_minutes <= max_age_minutes, age_minutes
+    except (ValueError, KeyError):
+        return False, 0
+
+
+def check_rate_limit():
+    """Check GitHub API rate limit status. Returns (remaining, limit) or None on error."""
+    try:
+        url = "https://api.github.com/rate_limit"
+        req = urllib.request.Request(url, headers=get_github_headers())
+        with urllib.request.urlopen(req, timeout=5) as response:
+            data = json.loads(response.read().decode())
+            core = data.get("resources", {}).get("core", {})
+            return core.get("remaining", 0), core.get("limit", 60)
+    except Exception:
+        return None, None
+
+
+def make_github_request(url):
     """
-    Fetch version and commit info from GitHub API.
-    Falls back to YAML data, then to placeholders.
-    Returns dict with version, last_commit (date), commit_id (short SHA).
-    Prints warnings on failures.
+    Make a GitHub API request with proper error handling.
+    Returns (data, headers, error_type) where error_type is None on success,
+    'rate_limit' if rate limited, 'not_found' for 404, or 'error' for other errors.
     """
+    try:
+        req = urllib.request.Request(url, headers=get_github_headers())
+        with urllib.request.urlopen(req, timeout=10) as response:
+            headers = dict(response.headers)
+            data = json.loads(response.read().decode())
+            return data, headers, None
+    except urllib.error.HTTPError as e:
+        if e.code == 403:
+            # Check if rate limited
+            body = e.read().decode() if e.fp else ""
+            if "rate limit" in body.lower():
+                return None, None, "rate_limit"
+        elif e.code == 404:
+            return None, None, "not_found"
+        return None, None, "error"
+    except Exception:
+        return None, None, "error"
+
+
+def fetch_repo_info(owner, repo):
+    """Fetch basic repository info from /repos endpoint."""
+    url = f"https://api.github.com/repos/{owner}/{repo}"
+    data, headers, error = make_github_request(url)
+
+    if error:
+        return None, error
+
+    return {
+        "stars": data.get("stargazers_count", 0),
+        "forks": data.get("forks_count", 0),
+        "open_issues": data.get("open_issues_count", 0),
+        "description": data.get("description", ""),
+        "topics": data.get("topics", []),
+        "license_spdx": (data.get("license") or {}).get("spdx_id", ""),
+        "created_at": (data.get("created_at") or "")[:10],  # Just the date part
+        "updated_at": (data.get("updated_at") or "")[:10],
+    }, None
+
+
+def fetch_version_info(owner, repo):
+    """Fetch version from releases or tags."""
+    # Try releases first
+    url = f"https://api.github.com/repos/{owner}/{repo}/releases/latest"
+    data, headers, error = make_github_request(url)
+
+    if not error and data:
+        return data.get("tag_name", ""), None
+
+    if error == "rate_limit":
+        return None, "rate_limit"
+
+    # Try tags as fallback
+    url = f"https://api.github.com/repos/{owner}/{repo}/tags"
+    data, headers, error = make_github_request(url)
+
+    if not error and data and len(data) > 0:
+        return data[0].get("name", ""), None
+
+    return "", error
+
+
+def fetch_commits_info(owner, repo):
+    """Fetch commit info: latest commit and total count."""
+    result = {
+        "last_commit_date": "",
+        "last_commit_sha": "",
+        "first_commit_date": "",
+        "total_commits": 0,
+    }
+
+    # Fetch latest commit
+    url = f"https://api.github.com/repos/{owner}/{repo}/commits?per_page=1"
+    data, headers, error = make_github_request(url)
+
+    if error == "rate_limit":
+        return None, "rate_limit"
+
+    if not error and data and len(data) > 0:
+        commit = data[0]
+        result["last_commit_sha"] = commit["sha"][:7]
+        date_str = commit["commit"]["committer"]["date"]
+        try:
+            dt = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
+            result["last_commit_date"] = dt.strftime("%Y-%m-%d")
+        except ValueError:
+            pass
+
+        # Try to get total commit count from Link header
+        if headers:
+            link = headers.get("Link", "")
+            # Parse the last page number from Link header
+            # Format: <url>; rel="last"
+            import re as re_module
+
+            match = re_module.search(r'page=(\d+)>; rel="last"', link)
+            if match:
+                result["total_commits"] = int(match.group(1))
+            else:
+                # If no pagination, it's just 1 commit
+                result["total_commits"] = 1
+
+    # Try to get first commit (oldest)
+    # This requires getting the last page of commits
+    if result["total_commits"] > 1:
+        last_page = result["total_commits"]
+        url = f"https://api.github.com/repos/{owner}/{repo}/commits?per_page=1&page={last_page}"
+        data, _, error = make_github_request(url)
+        if not error and data and len(data) > 0:
+            commit = data[0]
+            date_str = commit["commit"]["committer"]["date"]
+            try:
+                dt = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
+                result["first_commit_date"] = dt.strftime("%Y-%m-%d")
+            except ValueError:
+                pass
+
+    return result, None
+
+
+def fetch_contributors(owner, repo):
+    """Fetch contributor list."""
+    url = f"https://api.github.com/repos/{owner}/{repo}/contributors?per_page=100"
+    data, headers, error = make_github_request(url)
+
+    if error == "rate_limit":
+        return None, "rate_limit"
+
+    if not error and data:
+        contributors = [c.get("login", "") for c in data if c.get("login")]
+        return {
+            "contributors": contributors,
+            "contributor_count": len(contributors),
+        }, None
+
+    return {"contributors": [], "contributor_count": 0}, None
+
+
+def fetch_github_info(github_url, yaml_data=None, force_refresh=False):
+    """
+    Fetch version and commit info from GitHub API with caching.
+    Falls back to cached data, then YAML data, then to placeholders.
+
+    Returns dict with:
+    - version, last_commit_date, last_commit_sha (basic info)
+    - first_commit_date, total_commits (commit history)
+    - contributors, contributor_count (team info)
+    - stars, forks, open_issues (popularity)
+    - description, topics, license_spdx (metadata)
+    - created_at, updated_at (dates)
+    - from_cache, cache_age_minutes (cache status)
+    """
+    global _github_stats
+
     if yaml_data is None:
         yaml_data = {}
 
+    # Default result with placeholders
     result = {
         "version": yaml_data.get("version", "XX.XX"),
-        "last_commit": yaml_data.get("last_commit", "XXXX-XX-XX"),
-        "commit_id": yaml_data.get("commit_id", "XXXXXXX"),
+        "last_commit_date": yaml_data.get("last_commit", "XXXX-XX-XX"),
+        "last_commit_sha": yaml_data.get("commit_id", "XXXXXXX"),
+        "first_commit_date": "",
+        "total_commits": 0,
+        "contributors": [],
+        "contributor_count": 0,
+        "open_issues": 0,
+        "stars": 0,
+        "forks": 0,
+        "description": yaml_data.get("description", ""),
+        "topics": [],
+        "license_spdx": "",
+        "created_at": "",
+        "updated_at": "",
+        "from_cache": False,
+        "cache_age_minutes": 0,
     }
 
     if not github_url:
-        print(f"  ⚠ Warning: No GitHub URL provided")
+        print(f"    ⚠ No GitHub URL provided")
         return result
 
     # Parse owner/repo from GitHub URL
-    # Strip whitespace and trailing slashes
     github_url = github_url.strip().rstrip("/")
     match = re.match(r"https?://github\.com/([^/]+)/([^/]+?)(?:\.git)?$", github_url)
     if not match:
-        print(f"  ⚠ Warning: Could not parse GitHub URL: {github_url}")
+        print(f"    ⚠ Could not parse GitHub URL: {github_url}")
         return result
 
     owner, repo = match.groups()
+    cache_key = f"{owner}/{repo}"
 
-    # Fetch version from releases or tags
-    version_fetched = False
-    try:
-        # Try releases first
-        url = f"https://api.github.com/repos/{owner}/{repo}/releases/latest"
-        req = urllib.request.Request(url, headers={"User-Agent": "CV-Builder"})
-        with urllib.request.urlopen(req, timeout=5) as response:
-            data = json.loads(response.read().decode())
-            result["version"] = data.get("tag_name", result["version"])
-            version_fetched = True
-    except urllib.error.HTTPError as e:
-        if e.code == 404:
-            # No releases, try tags
-            try:
-                url = f"https://api.github.com/repos/{owner}/{repo}/tags"
-                req = urllib.request.Request(url, headers={"User-Agent": "CV-Builder"})
-                with urllib.request.urlopen(req, timeout=5) as response:
-                    data = json.loads(response.read().decode())
-                    if data:
-                        result["version"] = data[0].get("name", result["version"])
-                        version_fetched = True
-            except Exception as tag_err:
-                print(
-                    f"  ⚠ Warning: Could not fetch tags for {owner}/{repo}: {tag_err}"
-                )
-        else:
-            print(f"  ⚠ Warning: GitHub API error for {owner}/{repo}: {e}")
-    except Exception as e:
-        print(f"  ⚠ Warning: Could not fetch release for {owner}/{repo}: {e}")
+    # Load cache
+    cache = load_github_cache()
+    cached_entry = cache.get(cache_key, {})
 
-    if not version_fetched and result["version"] == "XX.XX":
-        print(f"  ⚠ Warning: No version found for {owner}/{repo}")
+    # Check if we should use cache
+    is_fresh, age_minutes = is_cache_fresh(cached_entry)
 
-    # Fetch latest commit
-    try:
-        url = f"https://api.github.com/repos/{owner}/{repo}/commits?per_page=1"
-        req = urllib.request.Request(url, headers={"User-Agent": "CV-Builder"})
-        with urllib.request.urlopen(req, timeout=5) as response:
-            data = json.loads(response.read().decode())
-            if data:
-                commit = data[0]
-                result["commit_id"] = commit["sha"][:7]
-                # Parse date
-                date_str = commit["commit"]["committer"]["date"]
-                # Format: 2024-01-15T10:30:00Z
-                dt = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
-                result["last_commit"] = dt.strftime("%Y-%m-%d")
-    except urllib.error.HTTPError as e:
-        if e.code == 404:
-            print(f"  ⚠ Warning: Repository not found: {github_url}")
-        else:
-            print(f"  ⚠ Warning: GitHub API error for commits: {e}")
-    except Exception as e:
-        print(f"  ⚠ Warning: Could not fetch commits for {owner}/{repo}: {e}")
+    # Check for force-api-call flag in YAML
+    if yaml_data.get("force-api-call"):
+        force_refresh = True
+
+    if is_fresh and not force_refresh:
+        # Use cached data
+        print(f"    ✓ Using cached data ({age_minutes:.0f} min old)")
+        result.update(
+            {
+                "version": cached_entry.get("version", result["version"]),
+                "last_commit_date": cached_entry.get(
+                    "last_commit_date", result["last_commit_date"]
+                ),
+                "last_commit_sha": cached_entry.get(
+                    "last_commit_sha", result["last_commit_sha"]
+                ),
+                "first_commit_date": cached_entry.get("first_commit_date", ""),
+                "total_commits": cached_entry.get("total_commits", 0),
+                "contributors": cached_entry.get("contributors", []),
+                "contributor_count": cached_entry.get("contributor_count", 0),
+                "open_issues": cached_entry.get("open_issues", 0),
+                "stars": cached_entry.get("stars", 0),
+                "forks": cached_entry.get("forks", 0),
+                "description": cached_entry.get("description", ""),
+                "topics": cached_entry.get("topics", []),
+                "license_spdx": cached_entry.get("license_spdx", ""),
+                "created_at": cached_entry.get("created_at", ""),
+                "updated_at": cached_entry.get("updated_at", ""),
+                "from_cache": True,
+                "cache_age_minutes": age_minutes,
+            }
+        )
+        _github_stats["cached"] += 1
+        return result
+
+    # Fetch fresh data
+    print(f"    → Fetching fresh data from API...")
+    rate_limited = False
+    new_data = {"last_fetched": datetime.now(timezone.utc).isoformat()}
+
+    # Fetch repo info
+    repo_info, error = fetch_repo_info(owner, repo)
+    if error == "rate_limit":
+        rate_limited = True
+        print(f"    ⚠ Rate limited")
+    elif repo_info:
+        new_data.update(repo_info)
+        result.update(repo_info)
+
+    # Fetch version
+    if not rate_limited:
+        version, error = fetch_version_info(owner, repo)
+        if error == "rate_limit":
+            rate_limited = True
+            print(f"    ⚠ Rate limited")
+        elif version:
+            new_data["version"] = version
+            result["version"] = version
+
+    # Fetch commits info
+    if not rate_limited:
+        commits_info, error = fetch_commits_info(owner, repo)
+        if error == "rate_limit":
+            rate_limited = True
+            print(f"    ⚠ Rate limited")
+        elif commits_info:
+            new_data.update(commits_info)
+            result.update(commits_info)
+
+    # Fetch contributors
+    if not rate_limited:
+        contrib_info, error = fetch_contributors(owner, repo)
+        if error == "rate_limit":
+            rate_limited = True
+            print(f"    ⚠ Rate limited")
+        elif contrib_info:
+            new_data.update(contrib_info)
+            result.update(contrib_info)
+
+    # Handle rate limiting: fall back to cache
+    if rate_limited and cached_entry:
+        print(f"    ⚠ Rate limited - using cached data as fallback")
+        result.update(
+            {
+                "version": cached_entry.get("version", result["version"]),
+                "last_commit_date": cached_entry.get(
+                    "last_commit_date", result["last_commit_date"]
+                ),
+                "last_commit_sha": cached_entry.get(
+                    "last_commit_sha", result["last_commit_sha"]
+                ),
+                "first_commit_date": cached_entry.get("first_commit_date", ""),
+                "total_commits": cached_entry.get("total_commits", 0),
+                "contributors": cached_entry.get("contributors", []),
+                "contributor_count": cached_entry.get("contributor_count", 0),
+                "open_issues": cached_entry.get("open_issues", 0),
+                "stars": cached_entry.get("stars", 0),
+                "forks": cached_entry.get("forks", 0),
+                "description": cached_entry.get("description", ""),
+                "topics": cached_entry.get("topics", []),
+                "license_spdx": cached_entry.get("license_spdx", ""),
+                "created_at": cached_entry.get("created_at", ""),
+                "updated_at": cached_entry.get("updated_at", ""),
+                "from_cache": True,
+                "cache_age_minutes": age_minutes if cached_entry else 0,
+            }
+        )
+        _github_stats["cached"] += 1
+        return result
+
+    # Save to cache if we got any new data
+    if not rate_limited and new_data.get("last_fetched"):
+        cache[cache_key] = new_data
+        save_github_cache(cache)
+        _github_stats["fresh"] += 1
+
+    result["from_cache"] = False
+    result["cache_age_minutes"] = 0
 
     return result
 
@@ -580,7 +898,21 @@ def build_cv():
     # Software
     if data.get("software"):
         sw_items = []
-        print("Fetching GitHub info for software packages...")
+        print("\nFetching GitHub info for software packages...")
+
+        # Check and display rate limit status
+        remaining, limit = check_rate_limit()
+        has_token = os.environ.get("GITHUB_TOKEN") is not None
+        auth_status = (
+            "(authenticated)"
+            if has_token
+            else "(unauthenticated - set GITHUB_TOKEN for higher limits)"
+        )
+        if remaining is not None:
+            print(f"  GitHub API: {remaining}/{limit} requests remaining {auth_status}")
+        else:
+            print(f"  GitHub API: Could not check rate limit {auth_status}")
+
         for sw in data["software"]:
             package = clean_text(sw.get("package", ""))
             language = sw.get("language", "")
@@ -590,9 +922,28 @@ def build_cv():
             github_url = sw.get("github", "")
             team = clean_text(sw.get("development", ""))
 
-            # Fetch GitHub info (version, commit)
+            # Fetch GitHub info (version, commit, and more)
             print(f"  → {package}...")
             gh_info = fetch_github_info(github_url, sw)
+
+            # All available variables from GitHub API / cache:
+            version = gh_info["version"]
+            last_commit_date = gh_info["last_commit_date"]
+            last_commit_sha = gh_info["last_commit_sha"]
+            first_commit_date = gh_info["first_commit_date"]
+            total_commits = gh_info["total_commits"]
+            contributors = gh_info["contributors"]
+            contributor_count = gh_info["contributor_count"]
+            open_issues = gh_info["open_issues"]
+            stars = gh_info["stars"]
+            forks = gh_info["forks"]
+            repo_description = gh_info["description"]
+            topics = gh_info["topics"]
+            license_spdx = gh_info["license_spdx"]
+            created_at = gh_info["created_at"]
+            updated_at = gh_info["updated_at"]
+            from_cache = gh_info["from_cache"]
+            cache_age_minutes = gh_info["cache_age_minutes"]
 
             # Get language badge
             language_badge = LANGUAGE_BADGES.get(language)
@@ -614,28 +965,32 @@ def build_cv():
                     f'<img src="{GITHUB_BADGE}" alt="GitHub"></a>'
                 )
                 # Package name links to GitHub
-                version = f"({gh_info["version"]})"
-                package_html = (
-                    f'<a href="{github_url}"><strong>{package}</strong></a> ({version})'
-                )
+                package_html = f'<a href="{github_url}"><strong>{package}</strong></a> (v{version})<br>{status}'
             else:
                 github_html = ""
                 package_html = f"<strong>{package}</strong>"
 
-            commit_id = gh_info["commit_id"]
-            last_commit = f"{gh_info["last_commit"]} (commit: {commit_id})"
+            # Format date for display (e.g., "Feb 3, 2026")
+            formatted_date = format_date_long(last_commit_date)
+            last_commit_display = f"{formatted_date} (commit: {last_commit_sha})"
 
             software_str = "<li>"
             software_str += f"{package_html}<br>"
-            # software_str += f"{package_long}<br>"
             software_str += f"{language_html} {license_html} {github_html}<br>"
-            software_str += f"<code>pip install {package}</code><br>"
-            software_str += f"Developed by: {team}<br>"
-            software_str += f"Last commit: {last_commit}<br>"
-            software_str += f"{description}"
+            # software_str += f"<code>pip install {package}</code><br>"
+            software_str += f"{team} (Netlab)<br>"
+            # software_str += f"Total commits: {total_commits}<br>"
+            software_str += f"Last commit: {last_commit_display}<br>"
+            software_str += f"Documentation: {description}<br>"
+            # software_str += f"<br>{description}"
             software_str += "</li>"
 
             sw_items.append(software_str)
+
+        # Print summary
+        print(
+            f"\n  GitHub data: {_github_stats['fresh']} packages fetched fresh, {_github_stats['cached']} from cache"
+        )
 
         sections.append(
             f"""
