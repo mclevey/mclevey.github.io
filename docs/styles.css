@@ -484,6 +484,33 @@ p {
   color: var(--text-muted);
 }
 
+.cv-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+.cv-table th,
+.cv-table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.cv-table th {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cv-table td:last-child,
+.cv-table th:last-child {
+  text-align: center;
+}
+
 .back-link {
   display: inline-block;
   margin-top: 2.5rem;

@@ -195,7 +195,7 @@ def build_cv():
             aff_items.append(aff_str)
         sections.append(
             f"""
-<h2>Affiliations</h2>
+<h3>Affiliations</h3>
 {"\n".join(aff_items)}
 """.replace(
                 "--", " to "
@@ -353,8 +353,8 @@ def build_cv():
         grant_items = []
         for g in data["grants"]:
             years = str(g.get("years", "")).replace("--", " to ")
-            grant_string = f'<li><strong>{clean_text(g.get("title", ""))}</strong> <br>'
-            grant_string += f'{years}. PI: {clean_text(g.get("pi", ""))}. {clean_text(g.get("grant", ""))}. {g.get("amount", "")}<br>'
+            grant_string = f'<li>{clean_text(g.get("title", ""))}<br>'
+            grant_string += f'{clean_text(g.get("pi", ""))} (PI). {years}. {clean_text(g.get("grant", ""))}. {g.get("amount", "")}<br>'
 
             if g.get("ci"):
                 grant_string += f"CI: {g.get("ci")}.<br>"
@@ -416,7 +416,7 @@ def build_cv():
         for c in data["contracts"]:
             years = str(c.get("years", "")).replace("--", " to ")
             contract_items.append(
-                f'<li>{years}. "{clean_text(c.get("title", ""))}." '
+                f'<li>{c.get("contracted", "")}. {years}. "{clean_text(c.get("title", ""))}." '
                 f'{clean_text(c.get("organization", ""))}.</li>'
             )
         sections.append(
@@ -502,21 +502,62 @@ def build_cv():
         )
 
     # Courses Taught
-    if data.get("courses"):
-        course_items = []
-        for c in data["courses"]:
-            course_items.append(
-                f'<li>{c.get("year", "")}. {c.get("id", "")}: '
-                f'{clean_text(c.get("name", ""))} ({c.get("level", "")}).</li>'
+    teaching_file = base_dir / "records" / "teaching.yml"
+    if teaching_file.exists():
+        import pandas as pd
+
+        with open(teaching_file, "r") as f:
+            teaching_data = yaml.safe_load(f)
+
+        courses = teaching_data.get("courses", [])
+        df_courses = pd.DataFrame(courses)
+        teaching = teaching_data.get("teaching", [])
+        df_teaching = pd.DataFrame(teaching)
+
+        # Lookup dicts
+        lookup_course_id_to_number = dict(zip(df_courses["id"], df_courses["number"]))
+        lookup_course_id_to_name = dict(zip(df_courses["id"], df_courses["name"]))
+
+        course_strings = []
+
+        # Group by 'id'
+        for course_id, group in df_teaching.groupby("id"):
+            # Sort by 'term-code'
+            group_sorted = group.sort_values(
+                by="term-code", key=lambda col: pd.to_numeric(col, errors="coerce")
             )
-        sections.append(
-            f"""
+            # Sum total enrollment (treat NaN as 0)
+            total_enrollment = group_sorted["enrollment"].fillna(0).astype(int).sum()
+            # Create ordered list of semester-year values
+            semester_years = group_sorted["semester-year"].tolist()
+            offering_list = ", ".join(semester_years)
+            # Get course number and name
+            course_number = lookup_course_id_to_number.get(course_id, course_id)
+            course_name = lookup_course_id_to_name.get(course_id, "")
+
+            # Format string
+            section_string = (
+                f"<p>{course_number} | <strong>{course_name}</strong><br>\n"
+            )
+            if total_enrollment > 0:
+                section_string += (
+                    f"{LEADING_WS}{total_enrollment} total enrolments from "
+                    f"{len(semester_years)} sections:<br>\n"
+                    f"{LEADING_WS}{offering_list}\n"
+                ).replace("1 sections:", "1 section:")
+            else:
+                section_string += f"{LEADING_WS}Scheduled for {offering_list}\n"
+            section_string += "</p>\n"
+
+            course_strings.append(section_string)
+
+        if course_strings:
+            sections.append(
+                f"""
 <h2>Courses Taught</h2>
-<ol reversed>
-{"\n".join(course_items)}
-</ol>
+{chr(10).join(course_strings)}
 """
-        )
+            )
 
     # Reading Courses
     if data.get("reading"):
