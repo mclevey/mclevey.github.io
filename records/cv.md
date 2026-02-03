@@ -571,74 +571,83 @@ contracts:
     organization: "Project for the Council of Ontario Directors of Education (CODE) and the Ontario Ministry of Education"
 
 software:
+  - package: birss
+    license: MIT
+    github: https://github.com/mclevey/birss
+    documentation: https://github.com/squidfunk/mkdocs-material
+    language: Python
+    description: Bayesian inference for reconstructing shared schemas
+    development: John McLevey
+    status: Active Development
+
   - package: unicore
     license: MIT
     github: https://github.com/mclevey/unicore
+    documentation: https://github.com/squidfunk/mkdocs-material
     language: Python
-    description: "unicore is for doing stuff."
-    development: "John McLevey"
+    description: Process, link, and model institutional data
+    development: John McLevey
+    status: Active Development
+
+  - package: clark
+    license: MIT
+    github: https://github.com/mclevey/clark
+    documentation: https://github.com/squidfunk/mkdocs-material
+    language: Python
+    description: Templates, config, cleaning, and syncing utilities
+    development: John McLevey
+    status: Active Development
+
+  - package: turtlestack
+    license: MIT
+    github: https://github.com/mclevey/turtlestack
+    documentation: https://github.com/squidfunk/mkdocs-material
+    language: Bash
+    description: "Manage data stored with DigitalOcean Spaces (S3-compatible)."
+    development: John McLevey
     status: Active Development
 
   - package: dcss
     license: GNU GPL2
-    github: https://github.com/mclevey/dcss
+    github: https://github.com/UWNETLAB/dcss_supplementary
+    related:
+      - https://github.com/mclevey/dcss
+      - https://github.com/mclevey/dcss_REORG_IN_PROGRESS
+      - https://github.com/mclevey/dcss-live
+      - https://github.com/pbrowne88/dcss_2021_fall
+    documentation: https://github.com/squidfunk/mkdocs-material
     language: Python
-    description: "`dcss` is a Python package accompanying John McLevey (2022) *Doing Computational Social Science*. It includes curated datasets and a large collection of utility functions for data processing and working with statistical and machine learning models."
-    development: "John McLevey, Tyler Crick, Pierson Browne"
+    description: Supplements McLevey (2022)
+    development: John McLevey, Tyler Crick, Pierson Browne
     status: Maintained, Occasional Updates
 
   - package: metaknowledge
     license: GNU GPL2
     github: https://github.com/UWNETLAB/metaknowledge
+    documentation: https://metaknowledge.readthedocs.io/en/latest/
     language: Python
-    description: "`metaknowledge` (or `mk`) is a Python package for quantitative and social networks research in the sociology of science and information science. First released in 2015. Under active development. Website and documentation: [http://networkslab.org/metaknowledge/](http://networkslab.org/metaknowledge/)."
+    description: "Data processing for bibliometric and 'science of science' research"
     development: Reid McIlroy-Young and John McLevey
     status: Maintained, Occasional Updates
 
   - package: pdpp
     license: MIT License
     github: https://github.com/UWNETLAB/pdpp
+    documentation: https://github.com/squidfunk/mkdocs-material
     language: Python
-    description: "`pdpp` is a Python package for principled data processing with Python. It was first released in 2015 and is under active development."
-    development: "Pierson Browne, Tyler Crick, Rachel Wood, and John McLevey"
+    description: Principled data processing with Python
+    development: Pierson Browne, Tyler Crick, Rachel Wood, and John McLevey
     status: Maintained, Occasional Updates
-
-  - package: nate
-    license: MIT License
-    github: https://github.com/UWNETLAB/nate
-    language: Python
-    description: "`Nate` (**n**etwork **a**nalysis with **te**xt) is a Python package for network-based text analysis."
-    development: "John McLevey, Pierson Browne, and Tyler Crick"
-    status: Archived
-
-  - package: simkit
-    license: MIT License
-    github: https://github.com/mclevey/simkit
-    language: Python
-    description: "`simkit` is a Python package for probabilistic and agent-based computational models of opinion dynamics, diffusion, learning, and influence. It is currently in beta and under active development."
-    development: John McLevey
-    status: Archived
-
-  - package: tidyext
-    license: MIT License
-    github: https://github.com/UWNETLAB/tidyextractors
-    language: Python
-    description: "`tidyextractors` is a Python package for extracting quantitative datasets from source code repositories, email mbox files, and social media APIs."
-    development: Joel Becker (NETLAB)
-    status: Archived
-
-  - package: gitnet
-    license: MIT License
-    github: https://github.com/UWNETLAB/gitnet
-    language: Python
-    description: "`gitnet` is a Python package for mining source code repository and mailing list data and generating network datasets. First released in 2016. `gitnet` is still publicly available and functional, but development and maintenance efforts have shifted to other Python packages."
-    development: "Joel Becker, Jillian Anderson, Steve McColl, and John McLevey"
-    status: Archived
 
 othersoftware:
   - package: recordlinkage
-    package_long:
     description: "Contributions to Jonathan de Bruin's Python package `recordlinkage`: A Python package for linking records across multiple data sources when there is no unique ID available. NetLab contributions were focused on implementing new comparison and fusion algorithms for my research on the structure and evolution of cross-sectoral collaboration networks in science and technology. Most NetLab contributions to `recordlinkage` were implemented by Joel Becker (RA) and occasionally Jillian Anderson (RA), and then submitted to Jonathan de Bruin as pull requests."
+  - package: nate (???), simkit, tidytext, gitnet (inspo!), etc.
+    description: All dead/retired/merged/forgotten.
+
+publication_supplements_and_replication_kits:
+  - Example 1, add CRS and other stuff.
+  - Example 2, add birss and other stuff.
 
 conferences:
   - year: 2026-01
@@ -653,7 +662,7 @@ conferences:
     location: "Melbourne, Australia"
   - year: 2019-10
     authors: John McLevey
-    title: "Disinformation, Democracy, and Influence in Online Political Discussion Networks."
+    title: "Disinformation, Democracy, and Influence in Online Political Discussion Networks"
     conference: "Disinformation Symposium, hosted by the Cardiff University Crime & Security Research Institute"
     location: "Hensol Castle, Vale of Glamorgan, Wales UK"
   - year: 2019-07
@@ -718,7 +727,7 @@ conferences:
     location: "Montréal, QC, Canada"
   - year: 2017-06
     authors: "John McLevey and Reid McIlroy-Young"
-    title: "`metaknowledge`: open source software for networks research on science."
+    title: "metaknowledge: open source software for networks research on science."
     conference: "Sunbelt, Annual meetings of the International Network for Social Network Analysis"
     location: "Beijing, China"
   - year: 2017-05

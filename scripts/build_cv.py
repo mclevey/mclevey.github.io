@@ -27,6 +27,10 @@ CACHE_FILE = Path(__file__).resolve().parent.parent / "records" / "github_cache.
 # Default cache max age in minutes
 CACHE_MAX_AGE_MINUTES = 15
 
+# Show placeholder text (XX.XX, XXXXXXX) when data is missing
+# Set to True to debug/identify missing data
+SHOW_MISSING_SOURCE_DATA = False
+
 
 # GitHub API headers (with optional token for higher rate limits)
 def get_github_headers():
@@ -897,7 +901,15 @@ def build_cv():
 
     # Software
     if data.get("software"):
-        sw_items = []
+        # Group software by status
+        sw_by_status = {}
+        # Define the order of status groups
+        status_order = [
+            "Active Development",
+            "Maintained, Occasional Updates",
+            "Archived",
+        ]
+
         print("\nFetching GitHub info for software packages...")
 
         # Check and display rate limit status
@@ -916,11 +928,14 @@ def build_cv():
         for sw in data["software"]:
             package = clean_text(sw.get("package", ""))
             language = sw.get("language", "")
-            status = sw.get("status", "")
+            status = sw.get("status", "Other")
             description = clean_text(sw.get("description", ""))
             license_text = sw.get("license", "")
             github_url = sw.get("github", "")
             team = clean_text(sw.get("development", ""))
+            documentation_url = sw.get("documentation", "")
+            citation = sw.get("citation", "")
+            learn_more = clean_text(sw.get("learn-more", ""))
 
             # Fetch GitHub info (version, commit, and more)
             print(f"  → {package}...")
@@ -930,20 +945,6 @@ def build_cv():
             version = gh_info["version"]
             last_commit_date = gh_info["last_commit_date"]
             last_commit_sha = gh_info["last_commit_sha"]
-            first_commit_date = gh_info["first_commit_date"]
-            total_commits = gh_info["total_commits"]
-            contributors = gh_info["contributors"]
-            contributor_count = gh_info["contributor_count"]
-            open_issues = gh_info["open_issues"]
-            stars = gh_info["stars"]
-            forks = gh_info["forks"]
-            repo_description = gh_info["description"]
-            topics = gh_info["topics"]
-            license_spdx = gh_info["license_spdx"]
-            created_at = gh_info["created_at"]
-            updated_at = gh_info["updated_at"]
-            from_cache = gh_info["from_cache"]
-            cache_age_minutes = gh_info["cache_age_minutes"]
 
             # Get language badge
             language_badge = LANGUAGE_BADGES.get(language)
@@ -958,64 +959,138 @@ def build_cv():
             else:
                 license_html = license_text
 
+            # Helper to check if a value is a placeholder/missing
+            def is_missing(val):
+                if not val:
+                    return True
+                missing_markers = [
+                    "XX.XX",
+                    "XXXX-XX-XX",
+                    "XXXXXXX",
+                    "add documentation website here",
+                    "add citation here",
+                ]
+                return str(val).strip() in missing_markers
+
             # GitHub badge with link
             if github_url:
                 github_html = (
                     f'<a href="{github_url}">'
                     f'<img src="{GITHUB_BADGE}" alt="GitHub"></a>'
                 )
-                # Package name links to GitHub
-                package_html = f'<a href="{github_url}"><strong>{package}</strong></a> (v{version})<br>{status}'
+                # Package name links to GitHub, include version if available
+                if is_missing(version) and not SHOW_MISSING_SOURCE_DATA:
+                    package_html = (
+                        f'<a href="{github_url}"><strong>{package}</strong></a>'
+                    )
+                else:
+                    package_html = (
+                        f'<a href="{github_url}"><strong>{package}</strong></a> '
+                        f"(v{version})"
+                    )
             else:
                 github_html = ""
                 package_html = f"<strong>{package}</strong>"
 
             # Format date for display (e.g., "Feb 3, 2026")
             formatted_date = format_date_long(last_commit_date)
-            last_commit_display = f"{formatted_date} (commit: {last_commit_sha})"
 
-            software_str = "<li>"
-            software_str += f"{package_html}<br>"
-            software_str += f"{language_html} {license_html} {github_html}<br>"
-            # software_str += f"<code>pip install {package}</code><br>"
-            software_str += f"{team} (Netlab)<br>"
-            # software_str += f"Total commits: {total_commits}<br>"
-            software_str += f"Last commit: {last_commit_display}<br>"
-            software_str += f"Documentation: {description}<br>"
-            # software_str += f"<br>{description}"
+            # Build last commit display, hide if missing
+            has_commit_info = not is_missing(last_commit_date) or not is_missing(
+                last_commit_sha
+            )
+            if has_commit_info or SHOW_MISSING_SOURCE_DATA:
+                if is_missing(last_commit_date) and is_missing(last_commit_sha):
+                    last_commit_line = "Last commit: (no data)<br>\n"
+                elif is_missing(last_commit_sha):
+                    last_commit_line = f"Last commit: {formatted_date}<br>\n"
+                elif is_missing(last_commit_date):
+                    last_commit_line = f"Last commit: (commit: {last_commit_sha})<br>\n"
+                else:
+                    last_commit_line = (
+                        f"<code>Last commit ({last_commit_sha}): "
+                        f"{formatted_date}</code><br>\n"
+                    )
+            else:
+                last_commit_line = ""
+
+            # Build documentation line
+            if not is_missing(documentation_url):
+                doc_line = f'Documentation: <a href="{documentation_url}">{documentation_url}</a><br>\n'
+            elif SHOW_MISSING_SOURCE_DATA:
+                doc_line = "Documentation: (no link)<br>\n"
+            else:
+                doc_line = ""
+
+            # # Build citation line (bibtex format)
+            # if not is_missing(citation):
+            #     citation_line = f"Citation:<br>\n<pre><code>{citation}</code></pre>\n"
+            # elif SHOW_MISSING_SOURCE_DATA:
+            #     citation_line = "Citation: (no citation)<br>\n"
+            # else:
+            #     citation_line = ""
+
+            # Build learn more line
+            # if learn_more:
+            #     learn_more_line = f"{learn_more}<br>\n"
+            # else:
+            #     learn_more_line = ""
+
+            software_str = "<li>\n"
+            software_str += f"{package_html} | {description}<br>\n"
+            software_str += f"{language_html} {license_html} {github_html}<br>\n"
+            software_str += f"{team}<br>\n"
+            # software_str += f"{description}<br>\n"
+
+            software_str += f"{LEADING_WS}{doc_line}"
+            if github_url:
+                software_str += f'{LEADING_WS}Source Code: <a href="{github_url}">{github_url.replace("https://", "")}</a><br>\n'
+            software_str += f"{LEADING_WS}{last_commit_line}"
             software_str += "</li>"
 
-            sw_items.append(software_str)
+            # Add to appropriate status group
+            if status not in sw_by_status:
+                sw_by_status[status] = []
+            sw_by_status[status].append(software_str)
 
         # Print summary
         print(
-            f"\n  GitHub data: {_github_stats['fresh']} packages fetched fresh, {_github_stats['cached']} from cache"
+            f"\n  GitHub data: {_github_stats['fresh']} packages fetched fresh, "
+            f"{_github_stats['cached']} from cache"
         )
 
-        sections.append(
-            f"""
-<h2>Scientific Software</h2>
-<ol reversed>
-{"\n".join(sw_items)}
-</ol>
-"""
-        )
+        # Build software section with H3 subsections for each status
+        software_html = "\n<h2>Scientific Software</h2>\n"
+
+        # Output in defined order, then any remaining statuses
+        all_statuses = status_order + [
+            s for s in sw_by_status.keys() if s not in status_order
+        ]
+
+        for status in all_statuses:
+            if status in sw_by_status and sw_by_status[status]:
+                software_html += f"<h3>{status}</h3>\n"
+                software_html += "<ol reversed>\n"
+                software_html += "\n".join(sw_by_status[status])
+                software_html += "\n</ol>\n"
+
+        sections.append(software_html)
 
     # Other Software
-    if data.get("othersoftware"):
-        osw_items = []
-        for osw in data["othersoftware"]:
-            osw_items.append(
-                f'<li><strong>{osw.get("package", "")}</strong>. {clean_text(osw.get("description", ""))}.</li>'
-            )
-        sections.append(
-            f"""
-<h2>Software Contributions</h2>
-<ol reversed>
-{"\n".join(osw_items)}
-</ol>
-"""
-        )
+    #     if data.get("othersoftware"):
+    #         osw_items = []
+    #         for osw in data["othersoftware"]:
+    #             osw_items.append(
+    #                 f'<li><strong>{osw.get("package", "")}</strong>. {clean_text(osw.get("description", ""))}</li>'
+    #             )
+    #         sections.append(
+    #             f"""
+    # <h2>Software Contributions</h2>
+    # <ol reversed>
+    # {"\n".join(osw_items)}
+    # </ol>
+    # """
+    #         )
 
     # Conference Presentations
     if data.get("conferences"):
@@ -1034,7 +1109,11 @@ def build_cv():
 <ol reversed>
 {"\n".join(conf_items)}
 </ol>
-"""
+""".replace(
+                "..", "."
+            ).replace(
+                "?.", "?"
+            )
         )
 
     # Invited Talks
