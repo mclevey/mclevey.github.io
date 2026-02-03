@@ -68,8 +68,8 @@ def add_heading_ids(html_content):
 
         return f'<{tag} id="{slug}">{content}</{tag}>'
 
-    # Match h2 and h3 tags
-    pattern = r"<(h[23])>([^<]+)</\1>"
+    # Match only h2 tags for TOC (changed from h2 and h3)
+    pattern = r"<(h2)>([^<]+)</h2>"
     return re.sub(pattern, replace_heading, html_content)
 
 
@@ -599,6 +599,8 @@ def build_cv():
     email = data.get("email", "")
     phone = data.get("phone", "")
     urls = data.get("urls", [])
+    # Wrap URLs in anchor tags
+    urls = [f'<a href="https://{url}">{url}</a>' for url in urls]
     urls = "<br>".join(urls)
 
     contact_html = "<h2>Contact Information</h2>\n"
@@ -1623,7 +1625,7 @@ def build_cv():
             <a href="index.html" class="nav-home">JM.</a>
             <a href="cv.html" class="active">CV</a>
             <a href="research.html">Research</a>
-            <a href="teaching.html">Teaching</a>
+            <a href="teaching.html">Teaching & Supervision</a>
             <a href="software-data.html">Software & Data</a>
             <a href="blog.html">Blog</a>
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">

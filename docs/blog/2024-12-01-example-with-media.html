@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Working with Images and Tables in Blog Posts – John McLevey</title>
   <link rel="stylesheet" href="../styles.css">
+  <!-- Highlight.js themes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css" id="hljs-light">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/nord.min.css" id="hljs-dark" disabled>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 </head>
 <body>
   <header>
@@ -12,7 +16,7 @@
       <a href="../index.html" class="nav-home">JM.</a>
       <a href="../cv.html">CV</a>
       <a href="../research.html">Research</a>
-      <a href="../teaching.html">Teaching</a>
+      <a href="../teaching.html">Teaching & Supervision</a>
       <a href="../software-data.html">Software & Data</a>
       <a href="../blog.html" class="active">Blog</a>
       <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
@@ -30,10 +34,10 @@
 <p>This post demonstrates how to include images and tables in blog posts. Click any image to view it in a lightbox.</p>
 <h2>Images</h2>
 <p>Images can be included using standard markdown syntax. Here's an example using one of the book covers:</p>
-<p><img alt="Doing Computational Social Science" src="../img/DCSS.png" /></p>
+<p><img alt="Doing Computational Social Science" src="../images/DCSS.png" /></p>
 <p>You can also include images with captions by wrapping them in HTML figure elements:</p>
 <figure>
-  <img src="../img/SHSNA.png" alt="Sage Handbook of Social Network Analysis">
+  <img src="../images/SHSNA.png" alt="Sage Handbook of Social Network Analysis">
   <figcaption>The Sage Handbook of Social Network Analysis, 2nd Edition (2023)</figcaption>
 </figure>
 
@@ -122,7 +126,7 @@
 <h2>Combining Elements</h2>
 <p>You can combine text, images, and tables to create rich content. For example, when discussing book publications:</p>
 <figure>
-  <img src="../img/F2FP.png" alt="The Face-to-Face Principle">
+  <img src="../images/F2FP.png" alt="The Face-to-Face Principle">
   <figcaption>The Face-to-Face Principle and the Internet (2022)</figcaption>
 </figure>
 
@@ -206,15 +210,33 @@ state.draw(output=&quot;network.png&quot;)
   </div>
 
   <script>
-    // Theme toggle
+    // Initialize highlight.js
+    hljs.highlightAll();
+
+    // Theme toggle with highlight.js theme switching
+    function updateHljsTheme(theme) {
+      const lightTheme = document.getElementById('hljs-light');
+      const darkTheme = document.getElementById('hljs-dark');
+      if (theme === 'dark') {
+        lightTheme.disabled = true;
+        darkTheme.disabled = false;
+      } else {
+        lightTheme.disabled = false;
+        darkTheme.disabled = true;
+      }
+    }
+
     function toggleTheme() {
       const html = document.documentElement;
       const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
+      updateHljsTheme(next);
     }
+
     const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    updateHljsTheme(saved);
 
     // Lightbox
     const lightbox = document.getElementById('lightbox');

@@ -33,19 +33,24 @@ TEMPLATE = """<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title} – John McLevey</title>
   <link rel="stylesheet" href="../styles.css">
+  <!-- Highlight.js themes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css" id="hljs-light">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/nord.min.css" id="hljs-dark" disabled>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 </head>
 <body>
   <header>
     <nav>
       <a href="../index.html" class="nav-home">JM.</a>
-      <a href="../research.html">Research</a>
-      <a href="../teaching.html">Teaching</a>
-      <a href="../supervision.html">Supervision</a>
-      <a href="../software.html">Software</a>
-      <a href="../data.html">Data</a>
-      <a href="../blog.html" class="active">Blog</a>
       <a href="../cv.html">CV</a>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      <a href="../research.html">Research</a>
+      <a href="../teaching.html">Teaching & Supervision</a>
+      <a href="../software-data.html">Software & Data</a>
+      <a href="../blog.html" class="active">Blog</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-moon">☽</span>
+        <span class="icon-sun">☼</span>
+      </button>
     </nav>
   </header>
   <main>
@@ -75,15 +80,33 @@ TEMPLATE = """<!DOCTYPE html>
   </div>
 
   <script>
-    // Theme toggle
+    // Initialize highlight.js
+    hljs.highlightAll();
+
+    // Theme toggle with highlight.js theme switching
+    function updateHljsTheme(theme) {{
+      const lightTheme = document.getElementById('hljs-light');
+      const darkTheme = document.getElementById('hljs-dark');
+      if (theme === 'dark') {{
+        lightTheme.disabled = true;
+        darkTheme.disabled = false;
+      }} else {{
+        lightTheme.disabled = false;
+        darkTheme.disabled = true;
+      }}
+    }}
+
     function toggleTheme() {{
       const html = document.documentElement;
       const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
+      updateHljsTheme(next);
     }}
+
     const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    updateHljsTheme(saved);
 
     // Lightbox
     const lightbox = document.getElementById('lightbox');
@@ -121,14 +144,15 @@ BLOG_INDEX_TEMPLATE = """<!DOCTYPE html>
   <header>
     <nav>
       <a href="index.html" class="nav-home">JM.</a>
-      <a href="research.html">Research</a>
-      <a href="teaching.html">Teaching</a>
-      <a href="supervision.html">Supervision</a>
-      <a href="software.html">Software</a>
-      <a href="data.html">Data</a>
-      <a href="blog.html" class="active">Blog</a>
       <a href="cv.html">CV</a>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      <a href="research.html">Research</a>
+      <a href="teaching.html">Teaching & Supervision</a>
+      <a href="software-data.html">Software & Data</a>
+      <a href="blog.html" class="active">Blog</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-moon">☽</span>
+        <span class="icon-sun">☼</span>
+      </button>
     </nav>
   </header>
 
@@ -136,7 +160,7 @@ BLOG_INDEX_TEMPLATE = """<!DOCTYPE html>
     <h1>Blog</h1>
     <p class="intro">Notes on methods, tutorials, and updates.</p>
 
-    <div class="posts">
+    <div class="cards">
 {posts}
     </div>
   </main>
@@ -164,11 +188,11 @@ BLOG_INDEX_TEMPLATE = """<!DOCTYPE html>
 </html>
 """
 
-POST_ENTRY_TEMPLATE = """      <article class="post">
-        <div class="post-date">{date}</div>
-        <a href="blog/{slug}.html" class="post-title">{title}</a>
-        <p class="post-excerpt">{excerpt}</p>
-      </article>
+POST_ENTRY_TEMPLATE = """      <a href="blog/{slug}.html" class="card">
+        <div class="meta">{date}</div>
+        <h3>{title}</h3>
+        <p>{excerpt}</p>
+      </a>
 """
 
 
