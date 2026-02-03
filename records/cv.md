@@ -531,7 +531,7 @@ awards:
   - year: 2017
     organization: University of Waterloo
     award: "Outstanding Performance Award"
-    amount:
+    amount: ""
   - year: 2010--2013
     organization: SSHRC Doctoral Scholarship (Category A)
     award: "Bombardier Canada Graduate Scholarship"
@@ -551,57 +551,85 @@ awards:
   - year: 2009
     organization: Memorial University
     award: "University Gold Medal for Excellence in Sociology"
-    amount:
+    amount: ""
 contracts:
   - years: 2025
     contracted: Allyson Stokes and John McLevey
     title: "Equity and Inclusion in Organized Sports in Newfoundland and Labrador"
-    organization: "SportNL"
+    organization: "Project with [SportNL](https://sportnl.ca/)"
   - years: 2020
     contracted: John McLevey
     title: "Applied Computer Vision and Ensemble Machine Learning for Disinformation Research"
-    organization: "Project for the Crime & Security Research Institute, Cardiff University"
+    organization: "Project for the Crime & Security Research Institute (now the [Security, Crime and Intelligence Innovation Institute](https://www.cardiff.ac.uk/security-crime-intelligence-innovation-institute/about-us)), Cardiff University"
   - years: 2020
     contracted: John McLevey
     title: "Automated Detection of 'Bursty' Concepts, Claims, and Narratives in Social Media Data"
-    organization: "Project for the Crime & Security Research Institute, Cardiff University"
+    organization: "Project for the Crime & Security Research Institute (now the [Security, Crime and Intelligence Innovation Institute](https://www.cardiff.ac.uk/security-crime-intelligence-innovation-institute/about-us)), Cardiff University"
   - years: 2016--2017
     contracted: Janice Aurini, John McLevey, and Rob Gorbet
     title: "Assessing the Impact of Classroom-Integrated Robotics on the Cultivation of 21^st^ Century Competencies"
-    organization: "Contract with Council of Ontario Directors of Education (CODE) for the Ontario Ministry of Education"
+    organization: "Project for the Council of Ontario Directors of Education (CODE) and the Ontario Ministry of Education"
 
 software:
   - package: dcss
-    license: GNU General Public License 2
+    license: GNU GPL2
+    github: https://github.com/mclevey/dcss
+    language: Python
     description: "`dcss` is a Python package accompanying John McLevey (2022) *Doing Computational Social Science*. It includes curated datasets and a large collection of utility functions for data processing and working with statistical and machine learning models."
     development: "John McLevey, Tyler Crick, Pierson Browne"
-  - package: mk
-    license: GNU General Public License 2
+    status: Active maintenance
+
+  - package: metaknowledge
+    license: GNU GPL2
+    github: https://github.com/UWNETLAB/metaknowledge
+    language: Python
     description: "`metaknowledge` (or `mk`) is a Python package for quantitative and social networks research in the sociology of science and information science. First released in 2015. Under active development. Website and documentation: [http://networkslab.org/metaknowledge/](http://networkslab.org/metaknowledge/)."
     development: Reid McIlroy-Young and John McLevey
-  - package: Nate
-    license: MIT License
-    description: "`Nate` (**n**etwork **a**nalysis with **te**xt) is a Python package for network-based text analysis."
-    development: "John McLevey, Pierson Browne, and Tyler Crick"
+    status: Active maintenance
+
   - package: pdpp
     license: MIT License
+    github: https://github.com/UWNETLAB/pdpp
+    language: Python
     description: "`pdpp` is a Python package for principled data processing with Python. It was first released in 2015 and is under active development."
     development: "Pierson Browne, Tyler Crick, Rachel Wood, and John McLevey"
+    status: Active maintenance
+
+  - package: nate
+    license: MIT License
+    github: https://github.com/UWNETLAB/nate
+    language: Python
+    description: "`Nate` (**n**etwork **a**nalysis with **te**xt) is a Python package for network-based text analysis."
+    development: "John McLevey, Pierson Browne, and Tyler Crick"
+    status: Archived
+
   - package: simkit
     license: MIT License
+    github: https://github.com/mclevey/simkit
+    language: Python
     description: "`simkit` is a Python package for probabilistic and agent-based computational models of opinion dynamics, diffusion, learning, and influence. It is currently in beta and under active development."
     development: John McLevey
+    status: Archived
+
   - package: tidyext
     license: MIT License
+    github: https://github.com/UWNETLAB/tidyextractors
+    language: Python
     description: "`tidyextractors` is a Python package for extracting quantitative datasets from source code repositories, email mbox files, and social media APIs."
     development: Joel Becker (NETLAB)
+    status: Archived
+
   - package: gitnet
     license: MIT License
+    github: https://github.com/UWNETLAB/gitnet
+    language: Python
     description: "`gitnet` is a Python package for mining source code repository and mailing list data and generating network datasets. First released in 2016. `gitnet` is still publicly available and functional, but development and maintenance efforts have shifted to other Python packages."
     development: "Joel Becker, Jillian Anderson, Steve McColl, and John McLevey"
+    status: Archived
 
 othersoftware:
   - package: recordlinkage
+    package_long:
     description: "Contributions to Jonathan de Bruin's Python package `recordlinkage`: A Python package for linking records across multiple data sources when there is no unique ID available. NetLab contributions were focused on implementing new comparison and fusion algorithms for my research on the structure and evolution of cross-sectoral collaboration networks in science and technology. Most NetLab contributions to `recordlinkage` were implemented by Joel Becker (RA) and occasionally Jillian Anderson (RA), and then submitted to Jonathan de Bruin as pull requests."
 
 conferences:
@@ -880,7 +908,7 @@ invited:
   - year: 2017-11
     authors: John McLevey
     title: "A Primer on Computational Sociology."
-    conference: "Guest speaker in Sociology Theory grad seminar, Department of Sociology & Legal Studies"
+    conference: "Guest speaker in Sociology Theory grad seminar, Sociology & Legal Studies"
     location: "University of Waterloo, Waterloo, ON, Canada"
   - year: 2017-05
     authors: John McLevey
@@ -1196,166 +1224,167 @@ teaching:
     enrollment: 55
 
 phd:
-  - student: "Karmvir Padda -- ABD"
-    department: "Sociology & Legal Studies"
-    status: "In Progress"
+  - student: Felix Morrow
+    department: Sociology, Memorial University
+    status: In progress
+    startdate: 2026-01
+    enddate:
+    supervisor: Mark Stoddart
+    committee: John McLevey, ...
+    dissertation:
+  - student: Karmvir Padda
+    department: Sociology & Legal Studies, University of Waterloo
+    status: 2025
     startdate: 2021-09
-    enddate: "Expected defence in 2025"
-    supervisor: "John McLevey"
-    committee: "Owen Gallupe and Veronica Kitchen"
+    enddate: Defended 2025-12
+    supervisor: John McLevey
+    committee: Owen Gallupe and Veronica Kitchen
     dissertation:
-  - student: "Tyler Crick -- ABD"
-    department: "Sociology & Legal Studies"
-    status: "In Progress"
+  - student: Tyler Crick
+    department: Sociology & Legal Studies, University of Waterloo
+    status: ABD
     startdate: 2017-09
-    enddate: "Expected defence in 2024"
-    supervisor: "John McLevey"
-    committee: "Owen Gallupe and Peter Carrington"
+    enddate: Expected defence in 2024
+    supervisor: John McLevey
+    committee: Owen Gallupe and Peter Carrington
     dissertation:
-  - student: "Alexander (Sasha) Graham -- ABD"
-    department: "Sociology & Legal Studies"
-    status: "In Progress"
+  - student: Alexander (Sasha) Graham
+    department: Sociology & Legal Studies, University of Waterloo
+    status: ABD
     startdate: 2017-09
-    enddate: "Expected defence in 2024"
-    supervisor: "John McLevey"
-    committee: "Owen Gallupe and Peter Carrington"
+    enddate: Expected defence in 2024
+    supervisor: John McLevey
+    committee: Owen Gallupe, Peter Carrington, Goetz Hoeppe
     dissertation:
-  - student: "Jessica Gill -- ABD"
-    department: "Sociology & Legal Studies"
-    status: "In Progress"
-    startdate: "2020-09"
-    enddate: "Expected defence in 2025"
-    supervisor: "Rashmee Singh"
-    committee: "Andrea Quinlan and John McLevey"
-    dissertation:
-  - student: "Geisha Sanchez -- ABD"
-    department: "Geography & Environmental Management"
-    status: "In Progress"
-    startdate: "2020-09"
-    enddate: "Expected defence in 2024"
-    supervisor: "Sarah Burch"
-    committee: "Olaf Weber and John McLevey"
-    dissertation:
-  - student: "Mark Shakespear"
-    department: "Sociology, University of British Columbia"
-    status: "In Progress"
-    startdate:
-    enddate:
-    supervisor: "David Tindall"
-    committee: "K Harrison, A Jorgenson, M Stoddart, and J McLevey"
-    dissertation:
-  - student: "Yasmin Koop-Monteiro -- ABD"
-    department: "Sociology, University of British Columbia"
-    status: "In Progress"
-    startdate:
-    enddate:
-    supervisor: "David Tindall"
-    committee: "Mark Stoddart and John McLevey"
-    dissertation:
-  - student: "Yixi Yang -- ABD"
-    department: "Sociology, Memorial University"
-    status: "In Progress"
-    startdate:
-    enddate:
-    supervisor: "Mark Stoddart"
-    committee: "John McLevey and David Tindall"
-    dissertation:
-  - student: "Keegan Aaron Fernandes"
-    department: "Electrical and Computer Engineering"
-    status: "In Progress"
-    startdate:
-    enddate:
-    supervisor: "Dan Davison"
-    committee: "David Wang, Rob Gorbet, and John McLevey"
-    dissertation:
-  - student: "Emerson LaCroix"
-    department: "Sociology & Legal Studies"
-    status: "2024"
+  - student: Jessica Gill
+    department: Sociology & Legal Studies, University of Waterloo
+    status: ABD
     startdate: 2020-09
-    enddate: "Defended 2024-06"
-    supervisor: "Janice Aurini"
-    committee: "John McLevey and Stephanie Howells"
+    enddate: Expected defence in 2025
+    supervisor: Rashmee Singh
+    committee: Andrea Quinlan and John McLevey
     dissertation:
-  - student: "Pierson Browne"
-    department: "Sociology & Legal Studies"
-    status: "2023"
+  - student: Geisha Sanchez
+    department: Geography & Environmental Management
+    status: ABD
+    startdate: 2020-09
+    enddate: Expected defence in 2024
+    supervisor: Sarah Burch
+    committee: Bipashyee Ghosh, Olaf Weber and John McLevey
+    dissertation:
+  - student: Mark Shakespear
+    department: Sociology, University of British Columbia
+    status: ABD
+    startdate:
+    enddate:
+    supervisor: David Tindall
+    committee: K Harrison, A Jorgenson, M Stoddart, and J McLevey
+    dissertation:
+  - student: Yasmin Koop-Monteiro
+    department: Sociology, University of British Columbia
+    status: 2025
+    startdate:
+    enddate: Defended 2025-06
+    supervisor: David Tindall
+    committee: Mark Stoddart and John McLevey
+    dissertation:
+  - student: Yixi Yang
+    department: Sociology, Memorial University
+    status: 2024
+    startdate:
+    enddate: Defended 2024-12
+    supervisor: Mark Stoddart
+    committee: John McLevey and David Tindall
+    dissertation:
+  - student: Emerson LaCroix
+    department: Sociology & Legal Studies, University of Waterloo
+    status: 2024
+    startdate: 2020-09
+    enddate: Defended 2024-06
+    supervisor: Janice Aurini
+    committee: John McLevey and Stephanie Howells
+    dissertation:
+  - student: Pierson Browne
+    department: Sociology & Legal Studies, University of Waterloo
+    status: 2023
     startdate: 2015-09
-    enddate: "Defended 2023-12"
-    supervisor: "John McLevey"
-    committee: "Owen Gallupe and Peter Carrington"
-    dissertation: "Doing Reproducible Quantiative Sociology"
-  - student: "Peter Duggins"
-    department: "Systems Design Engineering"
-    status: "2023"
+    enddate: Defended 2023-12
+    supervisor: John McLevey
+    committee: Owen Gallupe and Peter Carrington
+    dissertation: "Doing Reproducible Quantitative Sociology"
+  - student: Peter Duggins
+    department: Systems Design Engineering
+    status: 2023
     startdate: 2018-08
     enddate:
-    supervisor: "Chris Eliasmith"
-    committee: "Bryan Tripp, Kerstin Dautenhahn, and John McLevey"
+    supervisor: Chris Eliasmith
+    committee: Bryan Tripp, Kerstin Dautenhahn, and John McLevey
     dissertation: "Social Learning and Decison Making: Neural and Computational Models"
-  - student: "Adam Howe"
-    department: "Sociology, University of British Columbia"
-    status: "2022"
+  - student: Adam Howe
+    department: Sociology, University of British Columbia
+    status: 2022
     startdate: 2016-09
-    enddate: "Defended 2022-03"
-    supervisor: "David Tindall"
-    committee: "Catherine Corrigall-Brown, Rima Wilkes, and John McLevey"
+    enddate: Defended 2022-03
+    supervisor: David Tindall
+    committee: Catherine Corrigall-Brown, Rima Wilkes, and John McLevey
     dissertation:
-  - student: "François Lapachelle"
-    department: "Sociology, University of British Columbia"
+  - student: François Lapachelle
+    department: Sociology, University of British Columbia
     status: 2022
     startdate: 2015-09
-    enddate: "Defended 2022-02"
-    supervisor: "Beth Hirsh"
-    committee: "David Tindall and John McLevey"
+    enddate: Defended 2022-02
+    supervisor: Beth Hirsh
+    committee: David Tindall and John McLevey
     dissertation:
-  - student: "Julie Cooke"
-    department: "School of Environment, Enterprise, and Development"
+  - student: Julie Cooke
+    department: School of Environment, Enterprise, and Development
     status: 2022
     startdate: 2016-09
-    enddate: "Defended 2022-08"
-    supervisor: "Jennifer Lynes"
-    committee: "Steve Quilley and John McLevey"
+    enddate: Defended 2022-08
+    supervisor: Jennifer Lynes
+    committee: Steve Quilley and John McLevey
     dissertation:
-  - student: "Rod Missaghian"
-    department: "Sociology & Legal Studies"
+  - student: Rod Missaghian
+    department: Sociology & Legal Studies, University of Waterloo
     status: 2020
     startdate: 2015-09
-    enddate: "Defended 2020-10"
-    supervisor: "Janice Aurini"
-    committee: "Linda Quirke and John McLevey"
+    enddate: Defended 2020-10
+    supervisor: Janice Aurini
+    committee: Linda Quirke and John McLevey
     dissertation:
-  - student: "Brittany Etmanski"
-    department: "Sociology and Legal Studies"
+  - student: Brittany Etmanski
+    department: Sociology and Legal Studies
     status: 2019
     startdate: 2015-09
-    enddate: "Defended 2019-09"
-    supervisor: "Janice Aurini"
-    committee: "Owen Gallupe and John McLevey"
+    enddate: Defended 2019-09
+    supervisor: Janice Aurini
+    committee: Owen Gallupe and John McLevey
     dissertation:
-  - student: "Moutasem Zakkar"
-    department: "Applied Health Sciences"
+  - student: Moutasem Zakkar
+    department: Applied Health Sciences
     status: 2019
     startdate: 2015-09
-    enddate: "Defended 2019-11"
-    supervisor: "Craig Janes, Samantha Meyer"
-    committee: "Plinio Morita, Daniel Lizotte, John McLevey"
+    enddate: Defended 2019-11
+    supervisor: Craig Janes, Samantha Meyer
+    committee: Plinio Morita, Daniel Lizotte, John McLevey
     dissertation:
-  - student: "Noorin Manji"
-    department: "Sociology & Legal Studies"
+  - student: Noorin Manji
+    department: Sociology & Legal Studies, University of Waterloo
     status: 2018
     startdate: 2010-09
-    enddate: "Defended 2018-08"
-    supervisor: "Lorne Dawson"
-    committee: "Janice Aurini and John McLevey"
+    enddate: Defended 2018-08
+    supervisor: Lorne Dawson
+    committee: Janice Aurini and John McLevey
     dissertation:
-  - student: "Michael Clarke"
-    department: "Sociology & Legal Studies"
+  - student: Michael Clarke
+    department: Sociology & Legal Studies, University of Waterloo
     status: 2016
     startdate: 2011-09
-    enddate: "Defended 2016-06"
-    supervisor: "Kieran Bonner"
-    committee: "David Goodwin and John McLevey"
+    enddate: Defended 2016-06
+    supervisor: Kieran Bonner
+    committee: David Goodwin and John McLevey
     dissertation:
+
 # - student: "Amelia Howard"
 #   department: 'Sociology & Legal Studies'
 #   status: Medical Leave
@@ -1363,6 +1392,15 @@ phd:
 #   enddate:
 #   supervisor: "John McLevey"
 #   committee: "Kieran Bonner and Martin Cooke"
+#   dissertation:
+# - student: Keegan Aaron Fernandes
+#   note: "Didn't follow through when I left UW. Some other way to list this minimal work? (https://uwaterloo.ca/electrical-computer-engineering/events/phd-defence-notice-social-influence-based-control-voluntary)"
+#   department: Electrical and Computer Engineering
+#   status: In Progress
+#   startdate:
+#   enddate:
+#   supervisor: Dan Davison
+#   committee: David Wang, Rob Gorbet, and John McLevey
 #   dissertation:
 
 # comprehensives:
@@ -1396,7 +1434,7 @@ phd:
 #   exam: Quantitative Methods
 #   date: 2020-10
 #   chair: Sarah Laflamme
-#   department: Sociology & Legal Studies
+#   department: Sociology & Legal Studies, University of Waterloo
 #   committee: "Owen Gallupe and John McLevey"
 # - student: Pierson Browne
 #   exam: Quantitative Methods
@@ -1467,14 +1505,14 @@ phd:
 #   title: Social Network Analysis
 #   date: 2018-12
 #   chair: John McLevey
-#   department: Sociology & Legal Studies
+#   department: Sociology & Legal Studies, University of Waterloo
 #   committee: "Peter Carrington, Owen Gallupe"
 # - student: Emerson LaCroix
 #   exam: MA Thesis Proposal Defense
 #   title:
 #   date: 2018-06
 #   chair: Janice Aurini
-#   department: Sociology & Legal Studies
+#   department: Sociology & Legal Studies, University of Waterloo
 #   committee: ""
 # - student: Nathanial Barr
 #   exam: PhD Dissertation Defense
@@ -1650,7 +1688,7 @@ undergraduate:
     thesis: "`cydr`: An R Package for Cleaning Agricultural Yield Data"
   - year: 2015-2016
     student: Julia Yaroshinsky
-    department: Sociology & Legal Studies
+    department: Sociology & Legal Studies, University of Waterloo
     thesis: "Top Contributors of the Linux Kernel: Similarities and Differences"
   - year: 2014-2015
     student: Tiffany Lin
@@ -1662,7 +1700,7 @@ undergraduate:
     thesis: "Paradigms, Learning, and Change in Organizations"
   - year: 2013-2014
     student: Christina Minji Chung
-    department: Sociology & Legal Studies
+    department: Sociology & Legal Studies, University of Waterloo
     thesis: "Organizational Dynamics of Tech Startups in the Kitchener-Waterloo Region"
   - year: 2013-2014
     student: Chelsea Mills

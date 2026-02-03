@@ -9,9 +9,118 @@ Reads cv.md and outputs site/cv.html.
 """
 
 import re
+import urllib.request
+import urllib.error
+import json
 from pathlib import Path
+from datetime import datetime
 
 LEADING_WS = "&nbsp;&nbsp;&nbsp;&nbsp;"
+
+
+def fetch_github_info(github_url, yaml_data=None):
+    """
+    Fetch version and commit info from GitHub API.
+    Falls back to YAML data, then to placeholders.
+    Returns dict with version, last_commit (date), commit_id (short SHA).
+    Prints warnings on failures.
+    """
+    if yaml_data is None:
+        yaml_data = {}
+
+    result = {
+        "version": yaml_data.get("version", "XX.XX"),
+        "last_commit": yaml_data.get("last_commit", "XXXX-XX-XX"),
+        "commit_id": yaml_data.get("commit_id", "XXXXXXX"),
+    }
+
+    if not github_url:
+        print(f"  ⚠ Warning: No GitHub URL provided")
+        return result
+
+    # Parse owner/repo from GitHub URL
+    # Strip whitespace and trailing slashes
+    github_url = github_url.strip().rstrip("/")
+    match = re.match(r"https?://github\.com/([^/]+)/([^/]+?)(?:\.git)?$", github_url)
+    if not match:
+        print(f"  ⚠ Warning: Could not parse GitHub URL: {github_url}")
+        return result
+
+    owner, repo = match.groups()
+
+    # Fetch version from releases or tags
+    version_fetched = False
+    try:
+        # Try releases first
+        url = f"https://api.github.com/repos/{owner}/{repo}/releases/latest"
+        req = urllib.request.Request(url, headers={"User-Agent": "CV-Builder"})
+        with urllib.request.urlopen(req, timeout=5) as response:
+            data = json.loads(response.read().decode())
+            result["version"] = data.get("tag_name", result["version"])
+            version_fetched = True
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            # No releases, try tags
+            try:
+                url = f"https://api.github.com/repos/{owner}/{repo}/tags"
+                req = urllib.request.Request(url, headers={"User-Agent": "CV-Builder"})
+                with urllib.request.urlopen(req, timeout=5) as response:
+                    data = json.loads(response.read().decode())
+                    if data:
+                        result["version"] = data[0].get("name", result["version"])
+                        version_fetched = True
+            except Exception as tag_err:
+                print(
+                    f"  ⚠ Warning: Could not fetch tags for {owner}/{repo}: {tag_err}"
+                )
+        else:
+            print(f"  ⚠ Warning: GitHub API error for {owner}/{repo}: {e}")
+    except Exception as e:
+        print(f"  ⚠ Warning: Could not fetch release for {owner}/{repo}: {e}")
+
+    if not version_fetched and result["version"] == "XX.XX":
+        print(f"  ⚠ Warning: No version found for {owner}/{repo}")
+
+    # Fetch latest commit
+    try:
+        url = f"https://api.github.com/repos/{owner}/{repo}/commits?per_page=1"
+        req = urllib.request.Request(url, headers={"User-Agent": "CV-Builder"})
+        with urllib.request.urlopen(req, timeout=5) as response:
+            data = json.loads(response.read().decode())
+            if data:
+                commit = data[0]
+                result["commit_id"] = commit["sha"][:7]
+                # Parse date
+                date_str = commit["commit"]["committer"]["date"]
+                # Format: 2024-01-15T10:30:00Z
+                dt = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
+                result["last_commit"] = dt.strftime("%Y-%m-%d")
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            print(f"  ⚠ Warning: Repository not found: {github_url}")
+        else:
+            print(f"  ⚠ Warning: GitHub API error for commits: {e}")
+    except Exception as e:
+        print(f"  ⚠ Warning: Could not fetch commits for {owner}/{repo}: {e}")
+
+    return result
+
+
+def md_to_html(text):
+    """Convert common markdown syntax to HTML."""
+    if not text:
+        return ""
+    text = str(text)
+    # Convert markdown links [text](url) to <a href="url">text</a>
+    text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r'<a href="\2">\1</a>', text)
+    # Convert inline code `code` to <code>code</code>
+    text = re.sub(r"`([^`]+)`", r"<code>\1</code>", text)
+    return text
+
+
+def md_links_to_html(text):
+    """Legacy wrapper - use md_to_html instead."""
+    return md_to_html(text)
 
 
 try:
@@ -31,7 +140,7 @@ def parse_frontmatter(content: str) -> dict:
 
 
 def clean_text(text: str) -> str:
-    """Clean LaTeX and special formatting from text."""
+    """Clean LaTeX and special formatting from text, convert markdown to HTML."""
     if not text:
         return ""
     text = str(text)
@@ -42,8 +151,12 @@ def clean_text(text: str) -> str:
     text = re.sub(r"\\ind\s*", "", text)
     # Handle superscripts like 21^st^
     text = re.sub(r"\^(\w+)\^", r"<sup>\1</sup>", text)
-    # Handle italics marked with asterisks (student names)
+    # Handle bold marked with double asterisks (must come before italics)
+    text = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", text)
+    # Handle italics marked with single asterisks
     text = re.sub(r"\*([^*]+)\*", r"<em>\1</em>", text)
+    # Convert markdown syntax to HTML (links, inline code)
+    text = md_to_html(text)
     return text.strip()
 
 
@@ -394,12 +507,15 @@ def build_cv():
     if data.get("awards"):
         award_items = []
         for a in data["awards"]:
-            amount = f' ({a.get("amount", "")})' if a.get("amount") else ""
+            org = clean_text(a.get("organization", ""))
+            org = md_links_to_html(org)
+
+            award = clean_text(a.get("award", ""))
+            award = md_links_to_html(award)
+
             award_items.append(
-                f'<li>{a.get("year", "")}. {clean_text(a.get("award", ""))}. '
-                f'{clean_text(a.get("organization", ""))}{amount}.</li>'.replace(
-                    "--", " to "
-                )
+                f'<li>{a.get("year", "")}. {award}.<br>'
+                f'{org} {a.get("amount", "")}</li>'.replace("--", " to ")
             )
         sections.append(
             f"""
@@ -415,9 +531,10 @@ def build_cv():
         contract_items = []
         for c in data["contracts"]:
             years = str(c.get("years", "")).replace("--", " to ")
+            org = md_links_to_html(clean_text(c.get("organization", "")))
             contract_items.append(
                 f'<li>{c.get("contracted", "")}. {years}. "{clean_text(c.get("title", ""))}." '
-                f'{clean_text(c.get("organization", ""))}.</li>'
+                f"{org}.</li>"
             )
         sections.append(
             f"""
@@ -428,17 +545,101 @@ def build_cv():
 """
         )
 
+    # License badge mapping
+    LICENSE_BADGES = {
+        "MIT License": "https://img.shields.io/badge/License-MIT-yellow.svg",
+        "MIT": "https://img.shields.io/badge/License-MIT-yellow.svg",
+        "GNU GPL2": "https://img.shields.io/badge/License-GPL_v2-blue.svg",
+        "GNU GPL3": "https://img.shields.io/badge/License-GPLv3-blue.svg",
+        "Apache 2.0": "https://img.shields.io/badge/License-Apache_2.0-yellowgreen.svg",
+        "BSD 3-Clause": "https://img.shields.io/badge/License-BSD_3--Clause-orange.svg",
+    }
+
+    # GitHub badge
+    GITHUB_BADGE = "https://img.shields.io/badge/github-%23121011.svg?style=flat&logo=github&logoColor=white"
+    # Language and tool badges
+    LANGUAGE_BADGES = {
+        # Languages
+        "Python": "https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54",
+        "R": "https://img.shields.io/badge/r-%23276DC3.svg?style=flat&logo=r&logoColor=white",
+        "Julia": "https://img.shields.io/badge/-Julia-9558B2?style=flat&logo=julia&logoColor=white",
+        "Bash": "https://img.shields.io/badge/bash-%23121011.svg?style=flat&logo=gnu-bash&logoColor=white",
+        "Shell": "https://img.shields.io/badge/shell-%23121011.svg?style=flat&logo=gnu-bash&logoColor=white",
+        # ML/NLP tools
+        "HuggingFace": "https://img.shields.io/badge/HuggingFace-%23FFD21E.svg?style=flat&logo=huggingface&logoColor=black",
+        "Transformers": "https://img.shields.io/badge/Transformers-%23FFD21E.svg?style=flat&logo=huggingface&logoColor=black",
+        "spaCy": "https://img.shields.io/badge/spaCy-09A3D5?style=flat&logo=spacy&logoColor=white",
+        # Network analysis
+        "graph-tool": "https://img.shields.io/badge/graph--tool-7B68EE?style=flat",
+        # Bibliometric databases
+        "OpenAlex": "https://img.shields.io/badge/OpenAlex-A6CE39?style=flat",
+        "Web of Science": "https://img.shields.io/badge/Web_of_Science-5C5C5C?style=flat",
+        "Scopus": "https://img.shields.io/badge/Scopus-E9711C?style=flat",
+    }
+
     # Software
     if data.get("software"):
         sw_items = []
+        print("Fetching GitHub info for software packages...")
         for sw in data["software"]:
-            sw_items.append(
-                f'<li><strong>{sw.get("package", "")}</strong>. {clean_text(sw.get("description", ""))}. '
-                f'License: {sw.get("license", "")}. Development: {clean_text(sw.get("development", ""))}.</li>'
-            )
+            package = clean_text(sw.get("package", ""))
+            language = sw.get("language", "")
+            status = sw.get("status", "")
+            description = clean_text(sw.get("description", ""))
+            license_text = sw.get("license", "")
+            github_url = sw.get("github", "")
+            team = clean_text(sw.get("development", ""))
+
+            # Fetch GitHub info (version, commit)
+            print(f"  → {package}...")
+            gh_info = fetch_github_info(github_url, sw)
+
+            # Get language badge
+            language_badge = LANGUAGE_BADGES.get(language)
+            if language_badge:
+                language_html = f'<img src="{language_badge}" alt="{language}">'
+            else:
+                language_html = ""
+
+            badge_url = LICENSE_BADGES.get(license_text)
+            if badge_url:
+                license_html = f'<img src="{badge_url}" alt="{license_text}">'
+            else:
+                license_html = license_text
+
+            # GitHub badge with link
+            if github_url:
+                github_html = (
+                    f'<a href="{github_url}">'
+                    f'<img src="{GITHUB_BADGE}" alt="GitHub"></a>'
+                )
+                # Package name links to GitHub
+                version = f"({gh_info["version"]})"
+                package_html = (
+                    f'<a href="{github_url}"><strong>{package}</strong></a> ({version})'
+                )
+            else:
+                github_html = ""
+                package_html = f"<strong>{package}</strong>"
+
+            commit_id = gh_info["commit_id"]
+            last_commit = f"{gh_info["last_commit"]} (commit: {commit_id})"
+
+            software_str = "<li>"
+            software_str += f"{package_html}<br>"
+            # software_str += f"{package_long}<br>"
+            software_str += f"{language_html} {license_html} {github_html}<br>"
+            software_str += f"<code>pip install {package}</code><br>"
+            software_str += f"Developed by: {team}<br>"
+            software_str += f"Last commit: {last_commit}<br>"
+            software_str += f"{description}"
+            software_str += "</li>"
+
+            sw_items.append(software_str)
+
         sections.append(
             f"""
-<h2>Software</h2>
+<h2>Scientific Software</h2>
 <ol reversed>
 {"\n".join(sw_items)}
 </ol>
@@ -578,51 +779,74 @@ def build_cv():
 
     # PhD Supervision
     if data.get("phd"):
-        phd_items = []
+        phd_active = []
+        phd_completed = []
         for p in data["phd"]:
-            status = f' ({p.get("status", "")})' if p.get("status") else ""
-            diss = (
-                f' Dissertation: "{clean_text(p.get("dissertation", ""))}".'
-                if p.get("dissertation")
-                else ""
-            )
+            status_val = p.get("status", "")
+            is_completed = isinstance(status_val, int)
             role = (
                 "Supervisor"
                 if p.get("supervisor") == "John McLevey"
-                else f'Committee Member (Supervisor: {clean_text(p.get("supervisor", ""))})'
+                else "Committee Member"
             )
-            phd_items.append(
-                f'<li>{clean_text(p.get("student", ""))}{status}. '
-                f'{clean_text(p.get("department", ""))}. {role}. '
-                f'Committee: {clean_text(p.get("committee", ""))}.{diss}</li>'
-            )
-        sections.append(
-            f"""
-<h2>PhD Supervision</h2>
-<ol reversed>
-{"\n".join(phd_items)}
-</ol>
-"""
-        )
+            if is_completed:
+                phd_completed.append(
+                    f"<li>{role} for "
+                    f'<strong>{clean_text(p.get("student", ""))} ({status_val})</strong><br>'
+                    f'{clean_text(p.get("department", ""))}<br>'
+                    f'Supervisor: {p.get("supervisor", "")}<br>'
+                    f'Committee: {p.get("committee", "")}</li>'
+                )
+            else:
+                status_str = f" ({status_val})" if status_val else ""
+                phd_active.append(
+                    f"<p>{role} for "
+                    f'<strong>{clean_text(p.get("student", ""))}{status_str}</strong><br>'
+                    f'{LEADING_WS}{clean_text(p.get("department", ""))}<br>'
+                    f'{LEADING_WS}Supervisor: {p.get("supervisor", "")}<br>'
+                    f'{LEADING_WS}Committee: {p.get("committee", "")}</p>'
+                )
+        phd_section = "\n<h2>PhD Students</h2>\n"
+        if phd_active:
+            phd_section += "<h3>Active</h3>\n"
+            phd_section += "\n".join(phd_active) + "\n"
+        if phd_completed:
+            phd_section += "<h3>Completed</h3>\n<ol reversed>\n"
+            phd_section += "\n".join(phd_completed)
+            phd_section += "\n</ol>\n"
+        sections.append(phd_section)
 
     # Masters Supervision
     if data.get("masters"):
-        ma_items = []
+        ma_active = []
+        ma_completed = []
         for m in data["masters"]:
-            thesis = f' "{clean_text(m.get("thesis", ""))}".' if m.get("thesis") else ""
-            ma_items.append(
-                f'<li>{clean_text(m.get("student", ""))} ({m.get("status", "")}). '
-                f'{m.get("degree", "")}, {clean_text(m.get("department", ""))}. '
-                f'{m.get("role", "")}.{thesis}</li>'
+            status_val = m.get("status", "")
+            is_completed = isinstance(status_val, int) or (
+                isinstance(status_val, str) and status_val.isdigit()
             )
-        sections.append(
-            f"""
-<h2>Masters Supervision</h2>
-<ol reversed>
-{"\n".join(ma_items)}
-</ol>
-"""
-        )
+            if is_completed:
+                ma_completed.append(
+                    f'<li>{m.get("role", "")} for <strong>{clean_text(m.get("student", ""))} ({status_val})</strong><br>'
+                    f'{m.get("degree", "")}, {clean_text(m.get("department", ""))}.'
+                    "</li>"
+                )
+            else:
+                status_str = f" ({status_val})" if status_val else ""
+                ma_active.append(
+                    f'<p>{clean_text(m.get("student", ""))}{status_str}. '
+                    f'{m.get("degree", "")}, {clean_text(m.get("department", ""))}. '
+                    f'Role: {m.get("role", "")}</p>'
+                )
+        ma_section = "\n<h2>Masters Students</h2>\n"
+        if ma_active:
+            ma_section += "<h3>Active</h3>\n"
+            ma_section += "\n".join(ma_active) + "\n"
+        if ma_completed:
+            ma_section += "<h3>Completed</h3>\n<ol reversed>\n"
+            ma_section += "\n".join(ma_completed)
+            ma_section += "\n</ol>\n"
+        sections.append(ma_section)
 
     # HQP
     if data.get("hqp"):
