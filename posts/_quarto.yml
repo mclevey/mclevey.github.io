@@ -1,0 +1,16 @@
+project:
+  type: default
+
+execute:
+  echo: true
+  warning: false
+  message: false
+  cache: true
+  freeze: auto
+
+format:
+  gfm:
+    preserve-yaml: true
+    toc: false
+    number-sections: false
+    wrap: none

@@ -10,12 +10,12 @@ This post demonstrates how to include images and tables in blog posts. Click any
 
 Images can be included using standard markdown syntax. Here's an example using one of the book covers:
 
-![Doing Computational Social Science](../img/DCSS.png)
+![Doing Computational Social Science](../images/DCSS.png)
 
 You can also include images with captions by wrapping them in HTML figure elements:
 
 <figure>
-  <img src="../img/SHSNA.png" alt="Sage Handbook of Social Network Analysis">
+  <img src="../images/SHSNA.png" alt="Sage Handbook of Social Network Analysis">
   <figcaption>The Sage Handbook of Social Network Analysis, 2nd Edition (2023)</figcaption>
 </figure>
 
@@ -23,42 +23,42 @@ You can also include images with captions by wrapping them in HTML figure elemen
 
 Tables are useful for presenting structured data. Here's an example comparing different network analysis packages:
 
-| Package | Language | Primary Use | License |
-|---------|----------|-------------|---------|
-| graph-tool | Python/C++ | General network analysis | LGPL |
-| NetworkX | Python | General network analysis | BSD |
-| igraph | R/Python/C | General network analysis | GPL |
-| metaknowledge | Python | Bibliometric networks | GPL |
-| Nate | Python | Text networks | MIT |
+| Package       | Language   | Primary Use              | License |
+| ------------- | ---------- | ------------------------ | ------- |
+| graph-tool    | Python/C++ | General network analysis | LGPL    |
+| NetworkX      | Python     | General network analysis | BSD     |
+| igraph        | R/Python/C | General network analysis | GPL     |
+| metaknowledge | Python     | Bibliometric networks    | GPL     |
+| Nate          | Python     | Text networks            | MIT     |
 
 ### Performance Comparison
 
 Here's another table showing hypothetical performance metrics:
 
 | Dataset Size | graph-tool | NetworkX | igraph |
-|-------------|------------|----------|--------|
-| 1K nodes | 0.1s | 0.2s | 0.15s |
-| 10K nodes | 0.8s | 3.2s | 1.1s |
-| 100K nodes | 12s | 180s | 25s |
-| 1M nodes | 150s | N/A | 420s |
+| ------------ | ---------- | -------- | ------ |
+| 1K nodes     | 0.1s       | 0.2s     | 0.15s  |
+| 10K nodes    | 0.8s       | 3.2s     | 1.1s   |
+| 100K nodes   | 12s        | 180s     | 25s    |
+| 1M nodes     | 150s       | N/A      | 420s   |
 
 ## Combining Elements
 
 You can combine text, images, and tables to create rich content. For example, when discussing book publications:
 
 <figure>
-  <img src="../img/F2FP.png" alt="The Face-to-Face Principle">
+  <img src="../images/F2FP.png" alt="The Face-to-Face Principle">
   <figcaption>The Face-to-Face Principle and the Internet (2022)</figcaption>
 </figure>
 
 The table below summarizes key publication details:
 
-| Title | Year | Publisher | Co-authors |
-|-------|------|-----------|------------|
-| Sage Handbook of SNA | 2023 | Sage | Scott, Carrington |
-| Doing CSS | 2022 | Sage | - |
-| Face-to-Face Principle | 2022 | MIT Press | Tindall |
-| Industrial Development | 2020 | Palgrave | Stoddart, Tindall |
+| Title                  | Year | Publisher | Co-authors        |
+| ---------------------- | ---- | --------- | ----------------- |
+| Sage Handbook of SNA   | 2023 | Sage      | Scott, Carrington |
+| Doing CSS              | 2022 | Sage      | -                 |
+| Face-to-Face Principle | 2022 | MIT Press | Tindall           |
+| Industrial Development | 2020 | Palgrave  | Stoddart, Tindall |
 
 ## Code with Images
 

@@ -1,0 +1,35 @@
+---
+title: Nested Stochastic Blockmodels Part 1
+author: John McLevey
+date: 2026-02-03
+excerpt: An introduction to nested stochastic blockmodels using graph-tool.
+execute:
+  echo: true
+  warning: false
+  message: false
+format:
+  gfm: default
+---
+
+This is the first in a series of posts exploring nested stochastic blockmodels (NSBMs) for network analysis. We'll use the `graph-tool` library to fit and visualize these models.
+
+## Introduction
+
+Stochastic blockmodels are generative models for networks that assume nodes can be grouped into blocks (communities) with characteristic connection patterns between them.
+
+## Setup
+
+Let's start by importing the necessary libraries.
+
+```{python}
+import pandas as pd
+import numpy as np
+
+print("Libraries loaded successfully!")
+print(f"NumPy version: {np.__version__}")
+print(f"Pandas version: {pd.__version__}")
+```
+
+## Next Steps
+
+In the next post, we'll load a real network and fit our first nested SBM.

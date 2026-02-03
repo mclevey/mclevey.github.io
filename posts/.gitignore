@@ -1,0 +1,9 @@
+# Quarto temp files
+/.quarto/
+.jupyter_cache/
+
+# Quarto duplicate GFM outputs (we use the .md files)
+*-gfm.md
+
+# Generated figure directories (cleaned after build)
+*_files/

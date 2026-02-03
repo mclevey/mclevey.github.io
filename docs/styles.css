@@ -602,6 +602,19 @@ pre code.hljs {
   width: 100%;
 }
 
+/* Code output styling (for executed notebook cells) */
+.code-output {
+  background: var(--bg-code);
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.25rem;
+  margin: 0.5rem 0 1.25rem 0;
+  font-family: ui-monospace, 'SF Mono', Menlo, Monaco, 'Cascadia Code', Consolas, monospace;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  white-space: pre;
+  overflow-x: auto;
+}
+
 /* Chapter authors */
 .chapter-authors {
   font-size: 0.9rem;
