@@ -4,7 +4,7 @@ Personal website served via GitHub Pages from the `docs/` directory.
 
 ## Architecture
 
-This site uses a **unified template-based build system** that separates content from presentation:
+I'm using a custom template-based build system. It's weird and you should probably just use Quarto instead. But anyway...
 
 - **Content** lives in `content/` (markdown with YAML frontmatter)
 - **Templates** live in `templates/` (Jinja2 HTML templates)
