@@ -1,20 +1,23 @@
 #!/usr/bin/env python3
 """
-Blog builder: renders .qmd files with Quarto, then converts markdown to HTML.
+Blog Builder: Renders Quarto notebooks to HTML for the site.
 
-Usage:
-    python build_blog.py              # Build all posts
-    python build_blog.py --render     # Render .qmd files first, then build
-    python build_blog.py --clean      # Clean temp files
+WORKFLOW:
+    1. Source files: posts/*.qmd (Quarto notebooks with executable code)
+    2. Quarto renders: .qmd → .md (markdown with executed code outputs)
+    3. This script converts: .md → HTML (using site template)
+    4. Cleanup: intermediate .md files are removed
 
-Workflow:
-1. .qmd files in posts/ contain executable code
-2. Quarto renders .qmd -> .md with executed outputs
-3. This script converts .md -> HTML using the site template
-4. Generated figures are copied to docs/blog/figures/
+USAGE:
+    pixi run update-blog     # Full build: render .qmd files and convert to HTML
 
-Source files: posts/*.qmd and posts/*.md (hand-written)
-Output files: docs/blog/*.html
+    # Or run directly:
+    python scripts/build_blog.py
+
+OUTPUT:
+    docs/blog/*.html         # Individual post pages
+    docs/blog.html           # Blog index page
+    docs/blog/figures/       # Any generated figures from code execution
 """
 
 import argparse
@@ -37,14 +40,15 @@ except ImportError:
     exit(1)
 
 
-TEMPLATE = """<!DOCTYPE html>
+# HTML template for individual blog posts
+POST_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title} – John McLevey</title>
   <link rel="stylesheet" href="../styles.css">
-  <!-- Highlight.js themes -->
+  <!-- Highlight.js for syntax highlighting -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css" id="hljs-light">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/nord.min.css" id="hljs-dark" disabled>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -85,17 +89,15 @@ TEMPLATE = """<!DOCTYPE html>
       }});
   </script>
 
-  <!-- Lightbox -->
+  <!-- Lightbox for images -->
   <div class="lightbox-overlay" id="lightbox">
     <span class="lightbox-close">&times;</span>
     <img src="" alt="" id="lightbox-img">
   </div>
 
   <script>
-    // Initialize highlight.js
     hljs.highlightAll();
 
-    // Theme toggle with highlight.js theme switching
     function updateHljsTheme(theme) {{
       const lightTheme = document.getElementById('hljs-light');
       const darkTheme = document.getElementById('hljs-dark');
@@ -144,6 +146,7 @@ TEMPLATE = """<!DOCTYPE html>
 </html>
 """
 
+# HTML template for blog index page
 BLOG_INDEX_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -200,7 +203,8 @@ BLOG_INDEX_TEMPLATE = """<!DOCTYPE html>
 </html>
 """
 
-POST_ENTRY_TEMPLATE = """      <a href="blog/{slug}.html" class="card">
+# Template for each post entry on the blog index
+POST_CARD_TEMPLATE = """      <a href="blog/{slug}.html" class="card">
         <div class="meta">{date}</div>
         <h3>{title}</h3>
         <p>{excerpt}</p>
@@ -220,7 +224,7 @@ def parse_frontmatter(content: str) -> tuple[dict, str]:
 
 
 def get_excerpt(html_content: str, max_length: int = 200) -> str:
-    """Extract first paragraph as excerpt."""
+    """Extract plain text excerpt from HTML content."""
     text = re.sub(r"<[^>]+>", "", html_content)
     text = " ".join(text.split())
     if len(text) > max_length:
@@ -228,196 +232,265 @@ def get_excerpt(html_content: str, max_length: int = 200) -> str:
     return text
 
 
-def clean_quarto_body(body: str, title: str, date: str) -> str:
-    """Remove Quarto-generated title/author/date lines from body."""
+def clean_quarto_artifacts(body: str, title: str) -> str:
+    """
+    Remove Quarto-generated artifacts from the markdown body.
+
+    Quarto adds redundant title, author, and date lines at the top of the
+    rendered markdown which we don't need (we get these from frontmatter).
+    """
     lines = body.split("\n")
     cleaned = []
     skip_next_blank = False
-
-    # Date patterns to skip (YYYY-MM-DD format)
     date_pattern = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
-    for i, line in enumerate(lines):
+    for line in lines:
         stripped = line.strip()
-        # Skip redundant title (Quarto adds # Title at top)
+
+        # Skip redundant title (Quarto adds "# Title" at top)
         if stripped == f"# {title}":
             skip_next_blank = True
             continue
-        # Skip author line and "Invalid Date" that Quarto adds
-        if stripped in ["Invalid Date", "John McLevey", "John McLevey Invalid Date"]:
+
+        # Skip author line
+        if stripped in ["John McLevey", "Invalid Date", "John McLevey Invalid Date"]:
             skip_next_blank = True
             continue
-        # Skip standalone date lines (Quarto adds these)
+
+        # Skip standalone date lines
         if date_pattern.match(stripped):
             skip_next_blank = True
             continue
+
         # Skip blank lines after removed content
         if skip_next_blank and stripped == "":
             skip_next_blank = False
             continue
+
         skip_next_blank = False
         cleaned.append(line)
 
     return "\n".join(cleaned)
 
 
-def fix_image_paths(body: str) -> str:
-    """Fix image paths for the output location."""
-    # Convert ../img/ to ../images/ (source to output path)
-    body = re.sub(r'\.\./img/', '../images/', body)
-    # Convert relative figure paths from Quarto output
-    # e.g., 2026-02-03-nsbm-1_files/figure-gfm/... -> figures/...
-    body = re.sub(r'(\S+)_files/figure-gfm/', 'figures/', body)
-    return body
-
-
 def format_code_output(body: str) -> str:
-    """Format code output blocks properly - combine consecutive output lines."""
+    """
+    Format code output blocks with proper HTML.
+
+    Quarto renders code output as 4-space indented text. We wrap these
+    in <pre class="code-output"> blocks for styling.
+    """
     lines = body.split("\n")
     result = []
     in_code_block = False
     output_buffer = []
 
     def flush_output():
-        """Flush buffered output lines into a single pre block."""
         if output_buffer:
             result.append('<pre class="code-output">' + "\n".join(output_buffer) + '</pre>')
             output_buffer.clear()
 
     for line in lines:
-        # Track code blocks
+        # Track fenced code blocks
         if line.strip().startswith("```"):
             flush_output()
             in_code_block = not in_code_block
             result.append(line)
             continue
 
-        # Convert indented output (4 spaces) to output block if not in code block
+        # 4-space indented lines outside code blocks are output
         if not in_code_block and line.startswith("    "):
-            # This is likely code output - buffer it
             output_buffer.append(line[4:])  # Strip the 4-space indent
         else:
             flush_output()
             result.append(line)
 
-    flush_output()  # Don't forget any trailing output
+    flush_output()
     return "\n".join(result)
 
 
-def render_qmd_files(posts_dir: Path) -> list[Path]:
-    """Render all .qmd files with Quarto and return list of generated .md files."""
-    qmd_files = list(posts_dir.glob("*.qmd"))
-    if not qmd_files:
-        print("No .qmd files found to render")
-        return []
+def fix_image_paths(body: str, slug: str) -> str:
+    """
+    Fix image paths for the output location.
 
-    print(f"Rendering {len(qmd_files)} .qmd files with Quarto...")
+    - Converts relative figure paths from Quarto (slug_files/figure-gfm/...)
+      to the output location (figures/...)
+    """
+    # Fix Quarto figure paths: slug_files/figure-gfm/image.png -> figures/image.png
+    body = re.sub(rf'{re.escape(slug)}_files/figure-gfm/', 'figures/', body)
+    return body
 
-    # Run quarto render on the posts directory
+
+def render_qmd_to_md(qmd_file: Path, posts_dir: Path) -> Path | None:
+    """
+    Render a single .qmd file to markdown using Quarto.
+
+    Returns the path to the generated .md file, or None if rendering failed.
+    """
+    print(f"  Rendering: {qmd_file.name}")
+
     result = subprocess.run(
-        ["quarto", "render", str(posts_dir), "--to", "gfm"],
+        ["quarto", "render", str(qmd_file), "--to", "gfm"],
         capture_output=True,
         text=True,
-        cwd=posts_dir.parent
+        cwd=posts_dir
     )
 
     if result.returncode != 0:
-        print(f"Quarto render failed:\n{result.stderr}")
-        return []
+        print(f"    ERROR: Quarto render failed")
+        print(f"    {result.stderr}")
+        return None
 
-    print(result.stdout)
+    # Quarto outputs to same name with .md extension
+    md_file = qmd_file.with_suffix(".md")
+    if md_file.exists():
+        return md_file
 
-    # Find the generated .md files (same name as .qmd)
-    generated = []
-    for qmd in qmd_files:
-        md_file = qmd.with_suffix(".md")
-        if md_file.exists():
-            generated.append(md_file)
-            print(f"  Generated: {md_file.name}")
+    # Sometimes Quarto adds -gfm suffix, check for that
+    gfm_file = posts_dir / f"{qmd_file.stem}-gfm.md"
+    if gfm_file.exists():
+        # Rename to expected name
+        gfm_file.rename(md_file)
+        return md_file
 
-    return generated
-
-
-def copy_figures(posts_dir: Path, output_dir: Path):
-    """Copy generated figure directories to output."""
-    figures_output = output_dir / "figures"
-    figures_output.mkdir(exist_ok=True)
-
-    # Find and copy figure directories
-    for fig_dir in posts_dir.glob("*_files/figure-gfm"):
-        if fig_dir.is_dir():
-            for fig_file in fig_dir.glob("*"):
-                dest = figures_output / fig_file.name
-                shutil.copy2(fig_file, dest)
-                print(f"  Copied figure: {fig_file.name}")
+    print(f"    ERROR: Expected output {md_file.name} not found")
+    return None
 
 
-def clean_temp_files(posts_dir: Path):
-    """Clean up temporary files generated by Quarto."""
-    # Remove -gfm.md files (we use the .md output)
-    for gfm_file in posts_dir.glob("*-gfm.md"):
+def copy_figures(posts_dir: Path, output_dir: Path, slug: str):
+    """Copy generated figures to the output directory."""
+    figures_src = posts_dir / f"{slug}_files" / "figure-gfm"
+    if not figures_src.exists():
+        return
+
+    figures_dest = output_dir / "figures"
+    figures_dest.mkdir(exist_ok=True)
+
+    for fig_file in figures_src.glob("*"):
+        dest = figures_dest / fig_file.name
+        shutil.copy2(fig_file, dest)
+        print(f"    Copied figure: {fig_file.name}")
+
+
+def cleanup_intermediate_files(posts_dir: Path, slug: str):
+    """Remove intermediate files generated during build."""
+    # Remove the generated .md file
+    md_file = posts_dir / f"{slug}.md"
+    if md_file.exists():
+        md_file.unlink()
+
+    # Remove any -gfm.md variant
+    gfm_file = posts_dir / f"{slug}-gfm.md"
+    if gfm_file.exists():
         gfm_file.unlink()
-        print(f"  Removed: {gfm_file.name}")
 
-    # Remove figure directories (after copying)
-    for fig_dir in posts_dir.glob("*_files"):
-        if fig_dir.is_dir():
-            shutil.rmtree(fig_dir)
-            print(f"  Removed: {fig_dir.name}/")
-
-    # Optionally remove .quarto directory
-    quarto_dir = posts_dir / ".quarto"
-    if quarto_dir.exists():
-        shutil.rmtree(quarto_dir)
-        print("  Removed: .quarto/")
+    # Remove figure directory
+    fig_dir = posts_dir / f"{slug}_files"
+    if fig_dir.exists():
+        shutil.rmtree(fig_dir)
 
 
-def get_source_md_files(posts_dir: Path) -> list[Path]:
-    """Get markdown files to process, excluding Quarto intermediates."""
-    all_md = list(posts_dir.glob("*.md"))
-    # Exclude -gfm.md variants (Quarto duplicates)
-    return [f for f in all_md if not f.stem.endswith("-gfm")]
+def cleanup_quarto_cache(posts_dir: Path):
+    """Remove Quarto cache directories."""
+    for cache_dir in [".quarto", "_freeze", ".jupyter_cache"]:
+        cache_path = posts_dir / cache_dir
+        if cache_path.exists():
+            shutil.rmtree(cache_path)
+            print(f"  Removed cache: {cache_dir}/")
 
 
-def build_blog(render: bool = False, clean: bool = False):
+def update_index_latest_posts(base_dir: Path, posts: list):
+    """
+    Update the 'Latest Posts' section on the index page with the two most recent posts.
+    """
+    index_file = base_dir / "docs" / "index.html"
+    if not index_file.exists():
+        print("  Warning: index.html not found, skipping latest posts update")
+        return
+
+    content = index_file.read_text()
+
+    # Find and replace the Latest Posts section
+    # Pattern: from <h2>Latest Posts</h2> through the closing </div> of the cards
+    pattern = r'(<h2>Latest Posts</h2>\s*<div class="cards">).*?(</div>\s*</main>)'
+
+    if not re.search(pattern, content, re.DOTALL):
+        print("  Warning: Could not find Latest Posts section in index.html")
+        return
+
+    # Build the new cards HTML (top 2 posts)
+    latest_posts = posts[:2]
+    cards_html = "\n".join(
+        f'''      <a href="blog/{post['slug']}.html" class="card">
+        <div class="meta">{post['date']}</div>
+        <h3>{post['title']}</h3>
+        <p>{post['excerpt']}</p>
+      </a>'''
+        for post in latest_posts
+    )
+
+    replacement = f'\\1\n{cards_html}\n    \\2'
+    new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+
+    index_file.write_text(new_content)
+    print("Updated index.html with latest posts")
+
+
+def build_blog():
+    """
+    Main build function.
+
+    1. Find all .qmd files in posts/
+    2. Render each to markdown with Quarto (executes code)
+    3. Convert markdown to HTML with site template
+    4. Clean up intermediate files
+    5. Generate blog index
+    6. Update index.html with latest posts
+    """
     base_dir = Path(__file__).resolve().parent.parent
     posts_dir = base_dir / "posts"
     output_dir = base_dir / "docs" / "blog"
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Optionally render .qmd files first
-    if render:
-        render_qmd_files(posts_dir)
-        copy_figures(posts_dir, output_dir)
+    # Find all .qmd source files
+    qmd_files = sorted(posts_dir.glob("*.qmd"), reverse=True)
 
-    md = markdown.Markdown(extensions=["fenced_code", "tables", "attr_list"])
+    if not qmd_files:
+        print("No .qmd files found in posts/")
+        return
+
+    print(f"Found {len(qmd_files)} .qmd files\n")
+
+    # Markdown converter
+    md_converter = markdown.Markdown(extensions=["fenced_code", "tables", "attr_list"])
 
     posts = []
 
-    # Get source markdown files (excluding -gfm variants)
-    md_files = get_source_md_files(posts_dir)
+    for qmd_file in qmd_files:
+        slug = qmd_file.stem
+        print(f"Processing: {qmd_file.name}")
 
-    for md_file in sorted(md_files, reverse=True):
-        # Skip files that have a corresponding .qmd and haven't been rendered
-        qmd_file = md_file.with_suffix(".qmd")
-        if qmd_file.exists() and not render:
-            # If there's a .qmd source, skip the .md unless we just rendered
-            print(f"Skipping {md_file.name} (has .qmd source, use --render)")
+        # Step 1: Render .qmd to .md with Quarto
+        md_file = render_qmd_to_md(qmd_file, posts_dir)
+        if md_file is None:
+            print(f"  Skipping due to render error\n")
             continue
 
-        print(f"Processing: {md_file.name}")
+        # Step 2: Copy any generated figures
+        copy_figures(posts_dir, output_dir, slug)
 
+        # Step 3: Read and parse the rendered markdown
         content = md_file.read_text()
         frontmatter, body = parse_frontmatter(content)
 
-        title = frontmatter.get("title", md_file.stem.replace("-", " ").title())
+        title = frontmatter.get("title", slug.replace("-", " ").title())
 
-        # Handle date - extract from filename if not in frontmatter or invalid
+        # Extract date from frontmatter or filename
         date = frontmatter.get("date")
-        if date is None or date == "\\today" or str(date) == "\\today":
-            # Try to extract from filename (YYYY-MM-DD-title.md)
-            match = re.match(r"(\d{4}-\d{2}-\d{2})", md_file.stem)
+        if date is None or str(date) == "\\today":
+            # Try to extract from filename (YYYY-MM-DD-title.qmd)
+            match = re.match(r"(\d{4}-\d{2}-\d{2})", slug)
             if match:
                 date = match.group(1)
             else:
@@ -425,58 +498,53 @@ def build_blog(render: bool = False, clean: bool = False):
         elif isinstance(date, datetime):
             date = date.strftime("%Y-%m-%d")
         else:
-            date = str(date)
+            # Handle ISO format with timezone
+            date = str(date).split("T")[0]
 
-        # Clean up Quarto-generated artifacts
-        body = clean_quarto_body(body, title, date)
-        body = fix_image_paths(body)
+        # Step 4: Clean up and convert to HTML
+        body = clean_quarto_artifacts(body, title)
+        body = fix_image_paths(body, slug)
         body = format_code_output(body)
 
-        md.reset()
-        html_content = md.convert(body)
+        md_converter.reset()
+        html_content = md_converter.convert(body)
 
-        slug = md_file.stem
-
-        html = TEMPLATE.format(title=title, date=date, content=html_content)
+        # Step 5: Apply template and write HTML
+        html = POST_TEMPLATE.format(title=title, date=date, content=html_content)
 
         output_file = output_dir / f"{slug}.html"
         output_file.write_text(html)
-        print(f"  → {output_file.relative_to(base_dir)}")
+        print(f"  → docs/blog/{slug}.html")
 
-        posts.append(
-            {
-                "title": title,
-                "date": date,
-                "slug": slug,
-                "excerpt": frontmatter.get("excerpt", get_excerpt(html_content)),
-            }
-        )
+        # Collect post metadata for index
+        posts.append({
+            "title": title,
+            "date": date,
+            "slug": slug,
+            "excerpt": frontmatter.get("excerpt", get_excerpt(html_content)),
+        })
 
-    # Clean temp files if requested
-    if clean:
-        print("\nCleaning temporary files...")
-        clean_temp_files(posts_dir)
+        # Step 6: Clean up intermediate files
+        cleanup_intermediate_files(posts_dir, slug)
+        print()
 
-    # Sort posts by date
+    # Clean up Quarto cache
+    cleanup_quarto_cache(posts_dir)
+
+    # Generate blog index page
     posts.sort(key=lambda p: p["date"], reverse=True)
-
-    # Generate blog index
-    posts_html = "\n".join(POST_ENTRY_TEMPLATE.format(**post) for post in posts)
+    posts_html = "\n".join(POST_CARD_TEMPLATE.format(**post) for post in posts)
 
     blog_index = BLOG_INDEX_TEMPLATE.format(posts=posts_html)
     blog_index_file = base_dir / "docs" / "blog.html"
     blog_index_file.write_text(blog_index)
-    print(f"  → {blog_index_file.relative_to(base_dir)}")
+    print(f"Generated blog index: docs/blog.html")
 
-    print(f"\nBuilt {len(posts)} posts")
+    # Update index.html with latest posts
+    update_index_latest_posts(base_dir, posts)
+
+    print(f"\nBuilt {len(posts)} posts successfully")
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Build blog from markdown/qmd files")
-    parser.add_argument("--render", action="store_true",
-                        help="Render .qmd files with Quarto first")
-    parser.add_argument("--clean", action="store_true",
-                        help="Clean temporary files after build")
-    args = parser.parse_args()
-
-    build_blog(render=args.render, clean=args.clean)
+    build_blog()

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nested Stochastic Blockmodels Part 1 – John McLevey</title>
   <link rel="stylesheet" href="../styles.css">
-  <!-- Highlight.js themes -->
+  <!-- Highlight.js for syntax highlighting -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css" id="hljs-light">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/nord.min.css" id="hljs-dark" disabled>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -63,17 +63,15 @@ Pandas version: 2.3.2</pre>
       });
   </script>
 
-  <!-- Lightbox -->
+  <!-- Lightbox for images -->
   <div class="lightbox-overlay" id="lightbox">
     <span class="lightbox-close">&times;</span>
     <img src="" alt="" id="lightbox-img">
   </div>
 
   <script>
-    // Initialize highlight.js
     hljs.highlightAll();
 
-    // Theme toggle with highlight.js theme switching
     function updateHljsTheme(theme) {
       const lightTheme = document.getElementById('hljs-light');
       const darkTheme = document.getElementById('hljs-dark');

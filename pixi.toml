@@ -8,10 +8,8 @@ version = "0.1.0"
 [tasks]
 preview = { cmd = "cd docs/ && python -m http.server 8080" }
 
-# Blog building commands
-update-blog = { cmd = "python scripts/build_blog.py --render --clean" }
-build-blog = { cmd = "python scripts/build_blog.py" }
-render-qmd = { cmd = "quarto render posts --to gfm" }
+# Build blog: renders .qmd files (executes code) and converts to HTML
+update-blog = { cmd = "python scripts/build_blog.py" }
 
 update-cv = { cmd = "python scripts/build_cv.py" }
 

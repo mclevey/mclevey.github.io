@@ -1,9 +1,10 @@
+# All .md files are generated (intermediate) - source is .qmd only
+*.md
+
 # Quarto temp files
 /.quarto/
 .jupyter_cache/
-
-# Quarto duplicate GFM outputs (we use the .md files)
-*-gfm.md
+_freeze/
 
 # Generated figure directories (cleaned after build)
 *_files/
