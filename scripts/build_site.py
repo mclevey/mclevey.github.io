@@ -5,10 +5,11 @@ Unified Site Builder
 Builds the entire site from content files using Jinja2 templates.
 
 CONTENT SOURCES:
-    content/*.md           → docs/*.html (static pages)
-    content/books/*.md     → docs/books/*.html (book pages)
-    posts/*.qmd            → docs/blog/*.html (blog posts via Quarto)
-    records/cv.md          → docs/cv.html (CV from YAML)
+    content/*.md             → docs/*.html (static pages)
+    content/books/*.md       → docs/books/*.html (book pages)
+    content/teaching/*.md    → docs/teaching/*.html (course pages)
+    content/posts/*.qmd      → docs/blog/*.html (blog posts via Quarto)
+    records/cv.md            → docs/cv.html (CV from YAML)
 
 TEMPLATES:
     templates/base.html       - Common page structure
@@ -17,6 +18,7 @@ TEMPLATES:
     templates/blog_post.html  - Blog post with syntax highlighting
     templates/blog_index.html - Blog listing
     templates/book.html       - Book page
+    templates/course.html     - Course page
     templates/cv.html         - CV with TOC sidebar
 
 USAGE:
@@ -58,7 +60,7 @@ except ImportError:
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = BASE_DIR / "templates"
 CONTENT_DIR = BASE_DIR / "content"
-POSTS_DIR = BASE_DIR / "posts"
+POSTS_DIR = CONTENT_DIR / "posts"
 RECORDS_DIR = BASE_DIR / "records"
 OUTPUT_DIR = BASE_DIR / "docs"
 

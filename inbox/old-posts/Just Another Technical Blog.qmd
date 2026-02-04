@@ -1,9 +1,0 @@
----
-title: "Hello World!"
-description: "These are the first words from every blog, right?"
-author: "John McLevey"
-date: "2/19/2024" # last-modified
-categories:
----
-
-I've been meaning to start doing some technical blogging for ~13 years, but I've always been too busy. Now that I have newborn twins, I figure it's a good time to start. 🤣

@@ -1,6 +1,8 @@
 project:
   type: default
 
+author: John McLevey
+
 execute:
   echo: true
   warning: false
