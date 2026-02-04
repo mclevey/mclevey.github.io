@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="book-header">
+  <img src="{{ base_path }}images/{{ image }}" alt="{{ title }}">
+  <div class="book-info">
+    <h1>{{ title }}</h1>
+    <p class="meta">{{ authors }}<br>{{ publisher }}, {{ year }}</p>
+  </div>
+</div>
+
+{{ content|safe }}
+
+<a href="{{ base_path }}index.html" class="back-link">← Back</a>
+{% endblock %}

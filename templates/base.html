@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>John McLevey</title>
-  <link rel="stylesheet" href="styles.css">
-  
+  <title>{{ title }}{% if title %} – {% endif %}John McLevey</title>
+  <link rel="stylesheet" href="{{ base_path }}styles.css">
+  {% block head_extra %}{% endblock %}
 </head>
 <body>
   <header>
     <nav>
-      <a href="index.html" class="nav-home">JM.</a>
-      <a href="cv.html">CV</a>
-      <a href="research.html">Research</a>
-      <a href="teaching.html">Teaching & Supervision</a>
-      <a href="software-data.html">Software & Data</a>
-      <a href="blog.html" class="active">Blog</a>
+      <a href="{{ base_path }}index.html" class="nav-home">JM.</a>
+      <a href="{{ base_path }}cv.html"{% if active == 'cv' %} class="active"{% endif %}>CV</a>
+      <a href="{{ base_path }}research.html"{% if active == 'research' %} class="active"{% endif %}>Research</a>
+      <a href="{{ base_path }}teaching.html"{% if active == 'teaching' %} class="active"{% endif %}>Teaching & Supervision</a>
+      <a href="{{ base_path }}software-data.html"{% if active == 'software' %} class="active"{% endif %}>Software & Data</a>
+      <a href="{{ base_path }}blog.html"{% if active == 'blog' %} class="active"{% endif %}>Blog</a>
       <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
         <span class="icon-moon">☽</span>
         <span class="icon-sun">☼</span>
@@ -23,34 +23,15 @@
     </nav>
   </header>
 
-  
+  {% block before_main %}{% endblock %}
 
   <main>
-    
-<h1>Blog</h1>
-<p class="intro">Notes on methods, tutorials, and updates.</p>
-
-<div class="cards">
-
-  <a href="blog/2026-02-05-nsbm-2.html" class="card">
-    <div class="meta">2026-02-05</div>
-    <h3>Nested Stochastic Blockmodels Part 2</h3>
-    <p>Fitting and visualizing nested stochastic blockmodels with graph-tool.</p>
-  </a>
-
-  <a href="blog/2026-02-03-nsbm-1.html" class="card">
-    <div class="meta">2026-02-03</div>
-    <h3>Nested Stochastic Blockmodels Part 1</h3>
-    <p>An introduction to nested stochastic blockmodels using graph-tool.</p>
-  </a>
-
-</div>
-
+    {% block content %}{% endblock %}
   </main>
 
   <footer id="site-footer"></footer>
   <script>
-    fetch('footer.html')
+    fetch('{{ base_path }}footer.html')
       .then(response => response.text())
       .then(html => {
         document.getElementById('site-footer').innerHTML = html;
@@ -63,13 +44,13 @@
       const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
-      
+      {% block theme_extra %}{% endblock %}
     }
     const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    
+    {% block theme_init_extra %}{% endblock %}
   </script>
 
-  
+  {% block scripts %}{% endblock %}
 </body>
 </html>

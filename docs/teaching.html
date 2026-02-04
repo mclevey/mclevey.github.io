@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teaching & Supervision – John McLevey</title>
+  <title>John McLevey</title>
   <link rel="stylesheet" href="styles.css">
+  
 </head>
 <body>
   <header>
@@ -22,69 +23,47 @@
     </nav>
   </header>
 
+  
+
   <main>
-    <h1>Courses</h1>
-
-    <h2>Undergraduate</h2>
-    <div class="cards">
-      <a href="teaching/3040.html" class="card">
-        <p>Sociology / Criminology 3040</p>
-        <h3>Quantitative Research Methods</h3>
-        <p>This course introduces students to foundational concepts, principles, and practices in contemporary quantitative social science.</p>
-        <br>
-        <p>Learn more...</p>
-      </a>
-      <div class="card">
-        <p>Sociology / Criminology 4420</p>
-        <h3>Networks, Culture, and Social Control</h3>
-        <p>This course introduces students to social network analysis in sociology and criminology.</p>
-        <br>
-        <p>Learn more...</p>
-      </div>
-    </div>
-
-    <h2>Graduate</h2>
-    <div class="cards">
-      <div class="card">
-        <p>Sociology 6044</p>
-        <h3>Networks, Culture, and Social Control</h3>
-        <p>SOCI 6044 is a graduate seminar, held alongside SOCI 4420, that introduces students to social network analysis in
-          sociology and criminology.</p>
-          <br>
-          <p>Learn more...</p>
-      </div>
-    </div>
+    
 
 
-    <br><br>
-    <h1>Graduate Supervision</h1>
-    <p>Coming soon.</p>
+<h1>Courses</h1>
 
-    <!-- <br><br>
-    <h1>Graduate Supervision</h1>
+<h2>Undergraduate</h2>
+<div class="cards">
+  <a href="teaching/3040.html" class="card">
+    <p>Sociology / Criminology 3040</p>
+    <h3>Quantitative Research Methods</h3>
+    <p>This course introduces students to foundational concepts, principles, and practices in contemporary quantitative social science.</p>
+    <br>
+    <p>Learn more...</p>
+  </a>
+  <div class="card">
+    <p>Sociology / Criminology 4420</p>
+    <h3>Networks, Culture, and Social Control</h3>
+    <p>This course introduces students to social network analysis in sociology and criminology.</p>
+    <br>
+    <p>Learn more...</p>
+  </div>
+</div>
 
-    <h2>Prospective Students</h2>
-    <p>I am not currently accepting new graduate students, but please feel free to contact me if you are interested in working with me.</p>
+<h2>Graduate</h2>
+<div class="cards">
+  <div class="card">
+    <p>Sociology 6044</p>
+    <h3>Networks, Culture, and Social Control</h3>
+    <p>SOCI 6044 is a graduate seminar, held alongside SOCI 4420, that introduces students to social network analysis in
+      sociology and criminology.</p>
+      <br>
+      <p>Learn more...</p>
+  </div>
+</div>
 
-    <h2>Current Students</h2>
-    <p>See the <a href="cv.html#phd-students">PhD Students</a> and <a href="cv.html#masters-students">Masters Students</a> sections of my CV.</p>
-
-    <h2>Completed Students</h2>
-    <p>See the <a href="cv.html#phd-students">PhD Students</a> and <a href="cv.html#masters-students">Masters Students</a> sections of my CV.</p>
-
-    <br><br>
-    <h1>Recent Workshops</h1>
-    <div class="cards">
-      <div class="card">
-        <p>Computational Social Science Symposium<br>January 2026, Dalhousie University, Halifax NS, Canada</p>
-        <h3>Introduction to Topic Modelling</h3>
-        <p>This workshop introduces the core concepts, methods, and underlying logic of topic modelling for research. It is
-        designed for researchers with little or no prior experience in quantitative text analysis who want to work with text
-        data in their own projects. Participants will learn how to prepare and process text data, fit topic models, and assess
-        and interpret the results. Examples are provided in Python, but the content is not specific to any particular
-        programming language or software.</p>
-      </div>
-    </div> -->
+<p><br><br></p>
+<h1>Graduate Supervision</h1>
+<p>Coming soon.</p>
 
   </main>
 
@@ -103,9 +82,13 @@
       const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
+      
     }
     const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    
   </script>
+
+  
 </body>
 </html>

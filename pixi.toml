@@ -1,20 +1,26 @@
 [workspace]
 authors = ["John McLevey <john.mclevey@hey.com>"]
 channels = ["conda-forge"]
-name = "black-book-talks"
+name = "mclevey.github.io"
 platforms = ["osx-arm64"]
 version = "0.1.0"
 
 [tasks]
 preview = { cmd = "cd docs/ && python -m http.server 8080" }
 
-# Build blog: renders .qmd files (executes code) and converts to HTML
-update-blog = { cmd = "python scripts/build_blog.py" }
+# Build commands
+build = { cmd = "python scripts/build_site.py" }
+build-pages = { cmd = "python scripts/build_site.py pages" }
+build-blog = { cmd = "python scripts/build_site.py blog" }
+build-cv = { cmd = "python scripts/build_site.py cv" }
 
-update-cv = { cmd = "python scripts/build_cv.py" }
+# Legacy aliases (for backwards compatibility)
+update-blog = { cmd = "python scripts/build_site.py blog" }
+update-cv = { cmd = "python scripts/build_site.py cv" }
 
 
 [dependencies]
+jinja2 = ">=3.1,<4"
 openai = ">=2.16.0,<3"
 python = ">=3.11,<3.13"
 ipykernel = ">=6.30.1,<7"

@@ -1,39 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Sage Handbook of Social Network Analysis – John McLevey</title>
-  <link rel="stylesheet" href="../styles.css">
-  
-</head>
-<body>
-  <header>
-    <nav>
-      <a href="../index.html" class="nav-home">JM.</a>
-      <a href="../cv.html">CV</a>
-      <a href="../research.html">Research</a>
-      <a href="../teaching.html">Teaching & Supervision</a>
-      <a href="../software-data.html">Software & Data</a>
-      <a href="../blog.html">Blog</a>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <span class="icon-moon">☽</span>
-        <span class="icon-sun">☼</span>
-      </button>
-    </nav>
-  </header>
-
-  
-
-  <main>
-    
-<div class="book-header">
-  <img src="../images/SHSNA.png" alt="The Sage Handbook of Social Network Analysis">
-  <div class="book-info">
-    <h1>The Sage Handbook of Social Network Analysis</h1>
-    <p class="meta">John McLevey, John Scott, and Peter J. Carrington (Eds)<br>Sage, London, 2023</p>
-  </div>
-</div>
+---
+template: book
+title: The Sage Handbook of Social Network Analysis
+authors: John McLevey, John Scott, and Peter J. Carrington (Eds)
+publisher: Sage, London
+year: 2023
+image: SHSNA.png
+---
 
 <h2>Description</h2>
 <p>This new edition of <em>The Sage Handbook of Social Network Analysis</em> builds on the success of its predecessor, offering a comprehensive overview of social network analysis produced by leading international scholars in the field.</p>
@@ -133,33 +105,3 @@
 <p><strong>Chapter 41</strong> | Missing Network Data<br><span class="chapter-authors">Robert W. Krause and Mark Huisman</span></p>
 
 <p><strong>Chapter 42</strong> | Scientific Software for Network Analysis<br><span class="chapter-authors">Pierson Browne, Adam Howe, Yasmin Koop-Monteiro, Yixi Yang, and John McLevey</span></p>
-
-<a href="../index.html" class="back-link">← Back</a>
-
-  </main>
-
-  <footer id="site-footer"></footer>
-  <script>
-    fetch('../footer.html')
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('site-footer').innerHTML = html;
-      });
-  </script>
-
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      
-    }
-    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    
-  </script>
-
-  
-</body>
-</html>

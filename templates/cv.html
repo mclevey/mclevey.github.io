@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block before_main %}
+{% if toc_entries %}
+<aside class="toc-sidebar">
+  <div class="toc-title">On this page</div>
+  <nav>
+    <ul>
+      {% for entry in toc_entries %}
+      <li class="toc-h{{ entry.level }}">
+        <a href="#{{ entry.id }}">{{ entry.text }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+</aside>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="post-header">
+  <h1>Professor John McLevey</h1>
+  <p class="meta">he/him</p>
+</div>
+<div class="cv-content">
+{{ content|safe }}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Scroll spy for TOC -->
+<script>
+  (function() {
+    const tocLinks = document.querySelectorAll('.toc-sidebar a');
+    const headings = [];
+
+    tocLinks.forEach(link => {
+      const id = link.getAttribute('href').slice(1);
+      const heading = document.getElementById(id);
+      if (heading) {
+        headings.push({ id, element: heading, link });
+      }
+    });
+
+    if (headings.length === 0) return;
+
+    function updateActiveLink() {
+      const scrollPos = window.scrollY + 120;
+
+      let current = headings[0];
+      for (const heading of headings) {
+        if (heading.element.offsetTop <= scrollPos) {
+          current = heading;
+        } else {
+          break;
+        }
+      }
+
+      tocLinks.forEach(link => link.classList.remove('active'));
+      if (current) {
+        current.link.classList.add('active');
+      }
+    }
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateActiveLink();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    updateActiveLink();
+
+    tocLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = link.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (target) {
+          const offset = 80;
+          const targetPosition = target.offsetTop - offset;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  })();
+</script>
+{% endblock %}

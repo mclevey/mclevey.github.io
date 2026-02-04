@@ -1,41 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Doing Computational Social Science – John McLevey</title>
-  <link rel="stylesheet" href="../styles.css">
-  
-</head>
-<body>
-  <header>
-    <nav>
-      <a href="../index.html" class="nav-home">JM.</a>
-      <a href="../cv.html">CV</a>
-      <a href="../research.html">Research</a>
-      <a href="../teaching.html">Teaching & Supervision</a>
-      <a href="../software-data.html">Software & Data</a>
-      <a href="../blog.html">Blog</a>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <span class="icon-moon">☽</span>
-        <span class="icon-sun">☼</span>
-      </button>
-    </nav>
-  </header>
+---
+template: book
+title: Doing Computational Social Science
+authors: John McLevey
+publisher: Sage, London
+year: 2022
+image: DCSS.png
+---
 
-  
-
-  <main>
-    
-<div class="book-header">
-  <img src="../images/DCSS.png" alt="Doing Computational Social Science">
-  <div class="book-info">
-    <h1>Doing Computational Social Science</h1>
-    <p class="meta">John McLevey<br>Sage, London, 2022</p>
-  </div>
-</div>
-
-<p><br></p>
+<br>
 <h1>Description</h1>
 
 <p>Computational approaches offer exciting opportunities for us to do social science differently. This beginner's guide discusses a range of computational methods and how to use them to study the problems and questions you want to research.</p>
@@ -51,7 +23,7 @@
 
 <p>For anyone who wants to use computational methods to conduct a social science research project, this book equips you with the skills, good habits and best working practices to do rigorous, high quality work.</p>
 
-<p><br></p>
+<br>
 <h1>Contents</h1>
 
 <p>Introduction - Learning to do computational social science</p>
@@ -115,33 +87,3 @@
   <li>Can we model meaning?: Contextual representation and neural word embeddings</li>
   <li>Named entity recognition, transfer learning and transformer models</li>
 </ol>
-
-<a href="../index.html" class="back-link">← Back</a>
-
-  </main>
-
-  <footer id="site-footer"></footer>
-  <script>
-    fetch('../footer.html')
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('site-footer').innerHTML = html;
-      });
-  </script>
-
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      
-    }
-    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    
-  </script>
-
-  
-</body>
-</html>

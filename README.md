@@ -2,278 +2,219 @@
 
 Personal website served via GitHub Pages from the `docs/` directory.
 
+## Architecture
+
+This site uses a **unified template-based build system** that separates content from presentation:
+
+- **Content** lives in `content/` (markdown with YAML frontmatter)
+- **Templates** live in `templates/` (Jinja2 HTML templates)
+- **Output** goes to `docs/` (static HTML served by GitHub Pages)
+
+```
+.
+├── content/                 # CONTENT: Markdown files with YAML frontmatter
+│   ├── index.md             # Home page content
+│   ├── research.md          # Research page
+│   ├── teaching.md          # Teaching page
+│   ├── software-data.md     # Software page
+│   └── books/               # Book pages
+│       ├── dcss.md
+│       ├── face-to-face.md
+│       ├── industrial-development.md
+│       └── sage-handbook.md
+├── templates/               # PRESENTATION: Jinja2 templates
+│   ├── base.html            # Common page structure (nav, footer, theme)
+│   ├── page.html            # Generic content page
+│   ├── index.html           # Home page with profile section
+│   ├── blog_post.html       # Blog post with syntax highlighting
+│   ├── blog_index.html      # Blog listing page
+│   ├── book.html            # Book page layout
+│   └── cv.html              # CV with TOC sidebar
+├── posts/                   # Blog sources (.qmd notebooks)
+├── records/                 # CV data sources
+│   └── cv.md                # CV data in YAML frontmatter
+├── docs/                    # OUTPUT: Built static site
+└── scripts/                 # Build scripts
+    ├── build_site.py        # Unified site builder
+    └── build_cv.py          # CV-specific builder (used by build_site.py)
+```
+
 ## Prerequisites
 
 - [Pixi](https://pixi.sh) for environment management
 - [Quarto](https://quarto.org) for rendering `.qmd` notebooks
 - Run `pixi install` to set up Python dependencies
 
-## Site Structure
+## Build Commands
 
-```
-.
-├── docs/                    # Built site (served by GitHub Pages)
-│   ├── blog/                # Generated blog post HTML
-│   │   └── figures/         # Generated figures from code execution
-│   ├── books/               # Book pages (manual HTML)
-│   ├── images/              # All images (profile, book covers, etc.)
-│   ├── pdfs/                # PDF files (publications, etc.)
-│   ├── teaching/            # Teaching materials (manual HTML)
-│   ├── styles.css           # Site-wide styles
-│   ├── footer.html          # Shared footer (loaded via JS)
-│   └── *.html               # Main site pages
-├── posts/                   # Blog post sources (.qmd files)
-│   └── _quarto.yml          # Quarto project config
-├── records/                 # Data sources for generated content
-│   ├── cv.md                # CV data in YAML frontmatter
-│   └── github_cache.json    # Cached GitHub API responses
-└── scripts/                 # Build scripts
-    ├── build_blog.py        # Blog build pipeline
-    └── build_cv.py          # CV build pipeline
-```
+| Command | Description |
+|---------|-------------|
+| `pixi run build` | Build entire site (pages + blog + CV) |
+| `pixi run build-pages` | Build static pages only |
+| `pixi run build-blog` | Build blog posts only |
+| `pixi run build-cv` | Build CV only |
+| `pixi run preview` | Start local server at http://localhost:8080 |
 
-## Build Pipelines
+Legacy aliases (`update-blog`, `update-cv`) still work for backwards compatibility.
 
-This site uses two automated build pipelines for generated content.
+## Content Workflow
 
-### Blog Pipeline
+### Static Pages
 
-```
-posts/*.qmd  →  [Quarto]  →  .md (with executed code)  →  [build_blog.py]  →  docs/blog/*.html
-                                                                           →  docs/blog.html (index)
-                                                                           →  docs/blog/figures/
+Content files use YAML frontmatter to specify the template and metadata:
+
+```markdown
+---
+template: page
+title: Research
+active: research
+---
+
+Page content in markdown (can include raw HTML)...
 ```
 
-**Source files:** `posts/*.qmd` (Quarto notebooks with executable Python code)
+**Available templates:**
+- `page` - Generic content page
+- `index` - Home page with profile section
+- `book` - Book page with cover image and metadata
 
-**What happens:**
-1. Quarto renders each `.qmd` file, executing Python code blocks
-2. Code outputs (text, tables, figures) are embedded in intermediate `.md` files
-3. `build_blog.py` converts the markdown to HTML using the site template
-4. Generated figures are copied to `docs/blog/figures/`
-5. Intermediate files are cleaned up (only `.qmd` sources remain)
-6. Blog index (`docs/blog.html`) is regenerated with all posts
-7. Home page (`docs/index.html`) "Latest Posts" section is updated with the two most recent posts
-
-**Command:** `pixi run update-blog`
-
-### CV Pipeline
-
-```
-records/cv.md  →  [build_cv.py]  →  docs/cv.html
-                       ↓
-              GitHub API (cached)
-```
-
-**Source file:** `records/cv.md` (YAML frontmatter with all CV data)
-
-**What happens:**
-1. `build_cv.py` parses the YAML frontmatter from `cv.md`
-2. For software entries, it fetches metadata from GitHub API (version, last commit, etc.)
-3. API responses are cached in `records/github_cache.json` (15 min TTL)
-4. CV sections are rendered to HTML with the site template
-5. Table of contents is auto-generated from section headings
-
-**Command:** `pixi run update-cv`
-
-**Note:** Set `GITHUB_TOKEN` environment variable for higher API rate limits.
-
-## Updating Content
+**Special frontmatter fields:**
+- `template` - Which template to use (defaults to `page`)
+- `active` - Which nav item to highlight
+- `title` - Page title
+- `show_title` - Whether to show an h1 with the title
 
 ### Blog Posts
 
-Blog posts are Quarto notebooks (`.qmd`) with executable Python code.
+Blog posts are Quarto notebooks with executable Python code:
 
-1. **Create a new post:** Add `posts/YYYY-MM-DD-slug.qmd`
-2. **Add frontmatter and content:**
-
+1. **Create:** Add `posts/YYYY-MM-DD-slug.qmd`
+2. **Add frontmatter:**
    ```yaml
    ---
    title: Your Post Title
    author: John McLevey
    date: 2026-02-03
-   excerpt: A brief description for the blog index.
+   excerpt: Brief description for blog index.
    execute:
      echo: true
      warning: false
    format:
      gfm: default
    ---
-
-   Your content here with executable code blocks:
-
-   ```{python}
-   import pandas as pd
-   print("This code will be executed!")
    ```
-   ```
+3. **Write content** with executable code blocks
+4. **Build:** Run `pixi run build-blog`
 
-3. **Build:** Run `pixi run update-blog`
-4. **Preview:** Run `pixi run preview` and open http://localhost:8080/blog.html
+### CV
 
-**Image handling:**
-- Static images: Place in `docs/images/`, reference as `../images/filename.png`
-- Generated figures: Automatically saved to `docs/blog/figures/`
+The CV is built from YAML data in `records/cv.md`:
 
-### CV Updates
+1. **Edit** the YAML frontmatter in `records/cv.md`
+2. **Build:** Run `pixi run build-cv`
 
-1. **Edit source:** Open `records/cv.md` and update the YAML frontmatter
-2. **Rebuild:** Run `pixi run update-cv`
-3. **Preview:** Run `pixi run preview` and open http://localhost:8080/cv.html
+GitHub API data (software versions, stars) is cached for 15 minutes.
 
-Example CV entry structure:
+## Build Pipeline
 
-```yaml
----
-name: John McLevey
-email: john.mclevey@example.com
-
-education:
-  - year: 2013
-    subject: PhD, Sociology
-    institute: McMaster University
-    city: Hamilton, ON, Canada
-
-articles:
-  - year: 2022
-    authors: John McLevey, Coauthor Name
-    title: "Article Title"
-    journal: Journal Name
-    volume: 59
-    issue: 2
-    pages: 228-250
-
-software:
-  - package: pdpp
-    description: Network data preprocessing
-    github: https://github.com/mclevey/pdpp
-    language: Python
-    license: MIT License
-    status: Active Development
-    development: John McLevey
----
+```
+                           ┌─────────────────────┐
+                           │  templates/*.html   │
+                           │  (Jinja2 templates) │
+                           └──────────┬──────────┘
+                                      │
+┌──────────────────┐                  │                  ┌───────────────────┐
+│ content/*.md     │──────┐           │           ┌──────│ docs/*.html       │
+│ (static pages)   │      │           │           │      │ (static pages)    │
+└──────────────────┘      │           │           │      └───────────────────┘
+                          │           │           │
+┌──────────────────┐      │     ┌─────┴─────┐     │      ┌───────────────────┐
+│ posts/*.qmd      │──────┼────▸│build_site │─────┼─────▸│ docs/blog/*.html  │
+│ (blog sources)   │      │     │   .py     │     │      │ (blog posts)      │
+└──────────────────┘      │     └─────┬─────┘     │      └───────────────────┘
+                          │           │           │
+┌──────────────────┐      │           │           │      ┌───────────────────┐
+│ records/cv.md    │──────┘           │           └──────│ docs/cv.html      │
+│ (CV data)        │                  │                  │ (CV page)         │
+└──────────────────┘                  │                  └───────────────────┘
+                                      │
+                           ┌──────────┴──────────┐
+                           │    GitHub API       │
+                           │ (software metadata) │
+                           └─────────────────────┘
 ```
 
-### Static Pages (Manual HTML)
+## Template Structure
 
-These pages are edited directly in `docs/`:
+All templates extend `base.html` which provides:
+- Navigation header with theme toggle
+- Footer (loaded via JS)
+- Theme persistence (light/dark mode)
 
-| File | Purpose |
-|------|---------|
-| `docs/index.html` | Home page |
-| `docs/research.html` | Research overview |
-| `docs/teaching.html` | Teaching & supervision |
-| `docs/software-data.html` | Software & data |
-| `docs/books/*.html` | Individual book pages |
-| `docs/teaching/*.html` | Course/workshop pages |
+Templates can override blocks:
+- `{% block head_extra %}` - Additional head elements
+- `{% block before_main %}` - Content before main (e.g., sidebars)
+- `{% block content %}` - Main page content
+- `{% block scripts %}` - Additional scripts
 
-**To edit:**
-1. Open the file in `docs/`
-2. Make changes directly to the HTML
-3. Preview with `pixi run preview`
+## File Reference
 
-### Shared Elements
+### Source Files (Edit These)
 
-| File | Purpose | Used By |
-|------|---------|---------|
-| `docs/styles.css` | All site styles | All pages |
-| `docs/footer.html` | Footer content | Loaded via JS on all pages |
-| `docs/images/` | Shared images | All pages |
+| Location | Purpose |
+|----------|---------|
+| `content/*.md` | Static page content |
+| `content/books/*.md` | Book page content |
+| `posts/*.qmd` | Blog post sources |
+| `records/cv.md` | CV data |
+| `templates/*.html` | Page templates |
+| `docs/styles.css` | Site styles |
+| `docs/footer.html` | Shared footer |
+| `docs/images/*` | Static images |
 
-## Pixi Commands
+### Generated Files (Don't Edit)
 
-| Command | Description |
-|---------|-------------|
-| `pixi run preview` | Start local server at http://localhost:8080 |
-| `pixi run update-blog` | Render `.qmd` files and build blog HTML |
-| `pixi run update-cv` | Rebuild CV from `records/cv.md` |
+| File | Source |
+|------|--------|
+| `docs/index.html` | `content/index.md` |
+| `docs/research.html` | `content/research.md` |
+| `docs/teaching.html` | `content/teaching.md` |
+| `docs/software-data.html` | `content/software-data.md` |
+| `docs/books/*.html` | `content/books/*.md` |
+| `docs/blog/*.html` | `posts/*.qmd` |
+| `docs/blog.html` | Generated from all posts |
+| `docs/cv.html` | `records/cv.md` |
 
 ## Deployment
 
-The site deploys automatically when you push to the `master` branch. GitHub Pages serves the `docs/` directory.
+The site deploys automatically when you push to `master`. GitHub Pages serves `docs/`.
 
 ```bash
+pixi run build
 git add .
 git commit -m "Update site"
 git push
 ```
 
-The custom domain is configured via `docs/CNAME`.
-
-## File Reference
-
-### Generated Files (Do Not Edit Directly)
-
-| File | Generated By | Source |
-|------|--------------|--------|
-| `docs/blog/*.html` | `build_blog.py` | `posts/*.qmd` |
-| `docs/blog.html` | `build_blog.py` | `posts/*.qmd` |
-| `docs/blog/figures/*` | Quarto + `build_blog.py` | Code in `.qmd` files |
-| `docs/cv.html` | `build_cv.py` | `records/cv.md` |
-
-**Partially generated:** `docs/index.html` - The "Latest Posts" section is auto-updated by `build_blog.py`, but the rest of the page is manually edited.
-
-### Source Files
-
-| File | Purpose | Build Command |
-|------|---------|---------------|
-| `posts/*.qmd` | Blog post sources | `pixi run update-blog` |
-| `records/cv.md` | CV data (YAML) | `pixi run update-cv` |
-
-### Manual Files
-
-| File | Purpose |
-|------|---------|
-| `docs/index.html` | Home page |
-| `docs/research.html` | Research page |
-| `docs/teaching.html` | Teaching page |
-| `docs/software-data.html` | Software page |
-| `docs/books/*.html` | Book pages |
-| `docs/teaching/*.html` | Course pages |
-| `docs/styles.css` | Site styles |
-| `docs/footer.html` | Shared footer |
-| `docs/images/*` | Static images |
-| `docs/pdfs/*` | PDF files |
-
 ## Technical Notes
 
-### Blog Build Details
+### Why This Architecture?
 
-The blog build script (`scripts/build_blog.py`) performs these steps:
+Previous iterations used a mix of approaches (raw HTML, partial templates, different build scripts). This unified system:
 
-1. Find all `.qmd` files in `posts/`
-2. For each file:
-   - Run `quarto render <file> --to gfm` (executes code, produces `.md`)
-   - Copy generated figures to `docs/blog/figures/`
-   - Parse YAML frontmatter for title, date, excerpt
-   - Clean Quarto artifacts (redundant title/author/date lines)
-   - Convert markdown to HTML with site template
-   - Delete intermediate `.md` file
-3. Clean Quarto cache directories
-4. Regenerate blog index page (`docs/blog.html`)
-5. Update "Latest Posts" section in `docs/index.html` with the two most recent posts
-
-### CV Build Details
-
-The CV build script (`scripts/build_cv.py`) performs these steps:
-
-1. Parse YAML frontmatter from `records/cv.md`
-2. For software entries with GitHub URLs:
-   - Check cache (`records/github_cache.json`)
-   - If stale (>15 min), fetch from GitHub API
-   - Extract version, last commit, stars, etc.
-3. Render each CV section to HTML
-4. Generate table of contents from h2 headings
-5. Write final HTML with site template
+1. **Separates concerns** - Content in markdown, presentation in templates
+2. **Single build script** - One entry point (`build_site.py`) for everything
+3. **Consistent workflow** - All pages work the same way
+4. **Easy to maintain** - Change a template, rebuild, done
 
 ### Intermediate Files
 
-These files are generated during builds and should not be committed:
+These are generated during builds and ignored by git:
 
-- `posts/*.md` - Intermediate markdown from Quarto (deleted after build)
-- `posts/*_files/` - Quarto figure directories (deleted after build)
-- `posts/.quarto/` - Quarto cache (deleted after build)
-- `posts/_freeze/` - Quarto freeze directory (deleted after build)
-- `posts/.jupyter_cache/` - Jupyter cache (deleted after build)
+- `posts/*.md` - Intermediate markdown from Quarto
+- `posts/*_files/` - Quarto figure directories
+- `posts/.quarto/`, `posts/_freeze/`, `posts/.jupyter_cache/` - Caches
 
-The `posts/.gitignore` is configured to ignore all these files.
+### GitHub API Caching
+
+Software entries fetch metadata from GitHub. Responses are cached in `records/github_cache.json` with a 15-minute TTL. Set `GITHUB_TOKEN` for higher rate limits.

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Blog</h1>
+<p class="intro">Notes on methods, tutorials, and updates.</p>
+
+<div class="cards">
+{% for post in posts %}
+  <a href="{{ base_path }}blog/{{ post.slug }}.html" class="card">
+    <div class="meta">{{ post.date }}</div>
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.excerpt }}</p>
+  </a>
+{% endfor %}
+</div>
+{% endblock %}

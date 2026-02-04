@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Software & Data – John McLevey</title>
+  <title>Software &amp; Data – John McLevey</title>
   <link rel="stylesheet" href="styles.css">
+  
 </head>
 <body>
   <header>
@@ -22,9 +23,18 @@
     </nav>
   </header>
 
+  
+
   <main>
-    <h1>Software & Data</h1>
-    <p class="intro">Coming soon.</p>
+    
+
+<h1>Software &amp; Data</h1>
+
+
+<p class="intro">Coming soon.</p>
+
+
+
   </main>
 
   <footer id="site-footer"></footer>
@@ -42,9 +52,13 @@
       const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
+      
     }
     const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    
   </script>
+
+  
 </body>
 </html>

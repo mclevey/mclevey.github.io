@@ -1,46 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Industrial Development and Eco-Tourisms – John McLevey</title>
-  <link rel="stylesheet" href="../styles.css">
-  
-</head>
-<body>
-  <header>
-    <nav>
-      <a href="../index.html" class="nav-home">JM.</a>
-      <a href="../cv.html">CV</a>
-      <a href="../research.html">Research</a>
-      <a href="../teaching.html">Teaching & Supervision</a>
-      <a href="../software-data.html">Software & Data</a>
-      <a href="../blog.html">Blog</a>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <span class="icon-moon">☽</span>
-        <span class="icon-sun">☼</span>
-      </button>
-    </nav>
-  </header>
+---
+template: book
+title: Industrial Development and Eco-Tourisms
+authors: Mark Stoddart, Alice Mattoni, and John McLevey
+publisher: Palgrave MacMillan
+year: 2020
+image: IDET.png
+---
 
-  
-
-  <main>
-    
-<div class="book-header">
-  <img src="../images/IDET.png" alt="Industrial Development and Eco-Tourisms">
-  <div class="book-info">
-    <h1>Industrial Development and Eco-Tourisms</h1>
-    <p class="meta">Mark Stoddart, Alice Mattoni, and John McLevey<br>Palgrave MacMillan, 2020</p>
-  </div>
-</div>
-
-<p><br></p>
+<br>
 <h1>Description</h1>
 
 <p>This book examines the "oil-tourism interface", the broad range of direct and indirect contact points between offshore oil extraction and nature-based tourism. Offshore oil extraction and nature-based tourism are pursued as development paths across the North Atlantic region. Offshore oil promises economic benefits from employment and royalty payments to host societies, but is based on fossil fuel-intensive resource extraction. Nature-based tourism, instead, is based on experiencing natural environments and encountering wildlife, including whales, seals, or seabirds. They share social-ecological space, such as oceans, coastlines, cities and towns where tourism and offshore oil operations and offices are located. However, they rarely share cultural or political space, in terms of media coverage, public debate, or policy discussion that integrates both modes of development. Through a comparative analysis of Denmark, Iceland, Newfoundland and Labrador, Norway, and Scotland, this book offers important lessons for how coastal societies can better navigate relationships between resource extraction and nature-based tourism in the interests of social-ecological wellbeing.</p>
 
-<p><br></p>
+<br>
 <h1>Contents</h1>
 <ol>
   <li><a href="https://link.springer.com/chapter/10.1007/978-3-030-55944-1_1">Introduction: Contact Points Between Offshore Oil and Nature-Based Tourism</a></li>
@@ -52,7 +24,7 @@
   <li><a href="https://link.springer.com/chapter/10.1007/978-3-030-55944-1_7">Epilogue on Methodology</a></li>
 </ol>
 
-<p><br></p>
+<br>
 <h1>Reviews</h1>
 
 <blockquote>
@@ -74,33 +46,3 @@
 <blockquote>
   <p>"In this sweeping five-nation comparison, the authors untangle the complicated interplay of offshore oil extraction and nature-based tourism for the coastal cultures and political interests of the North Atlantic region. Through the adoption of an "omnivorous" methodological approach, the authors identify how these two industries have co-existed in isolation, cooperation, and conflict. From their findings, they offer a compelling argument for the consistent inclusion of environmental groups in deliberations on these economic activities at sea, ideally for the enhanced wellbeing of North Atlantic communities and the marine environment. Their assessment is particularly salient given climate change and the future significance of the Arctic in both oil exploration and tourism." <strong>Patricia Widener</strong>, Florida Atlantic University, USA, author of <em>Toxic and Intoxicating Oil</em></p>
 </blockquote>
-
-<a href="../index.html" class="back-link">← Back</a>
-
-  </main>
-
-  <footer id="site-footer"></footer>
-  <script>
-    fetch('../footer.html')
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('site-footer').innerHTML = html;
-      });
-  </script>
-
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      
-    }
-    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    
-  </script>
-
-  
-</body>
-</html>

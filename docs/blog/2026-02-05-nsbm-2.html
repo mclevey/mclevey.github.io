@@ -5,11 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nested Stochastic Blockmodels Part 2 – John McLevey</title>
   <link rel="stylesheet" href="../styles.css">
-  <!-- Highlight.js for syntax highlighting -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css" id="hljs-light">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/nord.min.css" id="hljs-dark" disabled>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+  
+<!-- Highlight.js for syntax highlighting -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css" id="hljs-light">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/nord.min.css" id="hljs-dark" disabled>
+<script>
+  // Set correct hljs theme immediately before page renders
+  (function() {
+    var theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (theme === 'dark') {
+      document.getElementById('hljs-light').disabled = true;
+      document.getElementById('hljs-dark').disabled = false;
+    }
+  })();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+
 </head>
 <body>
   <header>
@@ -26,12 +38,16 @@
       </button>
     </nav>
   </header>
+
+  
+
   <main>
-    <div class="post-header">
-      <div class="post-date">2026-02-05</div>
-      <h1>Nested Stochastic Blockmodels Part 2</h1>
-    </div>
-    <div class="post-content">
+    
+<div class="post-header">
+  <div class="post-date">2026-02-05</div>
+  <h1>Nested Stochastic Blockmodels Part 2</h1>
+</div>
+<div class="post-content">
 <p>In this second post, we continue our exploration of nested stochastic blockmodels by fitting a model to the political blogs network.</p>
 <h2>Loading the Network</h2>
 <p>Let’s start by loading our network data and examining its structure.</p>
@@ -90,8 +106,9 @@ Network density: 0.289</pre>
 
 <h2>Next Steps</h2>
 <p>In the next post, we’ll fit the actual nested SBM and visualize the results.</p>
-    </div>
-    <a href="../blog.html" class="back-link">← Back to blog</a>
+</div>
+<a href="../blog.html" class="back-link">← Back to blog</a>
+
   </main>
 
   <footer id="site-footer"></footer>
@@ -103,58 +120,63 @@ Network density: 0.289</pre>
       });
   </script>
 
-  <!-- Lightbox for images -->
-  <div class="lightbox-overlay" id="lightbox">
-    <span class="lightbox-close">&times;</span>
-    <img src="" alt="" id="lightbox-img">
-  </div>
-
   <script>
-    hljs.highlightAll();
-
-    function updateHljsTheme(theme) {
-      const lightTheme = document.getElementById('hljs-light');
-      const darkTheme = document.getElementById('hljs-dark');
-      if (theme === 'dark') {
-        lightTheme.disabled = true;
-        darkTheme.disabled = false;
-      } else {
-        lightTheme.disabled = false;
-        darkTheme.disabled = true;
-      }
-    }
-
     function toggleTheme() {
       const html = document.documentElement;
       const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
-      updateHljsTheme(next);
-    }
+      
+updateHljsTheme(next);
 
+    }
     const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    updateHljsTheme(saved);
-
-    // Lightbox
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-
-    document.querySelectorAll('.post-content img').forEach(img => {
-      img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt;
-        lightbox.classList.add('active');
-      });
-    });
-
-    lightbox.addEventListener('click', () => {
-      lightbox.classList.remove('active');
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') lightbox.classList.remove('active');
-    });
+    
   </script>
+
+  
+<!-- Lightbox for images -->
+<div class="lightbox-overlay" id="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <img src="" alt="" id="lightbox-img">
+</div>
+
+<script>
+  hljs.highlightAll();
+
+  function updateHljsTheme(theme) {
+    const lightTheme = document.getElementById('hljs-light');
+    const darkTheme = document.getElementById('hljs-dark');
+    if (theme === 'dark') {
+      lightTheme.disabled = true;
+      darkTheme.disabled = false;
+    } else {
+      lightTheme.disabled = false;
+      darkTheme.disabled = true;
+    }
+  }
+
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  document.querySelectorAll('.post-content img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('active');
+    });
+  });
+
+  lightbox.addEventListener('click', () => {
+    lightbox.classList.remove('active');
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') lightbox.classList.remove('active');
+  });
+</script>
+
 </body>
 </html>

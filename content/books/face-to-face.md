@@ -1,41 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Face-to-Face Principle and the Internet – John McLevey</title>
-  <link rel="stylesheet" href="../styles.css">
-  
-</head>
-<body>
-  <header>
-    <nav>
-      <a href="../index.html" class="nav-home">JM.</a>
-      <a href="../cv.html">CV</a>
-      <a href="../research.html">Research</a>
-      <a href="../teaching.html">Teaching & Supervision</a>
-      <a href="../software-data.html">Software & Data</a>
-      <a href="../blog.html">Blog</a>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <span class="icon-moon">☽</span>
-        <span class="icon-sun">☼</span>
-      </button>
-    </nav>
-  </header>
+---
+template: book
+title: The Face-to-Face Principle and the Internet
+authors: Harry Collins, Rob Evans, Martin Innes, Will Mason-Wilkes, Eric Kennedy, and John McLevey
+publisher: Cardiff University Press
+year: 2022
+image: F2FP.png
+---
 
-  
-
-  <main>
-    
-<div class="book-header">
-  <img src="../images/F2FP.png" alt="The Face-to-Face Principle and the Internet">
-  <div class="book-info">
-    <h1>The Face-to-Face Principle and the Internet</h1>
-    <p class="meta">Harry Collins, Rob Evans, Martin Innes, Will Mason-Wilkes, Eric Kennedy, and John McLevey<br>Cardiff University Press, 2022</p>
-  </div>
-</div>
-
-<p><br></p>
+<br>
 <h1>Description</h1>
 
 <p>The internet is changing the way that knowledge is made and shared. Knowledge-making in face-to-face settings is being replaced by information gathering from remote sources, whose origins may be concealed but which can create an illusion of intimacy. Though remote communication is beneficial in many ways – modern societies would fail without it – and though the tight boundaries of the face-to-face can be used for evil purposes such as criminal conspiracy, if the overall trend to remote communication continues unchecked, it could be disastrous for the future of democracy and the very idea of truth itself. Too much reliance on remote communication threatens the core institutions of democratic societies.</p>
@@ -44,7 +16,7 @@
 
 <p>By drawing out the special features of face-to-face interaction and its constitutive role in creating societies, with science as the icon, the book sets out an agenda for civic education that can protect democratic institutions from the erosion of pluralism and the facile abandonment of trustworthy expertise. The authors conclude by returning to the themes set out at the start of the book, namely the crucial role played by trust in modern societies and the importance of face-to-face interactions in reproducing that trust, and the democratic institutions in which it should be invested.</p>
 
-<p><br></p>
+<br>
 <h1>Contents</h1>
 
 <p>Introduction - The Wide Reach of the Argument</p>
@@ -83,33 +55,3 @@
   <li>An Alternative View: Successful Business Interaction Without Face-to-Face Communication</li>
   <li>Second Language Learning</li>
 </ol>
-
-<a href="../index.html" class="back-link">← Back</a>
-
-  </main>
-
-  <footer id="site-footer"></footer>
-  <script>
-    fetch('../footer.html')
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('site-footer').innerHTML = html;
-      });
-  </script>
-
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      
-    }
-    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    
-  </script>
-
-  
-</body>
-</html>

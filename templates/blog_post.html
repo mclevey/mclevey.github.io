@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block head_extra %}
+<!-- Highlight.js for syntax highlighting -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css" id="hljs-light">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/nord.min.css" id="hljs-dark" disabled>
+<script>
+  // Set correct hljs theme immediately before page renders
+  (function() {
+    var theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (theme === 'dark') {
+      document.getElementById('hljs-light').disabled = true;
+      document.getElementById('hljs-dark').disabled = false;
+    }
+  })();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="post-header">
+  <div class="post-date">{{ date }}</div>
+  <h1>{{ title }}</h1>
+</div>
+<div class="post-content">
+{{ content|safe }}
+</div>
+<a href="{{ base_path }}blog.html" class="back-link">← Back to blog</a>
+{% endblock %}
+
+{% block theme_extra %}
+updateHljsTheme(next);
+{% endblock %}
+
+{% block scripts %}
+<!-- Lightbox for images -->
+<div class="lightbox-overlay" id="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <img src="" alt="" id="lightbox-img">
+</div>
+
+<script>
+  hljs.highlightAll();
+
+  function updateHljsTheme(theme) {
+    const lightTheme = document.getElementById('hljs-light');
+    const darkTheme = document.getElementById('hljs-dark');
+    if (theme === 'dark') {
+      lightTheme.disabled = true;
+      darkTheme.disabled = false;
+    } else {
+      lightTheme.disabled = false;
+      darkTheme.disabled = true;
+    }
+  }
+
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  document.querySelectorAll('.post-content img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('active');
+    });
+  });
+
+  lightbox.addEventListener('click', () => {
+    lightbox.classList.remove('active');
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') lightbox.classList.remove('active');
+  });
+</script>
+{% endblock %}

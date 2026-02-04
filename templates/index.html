@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profile-section">
+  <img src="{{ base_path }}images/john_mclevey.jpeg" alt="John McLevey" class="profile-img">
+  <div class="profile-text">
+    <h1><span class="first-name">John</span> <span class="last-name">McLevey</span></h1>
+    <p class="subtitle">{{ subtitle|safe }}</p>
+  </div>
+</div>
+{{ content|safe }}
+
+<h2>Latest Posts</h2>
+<div class="cards">
+{% for post in latest_posts %}
+  <a href="{{ base_path }}blog/{{ post.slug }}.html" class="card">
+    <div class="meta">{{ post.date }}</div>
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.excerpt }}</p>
+  </a>
+{% endfor %}
+</div>
+{% endblock %}
