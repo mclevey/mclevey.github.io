@@ -322,6 +322,9 @@ def build_blog():
         else:
             date = str(date).split("T")[0]
 
+        # Extract author (default to John McLevey)
+        author = frontmatter.get("author", "John McLevey")
+
         # Clean and convert
         body = clean_quarto_artifacts(body, title)
         body = re.sub(rf'{re.escape(slug)}_files/figure-gfm/', 'figures/', body)
@@ -335,6 +338,7 @@ def build_blog():
             base_path="../",
             title=title,
             date=date,
+            author=author,
             content=html_content,
             active="blog"
         )

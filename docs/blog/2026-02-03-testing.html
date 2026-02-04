@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello World! – John McLevey</title>
+  <link rel="stylesheet" href="../styles.css">
+  
+<!-- Highlight.js for syntax highlighting -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css" id="hljs-light">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/nord.min.css" id="hljs-dark" disabled>
+<script>
+  // Set correct hljs theme immediately before page renders
+  (function() {
+    var theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (theme === 'dark') {
+      document.getElementById('hljs-light').disabled = true;
+      document.getElementById('hljs-dark').disabled = false;
+    }
+  })();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html" class="nav-home">JM.</a>
+      <a href="../cv.html">CV</a>
+      <a href="../research.html">Research</a>
+      <a href="../teaching.html">Teaching & Supervision</a>
+      <a href="../software-data.html">Software & Data</a>
+      <a href="../blog.html" class="active">Blog</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-moon">☽</span>
+        <span class="icon-sun">☼</span>
+      </button>
+    </nav>
+  </header>
+
+  
+
+  <main>
+    
+<div class="post-header">
+  <div class="post-date">2026-02-03</div>
+  <h1>Hello World!</h1>
+</div>
+<div class="post-content">
+<p>I’ve been meaning to start doing some technical blogging for ~15 years, but I’ve always been too busy. Now I’m Department Head and I have twins, so I figure it’s a good time to start. 🤣</p>
+<p>We’ll see.</p>
+<!-- 
+&#10;---
+&#10;title: Nested Stochastic Blockmodels Part 1
+author: John McLevey
+date: 2026-02-03
+excerpt: An introduction to nested stochastic blockmodels using graph-tool.
+execute:
+  echo: true
+  warning: false
+  message: false
+format:
+  gfm: default
+&#10;---
+&#10;
+This is the first in a series of posts exploring nested stochastic blockmodels (NSBMs) for network analysis. We'll use the `graph-tool` library to fit and visualize these models.
+&#10;## Introduction
+&#10;Stochastic blockmodels are generative models for networks that assume nodes can be grouped into blocks (communities) with characteristic connection patterns between them.
+&#10;## Setup
+&#10;Let's start by importing the necessary libraries.
+&#10;::: {.cell execution_count=1}
+
+<pre class="cell-code"><code class="language-python">import pandas as pd
+import numpy as np
+&amp;#10;print(&quot;Libraries loaded successfully!&quot;)
+print(f&quot;NumPy version: {np.__version__}&quot;)
+print(f&quot;Pandas version: {pd.__version__}&quot;)
+</code></pre>
+
+&#10;::: {.cell-output .cell-output-stdout}
+
+<pre><code>Libraries loaded successfully!
+NumPy version: 2.3.3
+Pandas version: 2.3.2
+</code></pre>
+
+:::
+:::
+&#10;
+## Next Steps
+&#10;In the next post, we'll load a real network and fit our first nested SBM.
+ -->
+</div>
+<a href="../blog.html" class="back-link">← Back to blog</a>
+
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script>
+    fetch('../footer.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('site-footer').innerHTML = html;
+      });
+  </script>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      
+updateHljsTheme(next);
+
+    }
+    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    
+  </script>
+
+  
+<!-- Lightbox for images -->
+<div class="lightbox-overlay" id="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <img src="" alt="" id="lightbox-img">
+</div>
+
+<script>
+  hljs.highlightAll();
+
+  function updateHljsTheme(theme) {
+    const lightTheme = document.getElementById('hljs-light');
+    const darkTheme = document.getElementById('hljs-dark');
+    if (theme === 'dark') {
+      lightTheme.disabled = true;
+      darkTheme.disabled = false;
+    } else {
+      lightTheme.disabled = false;
+      darkTheme.disabled = true;
+    }
+  }
+
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  document.querySelectorAll('.post-content img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('active');
+    });
+  });
+
+  lightbox.addEventListener('click', () => {
+    lightbox.classList.remove('active');
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') lightbox.classList.remove('active');
+  });
+</script>
+
+</body>
+</html>

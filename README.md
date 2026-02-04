@@ -16,7 +16,7 @@ This site uses a **unified template-based build system** that separates content 
 │   ├── index.md             # Home page
 │   ├── research.md          # Research page
 │   ├── teaching.md          # Teaching overview
-│   ├── software-data.md     # Software page
+│   ├── software-data.md     # Code & Data page
 │   ├── books/               # Book pages
 │   │   ├── dcss.md
 │   │   ├── face-to-face.md
