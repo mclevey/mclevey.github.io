@@ -17,8 +17,9 @@
       <a href="{{ base_path }}software-data.html"{% if active == 'software' %} class="active"{% endif %}>Code & Data</a>
       <a href="{{ base_path }}blog.html"{% if active == 'blog' %} class="active"{% endif %}>Blog</a>
       <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <span class="icon-moon">☽</span>
-        <span class="icon-sun">☼</span>
+        <span class="toggle-track">
+          <span class="toggle-thumb"></span>
+        </span>
       </button>
     </nav>
   </header>
