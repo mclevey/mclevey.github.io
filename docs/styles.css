@@ -76,40 +76,32 @@ nav a.nav-home {
   background: none;
   border: none;
   cursor: pointer;
+  color: var(--text-muted);
+  font-size: 1.1rem;
   padding: 0.5rem;
   margin-left: auto;
-  display: flex;
-  align-items: center;
+  transition: color 0.2s;
 }
 
-.toggle-track {
-  display: block;
-  width: 32px;
-  height: 18px;
-  background: var(--text-muted);
-  border-radius: 9px;
-  position: relative;
-  transition: background 0.2s;
+.theme-toggle:hover {
+  color: var(--text);
 }
 
-.toggle-thumb {
-  display: block;
-  width: 14px;
-  height: 14px;
-  background: var(--bg);
-  border-radius: 50%;
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  transition: transform 0.2s;
+/* Theme toggle icons - moon shown in light mode, sun in dark mode */
+.icon-sun {
+  display: none;
 }
 
-[data-theme="dark"] .toggle-thumb {
-  transform: translateX(14px);
+.icon-moon {
+  display: inline;
 }
 
-.theme-toggle:hover .toggle-track {
-  background: var(--text);
+[data-theme="dark"] .icon-moon {
+  display: none;
+}
+
+[data-theme="dark"] .icon-sun {
+  display: inline;
 }
 
 /* Main */
