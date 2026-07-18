@@ -3,97 +3,153 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>John McLevey</title>
+  <title>Research – John McLevey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="index.html" class="nav-home">JM.</a>
-      <a href="cv.html">CV</a>
-      <a href="research.html" class="active">Research</a>
-      <a href="teaching.html">Teaching & Supervision</a>
-      <a href="software-data.html">Code & Data</a>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a href="index.html" class="brand">John McLevey</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle-label">Menu</span>
+      <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <a href="research.html" class="active" aria-current="page">Research</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="software-data.html">Code &amp; Data</a>
       <a href="blog.html">Blog</a>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <span class="toggle-track">
-          <span class="toggle-thumb"></span>
-        </span>
-      </button>
+      <a href="cv.html" class="nav-cv">CV</a>
     </nav>
   </header>
 
-  
 
-  <main>
-    
+  <main id="main">
+<div class="container hero">
+  <h1>Research</h1>
+<p class="lede">My research spans computational social science, network science, cultural cognition and affect, and quantitative methodology, with substantive work in political sociology, sociology of science, and environmental social science.
+</p></div>
 
-
-<p>More coming soon! In the meantime, here are some recent publications...</p>
-
-<p><br></p>
-<h1>Recent Publications</h1>
-<h2>Books</h2>
-<div class="book-grid">
-  <a href="books/sage-handbook.html" class="book-card">
-    <img src="images/SHSNA.png" alt="The Sage Handbook of Social Network Analysis">
-  </a>
-  <a href="books/dcss.html" class="book-card">
-    <img src="images/DCSS.png" alt="Doing Computational Social Science">
-  </a>
-  <a href="books/face-to-face.html" class="book-card">
-    <img src="images/F2FP.png" alt="The Face-to-Face Principle and the Internet">
-  </a>
-  <a href="books/industrial-development.html" class="book-card">
-    <img src="images/IDET.png" alt="Industrial Development and Eco-Tourisms">
-  </a>
-</div>
-
-<p><br></p>
-<h2>Selected Articles</h2>
-<div class="cards">
-  <div class="card">
-    <div class="meta">Social Networks, 2023</div>
-    <h3>Social Networks and Anthropogenic Climate Change</h3>
-    <p>David Tindall · Nina Kolleck · John McLevey</p>
+<section class="container section" aria-labelledby="research-books">
+  <div class="section-header">
+    <h2 class="section-label" id="research-books">Books</h2>
   </div>
-  <div class="card">
-    <div class="meta">Social Networks, 2022</div>
-    <h3>Structural Diversity is a Poor Proxy for Information Diversity</h3>
-    <p>Alexander Graham · John McLevey · Tyler Crick · Pierson Browne</p>
+  <div class="book-features">
+    <article class="book-feature">
+      <a href="books/sage-handbook.html" class="book-feature-cover" tabindex="-1" aria-hidden="true">
+        <img src="images/SHSNA.png" alt="">
+      </a>
+      <div>
+        <h3><a href="books/sage-handbook.html">The Sage Handbook of Social Network Analysis</a></h3>
+        <div class="book-feature-meta">Second Edition · Sage, 2023</div>
+        <p>Co-edited with John Scott and Peter J. Carrington. A wide-ranging reference on the theory, methods, and applications of social network analysis.
+</p>
+        <a class="more-link" href="books/sage-handbook.html">About the book →</a>
+      </div>
+    </article>
+    <article class="book-feature">
+      <a href="books/dcss.html" class="book-feature-cover" tabindex="-1" aria-hidden="true">
+        <img src="images/DCSS.png" alt="">
+      </a>
+      <div>
+        <h3><a href="books/dcss.html">Doing Computational Social Science: A Practical Introduction</a></h3>
+        <div class="book-feature-meta">Sage, 2022</div>
+        <p>A practical, hands-on introduction to the concepts, tools, and workflows of contemporary computational social science.
+</p>
+        <a class="more-link" href="books/dcss.html">About the book →</a>
+      </div>
+    </article>
+    <article class="book-feature">
+      <a href="books/face-to-face.html" class="book-feature-cover" tabindex="-1" aria-hidden="true">
+        <img src="images/F2FP.png" alt="">
+      </a>
+      <div>
+        <h3><a href="books/face-to-face.html">The Face-to-Face Principle: Science, Trust, Democracy and the Internet</a></h3>
+        <div class="book-feature-meta">With Harry Collins, Robert Evans, Martin Innes, Eric B. Kennedy &amp; Will Mason-Wilkes</div>
+        <p>On the role of face-to-face communication in science, trust, and democratic life, and what changes when interaction moves online.
+</p>
+        <a class="more-link" href="books/face-to-face.html">About the book →</a>
+      </div>
+    </article>
+    <article class="book-feature">
+      <a href="books/industrial-development.html" class="book-feature-cover" tabindex="-1" aria-hidden="true">
+        <img src="images/IDET.png" alt="">
+      </a>
+      <div>
+        <h3><a href="books/industrial-development.html">Industrial Development and Eco-Tourisms: Can Oil Extraction and Nature Conservation Co-Exist?</a></h3>
+        <div class="book-feature-meta">With Mark C.J. Stoddart &amp; Alice Mattoni · Palgrave Macmillan</div>
+        <p>A comparative study of how oil extraction and nature-based tourism coexist, and conflict, across coastal regions.
+</p>
+        <a class="more-link" href="books/industrial-development.html">About the book →</a>
+      </div>
+    </article>
   </div>
-  <div class="card">
-    <div class="meta">Canadian Review of Sociology, 2022</div>
-    <h3>A New Method for Computational Cultural Cartography</h3>
-    <p>John McLevey · Tyler Crick · Pierson Browne · Darrin Durant</p>
+</section>
+
+<section class="container section" aria-labelledby="research-articles">
+  <div class="section-header">
+    <h2 class="section-label" id="research-articles">Selected articles</h2>
   </div>
-</div>
+  <div class="pub-list">
+    <div class="pub-item pub-item-roomy">
+      <div class="pub-row">
+        <span class="pub-title">Social Networks and Anthropogenic Climate Change</span>
+        <span class="pub-venue">Social Networks · 2023</span>
+      </div>
+<div class="pub-authors">David Tindall · Nina Kolleck · John McLevey</div>    </div>
+    <div class="pub-item pub-item-roomy">
+      <div class="pub-row">
+        <span class="pub-title">Structural Diversity is a Poor Proxy for Information Diversity</span>
+        <span class="pub-venue">Social Networks · 2022</span>
+      </div>
+<div class="pub-authors">Alexander Graham · John McLevey · Tyler Crick · Pierson Browne</div>    </div>
+    <div class="pub-item pub-item-roomy">
+      <div class="pub-row">
+        <span class="pub-title">A New Method for Computational Cultural Cartography</span>
+        <span class="pub-venue">Canadian Review of Sociology · 2022</span>
+      </div>
+<div class="pub-authors">John McLevey · Tyler Crick · Pierson Browne · Darrin Durant</div>    </div>
+  </div>
+  <p class="section-note">Full publication list available in my <a href="cv.html">CV</a>.</p>
+</section>
+
 
   </main>
 
-  <footer id="site-footer"></footer>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>© 2026 John McLevey</div>
+        <div class="footer-contact">
+          <a href="mailto:mclevey@mun.ca">mclevey@mun.ca</a>
+          <span>(709) 864-7447</span>
+          <span>Office AA-4055</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script>
-    fetch('footer.html')
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('site-footer').innerHTML = html;
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('site-nav');
+      toggle.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.focus();
+        }
+      });
+    })();
   </script>
 
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      
-    }
-    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    
-  </script>
-
-  
 </body>
 </html>

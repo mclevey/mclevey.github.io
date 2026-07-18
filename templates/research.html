@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container hero">
+  <h1>{{ heading }}</h1>
+  {% if lede %}<p class="lede">{{ lede|safe }}</p>{% endif %}
+</div>
+
+{% if books %}
+<section class="container section" aria-labelledby="research-books">
+  <div class="section-header">
+    <h2 class="section-label" id="research-books">Books</h2>
+  </div>
+  <div class="book-features">
+    {% for book in books %}
+    <article class="book-feature">
+      <a href="{{ base_path }}{{ book.href }}" class="book-feature-cover" tabindex="-1" aria-hidden="true">
+        <img src="{{ base_path }}images/{{ book.image }}" alt="">
+      </a>
+      <div>
+        <h3><a href="{{ base_path }}{{ book.href }}">{{ book.title }}</a></h3>
+        <div class="book-feature-meta">{{ book.meta }}</div>
+        <p>{{ book.description }}</p>
+        <a class="more-link" href="{{ base_path }}{{ book.href }}">About the book →</a>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if articles %}
+<section class="container section" aria-labelledby="research-articles">
+  <div class="section-header">
+    <h2 class="section-label" id="research-articles">Selected articles</h2>
+  </div>
+  <div class="pub-list">
+    {% for article in articles %}
+    <div class="pub-item pub-item-roomy">
+      <div class="pub-row">
+        {% if article.href %}
+        <a class="pub-title" href="{{ article.href }}">{{ article.title }}</a>
+        {% else %}
+        <span class="pub-title">{{ article.title }}</span>
+        {% endif %}
+        <span class="pub-venue">{{ article.venue }}</span>
+      </div>
+      {% if article.authors %}<div class="pub-authors">{{ article.authors }}</div>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  <p class="section-note">Full publication list available in my <a href="{{ base_path }}cv.html">CV</a>.</p>
+</section>
+{% endif %}
+
+{{ content|safe }}
+{% endblock %}

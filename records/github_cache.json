@@ -11,12 +11,12 @@
     "description": "Supplementary materials for McLevey 2021 Doing Computational Social Science (Sage, UK).",
     "first_commit_date": "2021-03-22",
     "forks": 10,
-    "last_commit_date": "2024-08-13",
-    "last_commit_sha": "ee41bc7",
-    "last_fetched": "2026-02-04T01:27:23.879299+00:00",
+    "last_commit_date": "2026-07-17",
+    "last_commit_sha": "5e559bd",
+    "last_fetched": "2026-07-18T09:21:55.604614+00:00",
     "license_spdx": "MIT",
     "open_issues": 6,
-    "stars": 23,
+    "stars": 27,
     "topics": [
       "bayesian-data-analysis",
       "bayesian-statistics",
@@ -30,8 +30,8 @@
       "text-analysis",
       "tranfer-learning"
     ],
-    "total_commits": 176,
-    "updated_at": "2026-01-26"
+    "total_commits": 177,
+    "updated_at": "2026-07-18"
   },
   "UWNETLAB/gitnet": {
     "contributor_count": 3,
@@ -82,10 +82,10 @@
     "forks": 35,
     "last_commit_date": "2022-02-09",
     "last_commit_sha": "05ee6a3",
-    "last_fetched": "2026-02-04T01:27:25.728801+00:00",
+    "last_fetched": "2026-07-18T09:21:57.449098+00:00",
     "license_spdx": "GPL-2.0",
     "open_issues": 10,
-    "stars": 178,
+    "stars": 181,
     "topics": [
       "bibliometrics",
       "citations",
@@ -98,7 +98,7 @@
       "sociology-of-science"
     ],
     "total_commits": 765,
-    "updated_at": "2026-01-26",
+    "updated_at": "2026-07-09",
     "version": "3.4.1"
   },
   "UWNETLAB/nate": {
@@ -141,15 +141,15 @@
     "description": "Principled Data Processing for Python",
     "first_commit_date": "2020-03-26",
     "forks": 2,
-    "last_commit_date": "2024-08-05",
-    "last_commit_sha": "5e15d43",
-    "last_fetched": "2026-02-04T01:27:27.296980+00:00",
+    "last_commit_date": "2026-07-10",
+    "last_commit_sha": "e4f1c4b",
+    "last_fetched": "2026-07-18T09:21:59.102260+00:00",
     "license_spdx": "MIT",
     "open_issues": 5,
-    "stars": 6,
+    "stars": 7,
     "topics": [],
-    "total_commits": 88,
-    "updated_at": "2026-01-26",
+    "total_commits": 91,
+    "updated_at": "2026-07-18",
     "version": "0.5.1"
   },
   "UWNETLAB/tidyextractors": {
@@ -182,7 +182,7 @@
     "first_commit_date": "",
     "last_commit_date": "",
     "last_commit_sha": "",
-    "last_fetched": "2026-02-04T01:18:24.129232+00:00",
+    "last_fetched": "2026-07-18T09:21:50.560976+00:00",
     "total_commits": 0
   },
   "mclevey/clark": {
@@ -191,7 +191,7 @@
     "first_commit_date": "",
     "last_commit_date": "",
     "last_commit_sha": "",
-    "last_fetched": "2026-02-04T01:18:27.433491+00:00",
+    "last_fetched": "2026-07-18T09:21:53.065940+00:00",
     "total_commits": 0
   },
   "mclevey/dcss": {
@@ -224,23 +224,13 @@
     "total_commits": 0
   },
   "mclevey/turtlestack": {
-    "contributor_count": 1,
-    "contributors": [
-      "mclevey"
-    ],
-    "created_at": "2025-05-29",
-    "description": "Turtlestack Lab Infrastructure",
-    "first_commit_date": "2025-05-29",
-    "forks": 0,
-    "last_commit_date": "2025-05-29",
-    "last_commit_sha": "0bee315",
-    "last_fetched": "2026-02-04T01:18:28.761693+00:00",
-    "license_spdx": "MIT",
-    "open_issues": 0,
-    "stars": 0,
-    "topics": [],
-    "total_commits": 3,
-    "updated_at": "2025-05-29"
+    "contributor_count": 0,
+    "contributors": [],
+    "first_commit_date": "",
+    "last_commit_date": "",
+    "last_commit_sha": "",
+    "last_fetched": "2026-07-18T09:21:54.333099+00:00",
+    "total_commits": 0
   },
   "mclevey/unicore": {
     "contributor_count": 0,
@@ -248,7 +238,7 @@
     "first_commit_date": "",
     "last_commit_date": "",
     "last_commit_sha": "",
-    "last_fetched": "2026-02-04T01:18:25.931791+00:00",
+    "last_fetched": "2026-07-18T09:21:51.823473+00:00",
     "total_commits": 0
   }
 }

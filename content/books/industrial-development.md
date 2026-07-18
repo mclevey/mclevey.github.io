@@ -1,5 +1,6 @@
 ---
 template: book
+active: research
 title: Industrial Development and Eco-Tourisms
 authors: Mark Stoddart, Alice Mattoni, and John McLevey
 publisher: Palgrave MacMillan
@@ -7,13 +8,11 @@ year: 2020
 image: IDET.png
 ---
 
-<br>
-<h1>Description</h1>
+<h2>Description</h2>
 
 <p>This book examines the "oil-tourism interface", the broad range of direct and indirect contact points between offshore oil extraction and nature-based tourism. Offshore oil extraction and nature-based tourism are pursued as development paths across the North Atlantic region. Offshore oil promises economic benefits from employment and royalty payments to host societies, but is based on fossil fuel-intensive resource extraction. Nature-based tourism, instead, is based on experiencing natural environments and encountering wildlife, including whales, seals, or seabirds. They share social-ecological space, such as oceans, coastlines, cities and towns where tourism and offshore oil operations and offices are located. However, they rarely share cultural or political space, in terms of media coverage, public debate, or policy discussion that integrates both modes of development. Through a comparative analysis of Denmark, Iceland, Newfoundland and Labrador, Norway, and Scotland, this book offers important lessons for how coastal societies can better navigate relationships between resource extraction and nature-based tourism in the interests of social-ecological wellbeing.</p>
 
-<br>
-<h1>Contents</h1>
+<h2>Contents</h2>
 <ol>
   <li><a href="https://link.springer.com/chapter/10.1007/978-3-030-55944-1_1">Introduction: Contact Points Between Offshore Oil and Nature-Based Tourism</a></li>
   <li><a href="https://link.springer.com/chapter/10.1007/978-3-030-55944-1_2">The North Atlantic as Object of Inquiry</a></li>
@@ -24,8 +23,7 @@ image: IDET.png
   <li><a href="https://link.springer.com/chapter/10.1007/978-3-030-55944-1_7">Epilogue on Methodology</a></li>
 </ol>
 
-<br>
-<h1>Reviews</h1>
+<h2>Reviews</h2>
 
 <blockquote>
   <p>"This book breaks new ground with its introduction of the notion of the oil-tourism interface. Through this analytical and empirical lens, the book explores the tensions between oil extraction and eco-tourism – in terms of extractive and attractive development. The devastating impact of oil extraction on the environment also has detrimental consequences for highly-valued tourism landscapes. One of the main strengths of this book lies in the rich cases, which the authors use to illustrate the complexities of these consequences and the ways in which societies, including policy-makers, business, citizens and social movements, evaluate and try to shape tourism and oil development models. These insights are important in the current context of climate crisis, which both impacts and is impacted by oil extraction and eco-tourism." <strong>Julie Uldam</strong>, Associate Professor, Department of Management, Society and Communication Copenhagen Business School, Denmark</p>

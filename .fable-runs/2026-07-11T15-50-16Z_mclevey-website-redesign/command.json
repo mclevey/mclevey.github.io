@@ -1,0 +1,18 @@
+{
+  "model": "fable",
+  "expected_model": "claude-fable-5",
+  "effort": "high",
+  "cwd": "/Users/testingaccount/FABLE/fable5-mclevey-website-redesign-sandbox/source",
+  "output_format": "stream-json",
+  "permission_mode": "acceptEdits",
+  "allowed_tools": [
+    "Read",
+    "Edit",
+    "Write",
+    "Bash",
+    "Glob",
+    "Grep"
+  ],
+  "auth_transport": "stdin-to-environment",
+  "auth_written_to_disk": false
+}

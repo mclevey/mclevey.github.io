@@ -2,6 +2,7 @@ project:
   type: default
 
 author: John McLevey
+jupyter: python3
 
 execute:
   echo: true

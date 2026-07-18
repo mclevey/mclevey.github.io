@@ -8,3 +8,5 @@ _freeze/
 
 # Generated figure directories (cleaned after build)
 *_files/
+
+**/*.quarto_ipynb

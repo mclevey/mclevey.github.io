@@ -2,6 +2,7 @@
 title: Hello World!
 excerpt: These are the first words from every blog, right?
 date: 2026-02-03
+jupyter: python3
 ---
 
 I've been meaning to start doing some technical blogging for ~15 years, but I've always been too busy. Now I'm Department Head and I have twins, so I figure it's a good time to start. 🤣

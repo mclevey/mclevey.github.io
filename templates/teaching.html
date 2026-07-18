@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container hero">
+  <h1>{{ heading }}</h1>
+</div>
+
+{% for group in course_groups %}
+<section class="container section section-mid" aria-labelledby="teaching-{{ loop.index }}">
+  <div class="section-header">
+    <h2 class="section-label" id="teaching-{{ loop.index }}">{{ group.label }}</h2>
+  </div>
+  <div class="course-entries">
+    {% for course in group.courses %}
+    <article class="course-entry">
+      <div class="course-kicker">{{ course.code }}</div>
+      <h3>{{ course.name }}</h3>
+      <p>{{ course.description }}</p>
+      {% if course.href %}
+      <a class="more-link" href="{{ base_path }}{{ course.href }}">Learn more →</a>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+
+<section class="container section section-mid" aria-labelledby="teaching-supervision">
+  <div class="section-header">
+    <h2 class="section-label" id="teaching-supervision">Graduate supervision</h2>
+  </div>
+  <div class="supervision-note">
+    {{ content|safe }}
+  </div>
+</section>
+{% endblock %}

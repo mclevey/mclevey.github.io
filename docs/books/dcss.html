@@ -4,40 +4,41 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Doing Computational Social Science – John McLevey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
-  
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="../index.html" class="nav-home">JM.</a>
-      <a href="../cv.html">CV</a>
-      <a href="../research.html">Research</a>
-      <a href="../teaching.html">Teaching & Supervision</a>
-      <a href="../software-data.html">Code & Data</a>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a href="../index.html" class="brand">John McLevey</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle-label">Menu</span>
+      <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <a href="../research.html" class="active" aria-current="page">Research</a>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../software-data.html">Code &amp; Data</a>
       <a href="../blog.html">Blog</a>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <span class="toggle-track">
-          <span class="toggle-thumb"></span>
-        </span>
-      </button>
+      <a href="../cv.html" class="nav-cv">CV</a>
     </nav>
   </header>
 
-  
 
-  <main>
-    
-<div class="book-header">
-  <img src="../images/DCSS.png" alt="Doing Computational Social Science">
-  <div class="book-info">
-    <h1>Doing Computational Social Science</h1>
-    <p class="meta">John McLevey<br>Sage, London, 2022</p>
+  <main id="main">
+<article class="container hero">
+  <div class="book-page-header">
+    <img src="../images/DCSS.png" alt="Doing Computational Social Science book cover">
+    <div>
+      <h1>Doing Computational Social Science</h1>
+      <p class="book-page-meta">John McLevey<br>Sage, London, 2022</p>
+    </div>
   </div>
-</div>
-
-<p><br></p>
-<h1>Description</h1>
+  <div class="prose">
+    <h2>Description</h2>
 
 <p>Computational approaches offer exciting opportunities for us to do social science differently. This beginner's guide discusses a range of computational methods and how to use them to study the problems and questions you want to research.</p>
 
@@ -52,12 +53,11 @@
 
 <p>For anyone who wants to use computational methods to conduct a social science research project, this book equips you with the skills, good habits and best working practices to do rigorous, high quality work.</p>
 
-<p><br></p>
-<h1>Contents</h1>
+<h2>Contents</h2>
 
 <p>Introduction - Learning to do computational social science</p>
 
-<h2>Part I: Foundations</h2>
+<h3>Part I: Foundations</h3>
 <ol start="1">
   <li>Setting up your open source scientific computing environment</li>
   <li>Python programming: The basics</li>
@@ -69,7 +69,7 @@
   <li>Latent factors and components</li>
 </ol>
 
-<h2>Part II: Fundamentals of Text Analysis</h2>
+<h3>Part II: Fundamentals of Text Analysis</h3>
 <ol start="9">
   <li>Processing natural language data</li>
   <li>Iterative text analysis</li>
@@ -77,7 +77,7 @@
   <li>Text similarity and latent semantic space</li>
 </ol>
 
-<h2>Part III: Fundamentals of Network Analysis</h2>
+<h3>Part III: Fundamentals of Network Analysis</h3>
 <ol start="13">
   <li>Social networks and relational thinking</li>
   <li>Connection and clustering in social networks</li>
@@ -86,7 +86,7 @@
   <li>Not so fast: Modelling the diffusion of complex contagions</li>
 </ol>
 
-<h2>Part IV: Research Ethics and Machine Learning</h2>
+<h3>Part IV: Research Ethics and Machine Learning</h3>
 <ol start="18">
   <li>Research ethics, politics and practices</li>
   <li>Machine learning: Symbolic and connectionist</li>
@@ -96,14 +96,14 @@
   <li>Developing neural network models with Keras and Tensorflow</li>
 </ol>
 
-<h2>Part V: Bayesian Machine Learning and Probabilistic Programming</h2>
+<h3>Part V: Bayesian Machine Learning and Probabilistic Programming</h3>
 <ol start="24">
   <li>Statistical machine learning and generative models</li>
   <li>Probability: A primer</li>
   <li>Approximate posterior inference with stochastic sampling and MCMC</li>
 </ol>
 
-<h2>Part VI: Bayesian Data Analysis and Latent Variable Modelling with Relational and Text Data</h2>
+<h3>Part VI: Bayesian Data Analysis and Latent Variable Modelling with Relational and Text Data</h3>
 <ol start="27">
   <li>Bayesian regression models with probabilistic programming</li>
   <li>Bayesian hierarchical regression modelling</li>
@@ -111,38 +111,46 @@
   <li>Generative network analysis with Bayesian stochastic blockmodels</li>
 </ol>
 
-<h2>Part VII: Embeddings, Transformer Models and Named Entity Recognition</h2>
+<h3>Part VII: Embeddings, Transformer Models and Named Entity Recognition</h3>
 <ol start="31">
   <li>Can we model meaning?: Contextual representation and neural word embeddings</li>
   <li>Named entity recognition, transfer learning and transformer models</li>
 </ol>
-
-<a href="../index.html" class="back-link">← Back</a>
-
+  </div>
+  <a href="../research.html" class="back-link">← Back to research</a>
+</article>
   </main>
 
-  <footer id="site-footer"></footer>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>© 2026 John McLevey</div>
+        <div class="footer-contact">
+          <a href="mailto:mclevey@mun.ca">mclevey@mun.ca</a>
+          <span>(709) 864-7447</span>
+          <span>Office AA-4055</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script>
-    fetch('../footer.html')
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('site-footer').innerHTML = html;
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('site-nav');
+      toggle.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.focus();
+        }
+      });
+    })();
   </script>
 
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      
-    }
-    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    
-  </script>
-
-  
 </body>
 </html>

@@ -4,45 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Industrial Development and Eco-Tourisms – John McLevey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
-  
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="../index.html" class="nav-home">JM.</a>
-      <a href="../cv.html">CV</a>
-      <a href="../research.html">Research</a>
-      <a href="../teaching.html">Teaching & Supervision</a>
-      <a href="../software-data.html">Code & Data</a>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a href="../index.html" class="brand">John McLevey</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle-label">Menu</span>
+      <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <a href="../research.html" class="active" aria-current="page">Research</a>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../software-data.html">Code &amp; Data</a>
       <a href="../blog.html">Blog</a>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <span class="toggle-track">
-          <span class="toggle-thumb"></span>
-        </span>
-      </button>
+      <a href="../cv.html" class="nav-cv">CV</a>
     </nav>
   </header>
 
-  
 
-  <main>
-    
-<div class="book-header">
-  <img src="../images/IDET.png" alt="Industrial Development and Eco-Tourisms">
-  <div class="book-info">
-    <h1>Industrial Development and Eco-Tourisms</h1>
-    <p class="meta">Mark Stoddart, Alice Mattoni, and John McLevey<br>Palgrave MacMillan, 2020</p>
+  <main id="main">
+<article class="container hero">
+  <div class="book-page-header">
+    <img src="../images/IDET.png" alt="Industrial Development and Eco-Tourisms book cover">
+    <div>
+      <h1>Industrial Development and Eco-Tourisms</h1>
+      <p class="book-page-meta">Mark Stoddart, Alice Mattoni, and John McLevey<br>Palgrave MacMillan, 2020</p>
+    </div>
   </div>
-</div>
-
-<p><br></p>
-<h1>Description</h1>
+  <div class="prose">
+    <h2>Description</h2>
 
 <p>This book examines the "oil-tourism interface", the broad range of direct and indirect contact points between offshore oil extraction and nature-based tourism. Offshore oil extraction and nature-based tourism are pursued as development paths across the North Atlantic region. Offshore oil promises economic benefits from employment and royalty payments to host societies, but is based on fossil fuel-intensive resource extraction. Nature-based tourism, instead, is based on experiencing natural environments and encountering wildlife, including whales, seals, or seabirds. They share social-ecological space, such as oceans, coastlines, cities and towns where tourism and offshore oil operations and offices are located. However, they rarely share cultural or political space, in terms of media coverage, public debate, or policy discussion that integrates both modes of development. Through a comparative analysis of Denmark, Iceland, Newfoundland and Labrador, Norway, and Scotland, this book offers important lessons for how coastal societies can better navigate relationships between resource extraction and nature-based tourism in the interests of social-ecological wellbeing.</p>
 
-<p><br></p>
-<h1>Contents</h1>
+<h2>Contents</h2>
 <ol>
   <li><a href="https://link.springer.com/chapter/10.1007/978-3-030-55944-1_1">Introduction: Contact Points Between Offshore Oil and Nature-Based Tourism</a></li>
   <li><a href="https://link.springer.com/chapter/10.1007/978-3-030-55944-1_2">The North Atlantic as Object of Inquiry</a></li>
@@ -53,8 +53,7 @@
   <li><a href="https://link.springer.com/chapter/10.1007/978-3-030-55944-1_7">Epilogue on Methodology</a></li>
 </ol>
 
-<p><br></p>
-<h1>Reviews</h1>
+<h2>Reviews</h2>
 
 <blockquote>
   <p>"This book breaks new ground with its introduction of the notion of the oil-tourism interface. Through this analytical and empirical lens, the book explores the tensions between oil extraction and eco-tourism – in terms of extractive and attractive development. The devastating impact of oil extraction on the environment also has detrimental consequences for highly-valued tourism landscapes. One of the main strengths of this book lies in the rich cases, which the authors use to illustrate the complexities of these consequences and the ways in which societies, including policy-makers, business, citizens and social movements, evaluate and try to shape tourism and oil development models. These insights are important in the current context of climate crisis, which both impacts and is impacted by oil extraction and eco-tourism." <strong>Julie Uldam</strong>, Associate Professor, Department of Management, Society and Communication Copenhagen Business School, Denmark</p>
@@ -75,33 +74,41 @@
 <blockquote>
   <p>"In this sweeping five-nation comparison, the authors untangle the complicated interplay of offshore oil extraction and nature-based tourism for the coastal cultures and political interests of the North Atlantic region. Through the adoption of an "omnivorous" methodological approach, the authors identify how these two industries have co-existed in isolation, cooperation, and conflict. From their findings, they offer a compelling argument for the consistent inclusion of environmental groups in deliberations on these economic activities at sea, ideally for the enhanced wellbeing of North Atlantic communities and the marine environment. Their assessment is particularly salient given climate change and the future significance of the Arctic in both oil exploration and tourism." <strong>Patricia Widener</strong>, Florida Atlantic University, USA, author of <em>Toxic and Intoxicating Oil</em></p>
 </blockquote>
-
-<a href="../index.html" class="back-link">← Back</a>
-
+  </div>
+  <a href="../research.html" class="back-link">← Back to research</a>
+</article>
   </main>
 
-  <footer id="site-footer"></footer>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>© 2026 John McLevey</div>
+        <div class="footer-contact">
+          <a href="mailto:mclevey@mun.ca">mclevey@mun.ca</a>
+          <span>(709) 864-7447</span>
+          <span>Office AA-4055</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script>
-    fetch('../footer.html')
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('site-footer').innerHTML = html;
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('site-nav');
+      toggle.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.focus();
+        }
+      });
+    })();
   </script>
 
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      
-    }
-    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    
-  </script>
-
-  
 </body>
 </html>

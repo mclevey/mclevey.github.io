@@ -1,5 +1,6 @@
 ---
 template: book
+active: research
 title: The Sage Handbook of Social Network Analysis
 authors: John McLevey, John Scott, and Peter J. Carrington (Eds)
 publisher: Sage, London

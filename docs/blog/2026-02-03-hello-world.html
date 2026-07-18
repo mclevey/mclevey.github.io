@@ -4,144 +4,104 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hello World! – John McLevey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
-  
 <!-- Highlight.js for syntax highlighting -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css" id="hljs-light">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/nord.min.css" id="hljs-dark" disabled>
-<script>
-  // Set correct hljs theme immediately before page renders
-  (function() {
-    var theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    if (theme === 'dark') {
-      document.getElementById('hljs-light').disabled = true;
-      document.getElementById('hljs-dark').disabled = false;
-    }
-  })();
-</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
-
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="../index.html" class="nav-home">JM.</a>
-      <a href="../cv.html">CV</a>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a href="../index.html" class="brand">John McLevey</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle-label">Menu</span>
+      <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
       <a href="../research.html">Research</a>
-      <a href="../teaching.html">Teaching & Supervision</a>
-      <a href="../software-data.html">Code & Data</a>
-      <a href="../blog.html" class="active">Blog</a>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <span class="toggle-track">
-          <span class="toggle-thumb"></span>
-        </span>
-      </button>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../software-data.html">Code &amp; Data</a>
+      <a href="../blog.html" class="active" aria-current="page">Blog</a>
+      <a href="../cv.html" class="nav-cv">CV</a>
     </nav>
   </header>
 
-  
 
-  <main>
-    
-<div class="post-header">
-  <div class="post-date">2026-02-03 | John McLevey</div>
-  <h1>Hello World!</h1>
-</div>
-<div class="post-content">
-<p>I’ve been meaning to start doing some technical blogging for ~15 years, but I’ve always been too busy. Now I’m Department Head and I have twins, so I figure it’s a good time to start. 🤣</p>
-<p>We’ll see.</p>
-<!-- 
-&#10;---
-&#10;title: Nested Stochastic Blockmodels Part 1
-author: John McLevey
-date: 2026-02-03
-excerpt: An introduction to nested stochastic blockmodels using graph-tool.
-execute:
-  echo: true
-  warning: false
-  message: false
-format:
-  gfm: default
-&#10;---
-&#10;
-This is the first in a series of posts exploring nested stochastic blockmodels (NSBMs) for network analysis. We'll use the `graph-tool` library to fit and visualize these models.
-&#10;## Introduction
-&#10;Stochastic blockmodels are generative models for networks that assume nodes can be grouped into blocks (communities) with characteristic connection patterns between them.
-&#10;## Setup
-&#10;Let's start by importing the necessary libraries.
-&#10;::: {.cell execution_count=1}
-
-<pre class="cell-code"><code class="language-python">import pandas as pd
+  <main id="main">
+<article class="container hero post">
+  <header class="post-header">
+    <p class="post-meta">Feb 3, 2026 · John McLevey</p>
+    <h1>Hello World!</h1>
+  </header>
+  <div class="prose post-content">
+    <p>title: Nested Stochastic Blockmodels Part 1 author: John McLevey date: 2026-02-03 excerpt: An introduction to nested stochastic blockmodels using graph-tool. execute: echo: true warning: false message: false format: gfm: default —</p>
+<p>This is the first in a series of posts exploring nested stochastic blockmodels (NSBMs) for network analysis. We’ll use the <code>graph-tool</code> library to fit and visualize these models.</p>
+<h2>Introduction</h2>
+<p>Stochastic blockmodels are generative models for networks that assume nodes can be grouped into blocks (communities) with characteristic connection patterns between them.</p>
+<h2>Setup</h2>
+<p>Let’s start by importing the necessary libraries.</p>
+<pre><code class="language-python">import pandas as pd
 import numpy as np
-&amp;#10;print(&quot;Libraries loaded successfully!&quot;)
+
+print(&quot;Libraries loaded successfully!&quot;)
 print(f&quot;NumPy version: {np.__version__}&quot;)
 print(f&quot;Pandas version: {pd.__version__}&quot;)
 </code></pre>
+<pre class="code-output">Libraries loaded successfully!
+NumPy version: 2.4.1
+Pandas version: 2.3.3</pre>
 
-&#10;::: {.cell-output .cell-output-stdout}
-
-<pre><code>Libraries loaded successfully!
-NumPy version: 2.3.3
-Pandas version: 2.3.2
-</code></pre>
-
-:::
-:::
-&#10;
-## Next Steps
-&#10;In the next post, we'll load a real network and fit our first nested SBM.
- -->
-</div>
-<a href="../blog.html" class="back-link">← Back to blog</a>
-
+<h2>Next Steps</h2>
+<p>In the next post, we’ll load a real network and fit our first nested SBM. –&gt;</p>
+  </div>
+  <a href="../blog.html" class="back-link">← Back to blog</a>
+</article>
   </main>
 
-  <footer id="site-footer"></footer>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>© 2026 John McLevey</div>
+        <div class="footer-contact">
+          <a href="mailto:mclevey@mun.ca">mclevey@mun.ca</a>
+          <span>(709) 864-7447</span>
+          <span>Office AA-4055</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script>
-    fetch('../footer.html')
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('site-footer').innerHTML = html;
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('site-nav');
+      toggle.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.focus();
+        }
+      });
+    })();
   </script>
 
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      
-updateHljsTheme(next);
-
-    }
-    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    
-  </script>
-
-  
 <!-- Lightbox for images -->
-<div class="lightbox-overlay" id="lightbox">
-  <span class="lightbox-close">&times;</span>
-  <img src="" alt="" id="lightbox-img">
+<div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-close" aria-label="Close image viewer">&times;</button>
+  <img alt="" id="lightbox-img">
 </div>
 
 <script>
   hljs.highlightAll();
-
-  function updateHljsTheme(theme) {
-    const lightTheme = document.getElementById('hljs-light');
-    const darkTheme = document.getElementById('hljs-dark');
-    if (theme === 'dark') {
-      lightTheme.disabled = true;
-      darkTheme.disabled = false;
-    } else {
-      lightTheme.disabled = false;
-      darkTheme.disabled = true;
-    }
-  }
 
   // Lightbox
   const lightbox = document.getElementById('lightbox');
@@ -163,6 +123,5 @@ updateHljsTheme(next);
     if (e.key === 'Escape') lightbox.classList.remove('active');
   });
 </script>
-
 </body>
 </html>

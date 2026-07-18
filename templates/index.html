@@ -1,23 +1,95 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="profile-section">
-  <img src="{{ base_path }}images/john_mclevey.jpeg" alt="John McLevey" class="profile-img">
-  <div class="profile-text">
-    <h1><span class="first-name">John</span> <span class="last-name">McLevey</span></h1>
-    <p class="subtitle">{{ subtitle|safe }}</p>
+<div class="container hero">
+  <div class="profile">
+    <img src="{{ base_path }}images/{{ headshot }}" alt="John McLevey" class="profile-img">
+    <div>
+      <h1>John McLevey</h1>
+      <p class="profile-role">{{ role|safe }}</p>
+    </div>
   </div>
+  <div class="intro">
+    {{ content|safe }}
+  </div>
+  {% if social %}
+  <ul class="social-row">
+    {% for link in social %}
+    <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
 </div>
-{{ content|safe }}
 
-<h2>Latest Posts</h2>
-<div class="cards">
-{% for post in latest_posts %}
-  <a href="{{ base_path }}blog/{{ post.slug }}.html" class="card">
-    <div class="meta">{{ post.date }}</div>
-    <h3>{{ post.title }}</h3>
-    <p>{{ post.excerpt }}</p>
-  </a>
-{% endfor %}
-</div>
+{% if books %}
+<section class="container section" aria-labelledby="home-books">
+  <div class="section-header">
+    <h2 class="section-label" id="home-books">Books</h2>
+    <a class="section-link" href="{{ base_path }}research.html">All research →</a>
+  </div>
+  <div class="book-grid">
+    {% for book in books %}
+    <a href="{{ base_path }}{{ book.href }}" class="book-card">
+      <img src="{{ base_path }}images/{{ book.image }}" alt="{{ book.title }} book cover">
+      <span class="book-card-title">{{ book.title }}</span>
+      <span class="book-card-meta">{{ book.meta }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if articles %}
+<section class="container section" aria-labelledby="home-articles">
+  <div class="section-header">
+    <h2 class="section-label" id="home-articles">Selected articles</h2>
+  </div>
+  <div class="pub-list">
+    {% for article in articles %}
+    <div class="pub-item">
+      <div class="pub-row">
+        <a class="pub-title" href="{{ base_path }}research.html">{{ article.title }}</a>
+        <span class="pub-venue">{{ article.venue }}</span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if courses %}
+<section class="container section section-tight" aria-labelledby="home-teaching">
+  <div class="section-header">
+    <h2 class="section-label" id="home-teaching">Teaching</h2>
+    <a class="section-link" href="{{ base_path }}teaching.html">Courses &amp; supervision →</a>
+  </div>
+  <div class="course-grid">
+    {% for course in courses %}
+    <div class="course-cell">
+      <span class="course-code">{{ course.code }}</span>
+      <span class="course-name">{{ course.name }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if latest_posts %}
+<section class="container section section-tight" aria-labelledby="home-blog">
+  <div class="section-header">
+    <h2 class="section-label" id="home-blog">From the blog</h2>
+    <a class="section-link" href="{{ base_path }}blog.html">All posts →</a>
+  </div>
+  <div class="pub-list">
+    {% for post in latest_posts %}
+    <div class="pub-item">
+      <div class="pub-row">
+        <a class="pub-title" href="{{ base_path }}blog/{{ post.slug }}.html">{{ post.title }}</a>
+        <span class="pub-venue">{{ post.date_display }}</span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
 {% endblock %}

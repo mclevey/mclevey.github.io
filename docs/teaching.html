@@ -3,93 +3,110 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>John McLevey</title>
+  <title>Teaching &amp; Supervision – John McLevey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="index.html" class="nav-home">JM.</a>
-      <a href="cv.html">CV</a>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a href="index.html" class="brand">John McLevey</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle-label">Menu</span>
+      <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
       <a href="research.html">Research</a>
-      <a href="teaching.html" class="active">Teaching & Supervision</a>
-      <a href="software-data.html">Code & Data</a>
+      <a href="teaching.html" class="active" aria-current="page">Teaching</a>
+      <a href="software-data.html">Code &amp; Data</a>
       <a href="blog.html">Blog</a>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <span class="toggle-track">
-          <span class="toggle-thumb"></span>
-        </span>
-      </button>
+      <a href="cv.html" class="nav-cv">CV</a>
     </nav>
   </header>
 
-  
 
-  <main>
-    
-
-
-<h1>Courses</h1>
-
-<h2>Undergraduate</h2>
-<div class="cards">
-  <a href="teaching/3040.html" class="card">
-    <p>Sociology / Criminology 3040</p>
-    <h3>Quantitative Research Methods</h3>
-    <p>This course introduces students to foundational concepts, principles, and practices in contemporary quantitative social science.</p>
-    <br>
-    <p>Learn more...</p>
-  </a>
-  <div class="card">
-    <p>Sociology / Criminology 4420</p>
-    <h3>Networks, Culture, and Social Control</h3>
-    <p>This course introduces students to social network analysis in sociology and criminology.</p>
-    <br>
-    <p>Learn more...</p>
-  </div>
+  <main id="main">
+<div class="container hero">
+  <h1>Teaching &amp; Supervision</h1>
 </div>
 
-<h2>Graduate</h2>
-<div class="cards">
-  <div class="card">
-    <p>Sociology 6044</p>
-    <h3>Networks, Culture, and Social Control</h3>
-    <p>SOCI 6044 is a graduate seminar, held alongside SOCI 4420, that introduces students to social network analysis in
-      sociology and criminology.</p>
-      <br>
-      <p>Learn more...</p>
+<section class="container section section-mid" aria-labelledby="teaching-1">
+  <div class="section-header">
+    <h2 class="section-label" id="teaching-1">Undergraduate</h2>
   </div>
-</div>
+  <div class="course-entries">
+    <article class="course-entry">
+      <div class="course-kicker">Sociology / Criminology 3040</div>
+      <h3>Quantitative Research Methods</h3>
+      <p>Introduces students to foundational concepts, principles, and practices in contemporary quantitative social science.
+</p>
+      <a class="more-link" href="teaching/3040.html">Learn more →</a>
+    </article>
+    <article class="course-entry">
+      <div class="course-kicker">Sociology / Criminology 4420</div>
+      <h3>Networks, Culture, and Social Control</h3>
+      <p>Introduces students to social network analysis in sociology and criminology.
+</p>
+    </article>
+  </div>
+</section>
+<section class="container section section-mid" aria-labelledby="teaching-2">
+  <div class="section-header">
+    <h2 class="section-label" id="teaching-2">Graduate</h2>
+  </div>
+  <div class="course-entries">
+    <article class="course-entry">
+      <div class="course-kicker">Sociology 6044</div>
+      <h3>Networks, Culture, and Social Control</h3>
+      <p>A graduate seminar, held alongside SOCI 4420, that introduces students to social network analysis in sociology and criminology.
+</p>
+    </article>
+  </div>
+</section>
 
-<p><br><br></p>
-<h1>Graduate Supervision</h1>
-<p>Coming soon.</p>
-
+<section class="container section section-mid" aria-labelledby="teaching-supervision">
+  <div class="section-header">
+    <h2 class="section-label" id="teaching-supervision">Graduate supervision</h2>
+  </div>
+  <div class="supervision-note">
+    <p>Details coming soon. Questions about graduate work in the department are welcome by <a href="mailto:mclevey@mun.ca">email</a>.</p>
+  </div>
+</section>
   </main>
 
-  <footer id="site-footer"></footer>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>© 2026 John McLevey</div>
+        <div class="footer-contact">
+          <a href="mailto:mclevey@mun.ca">mclevey@mun.ca</a>
+          <span>(709) 864-7447</span>
+          <span>Office AA-4055</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script>
-    fetch('footer.html')
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('site-footer').innerHTML = html;
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('site-nav');
+      toggle.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.focus();
+        }
+      });
+    })();
   </script>
 
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      
-    }
-    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    
-  </script>
-
-  
 </body>
 </html>

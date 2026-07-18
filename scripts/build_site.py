@@ -67,8 +67,11 @@ OUTPUT_DIR = BASE_DIR / "docs"
 # Initialize Jinja2 environment
 env = Environment(
     loader=FileSystemLoader(TEMPLATES_DIR),
-    autoescape=select_autoescape(['html', 'xml'])
+    autoescape=select_autoescape(["html", "xml"]),
+    trim_blocks=True,
+    lstrip_blocks=True,
 )
+env.globals["current_year"] = datetime.now().year
 
 # Markdown converter
 md_converter = markdown.Markdown(extensions=["fenced_code", "tables", "attr_list"])
@@ -87,6 +90,23 @@ def parse_frontmatter(content: str) -> tuple[dict, str]:
             body = parts[2].strip()
             return frontmatter or {}, body
     return {}, content
+
+
+def format_date_display(date_str: str) -> str:
+    """Format an ISO date string as a short human-readable date.
+
+    Args:
+        date_str: Date in ``YYYY-MM-DD`` format.
+
+    Returns:
+        The date formatted as e.g. ``Feb 3, 2026``. Returns the input
+        unchanged if it does not parse as an ISO date.
+    """
+    try:
+        parsed = datetime.strptime(date_str, "%Y-%m-%d")
+    except ValueError:
+        return date_str
+    return f"{parsed.strftime('%b')} {parsed.day}, {parsed.year}"
 
 
 def get_excerpt(html_content: str, max_length: int = 200) -> str:
@@ -215,8 +235,19 @@ def format_code_output(body: str) -> str:
     return "\n".join(result)
 
 
-def render_qmd_to_md(qmd_file: Path) -> Path | None:
-    """Render a .qmd file to markdown using Quarto."""
+def render_qmd_to_md(qmd_file: Path) -> Path:
+    """Render a Quarto post to GitHub-flavoured Markdown.
+
+    Args:
+        qmd_file: Source Quarto document to render.
+
+    Returns:
+        Path to the rendered Markdown file.
+
+    Raises:
+        RuntimeError: If Quarto exits unsuccessfully.
+        FileNotFoundError: If Quarto succeeds without producing Markdown.
+    """
     result = subprocess.run(
         ["quarto", "render", str(qmd_file), "--to", "gfm"],
         capture_output=True,
@@ -225,8 +256,9 @@ def render_qmd_to_md(qmd_file: Path) -> Path | None:
     )
 
     if result.returncode != 0:
-        print(f"    ERROR: Quarto render failed: {result.stderr}")
-        return None
+        raise RuntimeError(
+            f"Quarto render failed for {qmd_file.name}:\n{result.stderr.strip()}"
+        )
 
     md_file = qmd_file.with_suffix(".md")
     if md_file.exists():
@@ -237,7 +269,9 @@ def render_qmd_to_md(qmd_file: Path) -> Path | None:
         gfm_file.rename(md_file)
         return md_file
 
-    return None
+    raise FileNotFoundError(
+        f"Quarto reported success but produced no Markdown for {qmd_file.name}"
+    )
 
 
 def copy_figures(slug: str):
@@ -297,8 +331,6 @@ def build_blog():
 
         # Render with Quarto
         md_file = render_qmd_to_md(qmd_file)
-        if md_file is None:
-            continue
 
         # Copy figures
         copy_figures(slug)
@@ -338,6 +370,7 @@ def build_blog():
             base_path="../",
             title=title,
             date=date,
+            date_display=format_date_display(date),
             author=author,
             content=html_content,
             active="blog"
@@ -351,6 +384,7 @@ def build_blog():
         posts.append({
             "title": title,
             "date": date,
+            "date_display": format_date_display(date),
             "slug": slug,
             "excerpt": frontmatter.get("excerpt", get_excerpt(html_content)),
         })

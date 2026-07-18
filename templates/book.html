@@ -1,15 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="book-header">
-  <img src="{{ base_path }}images/{{ image }}" alt="{{ title }}">
-  <div class="book-info">
-    <h1>{{ title }}</h1>
-    <p class="meta">{{ authors }}<br>{{ publisher }}, {{ year }}</p>
+<article class="container hero">
+  <div class="book-page-header">
+    <img src="{{ base_path }}images/{{ image }}" alt="{{ title }} book cover">
+    <div>
+      <h1>{{ title }}</h1>
+      <p class="book-page-meta">{{ authors }}<br>{{ publisher }}, {{ year }}</p>
+    </div>
   </div>
-</div>
-
-{{ content|safe }}
-
-<a href="{{ base_path }}index.html" class="back-link">← Back</a>
+  <div class="prose">
+    {{ content|safe }}
+  </div>
+  <a href="{{ base_path }}research.html" class="back-link">← Back to research</a>
+</article>
 {% endblock %}

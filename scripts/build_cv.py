@@ -73,30 +73,6 @@ def add_heading_ids(html_content):
     return re.sub(pattern, replace_heading, html_content)
 
 
-def generate_toc_html():
-    """Generate the table of contents HTML from tracked headings."""
-    if not _toc_entries:
-        return ""
-
-    toc_items = []
-    for entry in _toc_entries:
-        level_class = f"toc-h{entry['level']}"
-        toc_items.append(
-            f'<li class="{level_class}">'
-            f'<a href="#{entry["id"]}">{entry["text"]}</a>'
-            f"</li>"
-        )
-
-    return f"""<aside class="toc-sidebar">
-    <div class="toc-title">On this page</div>
-    <nav>
-        <ul>
-{chr(10).join("            " + item for item in toc_items)}
-        </ul>
-    </nav>
-</aside>"""
-
-
 # Cache file path
 CACHE_FILE = Path(__file__).resolve().parent.parent / "records" / "github_cache.json"
 
@@ -572,6 +548,36 @@ def format_volume_issue(volume, issue):
     if issue:
         return f" {volume}({issue})"
     return f" {volume}"
+
+
+def render_cv_page(sections_html: str) -> str:
+    """Render the CV page through the shared Jinja2 base template.
+
+    Args:
+        sections_html: Pre-built HTML for all CV sections, with heading IDs
+            already added by ``add_heading_ids``.
+
+    Returns:
+        The complete CV page as an HTML string.
+    """
+    from jinja2 import Environment, FileSystemLoader, select_autoescape
+
+    templates_dir = Path(__file__).resolve().parent.parent / "templates"
+    env = Environment(
+        loader=FileSystemLoader(templates_dir),
+        autoescape=select_autoescape(["html", "xml"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+    env.globals["current_year"] = datetime.now().year
+    template = env.get_template("cv.html")
+    return template.render(
+        base_path="",
+        title="CV",
+        active="cv",
+        toc_entries=_toc_entries,
+        content=sections_html,
+    )
 
 
 def build_cv():
@@ -1607,148 +1613,9 @@ def build_cv():
     # Build sections content and add heading IDs
     sections_html = add_heading_ids("".join(sections))
 
-    # Generate TOC from tracked headings
-    toc_html = generate_toc_html()
-
-    # Build final HTML
-    html = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV – John McLevey</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="index.html" class="nav-home">JM.</a>
-            <a href="cv.html" class="active">CV</a>
-            <a href="research.html">Research</a>
-            <a href="teaching.html">Teaching & Supervision</a>
-            <a href="software-data.html">Code & Data</a>
-            <a href="blog.html">Blog</a>
-            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-                <span class="icon-moon">☽</span>
-                <span class="icon-sun">☼</span>
-            </button>
-        </nav>
-    </header>
-
-{toc_html}
-
-    <main>
-        <!--
-        <p><a href="pdfs/cv.pdf" download class="pdf-button">
-            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                <path fill="currentColor"
-                    d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zM6 20V4h5v7h7v9H6zm2-6h8v2H8v-2zm0 3h8v2H8v-2z" />
-            </svg>
-            Download my CV (PDF)
-        </a></p>
-        -->
-        <div class="post-header">
-            <h1>Professor John McLevey</h1>
-            <p class="meta">he/him</p>
-        </div>
-        <div class="cv-content">
-{sections_html}
-        </div>
-    </main>
-
-    <footer id="site-footer"></footer>
-    <script>
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(html => {{
-                document.getElementById('site-footer').innerHTML = html;
-            }});
-    </script>
-
-    <script>
-        function toggleTheme() {{
-            const html = document.documentElement;
-            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', next);
-            localStorage.setItem('theme', next);
-        }}
-        const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    </script>
-
-    <!-- Scroll spy for TOC -->
-    <script>
-        (function() {{
-            const tocLinks = document.querySelectorAll('.toc-sidebar a');
-            const headings = [];
-
-            // Collect all headings that have IDs
-            tocLinks.forEach(link => {{
-                const id = link.getAttribute('href').slice(1);
-                const heading = document.getElementById(id);
-                if (heading) {{
-                    headings.push({{ id, element: heading, link }});
-                }}
-            }});
-
-            if (headings.length === 0) return;
-
-            function updateActiveLink() {{
-                const scrollPos = window.scrollY + 120; // Offset for better UX
-
-                // Find the current section
-                let current = headings[0];
-                for (const heading of headings) {{
-                    if (heading.element.offsetTop <= scrollPos) {{
-                        current = heading;
-                    }} else {{
-                        break;
-                    }}
-                }}
-
-                // Update active class
-                tocLinks.forEach(link => link.classList.remove('active'));
-                if (current) {{
-                    current.link.classList.add('active');
-                }}
-            }}
-
-            // Throttle scroll events
-            let ticking = false;
-            window.addEventListener('scroll', () => {{
-                if (!ticking) {{
-                    requestAnimationFrame(() => {{
-                        updateActiveLink();
-                        ticking = false;
-                    }});
-                    ticking = true;
-                }}
-            }});
-
-            // Initial update
-            updateActiveLink();
-
-            // Smooth scroll for TOC links
-            tocLinks.forEach(link => {{
-                link.addEventListener('click', (e) => {{
-                    e.preventDefault();
-                    const id = link.getAttribute('href').slice(1);
-                    const target = document.getElementById(id);
-                    if (target) {{
-                        const offset = 80;
-                        const targetPosition = target.offsetTop - offset;
-                        window.scrollTo({{
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        }});
-                    }}
-                }});
-            }});
-        }})();
-    </script>
-</body>
-</html>
-"""
+    # Render through the shared site template so the CV picks up the
+    # redesigned header, footer, and styles.
+    html = render_cv_page(sections_html)
 
     output_file.write_text(html)
     print(f"  → {output_file.relative_to(base_dir)}")

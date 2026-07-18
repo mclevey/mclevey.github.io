@@ -4,40 +4,41 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Face-to-Face Principle and the Internet – John McLevey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
-  
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="../index.html" class="nav-home">JM.</a>
-      <a href="../cv.html">CV</a>
-      <a href="../research.html">Research</a>
-      <a href="../teaching.html">Teaching & Supervision</a>
-      <a href="../software-data.html">Code & Data</a>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a href="../index.html" class="brand">John McLevey</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle-label">Menu</span>
+      <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <a href="../research.html" class="active" aria-current="page">Research</a>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../software-data.html">Code &amp; Data</a>
       <a href="../blog.html">Blog</a>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <span class="toggle-track">
-          <span class="toggle-thumb"></span>
-        </span>
-      </button>
+      <a href="../cv.html" class="nav-cv">CV</a>
     </nav>
   </header>
 
-  
 
-  <main>
-    
-<div class="book-header">
-  <img src="../images/F2FP.png" alt="The Face-to-Face Principle and the Internet">
-  <div class="book-info">
-    <h1>The Face-to-Face Principle and the Internet</h1>
-    <p class="meta">Harry Collins, Rob Evans, Martin Innes, Will Mason-Wilkes, Eric Kennedy, and John McLevey<br>Cardiff University Press, 2022</p>
+  <main id="main">
+<article class="container hero">
+  <div class="book-page-header">
+    <img src="../images/F2FP.png" alt="The Face-to-Face Principle and the Internet book cover">
+    <div>
+      <h1>The Face-to-Face Principle and the Internet</h1>
+      <p class="book-page-meta">Harry Collins, Rob Evans, Martin Innes, Will Mason-Wilkes, Eric Kennedy, and John McLevey<br>Cardiff University Press, 2022</p>
+    </div>
   </div>
-</div>
-
-<p><br></p>
-<h1>Description</h1>
+  <div class="prose">
+    <h2>Description</h2>
 
 <p>The internet is changing the way that knowledge is made and shared. Knowledge-making in face-to-face settings is being replaced by information gathering from remote sources, whose origins may be concealed but which can create an illusion of intimacy. Though remote communication is beneficial in many ways – modern societies would fail without it – and though the tight boundaries of the face-to-face can be used for evil purposes such as criminal conspiracy, if the overall trend to remote communication continues unchecked, it could be disastrous for the future of democracy and the very idea of truth itself. Too much reliance on remote communication threatens the core institutions of democratic societies.</p>
 
@@ -45,19 +46,18 @@
 
 <p>By drawing out the special features of face-to-face interaction and its constitutive role in creating societies, with science as the icon, the book sets out an agenda for civic education that can protect democratic institutions from the erosion of pluralism and the facile abandonment of trustworthy expertise. The authors conclude by returning to the themes set out at the start of the book, namely the crucial role played by trust in modern societies and the importance of face-to-face interactions in reproducing that trust, and the democratic institutions in which it should be invested.</p>
 
-<p><br></p>
-<h1>Contents</h1>
+<h2>Contents</h2>
 
 <p>Introduction - The Wide Reach of the Argument</p>
 
-<h2>Part I: Foundations – Communication, Socialization and Trust</h2>
+<h3>Part I: Foundations – Communication, Socialization and Trust</h3>
 <ol start="1">
   <li>What Trust and Communication Are For</li>
   <li>Forming Societies and Learning to Trust and to Rely</li>
   <li>Completing the Story of Face-to-Face Communication</li>
 </ol>
 
-<h2>Part II: Arguments and Evidence – Can Remote Communication Replace Face to Face?</h2>
+<h3>Part II: Arguments and Evidence – Can Remote Communication Replace Face to Face?</h3>
 <ol start="4">
   <li>Remote Technology and Trust</li>
   <li>Can Remote Replace Face-to-Face Communication?</li>
@@ -67,7 +67,7 @@
   <li>Disinformation and Misinformation</li>
 </ol>
 
-<h2>Part III: Consequences – Science, Truth, Democracy and the Nature of Society</h2>
+<h3>Part III: Consequences – Science, Truth, Democracy and the Nature of Society</h3>
 <ol start="10">
   <li>Some Immediate Consequences of the Coronavirus (COVID-19) Pandemic for Science</li>
   <li>The Nature of Democracy and Scientific Expertise</li>
@@ -76,7 +76,7 @@
 
 <p>Postscript - The November 2020 Election in the USA</p>
 
-<h2>Appendixes</h2>
+<h3>Appendixes</h3>
 <ol type="A">
   <li>Propaganda and Other Traditions</li>
   <li>(i) Coronavirus (COVID-19) Disinformation, (ii) Update on Disinformation in General, and (iii) a Warning about How Not to Fix the Problem</li>
@@ -84,33 +84,41 @@
   <li>An Alternative View: Successful Business Interaction Without Face-to-Face Communication</li>
   <li>Second Language Learning</li>
 </ol>
-
-<a href="../index.html" class="back-link">← Back</a>
-
+  </div>
+  <a href="../research.html" class="back-link">← Back to research</a>
+</article>
   </main>
 
-  <footer id="site-footer"></footer>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>© 2026 John McLevey</div>
+        <div class="footer-contact">
+          <a href="mailto:mclevey@mun.ca">mclevey@mun.ca</a>
+          <span>(709) 864-7447</span>
+          <span>Office AA-4055</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script>
-    fetch('../footer.html')
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('site-footer').innerHTML = html;
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('site-nav');
+      toggle.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.focus();
+        }
+      });
+    })();
   </script>
 
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      
-    }
-    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    
-  </script>
-
-  
 </body>
 </html>

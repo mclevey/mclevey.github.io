@@ -1,83 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV – John McLevey</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV – John McLevey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="index.html" class="nav-home">JM.</a>
-            <a href="cv.html" class="active">CV</a>
-            <a href="research.html">Research</a>
-            <a href="teaching.html">Teaching & Supervision</a>
-            <a href="software-data.html">Code & Data</a>
-            <a href="blog.html">Blog</a>
-            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-                <span class="toggle-track">
-                  <span class="toggle-thumb"></span>
-                </span>
-            </button>
-        </nav>
-    </header>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a href="index.html" class="brand">John McLevey</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle-label">Menu</span>
+      <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <a href="research.html">Research</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="software-data.html">Code &amp; Data</a>
+      <a href="blog.html">Blog</a>
+      <a href="cv.html" class="nav-cv active" aria-current="page">CV</a>
+    </nav>
+  </header>
 
 <aside class="toc-sidebar">
-    <div class="toc-title">On this page</div>
-    <nav>
-        <ul>
-            <li class="toc-h2"><a href="#contact-information">Contact Information</a></li>
-            <li class="toc-h2"><a href="#research-areas">Research Areas</a></li>
-            <li class="toc-h2"><a href="#education">Education</a></li>
-            <li class="toc-h2"><a href="#academic-appointments">Academic Appointments</a></li>
-            <li class="toc-h2"><a href="#books">Books</a></li>
-            <li class="toc-h2"><a href="#peer-reviewed-articles">Peer-Reviewed Articles</a></li>
-            <li class="toc-h2"><a href="#book-chapters">Book Chapters</a></li>
-            <li class="toc-h2"><a href="#edited-special-issues">Edited Special Issues</a></li>
-            <li class="toc-h2"><a href="#research-reports">Research Reports</a></li>
-            <li class="toc-h2"><a href="#replication-kits-supplements">Replication Kits & Supplements</a></li>
-            <li class="toc-h2"><a href="#manuscripts-in-progress">Manuscripts in Progress</a></li>
-            <li class="toc-h2"><a href="#other-publications">Other Publications</a></li>
-            <li class="toc-h2"><a href="#research-grants">Research Grants</a></li>
-            <li class="toc-h2"><a href="#teaching-grants">Teaching Grants</a></li>
-            <li class="toc-h2"><a href="#awards-and-scholarships">Awards and Scholarships</a></li>
-            <li class="toc-h2"><a href="#research-contracts">Research Contracts</a></li>
-            <li class="toc-h2"><a href="#scientific-software">Scientific Software</a></li>
-            <li class="toc-h2"><a href="#conference-presentations">Conference Presentations</a></li>
-            <li class="toc-h2"><a href="#invited-talks">Invited Talks</a></li>
-            <li class="toc-h2"><a href="#phd-students">PhD Students</a></li>
-            <li class="toc-h2"><a href="#masters-students">Masters Students</a></li>
-            <li class="toc-h2"><a href="#research-assistants-hqp">Research Assistants (HQP)</a></li>
-            <li class="toc-h2"><a href="#methods-scientific-computing-workshops">Methods & Scientific Computing Workshops</a></li>
-            <li class="toc-h2"><a href="#undergraduate-thesis-supervision">Undergraduate Thesis Supervision</a></li>
-            <li class="toc-h2"><a href="#professional-service">Professional Service</a></li>
-            <li class="toc-h2"><a href="#conference-sessions-organized">Conference Sessions Organized</a></li>
-            <li class="toc-h2"><a href="#peer-review">Peer Review</a></li>
-            <li class="toc-h2"><a href="#university-service">University Service</a></li>
-            <li class="toc-h2"><a href="#professional-development">Professional Development</a></li>
-            <li class="toc-h2"><a href="#research-and-teaching-assistantships">Research and Teaching Assistantships</a></li>
-            <li class="toc-h2"><a href="#professional-memberships">Professional Memberships</a></li>
-        </ul>
-    </nav>
+  <div class="toc-title">On this page</div>
+  <nav aria-label="CV sections">
+    <ul>
+      <li class="toc-h2">
+        <a href="#contact-information">Contact Information</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#research-areas">Research Areas</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#education">Education</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#academic-appointments">Academic Appointments</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#books">Books</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#peer-reviewed-articles">Peer-Reviewed Articles</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#book-chapters">Book Chapters</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#edited-special-issues">Edited Special Issues</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#research-reports">Research Reports</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#replication-kits-supplements">Replication Kits &amp; Supplements</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#manuscripts-in-progress">Manuscripts in Progress</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#other-publications">Other Publications</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#research-grants">Research Grants</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#teaching-grants">Teaching Grants</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#awards-and-scholarships">Awards and Scholarships</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#research-contracts">Research Contracts</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#scientific-software">Scientific Software</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#conference-presentations">Conference Presentations</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#invited-talks">Invited Talks</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#phd-students">PhD Students</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#masters-students">Masters Students</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#research-assistants-hqp">Research Assistants (HQP)</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#methods-scientific-computing-workshops">Methods &amp; Scientific Computing Workshops</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#undergraduate-thesis-supervision">Undergraduate Thesis Supervision</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#professional-service">Professional Service</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#conference-sessions-organized">Conference Sessions Organized</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#peer-review">Peer Review</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#university-service">University Service</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#professional-development">Professional Development</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#research-and-teaching-assistantships">Research and Teaching Assistantships</a>
+      </li>
+      <li class="toc-h2">
+        <a href="#professional-memberships">Professional Memberships</a>
+      </li>
+    </ul>
+  </nav>
 </aside>
 
-    <main>
-        <!--
-        <p><a href="pdfs/cv.pdf" download class="pdf-button">
-            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                <path fill="currentColor"
-                    d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zM6 20V4h5v7h7v9H6zm2-6h8v2H8v-2zm0 3h8v2H8v-2z" />
-            </svg>
-            Download my CV (PDF)
-        </a></p>
-        -->
-        <div class="post-header">
-            <h1>Professor John McLevey</h1>
-            <p class="meta">he/him</p>
-        </div>
-        <div class="cv-content">
-<h2 id="contact-information">Contact Information</h2>
+  <main id="main">
+<div class="container hero">
+  <header class="post-header">
+    <h1>Curriculum Vitae</h1>
+    <p class="post-meta">Professor John McLevey · he/him</p>
+  </header>
+  <div class="prose cv-content">
+    <h2 id="contact-information">Contact Information</h2>
 <p>AA-4055, Department of Sociology & Criminology<br>Faculty of Humanities and Social Sciences (HSS)<br>Memorial University, St. John's NL, Canada</p>
 <p>
 <a href="mailto:john.mclevey@uwaterloo.ca">john.mclevey@uwaterloo.ca</a>
@@ -271,7 +329,6 @@
 <li>
 <a href="https://github.com/mclevey/turtlestack"><strong>turtlestack</strong></a> | Manage data stored with DigitalOcean Spaces (S3-compatible). Developed by John McLevey. <a href="https://github.com/mclevey/turtlestack">https://github.com/mclevey/turtlestack</a><br>
 <img src="https://img.shields.io/badge/bash-%23121011.svg?style=flat&logo=gnu-bash&logoColor=white" alt="Bash"> <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT"> <a href="https://github.com/mclevey/turtlestack"><img src="https://img.shields.io/badge/github-%23121011.svg?style=flat&logo=github&logoColor=white" alt="GitHub"></a><br>
-<code>Last commit (0bee315): May 29, 2025</code><br>
 </li>
 </ol>
 <h3>Maintained, Occasional Updates</h3>
@@ -279,7 +336,7 @@
 <li>
 <a href="https://github.com/UWNETLAB/dcss_supplementary"><strong>dcss</strong></a> | Supplements McLevey (2022). Developed by John McLevey, Tyler Crick, Pierson Browne. <a href="https://github.com/UWNETLAB/dcss_supplementary">https://github.com/UWNETLAB/dcss_supplementary</a><br>
 <img src="https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54" alt="Python"> <img src="https://img.shields.io/badge/License-GPL_v2-blue.svg" alt="GNU GPL2"> <a href="https://github.com/UWNETLAB/dcss_supplementary"><img src="https://img.shields.io/badge/github-%23121011.svg?style=flat&logo=github&logoColor=white" alt="GitHub"></a><br>
-<code>Last commit (ee41bc7): Aug 13, 2024</code><br>
+<code>Last commit (5e559bd): Jul 17, 2026</code><br>
 </li>
 <li>
 <a href="https://github.com/UWNETLAB/metaknowledge"><strong>metaknowledge</strong></a> (v3.4.1) | Data processing for bibliometric and 'science of science' research. Developed by Reid McIlroy-Young and John McLevey. <a href="https://github.com/UWNETLAB/metaknowledge">https://github.com/UWNETLAB/metaknowledge</a><br>
@@ -289,7 +346,7 @@
 <li>
 <a href="https://github.com/UWNETLAB/pdpp"><strong>pdpp</strong></a> (v0.5.1) | Principled data processing with Python. Developed by Pierson Browne, Tyler Crick, Rachel Wood, and John McLevey. <a href="https://github.com/UWNETLAB/pdpp">https://github.com/UWNETLAB/pdpp</a><br>
 <img src="https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54" alt="Python"> <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License"> <a href="https://github.com/UWNETLAB/pdpp"><img src="https://img.shields.io/badge/github-%23121011.svg?style=flat&logo=github&logoColor=white" alt="GitHub"></a><br>
-<code>Last commit (5e15d43): Aug 5, 2024</code><br>
+<code>Last commit (e4f1c4b): Jul 10, 2026</code><br>
 </li>
 </ol>
 
@@ -577,98 +634,104 @@
 <h2 id="professional-memberships">Professional Memberships</h2>
 <p>International Network for Social Network Analysis (INSNA) ⋅ Network Science Society (NetSci) ⋅ Canadian Sociological Association (CSA) ⋅ International Sociological Association (ISA) ⋅ European Consortium for Political Research (ECPR) ⋅ American Sociological Association (ASA)</p>
 
+  </div>
+</div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>© 2026 John McLevey</div>
+        <div class="footer-contact">
+          <a href="mailto:mclevey@mun.ca">mclevey@mun.ca</a>
+          <span>(709) 864-7447</span>
+          <span>Office AA-4055</span>
         </div>
-    </main>
+      </div>
+    </div>
+  </footer>
 
-    <footer id="site-footer"></footer>
-    <script>
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('site-footer').innerHTML = html;
-            });
-    </script>
-
-    <script>
-        function toggleTheme() {
-            const html = document.documentElement;
-            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', next);
-            localStorage.setItem('theme', next);
+  <script>
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('site-nav');
+      toggle.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.focus();
         }
-        const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    </script>
+      });
+    })();
+  </script>
 
-    <!-- Scroll spy for TOC -->
-    <script>
-        (function() {
-            const tocLinks = document.querySelectorAll('.toc-sidebar a');
-            const headings = [];
+<!-- Scroll spy for TOC -->
+<script>
+  (function() {
+    const tocLinks = document.querySelectorAll('.toc-sidebar a');
+    const headings = [];
 
-            // Collect all headings that have IDs
-            tocLinks.forEach(link => {
-                const id = link.getAttribute('href').slice(1);
-                const heading = document.getElementById(id);
-                if (heading) {
-                    headings.push({ id, element: heading, link });
-                }
-            });
+    tocLinks.forEach(link => {
+      const id = link.getAttribute('href').slice(1);
+      const heading = document.getElementById(id);
+      if (heading) {
+        headings.push({ id, element: heading, link });
+      }
+    });
 
-            if (headings.length === 0) return;
+    if (headings.length === 0) return;
 
-            function updateActiveLink() {
-                const scrollPos = window.scrollY + 120; // Offset for better UX
+    function updateActiveLink() {
+      const scrollPos = window.scrollY + 120;
 
-                // Find the current section
-                let current = headings[0];
-                for (const heading of headings) {
-                    if (heading.element.offsetTop <= scrollPos) {
-                        current = heading;
-                    } else {
-                        break;
-                    }
-                }
+      let current = headings[0];
+      for (const heading of headings) {
+        if (heading.element.offsetTop <= scrollPos) {
+          current = heading;
+        } else {
+          break;
+        }
+      }
 
-                // Update active class
-                tocLinks.forEach(link => link.classList.remove('active'));
-                if (current) {
-                    current.link.classList.add('active');
-                }
-            }
+      tocLinks.forEach(link => link.classList.remove('active'));
+      if (current) {
+        current.link.classList.add('active');
+      }
+    }
 
-            // Throttle scroll events
-            let ticking = false;
-            window.addEventListener('scroll', () => {
-                if (!ticking) {
-                    requestAnimationFrame(() => {
-                        updateActiveLink();
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            });
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateActiveLink();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
 
-            // Initial update
-            updateActiveLink();
+    updateActiveLink();
 
-            // Smooth scroll for TOC links
-            tocLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const id = link.getAttribute('href').slice(1);
-                    const target = document.getElementById(id);
-                    if (target) {
-                        const offset = 80;
-                        const targetPosition = target.offsetTop - offset;
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-        })();
-    </script>
+    tocLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = link.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (target) {
+          const offset = 80;
+          const targetPosition = target.offsetTop - offset;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  })();
+</script>
 </body>
 </html>

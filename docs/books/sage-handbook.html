@@ -4,39 +4,41 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Sage Handbook of Social Network Analysis – John McLevey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
-  
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="../index.html" class="nav-home">JM.</a>
-      <a href="../cv.html">CV</a>
-      <a href="../research.html">Research</a>
-      <a href="../teaching.html">Teaching & Supervision</a>
-      <a href="../software-data.html">Code & Data</a>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a href="../index.html" class="brand">John McLevey</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle-label">Menu</span>
+      <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <a href="../research.html" class="active" aria-current="page">Research</a>
+      <a href="../teaching.html">Teaching</a>
+      <a href="../software-data.html">Code &amp; Data</a>
       <a href="../blog.html">Blog</a>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <span class="toggle-track">
-          <span class="toggle-thumb"></span>
-        </span>
-      </button>
+      <a href="../cv.html" class="nav-cv">CV</a>
     </nav>
   </header>
 
-  
 
-  <main>
-    
-<div class="book-header">
-  <img src="../images/SHSNA.png" alt="The Sage Handbook of Social Network Analysis">
-  <div class="book-info">
-    <h1>The Sage Handbook of Social Network Analysis</h1>
-    <p class="meta">John McLevey, John Scott, and Peter J. Carrington (Eds)<br>Sage, London, 2023</p>
+  <main id="main">
+<article class="container hero">
+  <div class="book-page-header">
+    <img src="../images/SHSNA.png" alt="The Sage Handbook of Social Network Analysis book cover">
+    <div>
+      <h1>The Sage Handbook of Social Network Analysis</h1>
+      <p class="book-page-meta">John McLevey, John Scott, and Peter J. Carrington (Eds)<br>Sage, London, 2023</p>
+    </div>
   </div>
-</div>
-
-<h2>Description</h2>
+  <div class="prose">
+    <h2>Description</h2>
 <p>This new edition of <em>The Sage Handbook of Social Network Analysis</em> builds on the success of its predecessor, offering a comprehensive overview of social network analysis produced by leading international scholars in the field.</p>
 
 <p>Brand new chapters provide both significant updates to topics covered in the first edition, as well as discussing cutting edge topics that have developed since, including new chapters on (1) general issues such as social categories and computational social science; (2) applications in contexts such as environmental policy, gender, ethnicity, cognition and social media and digital networks; and (3) concepts and methods such as centrality, blockmodeling, multilevel network analysis, spatial analysis, data collection, and beyond.</p>
@@ -134,33 +136,41 @@
 <p><strong>Chapter 41</strong> | Missing Network Data<br><span class="chapter-authors">Robert W. Krause and Mark Huisman</span></p>
 
 <p><strong>Chapter 42</strong> | Scientific Software for Network Analysis<br><span class="chapter-authors">Pierson Browne, Adam Howe, Yasmin Koop-Monteiro, Yixi Yang, and John McLevey</span></p>
-
-<a href="../index.html" class="back-link">← Back</a>
-
+  </div>
+  <a href="../research.html" class="back-link">← Back to research</a>
+</article>
   </main>
 
-  <footer id="site-footer"></footer>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>© 2026 John McLevey</div>
+        <div class="footer-contact">
+          <a href="mailto:mclevey@mun.ca">mclevey@mun.ca</a>
+          <span>(709) 864-7447</span>
+          <span>Office AA-4055</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script>
-    fetch('../footer.html')
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('site-footer').innerHTML = html;
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('site-nav');
+      toggle.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.focus();
+        }
+      });
+    })();
   </script>
 
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      
-    }
-    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    
-  </script>
-
-  
 </body>
 </html>

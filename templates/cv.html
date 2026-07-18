@@ -4,7 +4,7 @@
 {% if toc_entries %}
 <aside class="toc-sidebar">
   <div class="toc-title">On this page</div>
-  <nav>
+  <nav aria-label="CV sections">
     <ul>
       {% for entry in toc_entries %}
       <li class="toc-h{{ entry.level }}">
@@ -18,12 +18,14 @@
 {% endblock %}
 
 {% block content %}
-<div class="post-header">
-  <h1>Professor John McLevey</h1>
-  <p class="meta">he/him</p>
-</div>
-<div class="cv-content">
-{{ content|safe }}
+<div class="container hero">
+  <header class="post-header">
+    <h1>Curriculum Vitae</h1>
+    <p class="post-meta">Professor John McLevey · he/him</p>
+  </header>
+  <div class="prose cv-content">
+    {{ content|safe }}
+  </div>
 </div>
 {% endblock %}
 

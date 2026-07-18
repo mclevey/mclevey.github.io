@@ -4,55 +4,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quantitative Research Methods – John McLevey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
-  
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="../index.html" class="nav-home">JM.</a>
-      <a href="../cv.html">CV</a>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a href="../index.html" class="brand">John McLevey</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle-label">Menu</span>
+      <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
       <a href="../research.html">Research</a>
-      <a href="../teaching.html" class="active">Teaching & Supervision</a>
-      <a href="../software-data.html">Code & Data</a>
+      <a href="../teaching.html" class="active" aria-current="page">Teaching</a>
+      <a href="../software-data.html">Code &amp; Data</a>
       <a href="../blog.html">Blog</a>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <span class="toggle-track">
-          <span class="toggle-thumb"></span>
-        </span>
-      </button>
+      <a href="../cv.html" class="nav-cv">CV</a>
     </nav>
   </header>
 
-  
 
-  <main>
-    
-<div class="post-header">
-  <p class="meta">SOCI/CRIM 3040-001</p>
-  <h1>QUANTITATIVE RESEARCH METHODS</h1>
-  <p class="meta">Tuesday and Thursday, 1:30-2:50 pm in C2003<br>Professor John McLevey (he/him)<br>Winter 2026</p>
-</div>
-<div class="post-content">
-<blockquote>
+  <main id="main">
+<article class="container hero">
+  <header class="post-header">
+    <p class="course-kicker">SOCI/CRIM 3040-001</p>
+    <h1>Quantitative Research Methods</h1>
+    <p class="post-meta">Tuesday and Thursday, 1:30-2:50 pm in C2003<br>Professor John McLevey (he/him) · Winter 2026</p>
+  </header>
+  <div class="prose">
+    <blockquote>
 <p>SOCI/CRIM 3040, Quantitative Research Methods, introduces students to foundational concepts, principles, and practices in contemporary quantitative social science. Core topics include research computing, data collection and processing, descriptive and inferential statistics, measurement, visualization, and statistical modelling. Research ethics, transparency and reproducibility, and effective communication are emphasized throughout.</p>
 <p>This course follows the Faculty of Humanities and Social Sciences' <strong>Quantitative Reasoning Course Guidelines</strong> (see <a href="http://www.mun.ca/hss/qr" target="_blank" rel="noopener">www.mun.ca/hss/qr</a>).</p>
 </blockquote>
 
-<p><br><br></p>
-<h1>Contact Information</h1>
+<h2>Contact Information</h2>
 
-<h2>Professor John McLevey (he/him)</h2>
+<h3>Professor John McLevey (he/him)</h3>
 <p>Office: AA 4055<br>Office Hours: 3:00-4:00 PM Tuesdays and Thursdays or by appointment<br>Email: <a href="mailto:mclevey@mun.ca">mclevey@mun.ca</a></p>
 <p>I will reply to course related e-mail within 24 hours between Monday and Friday. I do not check or respond to e-mails on weekends or holidays. Please use your <code>@mun.ca</code> email account for all course-related correspondence, not Brightspace email.</p>
 
-<h2>Graduate Assistant (GA)</h2>
+<h3>Graduate Assistant (GA)</h3>
 <p>Atinuke Tiamiyu (she/her), PhD Student<br>Office Hours: By appointment<br>Email: <a href="mailto:aotiamiyu@mun.ca">aotiamiyu@mun.ca</a></p>
 
-<p><br><br></p>
-<h1 id="required-materials">Required Materials</h1>
+<h2 id="required-materials">Required Materials</h2>
 
-<h2 id="statistics-software-jamovi"><a href="https://www.jamovi.org">Jamovi</a> (Statistics Software)</h2>
+<h3 id="statistics-software-jamovi"><a href="https://www.jamovi.org">Jamovi</a> (Statistics Software)</h3>
 <p><strong><a href="https://www.jamovi.org">Jamovi</a></strong> is free/open source statistics software that provides an
     accessible interface for statistical analysis. We'll use Jamovi throughout this course for all lab assignments and
     hands-on exercises. Here are three ways you can use Jamovi:</p>
@@ -66,7 +66,7 @@
         available with limitations on storage and compute resources, but it provides full access to Jamovi's statistical
         analysis capabilities and is generally sufficient for course requirements.</li>
 </ol>
-<h3 id="download-and-setup-instructions">Download and Setup Instructions</h3>
+<h4 id="download-and-setup-instructions">Download and Setup Instructions</h4>
 <p>If you'd like to install Jamovi on your personal computer, follow these steps below. The installation process is
     straightforward and typically takes 5-10 minutes. No special configuration is required.</p>
 <ol type="1">
@@ -79,14 +79,13 @@
 <p>We'll cover Jamovi basics in Week 3 of the course and then you'll develop your skills over the course of the
     semester. No prior experience with statistics software is required.</p>
 
-<h2 id="textbook">Textbook</h2>
+<h3 id="textbook">Textbook</h3>
 <p><strong>Learning Statistics with Jamovi</strong> by Danielle Navarro and David Foxcroft <span class="citation"
         data-cites="navarro2025jamovi">(2025)</span> is available as a free online textbook at <a
         href="https://davidfoxcroft.github.io/lsj-book/">davidfoxcroft.github.io/lsj-book</a>.</p>
 <p><a href="https://davidfoxcroft.github.io/lsj-book/"><img src="../images/lsj-cover.jpg" style="width:50.0%" /></a></p>
 
-<p><br><br></p>
-<h1 id="schedule">Schedule</h1>
+<h2 id="schedule">Schedule</h2>
 <table>
     <colgroup>
         <col style="width: 20%" />
@@ -270,39 +269,37 @@
     </tbody>
 </table>
 
-<h2 id="important-end-of-term-dates">Important End of Term Dates</h2>
+<h3 id="important-end-of-term-dates">Important End of Term Dates</h3>
 <ul>
     <li>Monday April 13, examinations begin for winter semester.</li>
     <li>Wednesday April 22, examinations end for winter semester.</li>
     <li>Monday April 27, final winter semester grades released.</li>
 </ul>
 
-<h1 id="assessment">Assessment</h1>
-<p><br></p>
+<h2 id="assessment">Assessment</h2>
 <p>You'll complete ten short online quizzes (4% each), two lab assignments, and one final examination. These assessment
     components are designed to evaluate both ongoing engagement with course material and cumulative learning outcomes.
 </p>
-<h2 id="quizzes-40">Quizzes (40%)</h2>
+<h3 id="quizzes-40">Quizzes (40%)</h3>
 <p>You'll complete <strong>ten quizzes</strong> administered through Brightspace, each worth 4% of your final grade.
     These quizzes consist of multiple-choice and true/false questions and are open-book, so you can consult course
     materials while completing them. Quizzes emphasize content from assigned readings as well as material covered in
     lectures and labs. This format encourages regular engagement with course content while developing your ability to
     apply concepts and locate relevant information efficiently.</p>
-<h2 id="lab-assignments-20">Lab Assignments (20%)</h2>
+<h3 id="lab-assignments-20">Lab Assignments (20%)</h3>
 <p>You'll complete <strong>two lab assignments</strong> designed to provide hands-on experience with statistical
     analysis using Jamovi. These assignments will be completed across multiple lab sessions, with time provided in class
     to work through exercises. <em>You'll submit lab assignments twice during the term as collections of completed
         exercises.</em> Each submission is worth 10% of your final grade. These assignments provide opportunities to
     apply theoretical concepts to real data and develop proficiency with statistical software.</p>
-<h2 id="final-exam-40">Final Exam (40%)</h2>
+<h3 id="final-exam-40">Final Exam (40%)</h3>
 <p>There will be an <strong>cumulative, in-person, final exam</strong>. It will assess your understanding of course
     material, including key concepts, theoretical frameworks, and analytical methods covered throughout the term. The
     final exam questions will be very similar to the quiz questions you answer throughout the term, but unlike the
     quizzes it is closed-book and invigilated.</p>
 
-<p><br><br></p>
-<h1 id="policies">Policies</h1>
-<h2 id="attendance-and-participation">Attendance and Participation</h2>
+<h2 id="policies">Policies</h2>
+<h3 id="attendance-and-participation">Attendance and Participation</h3>
 <p>You are much more likely to succeed in this course if you show up regularly. Class sessions builds directly on
     previous work, and collaborative learning activities cannot be replicated outside class. If you must miss a session:
 </p>
@@ -311,9 +308,9 @@
     <li>Review session materials and complete any missed exercises</li>
     <li>Attend office hours if you need clarification on missed content</li>
 </ul>
-<h2 id="technology-and-device-policy">Technology and Device Policy</h2>
+<h3 id="technology-and-device-policy">Technology and Device Policy</h3>
 <p>Please use devices responsibly and avoid non-course related activities during class where possible.</p>
-<h2 id="academic-integrity">Academic Integrity</h2>
+<h3 id="academic-integrity">Academic Integrity</h3>
 <p>Students are expected to adhere to the principles of academic integrity as outlined in the University's Academic
     Integrity Policy. Academic misconduct includes, but is not limited to, plagiarism, cheating, misrepresentation, and
     unauthorized collaboration. All violations will be reported to the appropriate authorities and may result in failure
@@ -328,8 +325,8 @@
     <li>Properly cite any external resources, tutorials, or assistance you receive</li>
     <li>Never copy code directly from classmates or online sources without attribution</li>
 </ul>
-<h2 id="course-policy-on-generative-artificial-intelligence-genai">Course Policy on Generative Artificial Intelligence
-    (GenAI)</h2>
+<h3 id="course-policy-on-generative-artificial-intelligence-genai">Course Policy on Generative Artificial Intelligence
+    (GenAI)</h3>
 <p>The use of generative artificial intelligence (GenAI) tools in this course is <strong>permitted with the following
         guidelines</strong>:</p>
 <ul>
@@ -347,14 +344,14 @@
 </ul>
 <p>Note that violations of academic integrity could result in automatic failures of the assignment or the course,
     depending on severity. All cases will be reported.</p>
-<h2 id="class-cancellations">Class Cancellations</h2>
+<h3 id="class-cancellations">Class Cancellations</h3>
 <p>Changes to the schedule due to weather, illness, or other circumstances will be communicated via Brightspace
     announcements and email to your <code>@mun.ca</code> accounts.</p>
-<h2 id="accessibility-and-accommodations">Accessibility and Accommodations</h2>
+<h3 id="accessibility-and-accommodations">Accessibility and Accommodations</h3>
 <p>Memorial University is committed to supporting students with disabilities. Students who may need accommodations are
     encouraged to contact the Glenn Roy Blundon Centre for Students with Disabilities for a confidential consultation as
     early as possible in the semester.</p>
-<h3 id="contact-information">Contact Information</h3>
+<h4 id="contact-information">Contact Information</h4>
 <ul>
     <li><strong>Location:</strong> University Centre, UC-5000</li>
     <li><strong>Phone:</strong> 709-864-8000</li>
@@ -363,15 +360,14 @@
 </ul>
 <p>I am committed to ensuring all students can succeed in this course and will work with you to implement approved
     accommodations effectively.</p>
-<h2 id="respectful-learning-environment">Respectful Learning Environment</h2>
+<h3 id="respectful-learning-environment">Respectful Learning Environment</h3>
 <p>Memorial University is committed to creating a respectful, inclusive learning environment free from harassment and
     discrimination. All students, faculty, and staff have the right to learn and work in an environment that promotes
     dignity and respect. This is a shared responsibility.</p>
 
-<p><br><br></p>
-<h1 id="resources-for-students">Resources for Students</h1>
-<h2 id="student-well-being-and-support">Student Well-being and Support</h2>
-<h3 id="student-wellness-and-counselling-centre">Student Wellness and Counselling Centre</h3>
+<h2 id="resources-for-students">Resources for Students</h2>
+<h3 id="student-well-being-and-support">Student Well-being and Support</h3>
+<h4 id="student-wellness-and-counselling-centre">Student Wellness and Counselling Centre</h4>
 <ul>
     <li>Location: University Centre, UC-5400</li>
     <li>Phone: 709-864-8500</li>
@@ -380,7 +376,7 @@
             href="https://www.mun.ca/student-wellness-and-counselling-centre/">www.mun.ca/student-wellness-and-counselling-centre/</a>
     </li>
 </ul>
-<h3 id="student-success-centre">Student Success Centre</h3>
+<h4 id="student-success-centre">Student Success Centre</h4>
 <ul>
     <li>Academic coaching and study skills support</li>
     <li>Time management and stress reduction workshops</li>
@@ -389,63 +385,71 @@
             href="https://www.mun.ca/student/supports-and-services/student-success-centre/">www.mun.ca/student/supports-and-services/student-success-centre/</a>
     </li>
 </ul>
-<h3 id="sexual-harassment-and-misconduct-reporting">Sexual Harassment and Misconduct Reporting</h3>
+<h4 id="sexual-harassment-and-misconduct-reporting">Sexual Harassment and Misconduct Reporting</h4>
 <ul>
     <li>Confidential reporting and support services available</li>
     <li>Anonymous reporting options for sexual harassment and assault</li>
     <li>Website: <a href="https://www.mun.ca/sexualharassment/">www.mun.ca/sexualharassment/</a></li>
 </ul>
-<h3 id="financial-support">Financial Support</h3>
+<h4 id="financial-support">Financial Support</h4>
 <ul>
     <li>Student Financial Aid: <a href="https://www.mun.ca/student/money-matters/">www.mun.ca/student/money-matters/</a>
     </li>
     <li>Emergency bursaries and assistance programs available</li>
 </ul>
-<h2 id="research-and-library-support">Research and Library Support</h2>
-<h3 id="qeii-library">QEII Library</h3>
+<h3 id="research-and-library-support">Research and Library Support</h3>
+<h4 id="qeii-library">QEII Library</h4>
 <ul>
     <li>Research consultation services</li>
     <li>Data and statistical support</li>
     <li>Access to academic databases and resources</li>
     <li>Website: <a href="https://www.library.mun.ca">www.library.mun.ca</a></li>
 </ul>
-<h3 id="student-life-ask">Student Life (ASK)</h3>
+<h4 id="student-life-ask">Student Life (ASK)</h4>
 <ul>
     <li>Location: University Centre, UC-3005</li>
     <li>Information about courses, housing, books, financial matters, and health services</li>
     <li>General student support and guidance</li>
 </ul>
-<h2 id="additional-academic-support">Additional Academic Support</h2>
+<h3 id="additional-academic-support">Additional Academic Support</h3>
 <p>If you are struggling with course material, personal issues, or need additional support, please reach out during
     office hours or via email. Early communication allows us to address challenges before they become overwhelming. The
     university provides extensive support services designed to help you succeed academically and personally.</p>
-</div>
-<a href="../teaching.html" class="back-link">← Back to Teaching</a>
-
+  </div>
+  <a href="../teaching.html" class="back-link">← Back to teaching</a>
+</article>
   </main>
 
-  <footer id="site-footer"></footer>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>© 2026 John McLevey</div>
+        <div class="footer-contact">
+          <a href="mailto:mclevey@mun.ca">mclevey@mun.ca</a>
+          <span>(709) 864-7447</span>
+          <span>Office AA-4055</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script>
-    fetch('../footer.html')
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('site-footer').innerHTML = html;
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('site-nav');
+      toggle.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.focus();
+        }
+      });
+    })();
   </script>
 
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      
-    }
-    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    
-  </script>
-
-  
 </body>
 </html>

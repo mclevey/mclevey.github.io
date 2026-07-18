@@ -1,0 +1,47 @@
+{
+  "returncode": 0,
+  "stream_lines": 567,
+  "session_id": "a06db579-68b5-4beb-a768-6d45c25e95c7",
+  "is_error": false,
+  "stop_reason": "end_turn",
+  "terminal_reason": "completed",
+  "model_usage": {
+    "claude-haiku-4-5-20251001": {
+      "inputTokens": 1355,
+      "outputTokens": 16,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 0,
+      "costUSD": 0.001435,
+      "contextWindow": 200000,
+      "maxOutputTokens": 32000
+    },
+    "claude-fable-5": {
+      "inputTokens": 4491,
+      "outputTokens": 63349,
+      "cacheReadInputTokens": 6404077,
+      "cacheCreationInputTokens": 197228,
+      "webSearchRequests": 0,
+      "costUSD": 13.560996999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 64000
+    }
+  },
+  "permission_denials": [
+    {
+      "tool_name": "WebSearch",
+      "tool_use_id": "toolu_01GfgyFidFUX3Bvowa2S4KeY",
+      "tool_input": {
+        "query": "John McLevey Google Scholar profile sociology Memorial University Waterloo"
+      }
+    },
+    {
+      "tool_name": "WebSearch",
+      "tool_use_id": "toolu_01V6TrJ2tfot7eaTu61VgLmJ",
+      "tool_input": {
+        "query": "John McLevey ORCID sociology"
+      }
+    }
+  ],
+  "has_final_response": true
+}

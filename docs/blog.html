@@ -4,68 +4,81 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>John McLevey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="index.html" class="nav-home">JM.</a>
-      <a href="cv.html">CV</a>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a href="index.html" class="brand">John McLevey</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle-label">Menu</span>
+      <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
       <a href="research.html">Research</a>
-      <a href="teaching.html">Teaching & Supervision</a>
-      <a href="software-data.html">Code & Data</a>
-      <a href="blog.html" class="active">Blog</a>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <span class="toggle-track">
-          <span class="toggle-thumb"></span>
-        </span>
-      </button>
+      <a href="teaching.html">Teaching</a>
+      <a href="software-data.html">Code &amp; Data</a>
+      <a href="blog.html" class="active" aria-current="page">Blog</a>
+      <a href="cv.html" class="nav-cv">CV</a>
     </nav>
   </header>
 
-  
 
-  <main>
-    
-<blockquote>
-<p>Probably a blog about probabilistic modelling, networks, text and language, cognition and emotion, scientific computing, and research workflows.</p>
-</blockquote>
-
-<div class="cards">
-
-  <a href="blog/2026-02-03-hello-world.html" class="card">
-    <div class="meta">2026-02-03</div>
-    <h3>Hello World!</h3>
-    <p>These are the first words from every blog, right?</p>
-  </a>
-
+  <main id="main">
+<div class="container hero">
+  <h1>Blog</h1>
+  <p class="blog-tagline">Probably a blog about probabilistic modelling, networks, text and language, cognition and emotion, scientific computing, and research workflows.</p>
 </div>
 
+<section class="container section section-mid" aria-labelledby="blog-posts">
+  <div class="section-header">
+    <h2 class="section-label" id="blog-posts">Posts</h2>
+  </div>
+  <div class="pub-list">
+    <div class="pub-item pub-item-roomy">
+      <div class="pub-row">
+        <a class="pub-title" href="blog/2026-02-03-hello-world.html">Hello World!</a>
+        <span class="pub-venue">Feb 3, 2026</span>
+      </div>
+<div class="pub-authors">These are the first words from every blog, right?</div>    </div>
+  </div>
+</section>
   </main>
 
-  <footer id="site-footer"></footer>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>© 2026 John McLevey</div>
+        <div class="footer-contact">
+          <a href="mailto:mclevey@mun.ca">mclevey@mun.ca</a>
+          <span>(709) 864-7447</span>
+          <span>Office AA-4055</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script>
-    fetch('footer.html')
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('site-footer').innerHTML = html;
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('site-nav');
+      toggle.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.focus();
+        }
+      });
+    })();
   </script>
 
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      
-    }
-    const saved = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    
-  </script>
-
-  
 </body>
 </html>

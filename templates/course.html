@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="post-header">
-  <p class="meta">{{ code }}</p>
-  <h1>{{ title|upper }}</h1>
-  <p class="meta">{{ schedule }}<br>Professor John McLevey (he/him)<br>{{ term }}</p>
-</div>
-<div class="post-content">
-{{ content|safe }}
-</div>
-<a href="{{ base_path }}teaching.html" class="back-link">← Back to Teaching</a>
+<article class="container hero">
+  <header class="post-header">
+    <p class="course-kicker">{{ code }}</p>
+    <h1>{{ title }}</h1>
+    <p class="post-meta">{{ schedule }}<br>Professor John McLevey (he/him) · {{ term }}</p>
+  </header>
+  <div class="prose">
+    {{ content|safe }}
+  </div>
+  <a href="{{ base_path }}teaching.html" class="back-link">← Back to teaching</a>
+</article>
 {% endblock %}

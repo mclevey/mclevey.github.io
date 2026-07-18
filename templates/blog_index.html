@@ -1,17 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-<blockquote>
-<p>Probably a blog about probabilistic modelling, networks, text and language, cognition and emotion, scientific computing, and research workflows.</p>
-</blockquote>
-
-<div class="cards">
-{% for post in posts %}
-  <a href="{{ base_path }}blog/{{ post.slug }}.html" class="card">
-    <div class="meta">{{ post.date }}</div>
-    <h3>{{ post.title }}</h3>
-    <p>{{ post.excerpt }}</p>
-  </a>
-{% endfor %}
+<div class="container hero">
+  <h1>Blog</h1>
+  <p class="blog-tagline">Probably a blog about probabilistic modelling, networks, text and language, cognition and emotion, scientific computing, and research workflows.</p>
 </div>
+
+<section class="container section section-mid" aria-labelledby="blog-posts">
+  <div class="section-header">
+    <h2 class="section-label" id="blog-posts">Posts</h2>
+  </div>
+  <div class="pub-list">
+    {% for post in posts %}
+    <div class="pub-item pub-item-roomy">
+      <div class="pub-row">
+        <a class="pub-title" href="{{ base_path }}blog/{{ post.slug }}.html">{{ post.title }}</a>
+        <span class="pub-venue">{{ post.date_display }}</span>
+      </div>
+      {% if post.excerpt %}<div class="pub-authors">{{ post.excerpt }}</div>{% endif %}
+    </div>
+    {% else %}
+    <p class="section-note">No posts yet.</p>
+    {% endfor %}
+  </div>
+</section>
 {% endblock %}

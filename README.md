@@ -29,7 +29,9 @@ I'm using a custom template-based build system. It's weird and you should probab
 │       ├── .gitignore       # Ignores intermediate files
 │       └── *.qmd            # Blog post sources
 ├── templates/               # PRESENTATION: Jinja2 templates
-│   ├── base.html            # Common structure (nav, footer, theme)
+│   ├── base.html            # Common structure (nav, footer)
+│   ├── research.html        # Research page (books + articles)
+│   ├── teaching.html        # Teaching page (course groups)
 │   ├── page.html            # Generic content page
 │   ├── index.html           # Home page with profile
 │   ├── blog_post.html       # Blog post with syntax highlighting
@@ -42,7 +44,6 @@ I'm using a custom template-based build system. It's weird and you should probab
 │   └── github_cache.json    # Cached GitHub API responses
 ├── docs/                    # OUTPUT: Built static site
 │   ├── styles.css           # Site-wide styles (edit this)
-│   ├── footer.html          # Shared footer (edit this)
 │   ├── images/              # Static images (edit this)
 │   └── pdfs/                # PDF files (edit this)
 └── scripts/                 # Build scripts
@@ -87,9 +88,14 @@ Page content in markdown (can include raw HTML)...
 **Available templates:**
 
 - `page` - Generic content page
-- `index` - Home page with profile section
+- `index` - Home page with profile, books, articles, teaching, and blog sections
+- `research` - Research page with featured books and selected articles
+- `teaching` - Teaching page with course groups and supervision section
 - `book` - Book page with cover image and metadata
 - `course` - Course page with schedule info
+
+The `index`, `research`, and `teaching` templates read structured lists
+(books, articles, course groups) from their content file's YAML frontmatter.
 
 **Common frontmatter fields:**
 
@@ -221,7 +227,6 @@ For software entries with GitHub URLs, the build fetches metadata (version, star
 | `records/cv.md`             | CV data (YAML frontmatter)           |
 | `templates/*.html`          | Page templates                       |
 | `docs/styles.css`           | Site-wide CSS styles                 |
-| `docs/footer.html`          | Shared footer content                |
 | `docs/images/*`             | Static images (profile, book covers) |
 | `docs/pdfs/*`               | PDF files                            |
 
@@ -276,9 +281,9 @@ These are generated during builds and ignored by git (via `content/posts/.gitign
 
 All templates extend `base.html`, which provides:
 
-- Navigation header with theme toggle (light/dark mode)
-- Footer (loaded via JavaScript from `footer.html`)
-- Theme persistence via localStorage
+- Compact navigation header with a responsive mobile menu
+- Shared footer rendered inline (no JavaScript fetch)
+- Skip link, focus styles, and Instrument Sans webfont loading
 
 Templates can override these blocks:
 
